@@ -23,6 +23,9 @@ namespace SentinelsOfTheMultiverse
         public MainWindow()
         {
             InitializeComponent();
+
+            Image image = new Image();
+            
         }
     }
 }
