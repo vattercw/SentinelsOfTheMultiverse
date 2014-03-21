@@ -24,8 +24,31 @@ namespace SentinelsOfTheMultiverse
         {
             InitializeComponent();
 
-            Image image = new Image();
-            
+            initGame();
+        }
+
+        public Image initGame()
+        {
+            Uri darkVisionary= new Uri("Images/Dark Visionary.png", UriKind.Relative);
+                        
+            Uri legacy= new Uri("Images/Legacy.jpg", UriKind.Relative);
+
+            List<Uri> deck = new List<Uri> { };
+            deck.Add(darkVisionary);
+            deck.Add(legacy);
+
+            Image imgPlaceholder= new Image();
+            imgPlaceholder.Source = new BitmapImage(darkVisionary);
+
+            imgPlaceholder.MouseUp += (s, e) =>
+            {
+                Random r = new Random();
+                var randomUri = deck[r.Next(0, deck.Count)];
+                imgPlaceholder.Source = new BitmapImage(randomUri);
+            };
+
+            gridView.Children.Add(imgPlaceholder);
+            return imgPlaceholder;
         }
     }
 }
