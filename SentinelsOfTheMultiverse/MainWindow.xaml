@@ -2,7 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
-    <Grid Name="gridView">
+    <Grid>
         
+        <ListView Height="223" HorizontalAlignment="Left" Margin="70,50,0,0" 
+          Name="listView1" VerticalAlignment="Top" Width="363" ItemsSource="{Binding hand}"/>
     </Grid>
 </Window>

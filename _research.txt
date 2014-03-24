@@ -1,0 +1,2 @@
+cusome card panel? http://www.codeproject.com/Articles/93158/WPF-Custom-Card-Panel
+showing hand http://stackoverflow.com/questions/15594289/displaying-images-in-listview-or-something-better-in-wpf-mvvm-using-databindi

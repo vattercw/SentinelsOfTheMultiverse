@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace SentinelsOfTheMultiverse
 {
@@ -20,35 +22,46 @@ namespace SentinelsOfTheMultiverse
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ObservableCollection<string> hand { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
 
-            initGame();
+            //initGame();
+            
+            Player p1 = new Player();
+            hand = new ObservableCollection<string>(p1.hand);
+            this.DataContext = this;
         }
 
-        public Image initGame()
+        public void initGame()
         {
-            Uri darkVisionary= new Uri("Images/Dark Visionary.png", UriKind.Relative);
+            //Uri darkVisionary= new Uri("Images/Dark Visionary.png", UriKind.Relative);
                         
-            Uri legacy= new Uri("Images/Legacy.jpg", UriKind.Relative);
+            //Uri legacy= new Uri("Images/Legacy.jpg", UriKind.Relative);
 
-            List<Uri> deck = new List<Uri> { };
-            deck.Add(darkVisionary);
-            deck.Add(legacy);
+            //List<Uri> deck = new List<Uri> { };
+            //for (int ii = 0; ii < 10; ii++)
+            //{
+            //    deck.Add(darkVisionary);
+            //    deck.Add(legacy);
+            //}
 
-            Image imgPlaceholder= new Image();
-            imgPlaceholder.Source = new BitmapImage(darkVisionary);
+            //Image imgPlaceholder= new Image();
+            //imgPlaceholder.Source = new BitmapImage(darkVisionary);
 
-            imgPlaceholder.MouseUp += (s, e) =>
-            {
-                Random r = new Random();
-                var randomUri = deck[r.Next(0, deck.Count)];
-                imgPlaceholder.Source = new BitmapImage(randomUri);
-            };
+            //imgPlaceholder.MouseUp += (s, e) =>
+            //{
+            //    Random r = new Random();
+            //    var randomUri = deck[r.Next(0, deck.Count)];
+            //    imgPlaceholder.Source = new BitmapImage(randomUri);
+            //};
 
-            gridView.Children.Add(imgPlaceholder);
-            return imgPlaceholder;
+            //handView.Children.Add(imgPlaceholder);
+            //return imgPlaceholder;
         }
     }
+
+    
 }
