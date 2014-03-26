@@ -23,6 +23,7 @@ namespace SentinelsOfTheMultiverse
     public partial class MainWindow : Window
     {
         public ObservableCollection<string> hand { get; set; }
+        public ObservableCollection<string> deck { get; set; }
 
         public MainWindow()
         {
@@ -30,8 +31,9 @@ namespace SentinelsOfTheMultiverse
 
             //initGame();
             
-            Player p1 = new Player();
+            Hero p1 = new Hero();
             hand = new ObservableCollection<string>(p1.hand);
+            deck = new ObservableCollection<string>(p1.deck.getCards());
             this.DataContext = this;
         }
 

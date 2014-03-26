@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse
 {
-    public class Player
+    public interface Hero
     {
         public List<string> hand { get; set; }
         public Deck deck{get;set;}
 
-        public Player()
+        public Hero(string heroName)
         {
             deck = new Deck();
             deck.shuffle();
             deck.printDeck();
-
+            
             hand= deck.draw(7);
             deck.printDeck();
         }
@@ -67,6 +67,11 @@ namespace SentinelsOfTheMultiverse
         public void printDeck()
         {
             Debug.WriteLine("deck: " + String.Join(", ", this.cards));
+        }
+
+        public List<string> getCards()
+        {
+            return this.cards;
         }
     }
 }
