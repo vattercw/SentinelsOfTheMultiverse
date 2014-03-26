@@ -62,6 +62,8 @@
     <Compile Include="Data\IPlayer.cs" />
     <Compile Include="Data\Minion.cs" />
     <Compile Include="Data\Villian.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Data\Player.cs" />
     <Compile Include="Tests\BasicTest.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
