@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse
 {
-    class GameBoard
+    class Startup
     {
-
-        internal void initialize()
+        internal string begin()
         {
             throw new NotImplementedException();
         }
