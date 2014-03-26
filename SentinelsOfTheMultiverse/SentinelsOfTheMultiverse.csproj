@@ -54,7 +54,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\Player.cs" />
+    <Compile Include="Data\Heroes\Tempest.cs" />
+    <Compile Include="Data\IEffect.cs" />
+    <Compile Include="GameBoard.cs" />
+    <Compile Include="Data\GameEnvironment.cs" />
+    <Compile Include="Data\Hero.cs" />
+    <Compile Include="Data\IPlayer.cs" />
+    <Compile Include="Data\Minion.cs" />
+    <Compile Include="Data\Villian.cs" />
     <Compile Include="Tests\BasicTest.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +108,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Legacy.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Effects\" />
+    <Folder Include="Data\Environments\" />
+    <Folder Include="Data\Villians\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
