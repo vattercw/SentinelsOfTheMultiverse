@@ -1,0 +1,40 @@
+﻿Heroes:
+	Haka-
+		Haka of Battle - 3
+		Haka of Shielding - 3
+		Haka of Restoration - 3
+		Dominion - 3
+		Enduring Intercession - 3
+		Rampage - 3
+		Taiaha - 3
+		Punish the Weak - 3
+		Mere - 3
+		Vitality Surge - 3
+		Ta Moko - 3
+		Elbow Smash - 3
+		Savage Mana - 2
+		Ground Pound - 2
+
+Villains:
+	Baron Blade-
+		Blade Battalion - 4
+		Hasten Doom - 4
+		Mobile Defense Platform - 3
+		Devious Disruption - 2
+		Backlash Field - 2
+		Element Redistributor - 2
+		Slash and Burn - 2
+		Powered Remote Turrent - 2
+		Living Forced Field - 2
+		Flesh Repair Nanites - 1
+		"Consider the Price of Victory" - 1
+
+Environments:
+	Insula Primus-
+		Velociraptor Pack - 3
+		Obsidian Field - 3
+		Primordial Plant Life - 2
+		Pterodactyl Thief - 2
+		Enraged TRex - 2
+		River of Lava - 2
+		Volcanic Eruption - 1
