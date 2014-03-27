@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse.Data
 {
-    class GameEnvironment : IPlayer
+    abstract class GameEnvironment : IPlayer
     {
 
     }
