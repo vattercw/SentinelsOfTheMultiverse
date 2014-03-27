@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using SentinelsOfTheMultiverse.Data.Heroes;
 
 namespace SentinelsOfTheMultiverse
 {
@@ -31,10 +32,11 @@ namespace SentinelsOfTheMultiverse
 
             //initGame();
             
-            Hero p1 = new Hero();
+            Hero p1 = new Haka();
+            
             hand = new ObservableCollection<string>(p1.hand);
-            deck = new ObservableCollection<string>(p1.deck.getCards());
-            this.DataContext = this;
+            //deck = new ObservableCollection<string>(p1.deck.getCards());
+            //this.DataContext = this;
         }
 
         public void initGame()

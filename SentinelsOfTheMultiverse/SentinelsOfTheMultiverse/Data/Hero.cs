@@ -1,39 +1,40 @@
-﻿using System;
+﻿using SentinelsOfTheMultiverse.Data;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse
 {
-    public interface Hero
+    public abstract class Hero
     {
-        public List<string> hand { get; set; }
-        public Deck deck{get;set;}
 
-        public Hero(string heroName)
+        public List<string> hand { get; set; }
+        public Deck deck { get; set; }
+
+        public Hero()
         {
-            deck = new Deck();
-            deck.shuffle();
-            deck.printDeck();
-            
-            hand= deck.draw(7);
-            deck.printDeck();
+            string heroName = this.GetType().Name;
+            deck = new Deck(heroName);
         }
 
     }
 
     public class Deck
     {
-        List<string> cards;
+        List<Card> cards=new List<Card>();
 
-        public Deck()
+        public Deck(string hero)
         {
-            cards = new List<string>();
-            for (int ii = 0; ii < 20; ii++)
+            var files = Directory.GetFiles(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName+"\\Images\\heroes\\"+hero);
+
+            foreach (var filename in files)
             {
-                cards.Add("card" + ii);
+                Card card = new Card(filename);
+                cards.Add(card);
             }
         }
 
@@ -46,15 +47,15 @@ namespace SentinelsOfTheMultiverse
             {
                 n--;
                 int k = rng.Next(n + 1);
-                string value = cards[k];
+                Card temp = cards[k];
                 cards[k] = cards[n];
-                cards[n] = value;
+                cards[n] = temp;
             }
         }
 
-        public List<string> draw(int numberToDraw)
+        public List<Card> draw(int numberToDraw)
         {
-            List<string> drawnCards = new List<string>();
+            List<Card> drawnCards = new List<Card>();
             for (int jj = 0; jj < numberToDraw; jj++)
             {
                 drawnCards.Add(cards[0]);
@@ -66,12 +67,12 @@ namespace SentinelsOfTheMultiverse
 
         public void printDeck()
         {
-            Debug.WriteLine("deck: " + String.Join(", ", this.cards));
+            //Debug.WriteLine("deck: " + String.Join(", ", this.cards));
         }
 
-        public List<string> getCards()
-        {
-            return this.cards;
-        }
+        //public List<Card> getCards()
+        //{
+        //    return this.cards;
+        //}
     }
 }

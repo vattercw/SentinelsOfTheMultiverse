@@ -11,9 +11,9 @@ namespace SentinelsOfTheMultiverse.Data
      * */
     interface IEffect
     {
-        string effectName;
+        //string effectName;
 
-        public void execute(){
-        }
+        //public void execute(){
+        //}
     }
 }

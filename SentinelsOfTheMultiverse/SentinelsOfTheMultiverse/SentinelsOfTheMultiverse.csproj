@@ -37,6 +37,8 @@
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -54,17 +56,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\Heroes\Tempest.cs" />
+    <Compile Include="Data\Card.cs" />
+    <Compile Include="Data\Heroes\Haka.cs" />
     <Compile Include="Data\IEffect.cs" />
     <Compile Include="GameBoard.cs" />
     <Compile Include="Data\GameEnvironment.cs" />
     <Compile Include="Data\Hero.cs" />
     <Compile Include="Data\IPlayer.cs" />
     <Compile Include="Data\Minion.cs" />
-    <Compile Include="Data\Villian.cs" />
-    <Compile Include="Class1.cs" />
-    <Compile Include="Data\Player.cs" />
+    <Compile Include="Data\Villain.cs" />
     <Compile Include="GameEngine.cs" />
+    <Compile Include="HandPanel.cs" />
     <Compile Include="Tests\BasicTest.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -116,6 +118,38 @@
     <Folder Include="Data\Effects\" />
     <Folder Include="Data\Environments\" />
     <Folder Include="Data\Villians\" />
+    <Folder Include="obj\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\heroes\haka\dominion.png" />
+    <Resource Include="Images\heroes\haka\elbow_smash.png" />
+    <Resource Include="Images\heroes\haka\enduring_intercession.png" />
+    <Resource Include="Images\heroes\haka\ground_pound.png" />
+    <Resource Include="Images\heroes\haka\haka_back.png" />
+    <Resource Include="Images\heroes\haka\haka_cover.png" />
+    <Resource Include="Images\heroes\haka\haka_death.png" />
+    <Resource Include="Images\heroes\haka\haka_hero.png" />
+    <Resource Include="Images\heroes\haka\haka_of_battle.png" />
+    <Resource Include="Images\heroes\haka\haka_of_restoration.png" />
+    <Resource Include="Images\heroes\haka\haka_of_shielding.png" />
+    <Resource Include="Images\heroes\haka\mere.png" />
+    <Resource Include="Images\heroes\haka\punish_the_weak.png" />
+    <Resource Include="Images\heroes\haka\rampage.png" />
+    <Resource Include="Images\heroes\haka\savage_mana.png" />
+    <Resource Include="Images\heroes\haka\taiaha.png" />
+    <Resource Include="Images\heroes\haka\ta_moko.png" />
+    <Resource Include="Images\heroes\haka\vitality_surge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\environments\insula_primus\back_of_card.png" />
+    <Resource Include="Images\environments\insula_primus\deck_cover.png" />
+    <Resource Include="Images\environments\insula_primus\enraged_trex.png" />
+    <Resource Include="Images\environments\insula_primus\obsidian_field.png" />
+    <Resource Include="Images\environments\insula_primus\primordial_plant_life.png" />
+    <Resource Include="Images\environments\insula_primus\pterodactyl_thief.png" />
+    <Resource Include="Images\environments\insula_primus\river_of_lava.png" />
+    <Resource Include="Images\environments\insula_primus\velociraptor_pack.png" />
+    <Resource Include="Images\environments\insula_primus\volcanic_eruption.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

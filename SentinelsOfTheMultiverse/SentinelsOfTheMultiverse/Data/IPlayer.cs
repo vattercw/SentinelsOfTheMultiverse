@@ -8,13 +8,14 @@ namespace SentinelsOfTheMultiverse.Data
 {
     interface IPlayer
     {
-        Deck deck { get; private set; }
-        string characterName;
-        int lifeTotal { get; set; }
+        //Deck deck { get; private set; }
+        //string characterName;
+        //int lifeTotal { get; set; }
         
-        public IPlayer()
-        {
-        }
+        //public IPlayer()
+        //{
+
+        //}
 
     }
 }
