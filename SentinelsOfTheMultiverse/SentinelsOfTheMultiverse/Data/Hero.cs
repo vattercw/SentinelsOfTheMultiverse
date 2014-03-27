@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse
 {
-    public interface Hero
+    public abstract class Hero
     {
         public List<string> hand { get; set; }
         public Deck deck{get;set;}

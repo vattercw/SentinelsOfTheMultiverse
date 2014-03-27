@@ -28,5 +28,10 @@ namespace SentinelsOfTheMultiverse
         {
 
         }
+
+        public void ViewHand()
+        {
+
+        }
     }
 }
