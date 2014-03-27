@@ -20,18 +20,17 @@ namespace SentinelsOfTheMultiverse
     public partial class Window1 : Window
     {
 
-        string villian;
 
         public Window1()
         {
             InitializeComponent();
-
-            initBoard();
+            GameEngine game = new GameEngine();
+            DataContext = game;
         }
 
         private void initBoard()
         {
-
+            
         }
 
         

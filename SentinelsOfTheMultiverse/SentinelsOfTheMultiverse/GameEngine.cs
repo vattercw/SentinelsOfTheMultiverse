@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,26 +18,31 @@ namespace SentinelsOfTheMultiverse
         public Villian villian;
         public GameEnvironment environment;
         private int playerTurn = 0;
-        Image villainImage= new Image();
+        Image villainImage=new Image();
 
         public static int MAXPLAYER = 6;
         public static int VILLIANNUM = 6;
         public static int EVIRONMENTNUM = 7;
 
+        public GameEngine()
+        {
+            begin();
+        }
+
         public void begin()
         {
 
-            List<String> playerNames = this.startScreen.begin();
+            //List<String> playerNames = this.startScreen.begin();
 
            
-            for(int i = 0; i < MAXPLAYER; i++){
-                Hero newHero = (Hero) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[i]);
-                this.heroes.Add(newHero);
-            }
-            this.villian = (Villian) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[VILLIANNUM]);
-            this.environment = (GameEnvironment) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[EVIRONMENTNUM]);
+            //for(int i = 0; i < MAXPLAYER; i++){
+            //    Hero newHero = (Hero) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[i]);
+            //    this.heroes.Add(newHero);
+            //}
+            //this.villian = (Villian) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[VILLIANNUM]);
+            //this.environment = (GameEnvironment) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[EVIRONMENTNUM]);
             
-            villainImage.Source= new BitmapImage(new Uri("Images\\Villain\\bb\\bb_back.png"));
+            villainImage.Source = new BitmapImage(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName+"/Images/Villain/baron_blade/bb_back.png"));
 
 
         }
