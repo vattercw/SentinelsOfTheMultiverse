@@ -19,17 +19,28 @@ namespace SentinelsOfTheMultiverse
     /// </summary>
     public partial class Window1 : Window
     {
+
+        string villian;
+
         public Window1()
         {
             InitializeComponent();
+
+            initBoard();
         }
 
-        private void handListView_Copy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void initBoard()
         {
 
         }
 
-        public void ViewHand()
+        
+        private void View_Hand(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void View_Card_Full(object sender, MouseButtonEventArgs e)
         {
 
         }

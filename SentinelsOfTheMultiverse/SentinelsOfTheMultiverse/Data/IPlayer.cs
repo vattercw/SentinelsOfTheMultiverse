@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse.Data
 {
-    interface IPlayer
+    abstract class IPlayer
     {
-        Deck deck { get; private set; }
+        Deck deck { get;  set; }
         string characterName;
         int lifeTotal { get; set; }
         
@@ -17,9 +17,9 @@ namespace SentinelsOfTheMultiverse.Data
         }
 
 
-        void playTurn();
-        void beginPhase();
-        void mainPhase();
-        void endPhase();
+        public abstract void playTurn();
+        public abstract void beginPhase();
+        public abstract void mainPhase();
+        public abstract void endPhase();
     }
 }

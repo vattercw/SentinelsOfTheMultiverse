@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using SentinelsOfTheMultiverse.Data;
 
 namespace SentinelsOfTheMultiverse
@@ -10,12 +12,12 @@ namespace SentinelsOfTheMultiverse
     class GameEngine
     {
         public Startup startScreen = new Startup();
-        public GameBoard board = new GameBoard();
         public List<IPlayer> players = new List<IPlayer>();
         public List<Hero> heroes = new List<Hero>();
         public Villian villian;
         public GameEnvironment environment;
         private int playerTurn = 0;
+        Image villainImage= new Image();
 
         public static int MAXPLAYER = 6;
         public static int VILLIANNUM = 6;
@@ -34,7 +36,7 @@ namespace SentinelsOfTheMultiverse
             this.villian = (Villian) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[VILLIANNUM]);
             this.environment = (GameEnvironment) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[EVIRONMENTNUM]);
             
-            this.board.initialize();
+            villainImage.Source= new BitmapImage(new Uri("Images\\Villain\\bb\\bb_back.png"));
 
 
         }
