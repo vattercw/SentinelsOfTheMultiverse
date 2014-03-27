@@ -59,7 +59,6 @@
     <Compile Include="Data\Card.cs" />
     <Compile Include="Data\Heroes\Haka.cs" />
     <Compile Include="Data\IEffect.cs" />
-    <Compile Include="GameBoard.cs" />
     <Compile Include="Data\GameEnvironment.cs" />
     <Compile Include="Data\Hero.cs" />
     <Compile Include="Data\IPlayer.cs" />
@@ -67,19 +66,21 @@
     <Compile Include="Data\Villain.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="HandPanel.cs" />
+    <Compile Include="Data\Villian.cs" />
+    <Compile Include="GameEngine.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Tests\BasicTest.cs" />
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="GameBoard.xaml.cs">
+      <DependentUpon>GameBoard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="GameBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -109,10 +110,30 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Dark Visionary.png" />
+    <Folder Include="Data\Effects\" />
+    <Folder Include="Data\Environments\" />
+    <Folder Include="Data\Heroes\" />
+    <Folder Include="Data\Villians\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Legacy.jpg" />
+    <Resource Include="Images\Hero\Haka\dominion.png" />
+    <Resource Include="Images\Hero\Haka\elbow_smash.png" />
+    <Resource Include="Images\Hero\Haka\enduring_intercession.png" />
+    <Resource Include="Images\Hero\Haka\ground_pound.png" />
+    <Resource Include="Images\Hero\Haka\haka_back.png" />
+    <Resource Include="Images\Hero\Haka\haka_cover.png" />
+    <Resource Include="Images\Hero\Haka\haka_death.png" />
+    <Resource Include="Images\Hero\Haka\haka_hero.png" />
+    <Resource Include="Images\Hero\Haka\haka_of_battle.png" />
+    <Resource Include="Images\Hero\Haka\haka_of_restoration.png" />
+    <Resource Include="Images\Hero\Haka\haka_of_shielding.png" />
+    <Resource Include="Images\Hero\Haka\mere.png" />
+    <Resource Include="Images\Hero\Haka\punish_the_weak.png" />
+    <Resource Include="Images\Hero\Haka\rampage.png" />
+    <Resource Include="Images\Hero\Haka\savage_mana.png" />
+    <Resource Include="Images\Hero\Haka\taiaha.png" />
+    <Resource Include="Images\Hero\Haka\ta_moko.png" />
+    <Resource Include="Images\Hero\Haka\vitality_surge.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Effects\" />
@@ -150,6 +171,37 @@
     <Resource Include="Images\environments\insula_primus\river_of_lava.png" />
     <Resource Include="Images\environments\insula_primus\velociraptor_pack.png" />
     <Resource Include="Images\environments\insula_primus\volcanic_eruption.png" />
+    <Resource Include="Images\Environment\Insula Primus\back_of_card.png" />
+    <Resource Include="Images\Environment\Insula Primus\deck_cover.png" />
+    <Resource Include="Images\Environment\Insula Primus\enraged_trex.png" />
+    <Resource Include="Images\Environment\Insula Primus\obsidian_field.png" />
+    <Resource Include="Images\Environment\Insula Primus\primordial_plant_life.png" />
+    <Resource Include="Images\Environment\Insula Primus\pterodactyl_thief.png" />
+    <Resource Include="Images\Environment\Insula Primus\river_of_lava.png" />
+    <Resource Include="Images\Environment\Insula Primus\velociraptor_pack.png" />
+    <Resource Include="Images\Environment\Insula Primus\volcanic_eruption.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\NumOfCards.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Villain\baron_blade\backlash_field.png" />
+    <Resource Include="Images\Villain\baron_blade\bb_back.png" />
+    <Resource Include="Images\Villain\baron_blade\bb_cover.png" />
+    <Resource Include="Images\Villain\baron_blade\bb_death.png" />
+    <Resource Include="Images\Villain\baron_blade\bb_initial.png" />
+    <Resource Include="Images\Villain\baron_blade\bb_instr_back.png" />
+    <Resource Include="Images\Villain\baron_blade\bb_instr_front.png" />
+    <Resource Include="Images\Villain\baron_blade\blade_battalion.png" />
+    <Resource Include="Images\Villain\baron_blade\consider_the_price_of_victory.png" />
+    <Resource Include="Images\Villain\baron_blade\devious_disruption.png" />
+    <Resource Include="Images\Villain\baron_blade\elemental_redistributor.png" />
+    <Resource Include="Images\Villain\baron_blade\flesh_repair_nanites.png" />
+    <Resource Include="Images\Villain\baron_blade\hasten_doom.png" />
+    <Resource Include="Images\Villain\baron_blade\living_force_field.png" />
+    <Resource Include="Images\Villain\baron_blade\mobile_defense_platform.png" />
+    <Resource Include="Images\Villain\baron_blade\powerer_remote_turret.png" />
+    <Resource Include="Images\Villain\baron_blade\slash_and_burn.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

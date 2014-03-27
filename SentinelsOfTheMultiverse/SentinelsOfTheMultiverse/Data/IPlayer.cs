@@ -6,16 +6,26 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse.Data
 {
-    interface IPlayer
+    abstract class IPlayer
     {
         //Deck deck { get; private set; }
         //string characterName;
         //int lifeTotal { get; set; }
+
+        Deck deck { get;  set; }
+        string characterName;
+        int lifeTotal { get; set; }
+
         
         //public IPlayer()
         //{
 
         //}
 
+
+        public abstract void playTurn();
+        public abstract void beginPhase();
+        public abstract void mainPhase();
+        public abstract void endPhase();
     }
 }
