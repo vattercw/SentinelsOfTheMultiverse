@@ -21,6 +21,5 @@ namespace SentinelsOfTheMultiverse.Data
         void beginPhase();
         void mainPhase();
         void endPhase();
-
     }
 }

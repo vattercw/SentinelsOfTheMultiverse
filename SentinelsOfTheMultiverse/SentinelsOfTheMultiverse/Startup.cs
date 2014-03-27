@@ -7,7 +7,7 @@ namespace SentinelsOfTheMultiverse
 {
     class Startup
     {
-        internal string begin()
+        internal List<String> begin()
         {
             throw new NotImplementedException();
         }

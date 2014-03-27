@@ -17,21 +17,22 @@ namespace SentinelsOfTheMultiverse
         public GameEnvironment environment;
         private int playerTurn = 0;
 
+        public static int MAXPLAYER = 6;
+        public static int VILLIANNUM = 6;
+        public static int EVIRONMENTNUM = 7;
+
         public void begin()
         {
-            String villianName;
-            List<String> heroNames;
-            String environmentName;
 
-            //find out how to return more than one value appropriately
-            villianName, heroNames, environmentName= this.startScreen.begin();
+            List<String> playerNames = this.startScreen.begin();
 
-            this.villian = (Villian) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(villianName);
-            for(int i = 0; i < heroNames.Count; i++){
-                Hero newHero = (Hero) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(heroNames[i]);
+           
+            for(int i = 0; i < MAXPLAYER; i++){
+                Hero newHero = (Hero) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[i]);
                 this.heroes.Add(newHero);
             }
-            this.environment = (GameEnvironment) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(environmentName);
+            this.villian = (Villian) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[VILLIANNUM]);
+            this.environment = (GameEnvironment) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[EVIRONMENTNUM]);
             
             this.board.initialize();
 
