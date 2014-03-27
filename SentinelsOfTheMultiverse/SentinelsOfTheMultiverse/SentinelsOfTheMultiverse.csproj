@@ -203,6 +203,17 @@
     <Resource Include="Images\Villain\baron_blade\powerer_remote_turret.png" />
     <Resource Include="Images\Villain\baron_blade\slash_and_burn.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Environment\insula_primus\back_of_card.png" />
+    <Resource Include="Images\Environment\insula_primus\deck_cover.png" />
+    <Resource Include="Images\Environment\insula_primus\enraged_trex.png" />
+    <Resource Include="Images\Environment\insula_primus\obsidian_field.png" />
+    <Resource Include="Images\Environment\insula_primus\primordial_plant_life.png" />
+    <Resource Include="Images\Environment\insula_primus\pterodactyl_thief.png" />
+    <Resource Include="Images\Environment\insula_primus\river_of_lava.png" />
+    <Resource Include="Images\Environment\insula_primus\velociraptor_pack.png" />
+    <Resource Include="Images\Environment\insula_primus\volcanic_eruption.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
