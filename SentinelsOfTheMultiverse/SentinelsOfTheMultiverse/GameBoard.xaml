@@ -1,0 +1,16 @@
+﻿<Window x:Class="SentinelsOfTheMultiverse.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window1" Height="668" Width="1049">
+    <Grid>
+        <ListView Height="100" HorizontalAlignment="Left" Margin="59,197,0,0" 
+          Name="handListView" VerticalAlignment="Top" Width="911" ItemsSource="{Binding hand}"/>
+        <ListView Height="100" HorizontalAlignment="Left" Margin="59,32,0,0" 
+          Name="deckListView" VerticalAlignment="Top" Width="911" ItemsSource="{Binding deck}"/>
+        <ListView Height="100" HorizontalAlignment="Left" Margin="59,382,0,0" 
+        	x:Name="handListView_Copy" VerticalAlignment="Top" Width="911" ItemsSource="{Binding hand}" RenderTransformOrigin="0.502,2.095" SelectionChanged="handListView_Copy_SelectionChanged"/>
+        <ListView Height="100" HorizontalAlignment="Left" Margin="59,506,0,0" 
+        	x:Name="handListView_Copy1" VerticalAlignment="Top" Width="911" ItemsSource="{Binding hand}" RenderTransformOrigin="0.502,2.095" SelectionChanged="handListView_Copy_SelectionChanged"/>
+
+    </Grid>
+</Window>

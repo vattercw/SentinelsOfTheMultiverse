@@ -16,5 +16,11 @@ namespace SentinelsOfTheMultiverse.Data
         {
         }
 
+
+        void playTurn();
+        void beginPhase();
+        void mainPhase();
+        void endPhase();
+
     }
 }
