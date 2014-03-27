@@ -116,7 +116,6 @@
     <Folder Include="Data\Effects\" />
     <Folder Include="Data\Environments\" />
     <Folder Include="Data\Villians\" />
-    <Folder Include="Images\Villian\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Hero\Haka\dominion.png" />
@@ -148,6 +147,28 @@
     <Resource Include="Images\Environment\Insula Primus\river_of_lava.png" />
     <Resource Include="Images\Environment\Insula Primus\velociraptor_pack.png" />
     <Resource Include="Images\Environment\Insula Primus\volcanic_eruption.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\NumOfCards.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Villain\baron_blade\backlash_field.png" />
+    <Resource Include="Images\Villain\baron_blade\bb_back.png" />
+    <Resource Include="Images\Villain\baron_blade\bb_cover.png" />
+    <Resource Include="Images\Villain\baron_blade\bb_death.png" />
+    <Resource Include="Images\Villain\baron_blade\bb_initial.png" />
+    <Resource Include="Images\Villain\baron_blade\bb_instr_back.png" />
+    <Resource Include="Images\Villain\baron_blade\bb_instr_front.png" />
+    <Resource Include="Images\Villain\baron_blade\blade_battalion.png" />
+    <Resource Include="Images\Villain\baron_blade\consider_the_price_of_victory.png" />
+    <Resource Include="Images\Villain\baron_blade\devious_disruption.png" />
+    <Resource Include="Images\Villain\baron_blade\elemental_redistributor.png" />
+    <Resource Include="Images\Villain\baron_blade\flesh_repair_nanites.png" />
+    <Resource Include="Images\Villain\baron_blade\hasten_doom.png" />
+    <Resource Include="Images\Villain\baron_blade\living_force_field.png" />
+    <Resource Include="Images\Villain\baron_blade\mobile_defense_platform.png" />
+    <Resource Include="Images\Villain\baron_blade\powerer_remote_turret.png" />
+    <Resource Include="Images\Villain\baron_blade\slash_and_burn.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
