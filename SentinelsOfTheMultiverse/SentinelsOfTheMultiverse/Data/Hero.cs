@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse
 {
-    public abstract class Hero
+    public abstract class Hero : IPlayer
     {
 
         public List<string> hand { get; set; }
@@ -21,58 +21,49 @@ namespace SentinelsOfTheMultiverse
             deck = new Deck(heroName);
         }
 
-    }
 
-    public class Deck
-    {
-        List<Card> cards=new List<Card>();
+    
 
-        public Deck(string hero)
+        public override void playerTurn()
         {
-            var files = Directory.GetFiles(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName+"\\Images\\heroes\\"+hero);
-
-            foreach (var filename in files)
+            startPhase();
+            Boolean play = playPhase();
+            Boolean power = powerPhase();
+            if (play || power == true)
             {
-                Card card = new Card(filename);
-                cards.Add(card);
+                drawPhase(1);
             }
-        }
-
-
-        public void shuffle()
-        {
-            Random rng = new Random();
-            int n = this.cards.Count;
-            while (n > 1)
+            else
             {
-                n--;
-                int k = rng.Next(n + 1);
-                Card temp = cards[k];
-                cards[k] = cards[n];
-                cards[n] = temp;
+                drawPhase(2);
             }
+            endPhase();
         }
 
-        public List<Card> draw(int numberToDraw)
+        public override void startPhase()
         {
-            List<Card> drawnCards = new List<Card>();
-            for (int jj = 0; jj < numberToDraw; jj++)
-            {
-                drawnCards.Add(cards[0]);
-                cards.RemoveAt(0);
-            }
-
-            return drawnCards;
+            //conditionals for start turn effects
         }
 
-        public void printDeck()
+        public override Boolean playPhase()
         {
-            //Debug.WriteLine("deck: " + String.Join(", ", this.cards));
+            return true;
         }
 
-        //public List<Card> getCards()
-        //{
-        //    return this.cards;
-        //}
+        public override Boolean powerPhase()
+        {
+            return true;
+        }
+
+        public void drawPhase(int numCards)
+        {
+            deck.draw(numCards);
+        }
+
+        public override void endPhase()
+        {
+            //conditionals need to be added for end turn effects
+        }
+
     }
 }

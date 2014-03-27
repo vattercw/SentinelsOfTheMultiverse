@@ -8,6 +8,18 @@ namespace SentinelsOfTheMultiverse.Data
 {
     class Minion
     {
+        private int maxHealth;
+        private int health;
+        private String name;
+
+
+        public Minion(String minionName, int maxHealthNum)
+        {
+            maxHealth = maxHealthNum;
+            health = maxHealthNum;
+            name = minionName;
+        }
+
 
     }
 }
