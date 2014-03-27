@@ -24,15 +24,36 @@ namespace SentinelsOfTheMultiverse
         public Window1()
         {
             InitializeComponent();
-            GameEngine game = new GameEngine();
-            DataContext = game;
+            
+            DataContext = this;
+            initBoard();
         }
 
         private void initBoard()
         {
+            StackPanel sp = new StackPanel();
+            //sp.Children.Add(new Button { Content = "Button" });
+
+            Image i = new Image();
+            i.Height = 200;
+            i.Source = getImageSource("Images/Hero/Haka/haka_hero.png");
             
+            //int q = src.PixelHeight;        // Image loads here
+            sp.Children.Add(i);
+
+            
+
+            Content = sp;
         }
 
+        private ImageSource getImageSource(string path){
+            BitmapImage src = new BitmapImage();
+            src.BeginInit();
+            src.UriSource = new Uri(path, UriKind.Relative);
+            src.EndInit();
+
+            return src;
+        }
         
         private void View_Hand(object sender, RoutedEventArgs e)
         {

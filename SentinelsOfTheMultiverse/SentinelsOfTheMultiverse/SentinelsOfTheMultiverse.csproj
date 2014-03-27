@@ -64,10 +64,7 @@
     <Compile Include="Data\IPlayer.cs" />
     <Compile Include="Data\Minion.cs" />
     <Compile Include="Data\Villain.cs" />
-    <Compile Include="GameEngine.cs" />
     <Compile Include="HandPanel.cs" />
-    <Compile Include="Data\Villian.cs" />
-    <Compile Include="GameEngine.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Tests\BasicTest.cs" />
     <Compile Include="GameBoard.xaml.cs">
@@ -112,8 +109,8 @@
   <ItemGroup>
     <Folder Include="Data\Effects\" />
     <Folder Include="Data\Environments\" />
-    <Folder Include="Data\Heroes\" />
     <Folder Include="Data\Villians\" />
+    <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Hero\Haka\dominion.png" />
@@ -135,51 +132,17 @@
     <Resource Include="Images\Hero\Haka\ta_moko.png" />
     <Resource Include="Images\Hero\Haka\vitality_surge.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Data\Effects\" />
-    <Folder Include="Data\Environments\" />
-    <Folder Include="Data\Villians\" />
-    <Folder Include="obj\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\heroes\haka\dominion.png" />
-    <Resource Include="Images\heroes\haka\elbow_smash.png" />
-    <Resource Include="Images\heroes\haka\enduring_intercession.png" />
-    <Resource Include="Images\heroes\haka\ground_pound.png" />
-    <Resource Include="Images\heroes\haka\haka_back.png" />
-    <Resource Include="Images\heroes\haka\haka_cover.png" />
-    <Resource Include="Images\heroes\haka\haka_death.png" />
-    <Resource Include="Images\heroes\haka\haka_hero.png" />
-    <Resource Include="Images\heroes\haka\haka_of_battle.png" />
-    <Resource Include="Images\heroes\haka\haka_of_restoration.png" />
-    <Resource Include="Images\heroes\haka\haka_of_shielding.png" />
-    <Resource Include="Images\heroes\haka\mere.png" />
-    <Resource Include="Images\heroes\haka\punish_the_weak.png" />
-    <Resource Include="Images\heroes\haka\rampage.png" />
-    <Resource Include="Images\heroes\haka\savage_mana.png" />
-    <Resource Include="Images\heroes\haka\taiaha.png" />
-    <Resource Include="Images\heroes\haka\ta_moko.png" />
-    <Resource Include="Images\heroes\haka\vitality_surge.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\environments\insula_primus\back_of_card.png" />
-    <Resource Include="Images\environments\insula_primus\deck_cover.png" />
-    <Resource Include="Images\environments\insula_primus\enraged_trex.png" />
-    <Resource Include="Images\environments\insula_primus\obsidian_field.png" />
-    <Resource Include="Images\environments\insula_primus\primordial_plant_life.png" />
-    <Resource Include="Images\environments\insula_primus\pterodactyl_thief.png" />
-    <Resource Include="Images\environments\insula_primus\river_of_lava.png" />
-    <Resource Include="Images\environments\insula_primus\velociraptor_pack.png" />
-    <Resource Include="Images\environments\insula_primus\volcanic_eruption.png" />
-    <Resource Include="Images\Environment\Insula Primus\back_of_card.png" />
-    <Resource Include="Images\Environment\Insula Primus\deck_cover.png" />
-    <Resource Include="Images\Environment\Insula Primus\enraged_trex.png" />
-    <Resource Include="Images\Environment\Insula Primus\obsidian_field.png" />
-    <Resource Include="Images\Environment\Insula Primus\primordial_plant_life.png" />
-    <Resource Include="Images\Environment\Insula Primus\pterodactyl_thief.png" />
-    <Resource Include="Images\Environment\Insula Primus\river_of_lava.png" />
-    <Resource Include="Images\Environment\Insula Primus\velociraptor_pack.png" />
-    <Resource Include="Images\Environment\Insula Primus\volcanic_eruption.png" />
+    <Resource Include="Images\Environment\insula_primus\back_of_card.png" />
+    <Resource Include="Images\Environment\insula_primus\deck_cover.png" />
+    <Resource Include="Images\Environment\insula_primus\enraged_trex.png" />
+    <Resource Include="Images\Environment\insula_primus\obsidian_field.png" />
+    <Resource Include="Images\Environment\insula_primus\primordial_plant_life.png" />
+    <Resource Include="Images\Environment\insula_primus\pterodactyl_thief.png" />
+    <Resource Include="Images\Environment\insula_primus\river_of_lava.png" />
+    <Resource Include="Images\Environment\insula_primus\velociraptor_pack.png" />
+    <Resource Include="Images\Environment\insula_primus\volcanic_eruption.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\NumOfCards.txt" />
