@@ -62,10 +62,12 @@
     <Compile Include="Data\IPlayer.cs" />
     <Compile Include="Data\Minion.cs" />
     <Compile Include="Data\Villian.cs" />
-    <Compile Include="Class1.cs" />
-    <Compile Include="Data\Player.cs" />
     <Compile Include="GameEngine.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Tests\BasicTest.cs" />
+    <Compile Include="GameBoard.xaml.cs">
+      <DependentUpon>GameBoard.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,6 +80,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="GameBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
