@@ -9,18 +9,26 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse
 {
-    public abstract class Hero
+    public abstract class Hero: IPlayer
     {
 
         public List<string> hand { get; set; }
         public Deck deck { get; set; }
 
+        override string characterName;
+        override int lifeTotal { get; set; }
+
         public Hero()
         {
-            string heroName = this.GetType().Name;
-            deck = new Deck(heroName);
+            characterName = this.GetType().Name;
+            deck = new Deck(characterName);
         }
 
+
+        internal string getCharacterName()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Deck

@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Villians\BaronBlade.cs" />
     <Compile Include="Data\Card.cs" />
     <Compile Include="Data\Heroes\Haka.cs" />
     <Compile Include="Data\IEffect.cs" />
@@ -64,7 +65,9 @@
     <Compile Include="Data\IPlayer.cs" />
     <Compile Include="Data\Minion.cs" />
     <Compile Include="Data\Villain.cs" />
+    <Compile Include="GameEngine.cs" />
     <Compile Include="HandPanel.cs" />
+    <Compile Include="Data\Environments\InsulaPrimus.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Tests\BasicTest.cs" />
     <Compile Include="GameBoard.xaml.cs">
@@ -108,8 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Effects\" />
-    <Folder Include="Data\Environments\" />
-    <Folder Include="Data\Villians\" />
     <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>

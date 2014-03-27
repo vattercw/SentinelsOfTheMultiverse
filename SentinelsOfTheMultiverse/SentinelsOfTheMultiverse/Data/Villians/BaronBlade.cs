@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace SentinelsOfTheMultiverse.Data
+namespace SentinelsOfTheMultiverse.Data.Villains
 {
-    public class Villain
+    public class BaronBlade: Villain
     {
 
     }
