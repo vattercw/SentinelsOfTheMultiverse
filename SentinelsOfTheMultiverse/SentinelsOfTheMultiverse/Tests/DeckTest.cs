@@ -48,7 +48,6 @@ namespace SentinelsOfTheMultiverse.Tests
             }
             Assert.True(pass);
         }
-
         [Test, RequiresSTA]
         public void TestShuffle()
         {
@@ -68,7 +67,5 @@ namespace SentinelsOfTheMultiverse.Tests
 
             Assert.True(shuffled);
         }
-
-
     }
 }

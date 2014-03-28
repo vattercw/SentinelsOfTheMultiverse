@@ -22,7 +22,7 @@ namespace SentinelsOfTheMultiverse
     {
         private GameEngine game = new GameEngine();
         private Grid gridLayout = new Grid();
-        private HandPanel playerHand = new HandPanel();
+        private HandPanel playerHand;
 
         #region Constants
 
@@ -48,15 +48,26 @@ namespace SentinelsOfTheMultiverse
             showHandButton.Click += new RoutedEventHandler(View_Hand);
 
             Grid.SetRow(showHandButton, 0);
+
             gridLayout.Children.Add(showHandButton);
+			//gridLayout.Children.Add(playerHand);
 			
             List<Hero> heroes= game.getHeroes();
             Villain villain = game.getVillain();
             GameEnvironment env = game.getEnvironment();
+            //playerHand = new HandPanel(game.getCurrentPlayer().getPlayerHand());
 
             initPlayerBoard(heroes, villain, env);
             
             Content = gridLayout;
+
+            //Image i = new Image();
+            //i.Height = 200;
+            //i.Source = getImageSource("Images/Hero/Haka/haka_hero.png");
+
+            //gridLayout.Children.Add(i);
+
+            //Content = gridLayout;
         }
 
         private void initPlayerBoard(List<Hero> heroes, Villain villain, GameEnvironment env)
@@ -103,7 +114,7 @@ namespace SentinelsOfTheMultiverse
 
         private void View_Hand(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void View_Card_Full(object sender, MouseButtonEventArgs e)

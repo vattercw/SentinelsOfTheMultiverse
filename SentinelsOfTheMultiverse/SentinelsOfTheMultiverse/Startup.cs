@@ -12,16 +12,15 @@ namespace SentinelsOfTheMultiverse
             List<String> names = new List<String>();
 
             names.Add("BaronBlade");
-            names.Add("Raka");
+            names.Add("Haka");
             names.Add(null);
             names.Add(null);
             names.Add(null);
             names.Add(null);
             names.Add(null);
-            names.Add("InsulaPrimalis");
+            names.Add("InsulaPrimus");
 
             return names;
-
         }
     }
 }

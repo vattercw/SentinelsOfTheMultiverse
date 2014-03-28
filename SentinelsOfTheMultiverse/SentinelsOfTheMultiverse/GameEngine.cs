@@ -33,9 +33,6 @@ namespace SentinelsOfTheMultiverse
         {
             begin();
         }
-
-
-
         public void begin()
         {
             List<string> heroesStr = new List<string>() {HERO_NAMESPACE+"Haka", HERO_NAMESPACE+"Haka" };
@@ -68,15 +65,22 @@ namespace SentinelsOfTheMultiverse
 
         public void newTurn()
         {
-            this.players[playerTurn].playerTurn();
-            this.playerTurn++;
-            if (this.playerTurn == this.players.Count)
+            players[playerTurn].playerTurn();
+            playerTurn++;
+            if (playerTurn == players.Count)
             {
-                this.playerTurn = 0;
+                playerTurn = 0;
             }
         }
+        public int getPlayerTurn()
+        {
+            return playerTurn;
+        }
 
-
+        public Hero getCurrentPlayer()
+        {
+            return heroes[playerTurn];
+        }
 
         internal List<Hero> getHeroes()
         {
@@ -92,7 +96,5 @@ namespace SentinelsOfTheMultiverse
         {
             return environment;
         }
-
-
     }
 }

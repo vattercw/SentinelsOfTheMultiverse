@@ -15,7 +15,6 @@ namespace SentinelsOfTheMultiverse
 
         public List<Card> hand { get; set; }
         public Deck deck { get; set; }
-
         public string characterName;
 
         //override int lifeTotal { get; set; }
@@ -69,6 +68,10 @@ namespace SentinelsOfTheMultiverse
         public override void endPhase()
         {
             //conditionals need to be added for end turn effects
+        }
+        public List<Card> getPlayerHand()
+        {
+            return hand;
         }
 
     }
