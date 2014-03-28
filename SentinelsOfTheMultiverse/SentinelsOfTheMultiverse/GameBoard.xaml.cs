@@ -56,11 +56,13 @@ namespace SentinelsOfTheMultiverse
             List<Hero> heroes= game.getHeroes();
             Villain villain = game.getVillain();
             GameEnvironment env = game.getEnvironment();
-            //playerHand = new HandPanel(game.getCurrentPlayer().getPlayerHand());
+
+            playerHand = new HandPanel(game.getCurrentPlayer().getPlayerHand());
 
             initPlayerBoard(heroes, villain, env);
             
             Content = gridLayout;
+
             //Image i = new Image();
             //i.Height = 200;
             //i.Source = getImageSource("Images/Hero/Haka/haka_hero.png");
