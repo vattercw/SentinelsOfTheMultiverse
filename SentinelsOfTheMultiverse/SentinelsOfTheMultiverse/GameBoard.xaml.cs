@@ -32,7 +32,9 @@ namespace SentinelsOfTheMultiverse
         private void initBoard()
         {
             StackPanel sp = new StackPanel();
-            //sp.Children.Add(new Button { Content = "Button" });
+            Button showHand = new Button();
+            //showHand.Click += View_Hand();
+            sp.Children.Add(new Button { Content = "Button" });
 
             Image i = new Image();
             i.Height = 200;
@@ -41,9 +43,8 @@ namespace SentinelsOfTheMultiverse
             //int q = src.PixelHeight;        // Image loads here
             sp.Children.Add(i);
 
-            
-
             Content = sp;
+
         }
 
         private ImageSource getImageSource(string path){
