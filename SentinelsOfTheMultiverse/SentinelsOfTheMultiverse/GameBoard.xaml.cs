@@ -27,6 +27,11 @@ namespace SentinelsOfTheMultiverse
         #region Constants
 
             private string HERO_IMAGE_PATH="Images/Hero/";
+            private int VILLAIN_ROW_NUM=1;
+            private int ENVIRONMENT_ROW_NUM=0;
+            private int HERO_ROW_NUM = 2;    
+            private double CARD_HEIGHT=200;
+            private int DECK_COLUMN=2;
 
         #endregion
 
@@ -59,7 +64,7 @@ namespace SentinelsOfTheMultiverse
             GameEnvironment env = game.getEnvironment();
             //playerHand = new HandPanel(game.getCurrentPlayer().getPlayerHand());
 
-            initPlayerBoard(heroes, villain, env);
+            initBoard(heroes, villain, env);
             
             Content = gridLayout;
 
@@ -85,29 +90,73 @@ namespace SentinelsOfTheMultiverse
             return myGrid;
         }
 
-        private void initPlayerBoard(List<Hero> heroes, Villain villain, GameEnvironment env)
+        private void initBoard(List<Hero> heroes, Villain villain, GameEnvironment env)
         {
+            string villainName = villain.getCharacterName();
             
-            for (int ii=0;ii<heroes.Count;ii++)
+            ImageSource villainImg = getImageSource(HERO_IMAGE_PATH + villainName + "/" + villainName + "_initial.png");
+            ImageSource villainDeckBackImg = getImageSource(HERO_IMAGE_PATH + villainName + "/" + villainName + "_initial.png");
+            ImageSource villainInstImg = getImageSource(HERO_IMAGE_PATH + villainName + "/" + villainName + "_initial.png");
+            initPlayerTemplate(villainDeckBackImg, villainImg, villainInstImg);
+
+            ImageSource envDeckBackImg = getImageSource("Images/Environment/insula_primus/back_of_card.png");
+            initPlayerTemplate(envDeckBackImg);
+
+
+            for (int ii = 0; ii < heroes.Count; ii++)
             {
-                Image k = new Image();
-                k.Height = 200;
-                string heroName= heroes[ii].getCharacterName();
+                string heroName = heroes[ii].getCharacterName();
 
+                ImageSource heroDeckBackImg= getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_back.png");
+                ImageSource heroImg= getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_hero.png");
+                initPlayerTemplate(heroDeckBackImg, heroImg);
+            }   
+        }
 
-                k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_hero.png");
-                addElementToGrid(k, ii+1, 0);
-                gridLayout.Children.Add(k);
+        //TODO: later add ImageSource graveYardTop
+        private void initPlayerTemplate(ImageSource deckBack, ImageSource characterCard=null, ImageSource characterInstructions=null)
+        {
+            int deckBackRow;
+            if (characterInstructions != null)//villain
+            {
+                Image charInst = new Image();
+                charInst.Height = CARD_HEIGHT;
+                charInst.Source = characterInstructions;
 
-                //k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_back.png");
-                //gridLayout.Children.Add(k);
+                addElementToGrid(charInst, VILLAIN_ROW_NUM, 1);
+
+                Image charCardImg = new Image();
+                charCardImg.Height = CARD_HEIGHT;
+                charCardImg.Source = characterCard;
+                addElementToGrid(charCardImg, VILLAIN_ROW_NUM, 0);
+
+                deckBackRow = VILLAIN_ROW_NUM;
             }
+            else if (characterCard == null)//environment
+            {
+                deckBackRow = ENVIRONMENT_ROW_NUM;
+            }
+            else//hero
+            {
+                Image heroCharacterImg = new Image();
+                heroCharacterImg.Height = CARD_HEIGHT;
+                heroCharacterImg.Source = characterCard;
+                addElementToGrid(heroCharacterImg, HERO_ROW_NUM, 0);
+
+                deckBackRow = HERO_ROW_NUM;
+            }
+
+            Image deckBackImg = new Image();
+            deckBackImg.Height = CARD_HEIGHT;
+            deckBackImg.Source = deckBack;
+            addElementToGrid(deckBackImg, deckBackRow, DECK_COLUMN);
         }
 
         private void addElementToGrid(UIElement elem, int row, int col)
         {
             Grid.SetRow(elem, row);
             Grid.SetColumn(elem, col);
+            gridLayout.Children.Add(elem);
         }
 
 
