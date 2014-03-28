@@ -27,7 +27,7 @@ namespace SentinelsOfTheMultiverse
         }
         internal string getCharacterName()
         {
-            return characterName;
+            throw new NotImplementedException();
         }
 
         public override void playerTurn()
