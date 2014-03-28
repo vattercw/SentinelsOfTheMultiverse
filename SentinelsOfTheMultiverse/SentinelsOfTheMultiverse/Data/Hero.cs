@@ -9,18 +9,14 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse
 {
-<<<<<<< HEAD
     public abstract class Hero: IPlayer
-=======
-    public abstract class Hero : IPlayer
->>>>>>> 6f53958272daa2c939f4374ebabf318cce6471b1
     {
 
         public List<string> hand { get; set; }
         public Deck deck { get; set; }
 
-        override string characterName;
-        override int lifeTotal { get; set; }
+        public string characterName;
+        //override int lifeTotal { get; set; }
 
         public Hero()
         {
@@ -28,17 +24,10 @@ namespace SentinelsOfTheMultiverse
             deck = new Deck(characterName);
         }
 
-<<<<<<< HEAD
-
         internal string getCharacterName()
         {
             throw new NotImplementedException();
         }
-    }
-=======
->>>>>>> 6f53958272daa2c939f4374ebabf318cce6471b1
-
-    
 
         public override void playerTurn()
         {

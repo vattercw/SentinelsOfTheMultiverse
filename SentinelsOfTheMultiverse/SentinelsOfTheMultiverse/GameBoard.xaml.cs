@@ -66,8 +66,8 @@ namespace SentinelsOfTheMultiverse
         {
             foreach (Hero h in heroes)
             {
-                Image i = new Image();
-                i.Height = 200;
+                Image k = new Image();
+                k.Height = 200;
                 string heroName= h.getCharacterName();
                 
                 

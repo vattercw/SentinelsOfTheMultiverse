@@ -15,15 +15,10 @@ namespace SentinelsOfTheMultiverse
 
         public Startup startScreen = new Startup();
         public List<IPlayer> players = new List<IPlayer>();
-<<<<<<< HEAD
         public List<Hero> _heroes = new List<Hero>();
         public Villain _villian;
         public GameEnvironment _environment;
-=======
-        public List<Hero> heroes = new List<Hero>();
-        public Villain villian;
-        public GameEnvironment environment;
->>>>>>> 6f53958272daa2c939f4374ebabf318cce6471b1
+
         private int playerTurn = 0;
         Image villainImage=new Image();
 
@@ -33,8 +28,7 @@ namespace SentinelsOfTheMultiverse
 
         public GameEngine()
         {
-            
-            begin();
+            //begin();
         }
 
        

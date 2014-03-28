@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse.Data
 {
-<<<<<<< HEAD
-    public class Villain
-    {
-
-=======
-    class Villain : IPlayer
+    public class Villain : IPlayer
     {
         List<Minion> minions { get; set; }
         Deck deck { get; set; }
@@ -44,6 +39,5 @@ namespace SentinelsOfTheMultiverse.Data
         {
             //conditionals for end turn effects
         }
->>>>>>> 6f53958272daa2c939f4374ebabf318cce6471b1
     }
 }
