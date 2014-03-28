@@ -41,15 +41,17 @@ namespace SentinelsOfTheMultiverse
 
         private void initBoard()
         {
-            StackPanel sp = new StackPanel();
-
+            //StackPanel sp = new StackPanel();
+            
             Button showHandButton = new Button();
             showHandButton.Content = "Show Your Hand!";
             showHandButton.Width = 150;
             showHandButton.Height = 50;
             showHandButton.Click += new RoutedEventHandler(View_Hand);
 
-            sp.Children.Add(showHandButton);
+
+
+            gridLayout.Children.Add(showHandButton);
 			
             List<Hero> heroes= game.getHeroes();
             Villain villain = game.getVillain();
@@ -57,7 +59,7 @@ namespace SentinelsOfTheMultiverse
 
             initPlayerBoard(heroes, villain, env);
             
-            Content = sp;
+            Content = gridLayout;
 			
             //Image i = new Image();
             //i.Height = 200;

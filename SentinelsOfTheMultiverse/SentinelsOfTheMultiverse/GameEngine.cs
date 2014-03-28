@@ -31,7 +31,7 @@ namespace SentinelsOfTheMultiverse
 
         public GameEngine()
         {
-            //begin();
+            begin();
         }
 
 

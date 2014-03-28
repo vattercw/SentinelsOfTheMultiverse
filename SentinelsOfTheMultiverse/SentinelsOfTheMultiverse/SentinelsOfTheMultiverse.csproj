@@ -79,7 +79,6 @@
     </Compile>
     <Compile Include="Tests\HeroTest.cs" />
     <Compile Include="Tests\DeckTest.cs" />
-    <Compile Include="Tests\VillainTest.cs" />
     <Page Include="GameBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
