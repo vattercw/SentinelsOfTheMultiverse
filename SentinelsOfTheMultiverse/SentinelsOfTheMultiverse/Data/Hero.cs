@@ -17,20 +17,13 @@ namespace SentinelsOfTheMultiverse
 
         public string characterName;
 
-        public Hero()
-        {
-
-            string heroName = this.GetType().Name;
-            deck = new Deck(heroName);
-            hand.AddRange(deck.draw(4));
-            //override int lifeTotal { get; set; }
+        //override int lifeTotal { get; set; }
 
         public Hero()
         {
             characterName = this.GetType().Name;
             deck = new Deck(characterName);
         }
-
         internal string getCharacterName()
         {
             return characterName;
