@@ -17,10 +17,13 @@ namespace SentinelsOfTheMultiverse
         public List<IPlayer> players = new List<IPlayer>();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         public List<Hero> heroes = new List<Hero>();
         public Villain villain;
         public GameEnvironment environment;
 =======
+=======
+>>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
 =======
 >>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
         public List<Hero> _heroes = new List<Hero>();
@@ -28,6 +31,9 @@ namespace SentinelsOfTheMultiverse
         public GameEnvironment _environment;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
+=======
 >>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
 =======
 >>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
@@ -84,6 +90,10 @@ namespace SentinelsOfTheMultiverse
             
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            //villainImage.Source = new BitmapImage(new Uri("C:\\Users\\vattercw\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Villain\\baron_blade\\bb_back.png"));
+>>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
 =======
             //villainImage.Source = new BitmapImage(new Uri("C:\\Users\\vattercw\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Villain\\baron_blade\\bb_back.png"));
 >>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
