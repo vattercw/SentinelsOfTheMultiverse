@@ -21,17 +21,22 @@ namespace SentinelsOfTheMultiverse
     public partial class GameBoard : Window
     {
         private GameEngine game = new GameEngine();
-        private Grid gridLayout;
-        private HandPanel playerHand;
+        private Grid gridLayout = new Grid();
+        private ViewHand handViewer;
 
         #region Constants
 
             private string HERO_IMAGE_PATH="Images/Hero/";
+
             private int VILLAIN_ROW_NUM=1;
             private int ENVIRONMENT_ROW_NUM=0;
             private int HERO_ROW_NUM = 2;    
             private double CARD_HEIGHT=200;
             private int DECK_COLUMN=2;
+
+            private System.Windows.Visibility SHOW = Visibility.Visible;
+            private System.Windows.Visibility HIDE = Visibility.Hidden;
+
 
         #endregion
 
@@ -56,13 +61,12 @@ namespace SentinelsOfTheMultiverse
 
             Grid.SetRow(showHandButton, 0);
 
+            initHandViewer();
             gridLayout.Children.Add(showHandButton);
-			//gridLayout.Children.Add(playerHand);
 			
             List<Hero> heroes= game.getHeroes();
             Villain villain = game.getVillain();
             GameEnvironment env = game.getEnvironment();
-            //playerHand = new HandPanel(game.getCurrentPlayer().getPlayerHand());
 
             initBoard(heroes, villain, env);
             
@@ -70,6 +74,11 @@ namespace SentinelsOfTheMultiverse
 
         }
 
+        private void initHandViewer()
+        {
+            handViewer = new ViewHand(game.getCurrentPlayer().getPlayerHand());
+		}
+		
         private Grid initGrid()
         {
             Grid myGrid = new Grid();
@@ -172,7 +181,18 @@ namespace SentinelsOfTheMultiverse
 
         private void View_Hand(object sender, RoutedEventArgs e)
         {
-
+            if (!handViewer.IsVisible)
+            {
+                handViewer.Visibility = SHOW;
+                Button handVisibleButton = (Button)sender;
+                handVisibleButton.Content = "Hide Player Hand!";
+            }
+            else if (handViewer.IsVisible)
+            {
+                handViewer.Visibility = HIDE;
+                Button handHiddenButton = (Button)sender;
+                handHiddenButton.Content = "Show Player Hand!";
+            }
         }
 
         private void View_Card_Full(object sender, MouseButtonEventArgs e)

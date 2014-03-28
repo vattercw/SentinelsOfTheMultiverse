@@ -79,8 +79,15 @@
     </Compile>
     <Compile Include="Tests\HeroTest.cs" />
     <Compile Include="Tests\DeckTest.cs" />
+    <Compile Include="ViewHand.xaml.cs">
+      <DependentUpon>ViewHand.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tests\VillainTest.cs" />
     <Page Include="GameBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewHand.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,7 +117,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Effects\" />

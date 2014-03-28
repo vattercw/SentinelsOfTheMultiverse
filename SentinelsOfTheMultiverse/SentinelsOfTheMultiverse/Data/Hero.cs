@@ -23,6 +23,8 @@ namespace SentinelsOfTheMultiverse
         {
             characterName = this.GetType().Name;
             deck = new Deck(characterName);
+            hand = new List<Card>();
+            drawPhase(4);
         }
         internal string getCharacterName()
         {

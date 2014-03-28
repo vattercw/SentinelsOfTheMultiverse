@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace SentinelsOfTheMultiverse.Data
@@ -16,11 +17,21 @@ namespace SentinelsOfTheMultiverse.Data
 
         public Card(string cardPath)
         {
-            cardImage.Source = new BitmapImage(new Uri(cardPath));
+            cardImage.Source = getImageSource(cardPath);
         }
         public string getName()
         {
             return cardName;
+        }
+
+        private ImageSource getImageSource(string path)
+        {
+            BitmapImage src = new BitmapImage();
+            src.BeginInit();
+            src.UriSource = new Uri(path, UriKind.Relative);
+            src.EndInit();
+
+            return src;
         }
 
     }
