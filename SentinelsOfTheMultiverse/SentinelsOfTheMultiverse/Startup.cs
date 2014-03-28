@@ -9,7 +9,18 @@ namespace SentinelsOfTheMultiverse
     {
         internal List<String> begin()
         {
-            throw new NotImplementedException();
+            List<String> names = new List<String>();
+
+            names.Add("BaronBlade");
+            names.Add("Raka");
+            names.Add(null);
+            names.Add(null);
+            names.Add(null);
+            names.Add(null);
+            names.Add(null);
+            names.Add("InsulaPrimalis");
+
+            return names;
         }
     }
 }

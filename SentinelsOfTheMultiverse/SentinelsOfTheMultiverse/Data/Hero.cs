@@ -1,3 +1,4 @@
+﻿
 ﻿using SentinelsOfTheMultiverse.Data;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse
 {
-    public abstract class Hero: IPlayer
+    public abstract class Hero : IPlayer
     {
 
-        public List<string> hand { get; set; }
+        public List<Card> hand { get; set; }
         public Deck deck { get; set; }
 
         public string characterName;
+
         //override int lifeTotal { get; set; }
 
         public Hero()
@@ -23,7 +25,6 @@ namespace SentinelsOfTheMultiverse
             characterName = this.GetType().Name;
             deck = new Deck(characterName);
         }
-
         internal string getCharacterName()
         {
             throw new NotImplementedException();
@@ -62,7 +63,7 @@ namespace SentinelsOfTheMultiverse
 
         public void drawPhase(int numCards)
         {
-            deck.draw(numCards);
+            hand.AddRange(deck.draw(numCards));
         }
 
         public override void endPhase()
