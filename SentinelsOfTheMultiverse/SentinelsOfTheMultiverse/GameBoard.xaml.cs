@@ -41,16 +41,13 @@ namespace SentinelsOfTheMultiverse
 
         private void initBoard()
         {
-            //StackPanel sp = new StackPanel();
-            
             Button showHandButton = new Button();
             showHandButton.Content = "Show Your Hand!";
             showHandButton.Width = 150;
             showHandButton.Height = 50;
             showHandButton.Click += new RoutedEventHandler(View_Hand);
 
-
-
+            Grid.SetRow(showHandButton, 0);
             gridLayout.Children.Add(showHandButton);
 			
             List<Hero> heroes= game.getHeroes();
@@ -60,14 +57,6 @@ namespace SentinelsOfTheMultiverse
             initPlayerBoard(heroes, villain, env);
             
             Content = gridLayout;
-			
-            //Image i = new Image();
-            //i.Height = 200;
-            //i.Source = getImageSource("Images/Hero/Haka/haka_hero.png");
-
-            //gridLayout.Children.Add(i);
-
-            //Content = gridLayout;
         }
 
         private void initPlayerBoard(List<Hero> heroes, Villain villain, GameEnvironment env)
@@ -80,16 +69,21 @@ namespace SentinelsOfTheMultiverse
 
 
                 k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_hero.png");
+                Grid.SetRow(k, 1);
                 gridLayout.Children.Add(k);
 
                 //k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_back.png");
-
                 //gridLayout.Children.Add(k);
             }
 
             RowDefinition row = new RowDefinition ();
             row.Height= GridLength.Auto;
+
+            RowDefinition row2 = new RowDefinition();
+            row2.Height = GridLength.Auto;
+
             gridLayout.RowDefinitions.Add(row);
+            gridLayout.RowDefinitions.Add(row2);
 
             ColumnDefinition col= new ColumnDefinition();
             col.Width = GridLength.Auto;
