@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SentinelsOfTheMultiverse.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,15 +18,23 @@ namespace SentinelsOfTheMultiverse
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class GameBoard : Window
     {
+        private GameEngine game = new GameEngine();
+        private Grid gridLayout = new Grid();
 
+        #region Constants
 
-        public Window1()
+            private string HERO_IMAGE_PATH="Images/Hero/";
+
+        #endregion
+
+        public GameBoard()
         {
             InitializeComponent();
             
             DataContext = this;
+
             initBoard();
         }
 
@@ -35,19 +44,52 @@ namespace SentinelsOfTheMultiverse
             Button showHand = new Button();
             //showHand.Click += View_Hand();
             sp.Children.Add(new Button { Content = "Button" });
+			
+            List<Hero> heroes= game.getHeroes();
+            Villain villain = game.getVillain();
+            GameEnvironment env = game.getEnvironment();
 
-            Image i = new Image();
-            i.Height = 200;
-            i.Source = getImageSource("Images/Hero/Haka/haka_hero.png");
+            initPlayerBoard(heroes, villain, env);
             
-            //int q = src.PixelHeight;        // Image loads here
-            sp.Children.Add(i);
-
             Content = sp;
+			
+            //Image i = new Image();
+            //i.Height = 200;
+            //i.Source = getImageSource("Images/Hero/Haka/haka_hero.png");
 
+            //gridLayout.Children.Add(i);
+
+            Content = gridLayout;
         }
 
-        private ImageSource getImageSource(string path){
+        private void initPlayerBoard(List<Hero> heroes, Villain villain, GameEnvironment env)
+        {
+            foreach (Hero h in heroes)
+            {
+                Image i = new Image();
+                i.Height = 200;
+                string heroName= h.getCharacterName();
+                
+                
+                //i.Source= getImageSource(HERO_IMAGE_PATH+heroName+"/"+heroName+"_hero.png");
+                //gridLayout.Children.Add(i);
+
+                //i.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName + "_back.png");
+                //gridLayout.Children.Add(i);
+            }
+
+            RowDefinition row = new RowDefinition ();
+            row.Height= GridLength.Auto;
+            gridLayout.RowDefinitions.Add(row);
+
+            ColumnDefinition col= new ColumnDefinition();
+            col.Width = GridLength.Auto;
+            gridLayout.ColumnDefinitions.Add(col);
+        }
+
+
+        private ImageSource getImageSource(string path)
+        {
             BitmapImage src = new BitmapImage();
             src.BeginInit();
             src.UriSource = new Uri(path, UriKind.Relative);
@@ -55,7 +97,7 @@ namespace SentinelsOfTheMultiverse
 
             return src;
         }
-        
+
         private void View_Hand(object sender, RoutedEventArgs e)
         {
 
