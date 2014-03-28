@@ -22,7 +22,7 @@ namespace SentinelsOfTheMultiverse
     {
         private GameEngine game = new GameEngine();
         private Grid gridLayout = new Grid();
-        private HandPanel playerHand = new HandPanel();
+        public HandPanel playerHand = new HandPanel();
 
         #region Constants
 
@@ -80,8 +80,8 @@ namespace SentinelsOfTheMultiverse
                 k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName + "_hero.png");
                 gridLayout.Children.Add(k);
 
-                //i.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName + "_back.png");
-                //gridLayout.Children.Add(i);
+                //k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName + "_back.png");
+                //gridLayout.Children.Add(k);
             }
 
             RowDefinition row = new RowDefinition ();
@@ -106,8 +106,7 @@ namespace SentinelsOfTheMultiverse
 
         private void View_Hand(object sender, RoutedEventArgs e)
         {
-
-
+            
         }
 
         private void View_Card_Full(object sender, MouseButtonEventArgs e)
