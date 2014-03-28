@@ -49,7 +49,25 @@ namespace SentinelsOfTheMultiverse.Tests
             Assert.True(pass);
         }
 
-        //[Test]
+        [Test, RequiresSTA]
+        public void TestShuffle()
+        {
+            Deck testHaka = new Deck("haka");
+            Deck testHakaShuffled = new Deck("haka");
+
+            testHakaShuffled.shuffle();
+            Boolean shuffled = false;
+
+            for (int i = 0; i < testHaka.getCards().Count; i++)
+            {
+                if (testHaka.getCards()[i] != testHakaShuffled.getCards()[i])
+                {
+                    shuffled = true;
+                }
+            }
+
+            Assert.True(shuffled);
+        }
 
 
     }
