@@ -58,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="Data\Villians\BaronBlade.cs" />
     <Compile Include="Data\Card.cs" />
+    <Compile Include="Data\Deck.cs" />
     <Compile Include="Data\Heroes\Haka.cs" />
     <Compile Include="Data\IEffect.cs" />
     <Compile Include="Data\GameEnvironment.cs" />

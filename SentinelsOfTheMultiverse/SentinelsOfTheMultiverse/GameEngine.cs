@@ -15,14 +15,20 @@ namespace SentinelsOfTheMultiverse
 
         public Startup startScreen = new Startup();
         public List<IPlayer> players = new List<IPlayer>();
+<<<<<<< HEAD
         public List<Hero> _heroes = new List<Hero>();
         public Villain _villian;
         public GameEnvironment _environment;
+=======
+        public List<Hero> heroes = new List<Hero>();
+        public Villain villian;
+        public GameEnvironment environment;
+>>>>>>> 6f53958272daa2c939f4374ebabf318cce6471b1
         private int playerTurn = 0;
         Image villainImage=new Image();
 
         public static int MAXPLAYER = 6;
-        public static int VILLIANNUM = 6;
+        public static int VILLIANNUM = 0;
         public static int EVIRONMENTNUM = 7;
 
         public GameEngine()
@@ -59,7 +65,7 @@ namespace SentinelsOfTheMultiverse
             //List<String> playerNames = this.startScreen.begin();
 
            
-            //for(int i = 0; i < MAXPLAYER; i++){
+            //for(int i = 1; i <= MAXPLAYER; i++){
             //    Hero newHero = (Hero) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[i]);
             //    this.heroes.Add(newHero);
             //}
@@ -72,7 +78,8 @@ namespace SentinelsOfTheMultiverse
 
         public void newTurn()
         {
-            this.players[playerTurn].playTurn();
+
+            this.players[playerTurn].playerTurn();
             this.playerTurn++;
             if (this.playerTurn == this.players.Count)
             {
