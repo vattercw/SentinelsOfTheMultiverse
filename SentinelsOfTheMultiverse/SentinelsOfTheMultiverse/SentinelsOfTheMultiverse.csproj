@@ -82,6 +82,7 @@
     <Compile Include="ViewHand.xaml.cs">
       <DependentUpon>ViewHand.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tests\VillainTest.cs" />
     <Page Include="GameBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,7 +123,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Effects\" />
-    <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Hero\Haka\dominion.png" />
