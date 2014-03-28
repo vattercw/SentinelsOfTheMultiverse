@@ -14,6 +14,10 @@ namespace SentinelsOfTheMultiverse
     {
         private Collection<UIElement> list = new Collection<UIElement>();
 
+        public HandPanel()
+        {
+        }
+
         public HandPanel(List<Card> hand)
         {
             foreach (Card c in hand)
