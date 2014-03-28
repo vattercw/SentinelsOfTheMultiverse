@@ -31,7 +31,7 @@ namespace SentinelsOfTheMultiverse
 
         public GameEngine()
         {
-            begin();
+            //begin();
         }
 
 
@@ -54,6 +54,7 @@ namespace SentinelsOfTheMultiverse
             playerNames.AddRange(heroes);
             playerNames.Add(villain);
             playerNames.Add(environment);
+
 
         }
 

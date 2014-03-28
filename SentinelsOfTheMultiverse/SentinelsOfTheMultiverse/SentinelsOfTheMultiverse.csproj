@@ -70,7 +70,6 @@
     <Compile Include="HandPanel.cs" />
     <Compile Include="Data\Environments\InsulaPrimus.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Tests\BasicTest.cs" />
     <Compile Include="GameBoard.xaml.cs">
       <DependentUpon>GameBoard.xaml</DependentUpon>
     </Compile>
@@ -78,6 +77,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\HeroTest.cs" />
+    <Compile Include="Tests\DeckTest.cs" />
+    <Compile Include="Tests\VillainTest.cs" />
     <Page Include="GameBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,7 +122,6 @@
     <Resource Include="Images\Hero\Haka\enduring_intercession.png" />
     <Resource Include="Images\Hero\Haka\ground_pound.png" />
     <Resource Include="Images\Hero\Haka\haka_back.png" />
-    <Resource Include="Images\Hero\Haka\haka_cover.png" />
     <Resource Include="Images\Hero\Haka\haka_death.png" />
     <Resource Include="Images\Hero\Haka\haka_hero.png" />
     <Resource Include="Images\Hero\Haka\haka_of_battle.png" />
@@ -134,10 +135,13 @@
     <Resource Include="Images\Hero\Haka\ta_moko.png" />
     <Resource Include="Images\Hero\Haka\vitality_surge.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Icons\bb_cover.png" />
+    <Resource Include="Images\Icons\deck_cover.png" />
+    <Resource Include="Images\Icons\haka_cover.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Environment\insula_primus\back_of_card.png" />
-    <Resource Include="Images\Environment\insula_primus\deck_cover.png" />
     <Resource Include="Images\Environment\insula_primus\enraged_trex.png" />
     <Resource Include="Images\Environment\insula_primus\obsidian_field.png" />
     <Resource Include="Images\Environment\insula_primus\primordial_plant_life.png" />
@@ -152,7 +156,6 @@
   <ItemGroup>
     <Resource Include="Images\Villain\baron_blade\backlash_field.png" />
     <Resource Include="Images\Villain\baron_blade\bb_back.png" />
-    <Resource Include="Images\Villain\baron_blade\bb_cover.png" />
     <Resource Include="Images\Villain\baron_blade\bb_death.png" />
     <Resource Include="Images\Villain\baron_blade\bb_initial.png" />
     <Resource Include="Images\Villain\baron_blade\bb_instr_back.png" />
@@ -170,7 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Environment\insula_primus\back_of_card.png" />
-    <Resource Include="Images\Environment\insula_primus\deck_cover.png" />
     <Resource Include="Images\Environment\insula_primus\enraged_trex.png" />
     <Resource Include="Images\Environment\insula_primus\obsidian_field.png" />
     <Resource Include="Images\Environment\insula_primus\primordial_plant_life.png" />

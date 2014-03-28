@@ -53,5 +53,13 @@ namespace SentinelsOfTheMultiverse.Data
         {
             //Debug.WriteLine("deck: " + String.Join(", ", this.cards));
         }
+<<<<<<< HEAD
+=======
+
+        public List<Card> getCards()
+        {
+            return this.cards;
+        }
+>>>>>>> f60aaa66cb4b34dd65255f38185a7e2054f44ffc
     }
 }
