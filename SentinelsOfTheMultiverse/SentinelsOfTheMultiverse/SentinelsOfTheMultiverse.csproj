@@ -79,7 +79,14 @@
     </Compile>
     <Compile Include="Tests\HeroTest.cs" />
     <Compile Include="Tests\DeckTest.cs" />
+    <Compile Include="ViewHand.xaml.cs">
+      <DependentUpon>ViewHand.xaml</DependentUpon>
+    </Compile>
     <Page Include="GameBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewHand.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
