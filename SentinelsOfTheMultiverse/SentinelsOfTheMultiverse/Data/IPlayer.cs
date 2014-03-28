@@ -11,12 +11,6 @@ namespace SentinelsOfTheMultiverse.Data
         Deck deck { get;  set; }
         string characterName;
         int lifeTotal { get; set; }
-        
-        //public IPlayer()
-        //{
-
-        //}
-
 
         public abstract void playerTurn();
         public abstract void startPhase();

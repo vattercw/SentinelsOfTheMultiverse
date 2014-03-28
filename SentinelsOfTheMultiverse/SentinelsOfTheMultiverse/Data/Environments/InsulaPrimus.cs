@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SentinelsOfTheMultiverse
+namespace SentinelsOfTheMultiverse.Data.Environments
 {
     public class InsulaPrimus: GameEnvironment
     {

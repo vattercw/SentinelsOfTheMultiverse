@@ -41,16 +41,17 @@ namespace SentinelsOfTheMultiverse
 
         private void initBoard()
         {
-            StackPanel sp = new StackPanel();
-
+            //StackPanel sp = new StackPanel();
+            
             Button showHandButton = new Button();
             showHandButton.Content = "Show Your Hand!";
             showHandButton.Width = 150;
             showHandButton.Height = 50;
             showHandButton.Click += new RoutedEventHandler(View_Hand);
 
-            sp.Children.Add(showHandButton);
-            sp.Children.Add(playerHand);
+
+            gridLayout.Children.Add(showHandButton);
+			gridLayout.Children.Add(playerHand);
 			
             List<Hero> heroes= game.getHeroes();
             Villain villain = game.getVillain();
@@ -59,7 +60,7 @@ namespace SentinelsOfTheMultiverse
 
             initPlayerBoard(heroes, villain, env);
             
-            Content = sp;
+            Content = gridLayout;
             //Image i = new Image();
             //i.Height = 200;
             //i.Source = getImageSource("Images/Hero/Haka/haka_hero.png");
@@ -78,10 +79,11 @@ namespace SentinelsOfTheMultiverse
                 string heroName= h.getCharacterName();
 
 
-                k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName + "_hero.png");
+                k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_hero.png");
                 gridLayout.Children.Add(k);
 
-                //k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName + "_back.png");
+                //k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_back.png");
+
                 //gridLayout.Children.Add(k);
             }
 

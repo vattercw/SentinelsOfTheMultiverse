@@ -11,6 +11,20 @@ namespace SentinelsOfTheMultiverse.Data
         List<Minion> minions { get; set; }
         Deck deck { get; set; }
 
+        public String characterName;
+
+        public void Villian()
+        {
+            characterName = this.GetType().Name;
+            deck = new Deck(characterName);
+        }
+
+        public String getCharacterName()
+        {
+            return characterName;
+        }
+
+
 
         public override void playerTurn()
         {
