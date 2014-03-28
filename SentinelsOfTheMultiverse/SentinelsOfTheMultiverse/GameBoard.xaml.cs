@@ -75,10 +75,10 @@ namespace SentinelsOfTheMultiverse
                 Image k = new Image();
                 k.Height = 200;
                 string heroName= h.getCharacterName();
-                
-                
-                //i.Source= getImageSource(HERO_IMAGE_PATH+heroName+"/"+heroName+"_hero.png");
-                //gridLayout.Children.Add(i);
+
+
+                k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName + "_hero.png");
+                gridLayout.Children.Add(k);
 
                 //i.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName + "_back.png");
                 //gridLayout.Children.Add(i);

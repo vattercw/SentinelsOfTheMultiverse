@@ -13,7 +13,7 @@ namespace SentinelsOfTheMultiverse.Data
 
         public Deck(string hero)
         {
-            var files = Directory.GetFiles(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Images\\heroes\\" + hero);
+            var files = Directory.GetFiles(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Images\\Hero\\" + hero);
 
             foreach (var filename in files)
             {
