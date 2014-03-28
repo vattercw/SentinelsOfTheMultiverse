@@ -21,7 +21,7 @@ namespace SentinelsOfTheMultiverse
     public partial class GameBoard : Window
     {
         private GameEngine game = new GameEngine();
-        private Grid gridLayout = new Grid();
+        private Grid gridLayout;
         private HandPanel playerHand;
 
         #region Constants
@@ -41,6 +41,8 @@ namespace SentinelsOfTheMultiverse
 
         private void initBoard()
         {
+
+            gridLayout = initGrid();
             Button showHandButton = new Button();
             showHandButton.Content = "Show Your Hand!";
             showHandButton.Width = 150;
@@ -61,44 +63,51 @@ namespace SentinelsOfTheMultiverse
             
             Content = gridLayout;
 
-            //Image i = new Image();
-            //i.Height = 200;
-            //i.Source = getImageSource("Images/Hero/Haka/haka_hero.png");
+        }
 
-            //gridLayout.Children.Add(i);
+        private Grid initGrid()
+        {
+            Grid myGrid = new Grid();
 
-            //Content = gridLayout;
+            for (int ll = 0; ll < game.getHeroes().Count+2; ll++)
+            {
+                RowDefinition row = new RowDefinition();
+                row.Height = GridLength.Auto;
+                myGrid.RowDefinitions.Add(row);
+            }
+
+            for (int kk = 0; kk < 3; kk++)
+            {
+                ColumnDefinition col = new ColumnDefinition();
+                col.Width = GridLength.Auto;
+                myGrid.ColumnDefinitions.Add(col);
+            }
+            return myGrid;
         }
 
         private void initPlayerBoard(List<Hero> heroes, Villain villain, GameEnvironment env)
         {
-            foreach (Hero h in heroes)
+            
+            for (int ii=0;ii<heroes.Count;ii++)
             {
                 Image k = new Image();
                 k.Height = 200;
-                string heroName= h.getCharacterName();
+                string heroName= heroes[ii].getCharacterName();
 
 
                 k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_hero.png");
-                Grid.SetRow(k, 1);
+                addElementToGrid(k, ii+1, 0);
                 gridLayout.Children.Add(k);
 
                 //k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_back.png");
                 //gridLayout.Children.Add(k);
             }
+        }
 
-            RowDefinition row = new RowDefinition ();
-            row.Height= GridLength.Auto;
-
-            RowDefinition row2 = new RowDefinition();
-            row2.Height = GridLength.Auto;
-
-            gridLayout.RowDefinitions.Add(row);
-            gridLayout.RowDefinitions.Add(row2);
-
-            ColumnDefinition col= new ColumnDefinition();
-            col.Width = GridLength.Auto;
-            gridLayout.ColumnDefinitions.Add(col);
+        private void addElementToGrid(UIElement elem, int row, int col)
+        {
+            Grid.SetRow(elem, row);
+            Grid.SetColumn(elem, col);
         }
 
 

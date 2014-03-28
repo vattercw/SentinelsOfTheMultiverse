@@ -72,6 +72,8 @@ namespace SentinelsOfTheMultiverse
                 playerTurn = 0;
             }
         }
+
+        #region GET SET REGION
         public int getPlayerTurn()
         {
             return playerTurn;
@@ -80,6 +82,11 @@ namespace SentinelsOfTheMultiverse
         public Hero getCurrentPlayer()
         {
             return heroes[playerTurn];
+        }
+
+        internal List<IPlayer> getPlayers()
+        {
+            return players;
         }
 
         internal List<Hero> getHeroes()
@@ -96,5 +103,6 @@ namespace SentinelsOfTheMultiverse
         {
             return environment;
         }
+        #endregion
     }
 }
