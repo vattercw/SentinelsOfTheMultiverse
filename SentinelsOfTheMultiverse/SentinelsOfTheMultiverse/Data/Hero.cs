@@ -16,28 +16,13 @@ namespace SentinelsOfTheMultiverse
         public Deck deck { get; set; }
 
         public string characterName;
-        //override int lifeTotal { get; set; }
 
         public Hero()
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             string heroName = this.GetType().Name;
             deck = new Deck(heroName);
             hand.AddRange(deck.draw(4));
-=======
-            characterName = this.GetType().Name;
-            deck = new Deck(characterName);
->>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
-=======
-            characterName = this.GetType().Name;
-            deck = new Deck(characterName);
->>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
-=======
-            characterName = this.GetType().Name;
-            deck = new Deck(characterName);
->>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
         }
 
         internal string getCharacterName()
