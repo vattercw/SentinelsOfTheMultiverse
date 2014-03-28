@@ -16,7 +16,7 @@ namespace SentinelsOfTheMultiverse
         public Startup startScreen = new Startup();
         public List<IPlayer> players = new List<IPlayer>();
         public List<Hero> heroes = new List<Hero>();
-        public Villain villian;
+        public Villain villain;
         public GameEnvironment environment;
         private int playerTurn = 0;
         Image villainImage=new Image();
@@ -33,32 +33,16 @@ namespace SentinelsOfTheMultiverse
         public void begin()
         {
 
-            //find out how to return more than one value appropriately
-            //villianName, heroNames, environmentName= this.startScreen.begin();
-
-            //this.villian = new Villian(villianName);
-            //for(int i = 0; i < heroNames.Count; i++){
-                
-            //    Hero newHero = (Hero) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(heroNames[i]);
-            //    this.heroes.Add(newHero);
-            //}
-            //this.environment = new GameEnvironment(environmentName);
-            
-            //this.board.initialize();
-
-            //List<String> playerNames = this.startScreen.begin();
+            List<String> playerNames = this.startScreen.begin();
 
            
-            //for(int i = 1; i <= MAXPLAYER; i++){
-            //    Hero newHero = (Hero) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[i]);
-            //    this.heroes.Add(newHero);
-            //}
-            //this.villian = (Villian) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[VILLIANNUM]);
-            //this.environment = (GameEnvironment) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[EVIRONMENTNUM]);
+            for(int i = 1; i <= MAXPLAYER; i++){
+                Hero newHero = (Hero) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[i]);
+                this.heroes.Add(newHero);
+            }
+            this.villain = (Villain) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[VILLIANNUM]);
+            this.environment = (GameEnvironment) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[EVIRONMENTNUM]);
             
-            villainImage.Source = new BitmapImage(new Uri("C:\\Users\\vattercw\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Villain\\baron_blade\\bb_back.png"));
-
-
 
         }
 

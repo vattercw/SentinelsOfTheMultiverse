@@ -12,13 +12,14 @@ namespace SentinelsOfTheMultiverse
     public abstract class Hero : IPlayer
     {
 
-        public List<string> hand { get; set; }
+        public List<Card> hand { get; set; }
         public Deck deck { get; set; }
 
         public Hero()
         {
             string heroName = this.GetType().Name;
             deck = new Deck(heroName);
+            hand.AddRange(deck.draw(4));
         }
 
 
@@ -57,7 +58,7 @@ namespace SentinelsOfTheMultiverse
 
         public void drawPhase(int numCards)
         {
-            deck.draw(numCards);
+            hand.AddRange(deck.draw(numCards));
         }
 
         public override void endPhase()
