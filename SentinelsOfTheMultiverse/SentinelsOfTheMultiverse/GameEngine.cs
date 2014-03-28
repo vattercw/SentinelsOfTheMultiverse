@@ -15,10 +15,16 @@ namespace SentinelsOfTheMultiverse
 
         public Startup startScreen = new Startup();
         public List<IPlayer> players = new List<IPlayer>();
+<<<<<<< HEAD
         public List<Hero> heroes = new List<Hero>();
         public Villain villain;
         public GameEnvironment environment;
         public List<Hero> _heroes = new List<Hero>();
+=======
+        public List<Hero> _heroes = new List<Hero>();
+        public Villain _villian;
+        public GameEnvironment _environment;
+>>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
 
         private int playerTurn = 0;
         Image villainImage=new Image();
@@ -39,9 +45,28 @@ namespace SentinelsOfTheMultiverse
 
             List<String> playerNames = this.startScreen.begin();
 
+<<<<<<< HEAD
             this.villain = new BaronBlade();
             Hero h1 = new Haka();
             Hero h2 = new Haka();
+=======
+            this._villian = new BaronBlade();
+            Hero h1 = new Haka();
+            Hero h2 = new Haka();
+
+            _heroes = new List<Hero>() {h1, h2 };
+
+            _environment = new InsulaPrimus();
+
+            //for(int i = 0; i < heroNames.Count; i++){
+                
+            //    Hero newHero = (Hero) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(heroNames[i]);
+            //    this.heroes.Add(newHero);
+            //}
+            //this.environment = new GameEnvironment(environmentName);
+            
+            //this.board.initialize();
+>>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
 
             heroes = new List<Hero>() {h1, h2 };
 
@@ -55,6 +80,10 @@ namespace SentinelsOfTheMultiverse
             this.villain = (Villain) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[VILLIANNUM]);
             this.environment = (GameEnvironment) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[EVIRONMENTNUM]);
             
+<<<<<<< HEAD
+=======
+            //villainImage.Source = new BitmapImage(new Uri("C:\\Users\\vattercw\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Villain\\baron_blade\\bb_back.png"));
+>>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
 
         }
 
@@ -78,12 +107,20 @@ namespace SentinelsOfTheMultiverse
 
         internal Villain getVillain()
         {
+<<<<<<< HEAD
             return villain;
+=======
+            return _villian;
+>>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
         }
 
         internal GameEnvironment getEnvironment()
         {
+<<<<<<< HEAD
             return environment;
+=======
+            return _environment;
+>>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
         }
     }
 }
