@@ -51,12 +51,12 @@ namespace SentinelsOfTheMultiverse
 
 
             gridLayout.Children.Add(showHandButton);
-			gridLayout.Children.Add(playerHand);
+			//gridLayout.Children.Add(playerHand);
 			
             List<Hero> heroes= game.getHeroes();
             Villain villain = game.getVillain();
             GameEnvironment env = game.getEnvironment();
-            playerHand = new HandPanel(game.getCurrentPlayer().getPlayerHand());
+            //playerHand = new HandPanel(game.getCurrentPlayer().getPlayerHand());
 
             initPlayerBoard(heroes, villain, env);
             

@@ -15,6 +15,7 @@ namespace SentinelsOfTheMultiverse
 
         public Startup startScreen = new Startup();
         public List<IPlayer> players = new List<IPlayer>();
+        public List<Hero> heroes = new List<Hero>();
         public Villain villain;
         public GameEnvironment environment;
 
@@ -78,7 +79,7 @@ namespace SentinelsOfTheMultiverse
 
         public Hero getCurrentPlayer()
         {
-            return _heroes[playerTurn];
+            return heroes[playerTurn];
         }
 
         internal List<Hero> getHeroes()
