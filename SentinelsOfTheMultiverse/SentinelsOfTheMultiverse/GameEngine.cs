@@ -16,14 +16,20 @@ namespace SentinelsOfTheMultiverse
         public Startup startScreen = new Startup();
         public List<IPlayer> players = new List<IPlayer>();
 <<<<<<< HEAD
+<<<<<<< HEAD
         public List<Hero> heroes = new List<Hero>();
         public Villain villain;
         public GameEnvironment environment;
 =======
+=======
+>>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
         public List<Hero> _heroes = new List<Hero>();
         public Villain _villian;
         public GameEnvironment _environment;
 
+<<<<<<< HEAD
+>>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
+=======
 >>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
         private int playerTurn = 0;
         Image villainImage=new Image();
@@ -77,6 +83,10 @@ namespace SentinelsOfTheMultiverse
             this.environment = (GameEnvironment) System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[EVIRONMENTNUM]);
             
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            //villainImage.Source = new BitmapImage(new Uri("C:\\Users\\vattercw\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Villain\\baron_blade\\bb_back.png"));
+>>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
 =======
             //villainImage.Source = new BitmapImage(new Uri("C:\\Users\\vattercw\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Villain\\baron_blade\\bb_back.png"));
 >>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
