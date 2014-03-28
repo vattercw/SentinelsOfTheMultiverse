@@ -70,7 +70,7 @@
     <Compile Include="HandPanel.cs" />
     <Compile Include="Data\Environments\InsulaPrimus.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Tests\BasicTest.cs" />
+    <Compile Include="Tests\DeckTest.cs" />
     <Compile Include="GameBoard.xaml.cs">
       <DependentUpon>GameBoard.xaml</DependentUpon>
     </Compile>
@@ -112,7 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Effects\" />
-    <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Hero\Haka\dominion.png" />
@@ -120,7 +119,6 @@
     <Resource Include="Images\Hero\Haka\enduring_intercession.png" />
     <Resource Include="Images\Hero\Haka\ground_pound.png" />
     <Resource Include="Images\Hero\Haka\haka_back.png" />
-    <Resource Include="Images\Hero\Haka\haka_cover.png" />
     <Resource Include="Images\Hero\Haka\haka_death.png" />
     <Resource Include="Images\Hero\Haka\haka_hero.png" />
     <Resource Include="Images\Hero\Haka\haka_of_battle.png" />
@@ -134,10 +132,13 @@
     <Resource Include="Images\Hero\Haka\ta_moko.png" />
     <Resource Include="Images\Hero\Haka\vitality_surge.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Icons\bb_cover.png" />
+    <Resource Include="Images\Icons\haka_cover.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Environment\insula_primus\back_of_card.png" />
-    <Resource Include="Images\Environment\insula_primus\deck_cover.png" />
+    <Resource Include="Images\Icons\deck_cover.png" />
     <Resource Include="Images\Environment\insula_primus\enraged_trex.png" />
     <Resource Include="Images\Environment\insula_primus\obsidian_field.png" />
     <Resource Include="Images\Environment\insula_primus\primordial_plant_life.png" />
@@ -152,7 +153,6 @@
   <ItemGroup>
     <Resource Include="Images\Villain\baron_blade\backlash_field.png" />
     <Resource Include="Images\Villain\baron_blade\bb_back.png" />
-    <Resource Include="Images\Villain\baron_blade\bb_cover.png" />
     <Resource Include="Images\Villain\baron_blade\bb_death.png" />
     <Resource Include="Images\Villain\baron_blade\bb_initial.png" />
     <Resource Include="Images\Villain\baron_blade\bb_instr_back.png" />
@@ -167,17 +167,6 @@
     <Resource Include="Images\Villain\baron_blade\mobile_defense_platform.png" />
     <Resource Include="Images\Villain\baron_blade\powerer_remote_turret.png" />
     <Resource Include="Images\Villain\baron_blade\slash_and_burn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Environment\insula_primus\back_of_card.png" />
-    <Resource Include="Images\Environment\insula_primus\deck_cover.png" />
-    <Resource Include="Images\Environment\insula_primus\enraged_trex.png" />
-    <Resource Include="Images\Environment\insula_primus\obsidian_field.png" />
-    <Resource Include="Images\Environment\insula_primus\primordial_plant_life.png" />
-    <Resource Include="Images\Environment\insula_primus\pterodactyl_thief.png" />
-    <Resource Include="Images\Environment\insula_primus\river_of_lava.png" />
-    <Resource Include="Images\Environment\insula_primus\velociraptor_pack.png" />
-    <Resource Include="Images\Environment\insula_primus\volcanic_eruption.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

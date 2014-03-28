@@ -16,6 +16,7 @@ namespace SentinelsOfTheMultiverse
 
         public HandPanel()
         {
+            //null
         }
 
         public HandPanel(List<Card> hand)

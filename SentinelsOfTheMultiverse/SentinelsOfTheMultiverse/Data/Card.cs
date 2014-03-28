@@ -18,7 +18,10 @@ namespace SentinelsOfTheMultiverse.Data
         {
             cardImage.Source = new BitmapImage(new Uri(cardPath));
         }
-
+        public string getName()
+        {
+            return cardName;
+        }
 
     }
 }

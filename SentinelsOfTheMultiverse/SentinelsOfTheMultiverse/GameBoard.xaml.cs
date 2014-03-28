@@ -22,7 +22,7 @@ namespace SentinelsOfTheMultiverse
     {
         private GameEngine game = new GameEngine();
         private Grid gridLayout = new Grid();
-        public HandPanel playerHand = new HandPanel();
+        private HandPanel playerHand = new HandPanel();
 
         #region Constants
 
