@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse.Data.Heroes
 {
-    class Haka: Hero
+    public class Haka: Hero
     {
         public Haka()
         {
-            initDeck();
+            
         }
 
         public List<string> hand
@@ -37,12 +37,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             {
                 this.deck = value;
             }
-        }
-
-
-        public void initDeck()
-        {
-            
         }
     }
 }

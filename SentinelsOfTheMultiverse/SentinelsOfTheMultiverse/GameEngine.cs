@@ -18,7 +18,6 @@ namespace SentinelsOfTheMultiverse
         public List<Hero> heroes = new List<Hero>();
         public Villain villain;
         public GameEnvironment environment;
-        public List<Hero> _heroes = new List<Hero>();
 
         private int playerTurn = 0;
         Image villainImage = new Image();
@@ -26,6 +25,9 @@ namespace SentinelsOfTheMultiverse
         public static int MAXPLAYER = 6;
         public static int VILLIANNUM = 0;
         public static int EVIRONMENTNUM = 7;
+        public string HERO_NAMESPACE = "SentinelsOfTheMultiverse.Data.Heroes.";
+        public string VILLAIN_NAMESPACE = "SentinelsOfTheMultiverse.Data.Villains.";
+        public string ENVIRONMENT_NAMESPACE = "SentinelsOfTheMultiverse.Data.Environments.";
 
         public GameEngine()
         {
@@ -36,32 +38,35 @@ namespace SentinelsOfTheMultiverse
 
         public void begin()
         {
-
-            List<String> playerNames = this.startScreen.begin();
-
-            this.villain = new BaronBlade();
-            Hero h1 = new Haka();
-            Hero h2 = new Haka();
-
-            heroes = new List<Hero>() { h1, h2 };
-
-            environment = new InsulaPrimus();
-
-
-            for (int i = 1; i <= MAXPLAYER; i++)
+            List<string> heroesStr = new List<string>() {HERO_NAMESPACE+"Haka", HERO_NAMESPACE+"Haka" };
+            string villainStr= VILLAIN_NAMESPACE+"BaronBlade";
+            string envStr = ENVIRONMENT_NAMESPACE+"InsulaPrimus";
+            
+            for (int i = 0; i < heroesStr.Count; i++)
             {
-                Hero newHero = (Hero)System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[i]);
-                this.heroes.Add(newHero);
+                Hero newHero = (Hero)getClassFromString(heroesStr[i]);
+                heroes.Add(newHero);
             }
-            this.villain = (Villain)System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[VILLIANNUM]);
-            this.environment = (GameEnvironment)System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[EVIRONMENTNUM]);
+            villain = (Villain)getClassFromString(villainStr);
+            environment = (GameEnvironment)getClassFromString(envStr);
 
+            List<IPlayer> playerNames = new List<IPlayer>();
+            playerNames.AddRange(heroes);
+            playerNames.Add(villain);
+            playerNames.Add(environment);
 
+        }
+
+        public Object getClassFromString(string className)
+        {
+            Type hai = Type.GetType(className, true);
+            Object o = (Activator.CreateInstance(hai));
+
+            return o;
         }
 
         public void newTurn()
         {
-
             this.players[playerTurn].playerTurn();
             this.playerTurn++;
             if (this.playerTurn == this.players.Count)
@@ -74,7 +79,7 @@ namespace SentinelsOfTheMultiverse
 
         internal List<Hero> getHeroes()
         {
-            return _heroes;
+            return heroes;
         }
 
         internal Villain getVillain()
@@ -86,5 +91,7 @@ namespace SentinelsOfTheMultiverse
         {
             return environment;
         }
+
+
     }
 }

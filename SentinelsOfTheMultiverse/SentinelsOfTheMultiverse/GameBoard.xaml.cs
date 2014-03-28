@@ -71,11 +71,11 @@ namespace SentinelsOfTheMultiverse
                 string heroName= h.getCharacterName();
 
 
-                k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName + "_hero.png");
+                k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_hero.png");
                 gridLayout.Children.Add(k);
 
-                //i.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName + "_back.png");
-                //gridLayout.Children.Add(i);
+                //k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_back.png");
+                //gridLayout.Children.Add(k);
             }
 
             RowDefinition row = new RowDefinition ();

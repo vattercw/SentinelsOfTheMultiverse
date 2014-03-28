@@ -21,6 +21,7 @@ namespace SentinelsOfTheMultiverse
             names.Add("InsulaPrimalis");
 
             return names;
+
         }
     }
 }
