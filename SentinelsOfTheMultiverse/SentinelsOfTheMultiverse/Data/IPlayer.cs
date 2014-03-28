@@ -8,14 +8,9 @@ namespace SentinelsOfTheMultiverse.Data
 {
     public abstract class IPlayer
     {
-        //Deck deck { get; private set; }
-        //string characterName;
-        //int lifeTotal { get; set; }
-
         Deck deck { get;  set; }
         string characterName;
         int lifeTotal { get; set; }
-
         
         //public IPlayer()
         //{

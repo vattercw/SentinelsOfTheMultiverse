@@ -9,21 +9,31 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse
 {
-    public abstract class Hero : IPlayer
+    public abstract class Hero: IPlayer
     {
 
         public List<Card> hand { get; set; }
         public Deck deck { get; set; }
 
+        public string characterName;
+        //override int lifeTotal { get; set; }
+
         public Hero()
         {
+<<<<<<< HEAD
             string heroName = this.GetType().Name;
             deck = new Deck(heroName);
             hand.AddRange(deck.draw(4));
+=======
+            characterName = this.GetType().Name;
+            deck = new Deck(characterName);
+>>>>>>> 86bdd026b80359d8cad5488d8308b8865f0c4448
         }
 
-
-    
+        internal string getCharacterName()
+        {
+            return characterName;
+        }
 
         public override void playerTurn()
         {

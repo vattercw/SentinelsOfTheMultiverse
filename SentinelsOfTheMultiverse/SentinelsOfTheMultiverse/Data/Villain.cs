@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse.Data
 {
-    class Villain : IPlayer
+    public class Villain : IPlayer
     {
         List<Minion> minions { get; set; }
         Deck deck { get; set; }
