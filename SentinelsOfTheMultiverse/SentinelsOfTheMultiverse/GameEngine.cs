@@ -18,7 +18,6 @@ namespace SentinelsOfTheMultiverse
         public List<Hero> heroes = new List<Hero>();
         public Villain villain;
         public GameEnvironment environment;
-        public List<Hero> _heroes = new List<Hero>();
 
         private int playerTurn = 0;
         Image villainImage = new Image();
@@ -48,14 +47,6 @@ namespace SentinelsOfTheMultiverse
             environment = new InsulaPrimus();
 
 
-            for (int i = 1; i <= MAXPLAYER; i++)
-            {
-                Hero newHero = (Hero)System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[i]);
-                this.heroes.Add(newHero);
-            }
-            this.villain = (Villain)System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[VILLIANNUM]);
-            this.environment = (GameEnvironment)System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(playerNames[EVIRONMENTNUM]);
-
 
         }
 
@@ -74,7 +65,7 @@ namespace SentinelsOfTheMultiverse
 
         internal List<Hero> getHeroes()
         {
-            return _heroes;
+            return heroes;
         }
 
         internal Villain getVillain()
