@@ -27,6 +27,8 @@ namespace SentinelsOfTheMultiverse
         #region Constants
 
             private string HERO_IMAGE_PATH="Images/Hero/";
+            private System.Windows.Visibility SHOW = Visibility.Visible;
+            private System.Windows.Visibility HIDE = Visibility.Hidden;
 
             private int VILLAIN_ROW_NUM=1;
             private int ENVIRONMENT_ROW_NUM=0;
