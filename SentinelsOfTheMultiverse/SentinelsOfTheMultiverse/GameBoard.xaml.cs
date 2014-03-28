@@ -41,14 +41,13 @@ namespace SentinelsOfTheMultiverse
 
         private void initBoard()
         {
-            //StackPanel sp = new StackPanel();
-            
             Button showHandButton = new Button();
             showHandButton.Content = "Show Your Hand!";
             showHandButton.Width = 150;
             showHandButton.Height = 50;
             showHandButton.Click += new RoutedEventHandler(View_Hand);
 
+            Grid.SetRow(showHandButton, 0);
 
             gridLayout.Children.Add(showHandButton);
 			//gridLayout.Children.Add(playerHand);
@@ -82,16 +81,21 @@ namespace SentinelsOfTheMultiverse
 
 
                 k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_hero.png");
+                Grid.SetRow(k, 1);
                 gridLayout.Children.Add(k);
 
                 //k.Source = getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_back.png");
-
                 //gridLayout.Children.Add(k);
             }
 
             RowDefinition row = new RowDefinition ();
             row.Height= GridLength.Auto;
+
+            RowDefinition row2 = new RowDefinition();
+            row2.Height = GridLength.Auto;
+
             gridLayout.RowDefinitions.Add(row);
+            gridLayout.RowDefinitions.Add(row2);
 
             ColumnDefinition col= new ColumnDefinition();
             col.Width = GridLength.Auto;
