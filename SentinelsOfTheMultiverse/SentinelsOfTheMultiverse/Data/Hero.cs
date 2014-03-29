@@ -26,7 +26,7 @@ namespace SentinelsOfTheMultiverse
             hand = new List<Card>();
             drawPhase(4);
         }
-        internal string getCharacterName()
+        public string getCharacterName()
         {
             return characterName;
         }

@@ -15,9 +15,10 @@ namespace SentinelsOfTheMultiverse.Data
         List<IEffect> effects;
         public Image cardImage = new Image();
 
-        public Card(string cardPath)
+        public Card(string cardPath, string name)
         {
             cardImage.Source = getImageSource(cardPath);
+            cardName = name;
         }
         public string getName()
         {

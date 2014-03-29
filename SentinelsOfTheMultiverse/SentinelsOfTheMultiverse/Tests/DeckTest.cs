@@ -55,17 +55,17 @@ namespace SentinelsOfTheMultiverse.Tests
             Deck testHakaShuffled = new Deck("haka");
 
             testHakaShuffled.shuffle();
-            Boolean shuffled = false;
+            int sameCount = 0;
 
             for (int i = 0; i < testHaka.getCards().Count; i++)
             {
-                if (testHaka.getCards()[i] != testHakaShuffled.getCards()[i])
+                if (testHaka.getCards()[i] == testHakaShuffled.getCards()[i])
                 {
-                    shuffled = true;
+                    sameCount++;
                 }
             }
 
-            Assert.True(shuffled);
+            Assert.False(testHaka.getCards().Count == sameCount);
         }
     }
 }

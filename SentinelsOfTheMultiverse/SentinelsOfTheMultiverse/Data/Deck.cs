@@ -17,7 +17,8 @@ namespace SentinelsOfTheMultiverse.Data
 
             foreach (var filename in files)
             {
-                Card card = new Card(filename);
+                var cardName = Path.GetFileNameWithoutExtension(filename);
+                Card card = new Card(filename, cardName);
                 cards.Add(card);
             }
         }

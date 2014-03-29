@@ -16,7 +16,7 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestVillainInitalization()
         {
             Villain villainTest = new BaronBlade();
-            Assert.AreNotEqual(null, villainTest);
+            Assert.NotNull(villainTest);
             //Assert.AreEqual("Baron Blade", villainTest.getCharacterName());
         }
 

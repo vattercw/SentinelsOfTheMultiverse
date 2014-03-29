@@ -26,6 +26,8 @@ namespace SentinelsOfTheMultiverse
         {
             InitializeComponent();
 
+            cardLayout = initGrid(hand);
+
             paintCards(hand);
 
             Content = cardLayout;
@@ -37,19 +39,27 @@ namespace SentinelsOfTheMultiverse
             for (int k = 0; k < numCards; k++)
             {
                 Image temp = new Image();
-                temp.Height = 300;
-                temp = handToShow[k].cardImage;
-                Grid.SetColumn(temp, 0);
+                temp.Source = handToShow[k].cardImage.Source;
+                Grid.SetColumn(temp, k);
                 cardLayout.Children.Add(temp);
             }
+        }
+
+        public Grid initGrid(List<Card> handToShow)
+        {
+            Grid myGrid = new Grid();
+
             RowDefinition row = new RowDefinition();
             row.Height = GridLength.Auto;
+            myGrid.RowDefinitions.Add(row);
 
-            cardLayout.RowDefinitions.Add(row);
-
-            ColumnDefinition col = new ColumnDefinition();
-            col.Width = GridLength.Auto;
-            cardLayout.ColumnDefinitions.Add(col);
+            for (int kk = 0; kk < handToShow.Count ; kk++)
+            {
+                ColumnDefinition col = new ColumnDefinition();
+                col.Width = GridLength.Auto;
+                myGrid.ColumnDefinitions.Add(col);
+            }
+            return myGrid;
         }
     }
 }

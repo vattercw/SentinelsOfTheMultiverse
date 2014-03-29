@@ -36,9 +36,6 @@ namespace SentinelsOfTheMultiverse
             private double CARD_HEIGHT=200;
             private int DECK_COLUMN=2;
 
-            private System.Windows.Visibility SHOW = Visibility.Visible;
-            private System.Windows.Visibility HIDE = Visibility.Hidden;
-
 
         #endregion
 
@@ -183,17 +180,20 @@ namespace SentinelsOfTheMultiverse
 
         private void View_Hand(object sender, RoutedEventArgs e)
         {
-            if (!handViewer.IsVisible)
+            lock(this)
             {
-                handViewer.Visibility = SHOW;
-                Button handVisibleButton = (Button)sender;
-                handVisibleButton.Content = "Hide Player Hand!";
-            }
-            else if (handViewer.IsVisible)
-            {
-                handViewer.Visibility = HIDE;
-                Button handHiddenButton = (Button)sender;
-                handHiddenButton.Content = "Show Player Hand!";
+                if (!handViewer.IsVisible)
+                {
+                    handViewer.Visibility = SHOW;
+                    Button handVisibleButton = (Button)sender;
+                    handVisibleButton.Content = "Hide Player Hand!";
+                }
+                else if (handViewer.IsVisible)
+                {
+                    handViewer.Visibility = HIDE;
+                    Button handHiddenButton = (Button)sender;
+                    handHiddenButton.Content = "Show Player Hand!";
+                }
             }
         }
 

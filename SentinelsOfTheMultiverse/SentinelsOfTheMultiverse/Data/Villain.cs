@@ -10,8 +10,7 @@ namespace SentinelsOfTheMultiverse.Data
     {
         List<Minion> minions { get; set; }
         Deck deck { get; set; }
-
-        public String characterName;
+        public string characterName;
 
         public void Villian()
         {
@@ -23,8 +22,6 @@ namespace SentinelsOfTheMultiverse.Data
         {
             return characterName;
         }
-
-
 
         public override void playerTurn()
         {
