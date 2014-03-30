@@ -7,6 +7,8 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 {
     public class BaronBlade: Villain
     {
-
+        public BaronBlade()
+        {
+        }
     }
 }

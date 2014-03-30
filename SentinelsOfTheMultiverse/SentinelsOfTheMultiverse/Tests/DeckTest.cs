@@ -22,14 +22,14 @@ namespace SentinelsOfTheMultiverse.Tests
         [ExpectedException(typeof(DirectoryNotFoundException))]
         public void TestDeckNull()
         {
-            Deck testNull = new Deck("nothing");
+            Deck testNull = new Deck("nothing", IPlayer.PlayerType.Hero);
         }
 
         [Test, RequiresSTA]
         public void TestImportNumOfCards()
         {
             int count = files.Length;
-            Deck testHaka = new Deck("haka");
+            Deck testHaka = new Deck("haka", IPlayer.PlayerType.Hero);
             Assert.IsTrue(testHaka.getCards().Count.Equals(count));
         }
 
@@ -51,8 +51,8 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestShuffle()
         {
-            Deck testHaka = new Deck("haka");
-            Deck testHakaShuffled = new Deck("haka");
+            Deck testHaka = new Deck("haka", IPlayer.PlayerType.Hero);
+            Deck testHakaShuffled = new Deck("haka", IPlayer.PlayerType.Hero);
 
             testHakaShuffled.shuffle();
             int sameCount = 0;

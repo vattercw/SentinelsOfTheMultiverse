@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse.Data
 {
-    public class Villain : IPlayer
+    public abstract class Villain : IPlayer
     {
         List<Minion> minions { get; set; }
         Deck deck { get; set; }
-        public string characterName;
+        string characterName;
 
-        public void Villian()
+        public Villain()
         {
             characterName = this.GetType().Name;
-            deck = new Deck(characterName);
+            deck = new Deck(characterName, IPlayer.PlayerType.Villain);
         }
 
         public String getCharacterName()

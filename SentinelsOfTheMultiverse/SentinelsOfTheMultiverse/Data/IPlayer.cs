@@ -17,5 +17,7 @@ namespace SentinelsOfTheMultiverse.Data
         public abstract Boolean playPhase();
         public abstract Boolean powerPhase();
         public abstract void endPhase();
+
+        public enum PlayerType { Hero, Villain, Minion };
     }
 }

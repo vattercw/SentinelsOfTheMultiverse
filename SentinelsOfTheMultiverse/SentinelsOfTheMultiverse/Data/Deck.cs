@@ -11,9 +11,9 @@ namespace SentinelsOfTheMultiverse.Data
     {
         List<Card> cards = new List<Card>();
 
-        public Deck(string hero)
+        public Deck(string characterName, IPlayer.PlayerType playerType)
         {
-            var files = Directory.GetFiles(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Images\\Hero\\" + hero);
+            var files = Directory.GetFiles(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Images\\"+playerType+"\\" + characterName);
 
             foreach (var filename in files)
             {

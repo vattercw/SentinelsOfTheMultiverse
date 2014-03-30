@@ -15,14 +15,14 @@ namespace SentinelsOfTheMultiverse
 
         public List<Card> hand { get; set; }
         public Deck deck { get; set; }
-        public string characterName;
+        string characterName;
 
         //override int lifeTotal { get; set; }
 
         public Hero()
         {
             characterName = this.GetType().Name;
-            deck = new Deck(characterName);
+            deck = new Deck(characterName, IPlayer.PlayerType.Hero);
             hand = new List<Card>();
             drawPhase(4);
         }
