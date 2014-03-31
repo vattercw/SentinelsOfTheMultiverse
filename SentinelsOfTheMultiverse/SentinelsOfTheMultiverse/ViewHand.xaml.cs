@@ -40,6 +40,7 @@ namespace SentinelsOfTheMultiverse
             {
                 Image temp = new Image();
                 temp.Source = handToShow[k].cardImage.Source;
+                
                 Grid.SetColumn(temp, k);
                 cardLayout.Children.Add(temp);
             }

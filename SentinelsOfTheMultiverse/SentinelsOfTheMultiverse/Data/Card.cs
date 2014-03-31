@@ -14,11 +14,13 @@ namespace SentinelsOfTheMultiverse.Data
         string cardName;
         List<IEffect> effects;
         public Image cardImage = new Image();
+        public string cardImageStr = "";
 
         public Card(string cardPath, string name)
         {
             cardImage.Source = getImageSource(cardPath);
             cardName = name;
+            cardImageStr = cardPath;
         }
         public string getName()
         {
@@ -29,7 +31,7 @@ namespace SentinelsOfTheMultiverse.Data
         {
             BitmapImage src = new BitmapImage();
             src.BeginInit();
-            src.UriSource = new Uri(path, UriKind.Relative);
+            src.UriSource = new Uri(path, UriKind.Absolute);
             src.EndInit();
 
             return src;

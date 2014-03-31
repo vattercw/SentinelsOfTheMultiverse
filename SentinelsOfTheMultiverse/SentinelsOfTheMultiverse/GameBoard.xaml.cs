@@ -52,7 +52,7 @@ namespace SentinelsOfTheMultiverse
 
         private void initBoard()
         {
-
+            
             gridLayout = initGrid();
             Button showHandButton = new Button();
             showHandButton.Content = "Show Your Hand!";
