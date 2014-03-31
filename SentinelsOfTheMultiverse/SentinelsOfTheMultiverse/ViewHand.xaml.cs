@@ -21,6 +21,8 @@ namespace SentinelsOfTheMultiverse
     public partial class ViewHand : Window
     {
         Grid cardLayout = new Grid();
+        
+
 
         public ViewHand(List<Card> hand)
         {
@@ -42,8 +44,14 @@ namespace SentinelsOfTheMultiverse
                 temp.Source = handToShow[k].cardImage.Source;
                 
                 Grid.SetColumn(temp, k);
+                temp.AddHandler(UIElement.MouseUpEvent, new RoutedEventHandler(card_mouseUp_eventHandler), true);
                 cardLayout.Children.Add(temp);
             }
+        }
+
+        public void card_mouseUp_eventHandler(object sender, RoutedEventArgs e)
+        {
+
         }
 
         public Grid initGrid(List<Card> handToShow)

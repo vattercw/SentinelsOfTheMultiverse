@@ -13,11 +13,7 @@ namespace SentinelsOfTheMultiverse
 
             names.Add("BaronBlade");
             names.Add("Haka");
-            names.Add(null);
-            names.Add(null);
-            names.Add(null);
-            names.Add(null);
-            names.Add(null);
+            names.Add("Haka");
             names.Add("InsulaPrimus");
 
             return names;

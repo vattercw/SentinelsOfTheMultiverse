@@ -31,9 +31,11 @@ namespace SentinelsOfTheMultiverse
 
         public GameEngine()
         {
-            begin();
+            initPlayers();
+            //newTurn();
         }
-        public void begin()
+
+        public void initPlayers()
         {
             List<string> heroesStr = new List<string>() {HERO_NAMESPACE+"Haka", HERO_NAMESPACE+"Haka" };
             string villainStr= VILLAIN_NAMESPACE+"BaronBlade";
@@ -51,8 +53,6 @@ namespace SentinelsOfTheMultiverse
             playerNames.AddRange(heroes);
             playerNames.Add(villain);
             playerNames.Add(environment);
-
-
         }
 
         public Object getClassFromString(string className)
