@@ -17,7 +17,7 @@ namespace SentinelsOfTheMultiverse
         static Villain villain;
         static GameEnvironment environment;
 
-        private static int playerTurn = 0;
+        public static int playerTurn = 0;
 
         public static int MAXPLAYER = 6;
         public static int VILLIANNUM = 0;
@@ -51,12 +51,8 @@ namespace SentinelsOfTheMultiverse
         //    return villain.getLifeTotal() <= 0;
         //}
 
-        public static void initPlayers()
+        public static void initPlayers(List<string> heroesStr, string villainStr, string envStr)
         {
-            Startup startScreen = new Startup();
-            var heroesStr= startScreen.getHeroesString();
-            var villainStr = startScreen.getVillainStr();
-            var envStr = startScreen.getEnvironmentString();
             
             for (int i = 0; i < heroesStr.Count; i++)
             {
@@ -67,12 +63,6 @@ namespace SentinelsOfTheMultiverse
 
             villain = (Villain)getClassFromString(villainStr);
             environment = (GameEnvironment)getClassFromString(envStr);
-
-            List<IPlayer> playerNames = new List<IPlayer>();
-            playerNames.AddRange(heroes);
-            playerNames.Add(villain);
-            playerNames.Add(environment);
-
         }
 
         public static Object getClassFromString(string className)

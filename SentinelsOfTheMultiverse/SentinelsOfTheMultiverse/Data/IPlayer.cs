@@ -9,7 +9,7 @@ namespace SentinelsOfTheMultiverse.Data
     public abstract class IPlayer
     {
         Deck deck { get;  set; }
-        string characterName;
+        public string characterName {get; set;}
         int lifeTotal { get; set; }
 
         public abstract void playerTurn();

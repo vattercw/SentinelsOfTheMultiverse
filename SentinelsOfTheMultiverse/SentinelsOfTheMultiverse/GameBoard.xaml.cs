@@ -64,7 +64,18 @@ namespace SentinelsOfTheMultiverse
             showHandButton.Height = 50;
             showHandButton.Click += new RoutedEventHandler(View_Hand);
 
-            Grid.SetRow(showHandButton, 0);
+            Grid.SetRow(showHandButton, 6);
+
+            Label currentPlayerLabel = new Label();
+            currentPlayerLabel.Width= 200;
+            currentPlayerLabel.Height= 100;
+            //IPlayer currCharName= GameEngine.getCurrentPlayer();
+            
+            int currIndex = GameEngine.playerTurn;
+            currentPlayerLabel.Content = currIndex;
+            currentPlayerLabel.VerticalAlignment = VerticalAlignment.Top;
+            
+            addElementToGrid(currentPlayerLabel, 0, 0);
 
             initHandViewer();
             gridLayout.Children.Add(showHandButton);
@@ -82,7 +93,10 @@ namespace SentinelsOfTheMultiverse
         {
 
             Hero currentPlayer= (Hero)GameEngine.getCurrentPlayer();
-            handViewer = new ViewHand(currentPlayer.getPlayerHand(), this);
+            if (currentPlayer != null)
+            {
+                handViewer = new ViewHand(currentPlayer.getPlayerHand(), this);
+            }
 
 		}
 		
