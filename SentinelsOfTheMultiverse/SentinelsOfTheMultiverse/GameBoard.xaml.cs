@@ -109,12 +109,12 @@ namespace SentinelsOfTheMultiverse
         {
             string villainName = villain.getCharacterName();
             
-            ImageSource villainImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/" + villainName + "_initial.png");
-            ImageSource villainDeckBackImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/" + villainName + "_back.png");
-            ImageSource villainInstImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/" + villainName + "_instr_front.png");
+            ImageSource villainImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png");
+            ImageSource villainDeckBackImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
+            ImageSource villainInstImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
             initPlayerTemplate(villainDeckBackImg, villainImg, villainInstImg);
 
-            ImageSource envDeckBackImg = getImageSource("Images/Environment/insula_primus/back_of_card.png");
+            ImageSource envDeckBackImg = getImageSource("Images/Environment/insula_primus/NonPlayable/insula_primus_back.png");
             initPlayerTemplate(envDeckBackImg);
 
 
@@ -122,8 +122,8 @@ namespace SentinelsOfTheMultiverse
             {
                 string heroName = heroes[ii].getCharacterName();
 
-                ImageSource heroDeckBackImg= getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_back.png");
-                ImageSource heroImg= getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_hero.png");
+                ImageSource heroDeckBackImg = getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png");
+                ImageSource heroImg = getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png");
                 initPlayerTemplate(heroDeckBackImg, heroImg);
             }   
         }

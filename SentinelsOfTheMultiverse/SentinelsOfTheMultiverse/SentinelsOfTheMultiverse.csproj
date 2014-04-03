@@ -130,9 +130,6 @@
     <Resource Include="Images\Hero\Haka\elbow_smash.png" />
     <Resource Include="Images\Hero\Haka\enduring_intercession.png" />
     <Resource Include="Images\Hero\Haka\ground_pound.png" />
-    <Resource Include="Images\Hero\Haka\haka_back.png" />
-    <Resource Include="Images\Hero\Haka\haka_death.png" />
-    <Resource Include="Images\Hero\Haka\haka_hero.png" />
     <Resource Include="Images\Hero\Haka\haka_of_battle.png" />
     <Resource Include="Images\Hero\Haka\haka_of_restoration.png" />
     <Resource Include="Images\Hero\Haka\haka_of_shielding.png" />
@@ -150,7 +147,6 @@
     <Resource Include="Images\Icons\haka_cover.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Environment\insula_primus\back_of_card.png" />
     <Resource Include="Images\Environment\insula_primus\enraged_trex.png" />
     <Resource Include="Images\Environment\insula_primus\obsidian_field.png" />
     <Resource Include="Images\Environment\insula_primus\primordial_plant_life.png" />
@@ -164,11 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Villain\BaronBlade\backlash_field.png" />
-    <Resource Include="Images\Villain\BaronBlade\BaronBlade_back.png" />
-    <Resource Include="Images\Villain\BaronBlade\BaronBlade_death.png" />
-    <Resource Include="Images\Villain\BaronBlade\BaronBlade_initial.png" />
-    <Resource Include="Images\Villain\BaronBlade\BaronBlade_instr_back.png" />
-    <Resource Include="Images\Villain\BaronBlade\BaronBlade_instr_front.png" />
     <Resource Include="Images\Villain\BaronBlade\blade_battalion.png" />
     <Resource Include="Images\Villain\BaronBlade\consider_the_price_of_victory.png" />
     <Resource Include="Images\Villain\BaronBlade\devious_disruption.png" />
@@ -179,6 +170,21 @@
     <Resource Include="Images\Villain\BaronBlade\mobile_defense_platform.png" />
     <Resource Include="Images\Villain\BaronBlade\powerer_remote_turret.png" />
     <Resource Include="Images\Villain\BaronBlade\slash_and_burn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Hero\Haka\NonPlayable\haka_back.png" />
+    <Resource Include="Images\Hero\Haka\NonPlayable\haka_death.png" />
+    <Resource Include="Images\Hero\Haka\NonPlayable\haka_hero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_back.png" />
+    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_death.png" />
+    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_initial.png" />
+    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_instr_back.png" />
+    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_instr_front.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Environment\insula_primus\NonPlayable\insula_primus_back.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
