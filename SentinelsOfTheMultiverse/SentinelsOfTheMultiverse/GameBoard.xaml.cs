@@ -104,12 +104,12 @@ namespace SentinelsOfTheMultiverse
         {
             string villainName = villain.getCharacterName();
             
-            ImageSource villainImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/" + villainName + "_initial.png");
-            ImageSource villainDeckBackImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/" + villainName + "_back.png");
-            ImageSource villainInstImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/" + villainName + "_instr_front.png");
+            ImageSource villainImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png");
+            ImageSource villainDeckBackImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
+            ImageSource villainInstImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
             initPlayerTemplate(villainDeckBackImg, villainImg, villainInstImg);
 
-            ImageSource envDeckBackImg = getImageSource("Images/Environment/insula_primus/back_of_card.png");
+            ImageSource envDeckBackImg = getImageSource("Images/Environment/insula_primus/insula_primus_back.png");
             initPlayerTemplate(envDeckBackImg);
 
 
@@ -117,8 +117,8 @@ namespace SentinelsOfTheMultiverse
             {
                 string heroName = heroes[ii].getCharacterName();
 
-                ImageSource heroDeckBackImg= getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_back.png");
-                ImageSource heroImg= getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_hero.png");
+                ImageSource heroDeckBackImg = getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png");
+                ImageSource heroImg = getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png");
                 initPlayerTemplate(heroDeckBackImg, heroImg);
             }   
         }
@@ -133,11 +133,13 @@ namespace SentinelsOfTheMultiverse
                 charInst.Height = CARD_HEIGHT;
                 charInst.Source = characterInstructions;
 
+                charInst.MouseUp += new MouseButtonEventHandler(View_Card_Full);
                 addElementToGrid(charInst, VILLAIN_ROW_NUM, 1);
 
                 Image charCardImg = new Image();
                 charCardImg.Height = CARD_HEIGHT;
                 charCardImg.Source = characterCard;
+                charCardImg.MouseUp += new MouseButtonEventHandler(View_Card_Full);
                 addElementToGrid(charCardImg, VILLAIN_ROW_NUM, 0);
 
                 deckBackRow = VILLAIN_ROW_NUM;
@@ -151,6 +153,7 @@ namespace SentinelsOfTheMultiverse
                 Image heroCharacterImg = new Image();
                 heroCharacterImg.Height = CARD_HEIGHT;
                 heroCharacterImg.Source = characterCard;
+                heroCharacterImg.MouseUp += new MouseButtonEventHandler(View_Card_Full);
                 addElementToGrid(heroCharacterImg, HERO_ROW_NUM, 0);
 
                 deckBackRow = HERO_ROW_NUM;
@@ -159,6 +162,7 @@ namespace SentinelsOfTheMultiverse
             Image deckBackImg = new Image();
             deckBackImg.Height = CARD_HEIGHT;
             deckBackImg.Source = deckBack;
+            deckBackImg.MouseUp += new MouseButtonEventHandler(View_Card_Full);
             addElementToGrid(deckBackImg, deckBackRow, DECK_COLUMN);
         }
 
@@ -170,7 +174,7 @@ namespace SentinelsOfTheMultiverse
         }
 
 
-        private ImageSource getImageSource(string path)
+        public static ImageSource getImageSource(string path)
         {
             BitmapImage src = new BitmapImage();
             src.BeginInit();
@@ -201,6 +205,11 @@ namespace SentinelsOfTheMultiverse
 
         private void View_Card_Full(object sender, MouseButtonEventArgs e)
         {
+            Image expandCard = (Image)sender;
+
+            ViewCard showCard = new ViewCard(expandCard.Source);
+
+            showCard.Show();
         }
     }
 }
