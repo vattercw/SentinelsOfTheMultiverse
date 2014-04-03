@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace SentinelsOfTheMultiverse
+{
+    /// <summary>
+    /// Interaction logic for Window1.xaml
+    /// </summary>
+    public partial class Start : Window
+    {
+        public Start()
+        {
+            InitializeComponent();
+
+            Button startButton = new Button();
+            startButton.Content = "Start!";
+            startButton.Click += new RoutedEventHandler(Start_Game);
+            Grid myGrid = new Grid();
+            Content = startButton;
+
+        }
+
+        private void Start_Game(object sender, RoutedEventArgs e)
+        {
+            GameBoard game = new GameBoard();
+            game.Activate();
+        }
+    }
+}
