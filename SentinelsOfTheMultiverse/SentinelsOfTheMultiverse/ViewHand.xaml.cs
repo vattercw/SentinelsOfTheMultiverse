@@ -46,6 +46,7 @@ namespace SentinelsOfTheMultiverse
 
             paintCards(hand);
 
+
             cardLayout.Children.Add(sideBar);
 
             Button playButton = new Button();

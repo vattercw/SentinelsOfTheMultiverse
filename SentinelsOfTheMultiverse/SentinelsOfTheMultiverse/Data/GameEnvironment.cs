@@ -8,8 +8,41 @@ namespace SentinelsOfTheMultiverse.Data
 {
     public abstract class GameEnvironment : IPlayer
     {
-        public List<string> inPlay { get; set; }
-        public Deck deck { get; set; }
+        private List<string> _inPlay= new List<string>();
+        private Deck _deck;
+        private string envName;
+
+        public GameEnvironment()
+        {
+            envName = this.GetType().Name;
+            deck = new Deck(envName, IPlayer.PlayerType.Environment);
+            deck.shuffle();
+        }
+
+        public List<string> inPlay 
+        { 
+            get{
+                return _inPlay;
+        }   set{
+                _inPlay = value;
+            } 
+        }
+
+        public Deck deck 
+        { 
+            get{
+                return _deck;
+        }   set{
+                _deck = value;
+            } 
+        }
+
+        public override void playerTurn()
+        {
+            startPhase();
+            playPhase();
+            endPhase();
+        }
 
         public override void startPhase()
         {
@@ -22,13 +55,14 @@ namespace SentinelsOfTheMultiverse.Data
 
         public override Boolean playPhase()
         {
-            //deck.draw(1);
+            
             return true;
         }
 
         public override void endPhase()
         {
             //conditionals for end turn effects
+            deck.draw(1);
         }
     }
 }

@@ -77,14 +77,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\EnvironmentTest.cs" />
     <Compile Include="Tests\GameEngineTest.cs" />
     <Compile Include="Tests\HeroTest.cs" />
     <Compile Include="Tests\DeckTest.cs" />
+    <Compile Include="ViewCard.xaml.cs">
+      <DependentUpon>ViewCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewHand.xaml.cs">
       <DependentUpon>ViewHand.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tests\VillainTest.cs" />
     <Page Include="GameBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,6 +138,9 @@
     <Resource Include="Images\Hero\Haka\elbow_smash.png" />
     <Resource Include="Images\Hero\Haka\enduring_intercession.png" />
     <Resource Include="Images\Hero\Haka\ground_pound.png" />
+    <Resource Include="Images\Hero\Haka\NonPlayable\haka_back.png" />
+    <Resource Include="Images\Hero\Haka\NonPlayable\haka_death.png" />
+    <Resource Include="Images\Hero\Haka\NonPlayable\haka_hero.png" />
     <Resource Include="Images\Hero\Haka\haka_of_battle.png" />
     <Resource Include="Images\Hero\Haka\haka_of_restoration.png" />
     <Resource Include="Images\Hero\Haka\haka_of_shielding.png" />
@@ -154,12 +165,26 @@
     <Resource Include="Images\Environment\insula_primus\river_of_lava.png" />
     <Resource Include="Images\Environment\insula_primus\velociraptor_pack.png" />
     <Resource Include="Images\Environment\insula_primus\volcanic_eruption.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\back_of_card.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\enraged_trex.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\obsidian_field.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\primordial_plant_life.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\pterodactyl_thief.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\river_of_lava.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\velociraptor_pack.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\volcanic_eruption.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\NonPlayable\insula_primus_back.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\NumOfCards.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Villain\BaronBlade\backlash_field.png" />
+    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_back.png" />
+    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_death.png" />
+    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_initial.png" />
+    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_instr_back.png" />
+    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_instr_front.png" />
     <Resource Include="Images\Villain\BaronBlade\blade_battalion.png" />
     <Resource Include="Images\Villain\BaronBlade\consider_the_price_of_victory.png" />
     <Resource Include="Images\Villain\BaronBlade\devious_disruption.png" />
@@ -186,6 +211,7 @@
   <ItemGroup>
     <Resource Include="Images\Environment\insula_primus\NonPlayable\insula_primus_back.png" />
   </ItemGroup>
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

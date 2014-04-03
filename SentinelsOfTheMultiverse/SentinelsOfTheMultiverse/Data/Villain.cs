@@ -11,6 +11,7 @@ namespace SentinelsOfTheMultiverse.Data
         List<Minion> minions { get; set; }
         Deck deck { get; set; }
         string characterName;
+        int _lifeTotal;
 
         public Villain()
         {
@@ -41,14 +42,15 @@ namespace SentinelsOfTheMultiverse.Data
             return true;
         }
 
-        public override bool powerPhase()
-        {
-            throw new NotImplementedException();
-        }
 
         public override void endPhase()
         {
             //conditionals for end turn effects
+        }
+
+        internal int getLifeTotal()
+        {
+            return _lifeTotal;
         }
     }
 }
