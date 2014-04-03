@@ -201,7 +201,6 @@ namespace SentinelsOfTheMultiverse
 
         private void View_Card_Full(object sender, MouseButtonEventArgs e)
         {
-
         }
     }
 }
