@@ -115,7 +115,7 @@ namespace SentinelsOfTheMultiverse
             ImageSource villainInstImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
             initPlayerTemplate(villainDeckBackImg, villainImg, villainInstImg);
 
-            ImageSource envDeckBackImg = getImageSource("Images/Environment/insula_primus/NonPlayable/insula_primus_back.png");
+            ImageSource envDeckBackImg = getImageSource("Images/Environment/InsulaPrimus/NonPlayable/insula_primus_back.png");
 
             initPlayerTemplate(envDeckBackImg);
 
