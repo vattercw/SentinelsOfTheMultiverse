@@ -23,6 +23,7 @@ namespace SentinelsOfTheMultiverse
         {
             characterName = this.GetType().Name;
             deck = new Deck(characterName, IPlayer.PlayerType.Hero);
+            deck.shuffle();
             hand = new List<Card>();
             drawPhase(4);
         }

@@ -24,6 +24,10 @@ namespace SentinelsOfTheMultiverse
         private Grid gridLayout = new Grid();
         private ViewHand handViewer;
 
+        private Card drawThisCard;
+
+        private int NEXT_CARD = 3;
+
         #region Constants
 
             private string HERO_IMAGE_PATH="Images/Hero/";
@@ -49,6 +53,7 @@ namespace SentinelsOfTheMultiverse
 
             initBoard();
         }
+
 
         private void initBoard()
         {
@@ -77,7 +82,7 @@ namespace SentinelsOfTheMultiverse
 
         private void initHandViewer()
         {
-            handViewer = new ViewHand(game.getCurrentPlayer().getPlayerHand());
+            handViewer = new ViewHand(game.getCurrentPlayer().getPlayerHand(), this);
 		}
 		
         private Grid initGrid()
@@ -91,7 +96,7 @@ namespace SentinelsOfTheMultiverse
                 myGrid.RowDefinitions.Add(row);
             }
 
-            for (int kk = 0; kk < 3; kk++)
+            for (int kk = 0; kk < 10; kk++)
             {
                 ColumnDefinition col = new ColumnDefinition();
                 col.Width = GridLength.Auto;
@@ -162,6 +167,12 @@ namespace SentinelsOfTheMultiverse
             addElementToGrid(deckBackImg, deckBackRow, DECK_COLUMN);
         }
 
+        private int getNextCard()
+        {
+            NEXT_CARD++;
+            return NEXT_CARD - 1;
+        }
+
         private void addElementToGrid(UIElement elem, int row, int col)
         {
             Grid.SetRow(elem, row);
@@ -182,25 +193,32 @@ namespace SentinelsOfTheMultiverse
 
         private void View_Hand(object sender, RoutedEventArgs e)
         {
-            lock(this)
+            lock (this)
             {
-                if (!handViewer.IsVisible)
-                {
-                    handViewer.Visibility = SHOW;
-                    Button handVisibleButton = (Button)sender;
-                    handVisibleButton.Content = "Hide Player Hand!";
-                }
-                else if (handViewer.IsVisible)
-                {
-                    handViewer.Visibility = HIDE;
-                    Button handHiddenButton = (Button)sender;
-                    handHiddenButton.Content = "Show Player Hand!";
-                }
+                handViewer.Visibility = SHOW;
+                Button handVisibleButton = (Button)sender;
             }
+              
         }
 
         private void View_Card_Full(object sender, MouseButtonEventArgs e)
         {
+        }
+
+        internal void drawCardSelected(Card cardClicked)
+        {
+            for(int i = 0; i < game.getCurrentPlayer().getPlayerHand().Count; i++){
+                if (game.getCurrentPlayer().getPlayerHand()[i].Equals(cardClicked))
+                {
+                    drawThisCard = game.getCurrentPlayer().getPlayerHand()[i];
+                    game.getCurrentPlayer().getPlayerHand().RemoveAt(i);
+                    break;
+                }
+
+            }
+            drawThisCard.cardImage.Height = CARD_HEIGHT;
+            addElementToGrid(drawThisCard.cardImage,HERO_ROW_NUM, getNextCard());
+            initHandViewer();
         }
     }
 }
