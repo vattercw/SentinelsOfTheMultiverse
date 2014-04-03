@@ -11,6 +11,10 @@ namespace SentinelsOfTheMultiverse
         string _villainStr;
         string _envStr;
 
+        public Startup()
+        {
+        }
+
         internal void begin()
         {
             _heroesStr = new List<string>();

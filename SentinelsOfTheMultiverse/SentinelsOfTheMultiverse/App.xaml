@@ -1,7 +1,7 @@
 ﻿<Application x:Class="SentinelsOfTheMultiverse.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="GameBoard.xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             <!--StartupUri="GameBoard.xaml">-->
     <Application.Resources>
          
     </Application.Resources>
