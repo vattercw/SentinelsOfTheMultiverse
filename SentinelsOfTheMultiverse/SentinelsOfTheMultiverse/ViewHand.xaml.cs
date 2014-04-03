@@ -31,7 +31,7 @@ namespace SentinelsOfTheMultiverse
             cardLayout = initGrid(hand);
 
             paintCards(hand);
-
+            
             Content = cardLayout;
         }
 

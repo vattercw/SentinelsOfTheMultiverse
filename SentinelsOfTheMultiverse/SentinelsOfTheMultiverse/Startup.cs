@@ -5,18 +5,36 @@ using System.Text;
 
 namespace SentinelsOfTheMultiverse
 {
-    class Startup
+    public class Startup
     {
-        internal List<String> begin()
+        List<string> _heroesStr;
+        string _villainStr;
+        string _envStr;
+
+        internal void begin()
         {
-            List<String> names = new List<String>();
+            _heroesStr = new List<string>();
+            _villainStr = GameEngine.VILLAIN_NAMESPACE + "BaronBlade";
+            _envStr = GameEngine.ENVIRONMENT_NAMESPACE + "InsulaPrimus";
 
-            names.Add("BaronBlade");
-            names.Add("Haka");
-            names.Add("Haka");
-            names.Add("InsulaPrimus");
-
-            return names;
+            _heroesStr.Add(GameEngine.HERO_NAMESPACE + "Haka");
+            _heroesStr.Add(GameEngine.HERO_NAMESPACE + "Haka");
         }
+
+        public List<string> getHeroesString()
+        {
+            return _heroesStr;
+        }
+
+        public string getVillainStr()
+        {
+            return _villainStr;
+        }
+
+        public string getEnvironmentString()
+        {
+            return _envStr;
+        }
+        
     }
 }

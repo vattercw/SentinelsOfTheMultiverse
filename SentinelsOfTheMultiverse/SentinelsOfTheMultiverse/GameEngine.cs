@@ -12,40 +12,58 @@ namespace SentinelsOfTheMultiverse
 {
     class GameEngine
     {
-
         public Startup startScreen = new Startup();
-        public List<IPlayer> players = new List<IPlayer>();
         public List<Hero> heroes = new List<Hero>();
         public Villain villain;
-        public GameEnvironment environment;
+        public static GameEnvironment environment;
 
-        private int playerTurn = 0;
+        private static int playerTurn = 0;
         Image villainImage = new Image();
 
         public static int MAXPLAYER = 6;
         public static int VILLIANNUM = 0;
         public static int EVIRONMENTNUM = 7;
-        public string HERO_NAMESPACE = "SentinelsOfTheMultiverse.Data.Heroes.";
-        public string VILLAIN_NAMESPACE = "SentinelsOfTheMultiverse.Data.Villains.";
-        public string ENVIRONMENT_NAMESPACE = "SentinelsOfTheMultiverse.Data.Environments.";
+        public static string HERO_NAMESPACE = "SentinelsOfTheMultiverse.Data.Heroes.";
+        public static string VILLAIN_NAMESPACE = "SentinelsOfTheMultiverse.Data.Villains.";
+        public static string ENVIRONMENT_NAMESPACE = "SentinelsOfTheMultiverse.Data.Environments.";
 
         public GameEngine()
         {
+            startScreen.begin();
+            
             initPlayers();
             //newTurn();
+
+            var cp = getPlayers()[0];
+
+            //while (getWinCon())
+            for(int ii=0;ii<5;ii++)
+            {
+                cp.playerTurn();
+                nextTurn();
+            }
         }
+
+
+
+        //private bool getWinCon()
+        //{
+        //    return villain.getLifeTotal() <= 0;
+        //}
 
         public void initPlayers()
         {
-            List<string> heroesStr = new List<string>() {HERO_NAMESPACE+"Haka", HERO_NAMESPACE+"Haka" };
-            string villainStr= VILLAIN_NAMESPACE+"BaronBlade";
-            string envStr = ENVIRONMENT_NAMESPACE+"InsulaPrimus";
+            var heroesStr= startScreen.getHeroesString();
+            var villainStr = startScreen.getVillainStr();
+            var envStr = startScreen.getEnvironmentString();
             
             for (int i = 0; i < heroesStr.Count; i++)
             {
                 Hero newHero = (Hero)getClassFromString(heroesStr[i]);
                 heroes.Add(newHero);
             }
+            
+
             villain = (Villain)getClassFromString(villainStr);
             environment = (GameEnvironment)getClassFromString(envStr);
 
@@ -53,6 +71,7 @@ namespace SentinelsOfTheMultiverse
             playerNames.AddRange(heroes);
             playerNames.Add(villain);
             playerNames.Add(environment);
+
         }
 
         public Object getClassFromString(string className)
@@ -63,11 +82,13 @@ namespace SentinelsOfTheMultiverse
             return o;
         }
 
-        public void newTurn()
+        public void nextTurn()
         {
-            players[playerTurn].playerTurn();
+            
+            getPlayers()[playerTurn].playerTurn();
+
             playerTurn++;
-            if (playerTurn == players.Count)
+            if (playerTurn == getPlayers().Count)
             {
                 playerTurn = 0;
             }
@@ -79,14 +100,18 @@ namespace SentinelsOfTheMultiverse
             return playerTurn;
         }
 
-        public Hero getCurrentPlayer()
+        public IPlayer getCurrentPlayer()
         {
-            return heroes[playerTurn];
+            return getPlayers()[playerTurn];
         }
 
         internal List<IPlayer> getPlayers()
         {
-            return players;
+            var list = new List<IPlayer>();
+            list.AddRange(heroes);
+            list.Add(villain);
+            list.Add(environment);
+            return list;
         }
 
         internal List<Hero> getHeroes()

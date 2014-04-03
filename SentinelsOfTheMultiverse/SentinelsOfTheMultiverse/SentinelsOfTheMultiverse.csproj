@@ -77,6 +77,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\EnvironmentTest.cs" />
     <Compile Include="Tests\GameEngineTest.cs" />
     <Compile Include="Tests\HeroTest.cs" />
     <Compile Include="Tests\DeckTest.cs" />
@@ -150,14 +151,14 @@
     <Resource Include="Images\Icons\haka_cover.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Environment\insula_primus\back_of_card.png" />
-    <Resource Include="Images\Environment\insula_primus\enraged_trex.png" />
-    <Resource Include="Images\Environment\insula_primus\obsidian_field.png" />
-    <Resource Include="Images\Environment\insula_primus\primordial_plant_life.png" />
-    <Resource Include="Images\Environment\insula_primus\pterodactyl_thief.png" />
-    <Resource Include="Images\Environment\insula_primus\river_of_lava.png" />
-    <Resource Include="Images\Environment\insula_primus\velociraptor_pack.png" />
-    <Resource Include="Images\Environment\insula_primus\volcanic_eruption.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\back_of_card.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\enraged_trex.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\obsidian_field.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\primordial_plant_life.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\pterodactyl_thief.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\river_of_lava.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\velociraptor_pack.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\volcanic_eruption.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\NumOfCards.txt" />
@@ -181,14 +182,14 @@
     <Resource Include="Images\Villain\BaronBlade\slash_and_burn.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Environment\insula_primus\back_of_card.png" />
-    <Resource Include="Images\Environment\insula_primus\enraged_trex.png" />
-    <Resource Include="Images\Environment\insula_primus\obsidian_field.png" />
-    <Resource Include="Images\Environment\insula_primus\primordial_plant_life.png" />
-    <Resource Include="Images\Environment\insula_primus\pterodactyl_thief.png" />
-    <Resource Include="Images\Environment\insula_primus\river_of_lava.png" />
-    <Resource Include="Images\Environment\insula_primus\velociraptor_pack.png" />
-    <Resource Include="Images\Environment\insula_primus\volcanic_eruption.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\back_of_card.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\enraged_trex.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\obsidian_field.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\primordial_plant_life.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\pterodactyl_thief.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\river_of_lava.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\velociraptor_pack.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\volcanic_eruption.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

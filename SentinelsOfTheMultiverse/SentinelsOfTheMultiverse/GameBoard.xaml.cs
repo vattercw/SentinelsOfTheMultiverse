@@ -47,12 +47,6 @@ namespace SentinelsOfTheMultiverse
             
             DataContext = this;
 
-            initBoard();
-        }
-
-        private void initBoard()
-        {
-            
             gridLayout = initGrid();
             Button showHandButton = new Button();
             showHandButton.Content = "Show Your Hand!";
@@ -64,20 +58,20 @@ namespace SentinelsOfTheMultiverse
 
             initHandViewer();
             gridLayout.Children.Add(showHandButton);
-			
-            List<Hero> heroes= game.getHeroes();
+
+            List<Hero> heroes = game.getHeroes();
             Villain villain = game.getVillain();
             GameEnvironment env = game.getEnvironment();
 
             initBoard(heroes, villain, env);
-            
-            Content = gridLayout;
 
+            Content = gridLayout;
         }
 
         private void initHandViewer()
         {
-            handViewer = new ViewHand(game.getCurrentPlayer().getPlayerHand());
+            Hero currentPlayer= (Hero)game.getCurrentPlayer();
+            handViewer = new ViewHand(currentPlayer.getPlayerHand());
 		}
 		
         private Grid initGrid()
@@ -109,6 +103,7 @@ namespace SentinelsOfTheMultiverse
             ImageSource villainInstImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/" + villainName + "_instr_front.png");
             initPlayerTemplate(villainDeckBackImg, villainImg, villainInstImg);
 
+            //TODO: don't hardcode things. thats bad
             ImageSource envDeckBackImg = getImageSource("Images/Environment/insula_primus/back_of_card.png");
             initPlayerTemplate(envDeckBackImg);
 

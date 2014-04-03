@@ -14,29 +14,5 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             
         }
-
-        public List<string> hand
-        {
-            get
-            {
-                return this.hand;
-            }
-            set
-            {
-                this.hand = value;
-            }
-        }
-
-        public Deck deck
-        {
-            get
-            {
-                return this.deck;
-            }
-            set
-            {
-                this.deck = value;
-            }
-        }
     }
 }

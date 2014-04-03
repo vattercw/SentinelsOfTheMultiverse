@@ -9,14 +9,5 @@ namespace SentinelsOfTheMultiverse.Data.Environments
     public class InsulaPrimus: GameEnvironment
     {
 
-        public override void playerTurn()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool powerPhase()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

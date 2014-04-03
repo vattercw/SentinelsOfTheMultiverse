@@ -49,5 +49,13 @@ namespace SentinelsOfTheMultiverse.Tests
             Assert.True(containsAll);
         }
 
+        [Test, RequiresSTA] //TODO: test a diff way
+        public void TestPlayerTurn()
+        {
+            GameEngine g = new GameEngine();
+            var currPlay = g.getCurrentPlayer();
+            g.nextTurn();
+            Assert.AreNotEqual(currPlay, g.getCurrentPlayer());
+        }
     }
 }
