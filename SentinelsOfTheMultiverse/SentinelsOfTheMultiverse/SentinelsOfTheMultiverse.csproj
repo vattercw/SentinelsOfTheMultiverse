@@ -194,13 +194,6 @@
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_death.png" />
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_hero.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_back.png" />
-    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_death.png" />
-    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_initial.png" />
-    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_instr_back.png" />
-    <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_instr_front.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

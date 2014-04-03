@@ -13,6 +13,5 @@ namespace SentinelsOfTheMultiverse
     /// </summary>
     public partial class App : Application
     {
-        Startup start = new Startup();
     }
 }

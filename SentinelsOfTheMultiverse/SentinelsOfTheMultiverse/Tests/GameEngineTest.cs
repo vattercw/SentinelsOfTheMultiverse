@@ -14,11 +14,11 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestInitialization()
         {
-            GameEngine testEngine = new GameEngine();
+            //GameEngine testEngine = new GameEngine();
 
-            bool pass = (testEngine.startScreen != null) && (testEngine.getPlayers() != null)
-                     && (testEngine.heroes != null) && (testEngine.villain != null) &&
-                        (GameEngine.environment != null);
+            bool pass =(GameEngine.getPlayers() != null)
+                     && (GameEngine.getHeroes() != null) && (GameEngine.getVillain() != null) &&
+                        (GameEngine.getEnvironment() != null);
             Assert.True(pass);
         }
     }

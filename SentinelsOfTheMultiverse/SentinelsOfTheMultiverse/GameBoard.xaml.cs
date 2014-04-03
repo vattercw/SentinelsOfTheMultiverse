@@ -20,7 +20,7 @@ namespace SentinelsOfTheMultiverse
     /// </summary>
     public partial class GameBoard : Window
     {
-        private GameEngine game = new GameEngine();
+        //private GameEngine game = new GameEngine();
         private Grid gridLayout = new Grid();
         private ViewHand handViewer;
 
@@ -69,9 +69,9 @@ namespace SentinelsOfTheMultiverse
             initHandViewer();
             gridLayout.Children.Add(showHandButton);
 
-            List<Hero> heroes = game.getHeroes();
-            Villain villain = game.getVillain();
-            GameEnvironment env = game.getEnvironment();
+            List<Hero> heroes = GameEngine.getHeroes();
+            Villain villain = GameEngine.getVillain();
+            GameEnvironment env = GameEngine.getEnvironment();
 
             initBoard(heroes, villain, env);
 
@@ -81,7 +81,7 @@ namespace SentinelsOfTheMultiverse
         private void initHandViewer()
         {
 
-            Hero currentPlayer= (Hero)game.getCurrentPlayer();
+            Hero currentPlayer= (Hero)GameEngine.getCurrentPlayer();
             handViewer = new ViewHand(currentPlayer.getPlayerHand(), this);
 
 		}
@@ -90,7 +90,7 @@ namespace SentinelsOfTheMultiverse
         {
             Grid myGrid = new Grid();
 
-            for (int ll = 0; ll < game.getHeroes().Count+2; ll++)
+            for (int ll = 0; ll < GameEngine.getHeroes().Count+2; ll++)
             {
                 RowDefinition row = new RowDefinition();
                 row.Height = GridLength.Auto;
@@ -218,7 +218,7 @@ namespace SentinelsOfTheMultiverse
 
         internal void drawCardSelected(Card cardClicked)
         {
-            Hero hero= (Hero)game.getCurrentPlayer();
+            Hero hero = (Hero)GameEngine.getCurrentPlayer();
             for(int i = 0; i < hero.getPlayerHand().Count; i++){
                 if (hero.getPlayerHand()[i].Equals(cardClicked))
                 {

@@ -10,15 +10,14 @@ using SentinelsOfTheMultiverse.Data.Heroes;
 
 namespace SentinelsOfTheMultiverse
 {
-    class GameEngine
+    static class GameEngine
     {
-        public Startup startScreen = new Startup();
-        public List<Hero> heroes = new List<Hero>();
-        public Villain villain;
-        public static GameEnvironment environment;
+        
+        static List<Hero> heroes = new List<Hero>();
+        static Villain villain;
+        static GameEnvironment environment;
 
         private static int playerTurn = 0;
-        Image villainImage = new Image();
 
         public static int MAXPLAYER = 6;
         public static int VILLIANNUM = 0;
@@ -27,17 +26,19 @@ namespace SentinelsOfTheMultiverse
         public static string VILLAIN_NAMESPACE = "SentinelsOfTheMultiverse.Data.Villains.";
         public static string ENVIRONMENT_NAMESPACE = "SentinelsOfTheMultiverse.Data.Environments.";
 
-        public GameEngine()
-        {
-            startScreen.begin();
+        //public GameEngine()
+        //{
+        //    startScreen.begin();
             
-            initPlayers();
-            //newTurn();
+        //    initPlayers();
+        //    //newTurn();
+        //}
 
+        public static void startGame()
+        {
             var cp = getPlayers()[0];
-
-            //while (getWinCon())
-            for(int ii=0;ii<5;ii++)
+            //    TODO: while (getWinCon())
+            for (int ii = 0; ii < 5; ii++)
             {
                 cp.playerTurn();
                 nextTurn();
@@ -45,14 +46,14 @@ namespace SentinelsOfTheMultiverse
         }
 
 
-
         //private bool getWinCon()
         //{
         //    return villain.getLifeTotal() <= 0;
         //}
 
-        public void initPlayers()
+        public static void initPlayers()
         {
+            Startup startScreen = new Startup();
             var heroesStr= startScreen.getHeroesString();
             var villainStr = startScreen.getVillainStr();
             var envStr = startScreen.getEnvironmentString();
@@ -74,7 +75,7 @@ namespace SentinelsOfTheMultiverse
 
         }
 
-        public Object getClassFromString(string className)
+        public static Object getClassFromString(string className)
         {
             Type hai = Type.GetType(className, true);
             Object o = (Activator.CreateInstance(hai));
@@ -82,7 +83,7 @@ namespace SentinelsOfTheMultiverse
             return o;
         }
 
-        public void nextTurn()
+        public static void nextTurn()
         {
             
             getPlayers()[playerTurn].playerTurn();
@@ -95,17 +96,17 @@ namespace SentinelsOfTheMultiverse
         }
 
         #region GET SET REGION
-        public int getPlayerTurn()
+        public static int getPlayerTurn()
         {
             return playerTurn;
         }
 
-        public IPlayer getCurrentPlayer()
+        public static IPlayer getCurrentPlayer()
         {
             return getPlayers()[playerTurn];
         }
 
-        internal List<IPlayer> getPlayers()
+        internal static List<IPlayer> getPlayers()
         {
             var list = new List<IPlayer>();
             list.AddRange(heroes);
@@ -114,17 +115,17 @@ namespace SentinelsOfTheMultiverse
             return list;
         }
 
-        internal List<Hero> getHeroes()
+        internal static List<Hero> getHeroes()
         {
             return heroes;
         }
 
-        internal Villain getVillain()
+        internal static Villain getVillain()
         {
             return villain;
         }
 
-        internal GameEnvironment getEnvironment()
+        internal static GameEnvironment getEnvironment()
         {
             return environment;
         }
