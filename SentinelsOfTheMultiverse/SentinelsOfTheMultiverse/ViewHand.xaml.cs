@@ -21,18 +21,67 @@ namespace SentinelsOfTheMultiverse
     public partial class ViewHand : Window
     {
         Grid cardLayout = new Grid();
+
+        StackPanel sideBar = new StackPanel();
+
+        Image imageSelected = null;
+
+        List<Card> handShow;
+
+        Card cardClicked = null;
+
+        GameBoard gameBoard;
+
         
 
 
-        public ViewHand(List<Card> hand)
+        public ViewHand(List<Card> hand, GameBoard game)
         {
             InitializeComponent();
+
+            handShow = hand;
+            gameBoard = game;
 
             cardLayout = initGrid(hand);
 
             paintCards(hand);
-            
+
+
+            cardLayout.Children.Add(sideBar);
+
+            Button playButton = new Button();
+            playButton.Content = "Play Card";
+
+            playButton.Click += new RoutedEventHandler(Play_Card);
+
+            Button cancelButton = new Button();
+            cancelButton.Content = "Cancel Action";
+
+            Button closeButton = new Button();
+            closeButton.Content = "Close";
+
+            closeButton.Click += new RoutedEventHandler(Close_Action);
+
+            cancelButton.Click += new RoutedEventHandler(Cancel_Action);
+
+            sideBar.Children.Add(playButton);
+
+            sideBar.Children.Add(cancelButton);
+
+            sideBar.Children.Add(closeButton);
+
             Content = cardLayout;
+                 
+        }
+
+        private void Close_Action(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void Cancel_Action(object sender, RoutedEventArgs e)
+        {
+            imageSelected = null;
         }
 
         public void paintCards(List<Card> handToShow)
@@ -51,7 +100,20 @@ namespace SentinelsOfTheMultiverse
 
         public void card_mouseUp_eventHandler(object sender, RoutedEventArgs e)
         {
+            imageSelected = (Image)sender;
 
+            for (int i = 0; i < handShow.Count ; i++)
+            {
+                if (handShow[i].cardImage.Source == imageSelected.Source)
+                {
+                    cardClicked = handShow[i];
+                    break;
+                }
+            }
+
+            
+
+           
         }
 
         public Grid initGrid(List<Card> handToShow)
@@ -62,13 +124,30 @@ namespace SentinelsOfTheMultiverse
             row.Height = GridLength.Auto;
             myGrid.RowDefinitions.Add(row);
 
-            for (int kk = 0; kk < handToShow.Count ; kk++)
+            for (int kk = 0; kk < handToShow.Count + 1; kk++)
             {
                 ColumnDefinition col = new ColumnDefinition();
                 col.Width = GridLength.Auto;
                 myGrid.ColumnDefinitions.Add(col);
             }
+            ColumnDefinition colm = new ColumnDefinition();
+            colm.Width = GridLength.Auto;
+            myGrid.ColumnDefinitions.Add(colm);
+            Grid.SetColumn(sideBar, handToShow.Count + 2);
+
             return myGrid;
+        }
+
+        public void Play_Card(object sender, RoutedEventArgs e) {
+            if (imageSelected == null)
+            {
+                return;
+            }
+            else
+            {
+                gameBoard.drawCardSelected(cardClicked);
+                this.Hide();
+            }
         }
     }
 }

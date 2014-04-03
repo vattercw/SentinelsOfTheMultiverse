@@ -24,6 +24,10 @@ namespace SentinelsOfTheMultiverse
         private Grid gridLayout = new Grid();
         private ViewHand handViewer;
 
+        private Card drawThisCard;
+
+        private int NEXT_CARD = 3;
+
         #region Constants
 
             private string HERO_IMAGE_PATH="Images/Hero/";
@@ -44,8 +48,14 @@ namespace SentinelsOfTheMultiverse
         public GameBoard()
         {
             InitializeComponent();
-            
+            initBoard();
+
             DataContext = this;
+
+        }
+
+        private void initBoard()
+        {
 
             gridLayout = initGrid();
             Button showHandButton = new Button();
@@ -70,8 +80,10 @@ namespace SentinelsOfTheMultiverse
 
         private void initHandViewer()
         {
+
             Hero currentPlayer= (Hero)game.getCurrentPlayer();
-            handViewer = new ViewHand(currentPlayer.getPlayerHand());
+            handViewer = new ViewHand(currentPlayer.getPlayerHand(), this);
+
 		}
 		
         private Grid initGrid()
@@ -85,7 +97,7 @@ namespace SentinelsOfTheMultiverse
                 myGrid.RowDefinitions.Add(row);
             }
 
-            for (int kk = 0; kk < 3; kk++)
+            for (int kk = 0; kk < 10; kk++)
             {
                 ColumnDefinition col = new ColumnDefinition();
                 col.Width = GridLength.Auto;
@@ -98,13 +110,14 @@ namespace SentinelsOfTheMultiverse
         {
             string villainName = villain.getCharacterName();
             
-            ImageSource villainImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/" + villainName + "_initial.png");
-            ImageSource villainDeckBackImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/" + villainName + "_back.png");
-            ImageSource villainInstImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/" + villainName + "_instr_front.png");
+            ImageSource villainImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png");
+            ImageSource villainDeckBackImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
+            ImageSource villainInstImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
             initPlayerTemplate(villainDeckBackImg, villainImg, villainInstImg);
 
             //TODO: don't hardcode things. thats bad
-            ImageSource envDeckBackImg = getImageSource("Images/Environment/insula_primus/back_of_card.png");
+            ImageSource envDeckBackImg = getImageSource("Images/Environment/InsulaPrimus/NonPlayable/insula_primus_back.png");
+
             initPlayerTemplate(envDeckBackImg);
 
 
@@ -112,8 +125,8 @@ namespace SentinelsOfTheMultiverse
             {
                 string heroName = heroes[ii].getCharacterName();
 
-                ImageSource heroDeckBackImg= getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_back.png");
-                ImageSource heroImg= getImageSource(HERO_IMAGE_PATH + heroName + "/" + heroName.ToLower() + "_hero.png");
+                ImageSource heroDeckBackImg = getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png");
+                ImageSource heroImg = getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png");
                 initPlayerTemplate(heroDeckBackImg, heroImg);
             }   
         }
@@ -128,11 +141,13 @@ namespace SentinelsOfTheMultiverse
                 charInst.Height = CARD_HEIGHT;
                 charInst.Source = characterInstructions;
 
+                charInst.MouseUp += new MouseButtonEventHandler(View_Card_Full);
                 addElementToGrid(charInst, VILLAIN_ROW_NUM, 1);
 
                 Image charCardImg = new Image();
                 charCardImg.Height = CARD_HEIGHT;
                 charCardImg.Source = characterCard;
+                charCardImg.MouseUp += new MouseButtonEventHandler(View_Card_Full);
                 addElementToGrid(charCardImg, VILLAIN_ROW_NUM, 0);
 
                 deckBackRow = VILLAIN_ROW_NUM;
@@ -146,6 +161,7 @@ namespace SentinelsOfTheMultiverse
                 Image heroCharacterImg = new Image();
                 heroCharacterImg.Height = CARD_HEIGHT;
                 heroCharacterImg.Source = characterCard;
+                heroCharacterImg.MouseUp += new MouseButtonEventHandler(View_Card_Full);
                 addElementToGrid(heroCharacterImg, HERO_ROW_NUM, 0);
 
                 deckBackRow = HERO_ROW_NUM;
@@ -154,7 +170,14 @@ namespace SentinelsOfTheMultiverse
             Image deckBackImg = new Image();
             deckBackImg.Height = CARD_HEIGHT;
             deckBackImg.Source = deckBack;
+            deckBackImg.MouseUp += new MouseButtonEventHandler(View_Card_Full);
             addElementToGrid(deckBackImg, deckBackRow, DECK_COLUMN);
+        }
+
+        private int getNextCard()
+        {
+            NEXT_CARD++;
+            return NEXT_CARD - 1;
         }
 
         private void addElementToGrid(UIElement elem, int row, int col)
@@ -165,7 +188,7 @@ namespace SentinelsOfTheMultiverse
         }
 
 
-        private ImageSource getImageSource(string path)
+        public static ImageSource getImageSource(string path)
         {
             BitmapImage src = new BitmapImage();
             src.BeginInit();
@@ -177,26 +200,38 @@ namespace SentinelsOfTheMultiverse
 
         private void View_Hand(object sender, RoutedEventArgs e)
         {
-            lock(this)
+            lock (this)
             {
-                if (!handViewer.IsVisible)
-                {
-                    handViewer.Visibility = SHOW;
-                    Button handVisibleButton = (Button)sender;
-                    handVisibleButton.Content = "Hide Player Hand!";
-                }
-                else if (handViewer.IsVisible)
-                {
-                    handViewer.Visibility = HIDE;
-                    Button handHiddenButton = (Button)sender;
-                    handHiddenButton.Content = "Show Player Hand!";
-                }
+                handViewer.Visibility = SHOW;
+                Button handVisibleButton = (Button)sender;
             }
+              
         }
 
         private void View_Card_Full(object sender, MouseButtonEventArgs e)
         {
+            Image expandCard = (Image)sender;
 
+            ViewCard showCard = new ViewCard(expandCard.Source);
+
+            showCard.Show();
+        }
+
+        internal void drawCardSelected(Card cardClicked)
+        {
+            Hero hero= (Hero)game.getCurrentPlayer();
+            for(int i = 0; i < hero.getPlayerHand().Count; i++){
+                if (hero.getPlayerHand()[i].Equals(cardClicked))
+                {
+                    drawThisCard = hero.getPlayerHand()[i];
+                    hero.getPlayerHand().RemoveAt(i);
+                    break;
+                }
+
+            }
+            drawThisCard.cardImage.Height = CARD_HEIGHT;
+            addElementToGrid(drawThisCard.cardImage,HERO_ROW_NUM, getNextCard());
+            initHandViewer();
         }
     }
 }
