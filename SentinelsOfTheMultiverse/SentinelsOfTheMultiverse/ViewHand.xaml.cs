@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -31,8 +32,6 @@ namespace SentinelsOfTheMultiverse
         Card cardClicked = null;
 
         GameBoard gameBoard;
-
-        
 
 
         public ViewHand(List<Card> hand, GameBoard game)
@@ -100,6 +99,8 @@ namespace SentinelsOfTheMultiverse
         public void card_mouseUp_eventHandler(object sender, RoutedEventArgs e)
         {
             imageSelected = (Image)sender;
+            imageSelected.Effect = selectionGlow();
+            
 
             for (int i = 0; i < handShow.Count ; i++)
             {
@@ -109,9 +110,6 @@ namespace SentinelsOfTheMultiverse
                     break;
                 }
             }
-
-            
-
            
         }
 
@@ -147,6 +145,26 @@ namespace SentinelsOfTheMultiverse
                 gameBoard.drawCardSelected(cardClicked);
                 this.Hide();
             }
+        }
+
+        public static DropShadowEffect selectionGlow()
+        {
+            DropShadowEffect glowEffect = new DropShadowEffect();
+            glowEffect.Direction = 0;
+            glowEffect.ShadowDepth = 0;
+            glowEffect.Opacity = 1;
+
+
+            Color cardGlowColor = new Color();
+            cardGlowColor.ScA = 0.5F;
+            cardGlowColor.ScR = 255;
+            cardGlowColor.ScG = 255;
+            cardGlowColor.ScB = 110;
+
+            glowEffect.Color = cardGlowColor;
+
+            return glowEffect;
+
         }
     }
 }

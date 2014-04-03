@@ -226,6 +226,7 @@ namespace SentinelsOfTheMultiverse
 
             }
             drawThisCard.cardImage.Height = CARD_HEIGHT;
+            drawThisCard.cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
             addElementToGrid(drawThisCard.cardImage,HERO_ROW_NUM, getNextCard());
             initHandViewer();
         }
