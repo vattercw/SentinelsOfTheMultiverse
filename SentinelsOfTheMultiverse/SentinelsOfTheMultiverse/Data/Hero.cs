@@ -58,7 +58,7 @@ namespace SentinelsOfTheMultiverse
             return true;
         }
 
-        public override Boolean powerPhase()
+        public Boolean powerPhase()
         {
             return true;
         }

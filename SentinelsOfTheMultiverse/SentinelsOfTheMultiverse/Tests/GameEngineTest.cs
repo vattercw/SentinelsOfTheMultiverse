@@ -16,9 +16,9 @@ namespace SentinelsOfTheMultiverse.Tests
         {
             GameEngine testEngine = new GameEngine();
 
-            bool pass = (testEngine.startScreen != null) && (testEngine.players != null)
+            bool pass = (testEngine.startScreen != null) && (testEngine.getPlayers() != null)
                      && (testEngine.heroes != null) && (testEngine.villain != null) &&
-                        (testEngine.environment != null);
+                        (GameEngine.environment != null);
             Assert.True(pass);
         }
     }

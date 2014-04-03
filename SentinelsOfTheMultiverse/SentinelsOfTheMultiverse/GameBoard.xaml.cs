@@ -48,16 +48,15 @@ namespace SentinelsOfTheMultiverse
         public GameBoard()
         {
             InitializeComponent();
-            
+            initBoard();
+
             DataContext = this;
 
-            initBoard();
         }
-
 
         private void initBoard()
         {
-            
+
             gridLayout = initGrid();
             Button showHandButton = new Button();
             showHandButton.Content = "Show Your Hand!";
@@ -69,20 +68,22 @@ namespace SentinelsOfTheMultiverse
 
             initHandViewer();
             gridLayout.Children.Add(showHandButton);
-			
-            List<Hero> heroes= game.getHeroes();
+
+            List<Hero> heroes = game.getHeroes();
             Villain villain = game.getVillain();
             GameEnvironment env = game.getEnvironment();
 
             initBoard(heroes, villain, env);
-            
-            Content = gridLayout;
 
+            Content = gridLayout;
         }
 
         private void initHandViewer()
         {
-            handViewer = new ViewHand(game.getCurrentPlayer().getPlayerHand(), this);
+
+            Hero currentPlayer= (Hero)game.getCurrentPlayer();
+            handViewer = new ViewHand(currentPlayer.getPlayerHand(), this);
+
 		}
 		
         private Grid initGrid()
@@ -114,7 +115,8 @@ namespace SentinelsOfTheMultiverse
             ImageSource villainInstImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
             initPlayerTemplate(villainDeckBackImg, villainImg, villainInstImg);
 
-            ImageSource envDeckBackImg = getImageSource("Images/Environment/insula_primus/insula_primus_back.png");
+            ImageSource envDeckBackImg = getImageSource("Images/Environment/insula_primus/NonPlayable/insula_primus_back.png");
+
             initPlayerTemplate(envDeckBackImg);
 
 
@@ -216,11 +218,12 @@ namespace SentinelsOfTheMultiverse
 
         internal void drawCardSelected(Card cardClicked)
         {
-            for(int i = 0; i < game.getCurrentPlayer().getPlayerHand().Count; i++){
-                if (game.getCurrentPlayer().getPlayerHand()[i].Equals(cardClicked))
+            Hero hero= (Hero)game.getCurrentPlayer();
+            for(int i = 0; i < hero.getPlayerHand().Count; i++){
+                if (hero.getPlayerHand()[i].Equals(cardClicked))
                 {
-                    drawThisCard = game.getCurrentPlayer().getPlayerHand()[i];
-                    game.getCurrentPlayer().getPlayerHand().RemoveAt(i);
+                    drawThisCard = hero.getPlayerHand()[i];
+                    hero.getPlayerHand().RemoveAt(i);
                     break;
                 }
 
