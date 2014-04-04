@@ -69,6 +69,7 @@ namespace SentinelsOfTheMultiverse
 
         public static void nextTurn()
         {
+            playerPlayedCard = false;
             playerTurn++;
             if (playerTurn == getPlayers().Count)
             {

@@ -15,6 +15,8 @@ namespace SentinelsOfTheMultiverse
     {
 
         public static Thickness cardSpacing = new Thickness(5, 5, 5, 5);
+        public static System.Windows.Visibility SHOW = Visibility.Visible;
+        public static System.Windows.Visibility HIDE = Visibility.Hidden;
 
         public static ImageSource getImageSource(string path)
         {
