@@ -19,8 +19,7 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestHeroInitalization()
         {
             Hero heroTest = new Haka();
-            Assert.IsNotNull(heroTest);
-            Assert.AreEqual("Haka", heroTest.characterName);
+            Assert.AreEqual("Haka", heroTest.getCharacterName());
         }
 
         [Test, RequiresSTA]
@@ -50,7 +49,7 @@ namespace SentinelsOfTheMultiverse.Tests
         }
 
         [Test, RequiresSTA] //TODO: test a diff way
-        public void TestPlayerTurn()
+        public void TestPlayerTurnCard()
         {
             var currPlay = GameEngine.getCurrentPlayer();
             GameEngine.nextTurn();

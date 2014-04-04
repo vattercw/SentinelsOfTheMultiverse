@@ -17,7 +17,17 @@ namespace SentinelsOfTheMultiverse.Tests
         {
             Villain villainTest = new BaronBlade();
             Assert.NotNull(villainTest);
-            //Assert.AreEqual("Baron Blade", villainTest.getCharacterName());
+            Assert.AreEqual("BaronBlade", villainTest.getCharacterName());
+        }
+
+        [Test, RequiresSTA]
+        public void TestVillainDrawCard()
+        {
+            Villain villainTest = new BaronBlade();
+            var begin = villainTest.cardsOnField.Count;
+            villainTest.drawPhase(1);
+            var end = villainTest.cardsOnField.Count;
+            Assert.AreNotEqual(begin, end);
         }
 
     }

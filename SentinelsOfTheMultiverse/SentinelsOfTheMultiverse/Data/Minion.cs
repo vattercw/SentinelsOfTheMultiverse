@@ -10,16 +10,25 @@ namespace SentinelsOfTheMultiverse.Data
     {
         private int maxHealth;
         private int health;
-        private String name;
+        private String  minionName;
 
 
-        public Minion(String minionName, int maxHealthNum)
+        public Minion(String name, int maxHealthNum)
         {
             maxHealth = maxHealthNum;
             health = maxHealthNum;
-            name = minionName;
+            minionName = name;
         }
 
+        public String getMinionName()
+        {
+            return minionName;
+        }
+
+        public int getCurrentHealth()
+        {
+            return health;
+        }
 
     }
 }
