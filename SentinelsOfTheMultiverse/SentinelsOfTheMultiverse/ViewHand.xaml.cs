@@ -84,7 +84,7 @@ namespace SentinelsOfTheMultiverse
         private void End_Turn(object sender, RoutedEventArgs e)
         {
             GameEngine.nextTurn();
-            gameBoard.initBoard();
+            gameBoard.updateBoard();
             this.Hide();
         }
 
@@ -165,6 +165,7 @@ namespace SentinelsOfTheMultiverse
             {
                 gameBoard.drawCardSelected(cardClicked);
                 GameEngine.playerPlayedCard = true;
+                gameBoard.updateBoard();
                 this.Hide();
             }
         }

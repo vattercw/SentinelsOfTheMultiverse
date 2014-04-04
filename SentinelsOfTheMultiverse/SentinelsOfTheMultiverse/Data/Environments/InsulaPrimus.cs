@@ -12,5 +12,6 @@ namespace SentinelsOfTheMultiverse.Data.Environments
         {
             throw new NotImplementedException();
         }
+
     }
 }

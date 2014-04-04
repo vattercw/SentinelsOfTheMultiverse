@@ -11,12 +11,14 @@ namespace SentinelsOfTheMultiverse.Data
         private List<string> _inPlay= new List<string>();
         private Deck _deck;
         private string envName;
+        public List<Card> cardsOnField { get; set; }
 
         public GameEnvironment()
         {
             envName = this.GetType().Name;
             deck = new Deck(envName, IPlayer.PlayerType.Environment);
             deck.shuffle();
+            cardsOnField = new List<Card>();
         }
 
         public List<string> inPlay 
@@ -42,6 +44,7 @@ namespace SentinelsOfTheMultiverse.Data
             startPhase();
             playPhase();
             endPhase();
+            GameEngine.nextTurn();
         }
 
         public override void startPhase()
@@ -63,6 +66,11 @@ namespace SentinelsOfTheMultiverse.Data
         {
             //conditionals for end turn effects
             deck.draw(1);
+        }
+
+        public override void drawPhase(int numCards)
+        {
+            cardsOnField.AddRange(deck.draw(numCards));
         }
     }
 }

@@ -49,13 +49,13 @@ namespace SentinelsOfTheMultiverse
         public GameBoard()
         {
             InitializeComponent();
-            initBoard();
+            updateBoard();
 
             DataContext = this;
 
         }
 
-        public void initBoard()
+        public void updateBoard()
         {
 
             gridLayout = initGrid();
@@ -65,7 +65,7 @@ namespace SentinelsOfTheMultiverse
             showHandButton.Height = 50;
             showHandButton.Click += new RoutedEventHandler(View_Hand);
 
-            Grid.SetRow(showHandButton, 6);
+            Grid.SetRow(showHandButton, 0);
 
             Label currentPlayerLabel = new Label();
             currentPlayerLabel.Width= 200;
@@ -78,7 +78,6 @@ namespace SentinelsOfTheMultiverse
             
             Utility.addElementToGrid(currentPlayerLabel, 0, 0, gridLayout);
 
-            initHandViewer();
             gridLayout.Children.Add(showHandButton);
 
             List<Hero> heroes = GameEngine.getHeroes();
@@ -86,23 +85,40 @@ namespace SentinelsOfTheMultiverse
             GameEnvironment env = GameEngine.getEnvironment();
 
             initBoard(heroes, villain, env);
+            updatePlayersBoard();
 
             Content = gridLayout;
         }
 
-        private void initHandViewer()
-        {
+        private void updatePlayersBoard()
+	    {
+	        Villain villain = GameEngine.getVillain();
+	        GameEnvironment env = GameEngine.getEnvironment();
+	
+	        foreach (Hero hero in GameEngine.getHeroes())
+	        {
+	            foreach(Card c in hero.cardsOnField){
+                    c.cardImage.Height = CARD_HEIGHT;
+	                c.cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
+	
+	                addElementToGrid(c.cardImage, HERO_ROW_NUM,4);
+	            }
+	        }
+	    }
 
+
+        public void initHandViewer()
+        {
             Hero currentPlayer= (Hero)GameEngine.getCurrentPlayer();
             if (currentPlayer != null)
             {
                 handViewer = new ViewHand(currentPlayer.getPlayerHand(), this);
             }
-
 		}
 		
         private Grid initGrid()
         {
+            gridLayout.Children.RemoveRange(0, gridLayout.Children.Count);
             Grid myGrid = new Grid();
 
             for (int ll = 0; ll < GameEngine.getHeroes().Count+2; ll++)
@@ -142,7 +158,7 @@ namespace SentinelsOfTheMultiverse
                 ImageSource heroDeckBackImg = Utility.getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png");
                 ImageSource heroImg = Utility.getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png");
                 initPlayerTemplate(heroDeckBackImg, heroImg);
-            }   
+            }
         }
 
         //TODO: later add ImageSource graveYardTop
@@ -198,6 +214,7 @@ namespace SentinelsOfTheMultiverse
         {
             lock (this)
             {
+                initHandViewer();
                 handViewer.Visibility = SHOW;
                 Button handVisibleButton = (Button)sender;
             }
@@ -225,10 +242,8 @@ namespace SentinelsOfTheMultiverse
                 }
 
             }
-            drawThisCard.cardImage.Height = CARD_HEIGHT;
-            drawThisCard.cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
-            Utility.addElementToGrid(drawThisCard.cardImage,HERO_ROW_NUM, getNextCard(), gridLayout);
-            initHandViewer();
+            ((Hero)GameEngine.getCurrentPlayer()).cardsOnField.Add(drawThisCard);
+
         }
     }
 }

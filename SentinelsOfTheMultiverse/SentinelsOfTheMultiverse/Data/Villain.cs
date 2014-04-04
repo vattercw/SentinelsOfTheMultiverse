@@ -12,11 +12,13 @@ namespace SentinelsOfTheMultiverse.Data
         Deck deck { get; set; }
         string characterName;
         int _lifeTotal;
+        public List<Card> cardsOnField { get; set; }
 
         public Villain()
         {
             characterName = this.GetType().Name;
             deck = new Deck(characterName, IPlayer.PlayerType.Villain);
+            cardsOnField = new List<Card>();
         }
 
         public String getCharacterName()
@@ -29,6 +31,7 @@ namespace SentinelsOfTheMultiverse.Data
             startPhase();
             playPhase();
             endPhase();
+            GameEngine.nextTurn();
         }
 
         public override void startPhase()
@@ -38,7 +41,7 @@ namespace SentinelsOfTheMultiverse.Data
 
         public override Boolean playPhase()
         {
-            //deck.draw(1);
+            
             return true;
         }
 
@@ -52,6 +55,10 @@ namespace SentinelsOfTheMultiverse.Data
         internal int getLifeTotal()
         {
             return _lifeTotal;
+        }
+        public override void drawPhase(int numCards)
+        {
+            cardsOnField.AddRange(deck.draw(numCards));
         }
     }
 }
