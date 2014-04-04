@@ -97,11 +97,11 @@ namespace SentinelsOfTheMultiverse
 	
 	        foreach (Hero hero in GameEngine.getHeroes())
 	        {
-	            foreach(Card c in hero.cardsOnField){
-                    c.cardImage.Height = CARD_HEIGHT;
-	                c.cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
+	            for(int k = 0; k < hero.cardsOnField.Count; k++){
+                    hero.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
+	                hero.cardsOnField[k].cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
 	
-	                addElementToGrid(c.cardImage, HERO_ROW_NUM,4);
+	                Utility.addElementToGrid(hero.cardsOnField[k].cardImage, HERO_ROW_NUM, k+4, gridLayout);
 	            }
 	        }
 	    }
@@ -212,13 +212,9 @@ namespace SentinelsOfTheMultiverse
 
         private void View_Hand(object sender, RoutedEventArgs e)
         {
-            lock (this)
-            {
-                initHandViewer();
-                handViewer.Visibility = SHOW;
-                Button handVisibleButton = (Button)sender;
-            }
-              
+            initHandViewer();
+            handViewer.Visibility = SHOW;
+            Button handVisibleButton = (Button)sender;         
         }
 
         private void View_Card_Full(object sender, MouseButtonEventArgs e)
