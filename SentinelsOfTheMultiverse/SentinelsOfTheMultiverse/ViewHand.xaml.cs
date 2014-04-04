@@ -48,8 +48,13 @@ namespace SentinelsOfTheMultiverse
 
             cardLayout.Children.Add(sideBar);
 
-            Button playButton = new Button();
-            playButton.Content = "Play Card";
+            if (!GameEngine.playerPlayedCard)
+            {
+                Button playButton = new Button();
+                playButton.Content = "Play Card";
+                playButton.Click += new RoutedEventHandler(Play_Card);
+                sideBar.Children.Add(playButton);
+            }
 
             Button cancelButton = new Button();
             cancelButton.Content = "Cancel Action";
@@ -60,15 +65,11 @@ namespace SentinelsOfTheMultiverse
             Button endTurnButton = new Button();
             endTurnButton.Content = "End Turn!";
 
-            playButton.Click += new RoutedEventHandler(Play_Card);
-
             closeButton.Click += new RoutedEventHandler(Close_Action);
 
             cancelButton.Click += new RoutedEventHandler(Cancel_Action);
 
             endTurnButton.Click += new RoutedEventHandler(End_Turn);
-
-            sideBar.Children.Add(playButton);
 
             sideBar.Children.Add(cancelButton);
 
@@ -76,25 +77,33 @@ namespace SentinelsOfTheMultiverse
 
             sideBar.Children.Add(endTurnButton);
 
+<<<<<<< HEAD
             SizeToContent = System.Windows.SizeToContent.WidthAndHeight;
             Content = cardLayout;
             
+=======
+            Content = cardLayout;
+
+            this.SizeToContent = SizeToContent.WidthAndHeight;
+                 
+>>>>>>> a21353270c1e04bf0408689933a482a59235ae03
         }
         
         private void End_Turn(object sender, RoutedEventArgs e)
         {
             GameEngine.nextTurn();
             gameBoard.updateBoard();
-            this.Hide();
+            this.Close();
         }
 
         private void Close_Action(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
 
         private void Cancel_Action(object sender, RoutedEventArgs e)
         {
+            imageSelected.Effect = null;
             imageSelected = null;
         }
 
@@ -166,7 +175,7 @@ namespace SentinelsOfTheMultiverse
                 gameBoard.drawCardSelected(cardClicked);
                 GameEngine.playerPlayedCard = true;
                 gameBoard.updateBoard();
-                this.Hide();
+                this.Close();
             }
         }
     }

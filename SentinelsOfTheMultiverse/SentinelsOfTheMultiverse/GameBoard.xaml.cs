@@ -33,8 +33,6 @@ namespace SentinelsOfTheMultiverse
 
             private string HERO_IMAGE_PATH="Images/Hero/";
             private string VILLAIN_IMAGE_PATH = "Images/Villain/";    
-            private System.Windows.Visibility SHOW = Visibility.Visible;
-            private System.Windows.Visibility HIDE = Visibility.Hidden;
 
             private int VILLAIN_ROW_NUM=1;
             private int ENVIRONMENT_ROW_NUM=0;
@@ -49,7 +47,10 @@ namespace SentinelsOfTheMultiverse
         public GameBoard()
         {
             InitializeComponent();
+
             updateBoard();
+
+            this.SizeToContent = SizeToContent.WidthAndHeight;
 
             DataContext = this;
 
@@ -229,7 +230,7 @@ namespace SentinelsOfTheMultiverse
         private void View_Hand(object sender, RoutedEventArgs e)
         {
             initHandViewer();
-            handViewer.Visibility = SHOW;
+            handViewer.Visibility = Utility.SHOW;
             Button handVisibleButton = (Button)sender;         
         }
 
@@ -255,7 +256,6 @@ namespace SentinelsOfTheMultiverse
 
             }
             ((Hero)GameEngine.getCurrentPlayer()).cardsOnField.Add(drawThisCard);
-
         }
     }
 }
