@@ -59,9 +59,14 @@ namespace SentinelsOfTheMultiverse
             Button closeButton = new Button();
             closeButton.Content = "Close";
 
+            Button endTurnButton = new Button();
+            endTurnButton.Content = "End Turn!";
+
             closeButton.Click += new RoutedEventHandler(Close_Action);
 
             cancelButton.Click += new RoutedEventHandler(Cancel_Action);
+
+            endTurnButton.Click += new RoutedEventHandler(End_Turn);
 
             sideBar.Children.Add(playButton);
 
@@ -69,8 +74,17 @@ namespace SentinelsOfTheMultiverse
 
             sideBar.Children.Add(closeButton);
 
+            sideBar.Children.Add(endTurnButton);
+
+
             Content = cardLayout;
                  
+        }
+
+        private void End_Turn(object sender, RoutedEventArgs e)
+        {
+            GameEngine.nextTurn();
+            this.Hide();
         }
 
         private void Close_Action(object sender, RoutedEventArgs e)
@@ -144,6 +158,7 @@ namespace SentinelsOfTheMultiverse
             else
             {
                 gameBoard.drawCardSelected(cardClicked);
+                GameEngine.playerPlayedCard = true;
                 this.Hide();
             }
         }
