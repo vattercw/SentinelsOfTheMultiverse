@@ -1,4 +1,5 @@
 ﻿using SentinelsOfTheMultiverse.Data;
+using SentinelsOfTheMultiverse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,7 +76,7 @@ namespace SentinelsOfTheMultiverse
             currentPlayerLabel.Content = currIndex;
             currentPlayerLabel.VerticalAlignment = VerticalAlignment.Top;
             
-            addElementToGrid(currentPlayerLabel, 0, 0);
+            Utility.addElementToGrid(currentPlayerLabel, 0, 0, gridLayout);
 
             initHandViewer();
             gridLayout.Children.Add(showHandButton);
@@ -124,12 +125,12 @@ namespace SentinelsOfTheMultiverse
         {
             string villainName = villain.getCharacterName();
             
-            ImageSource villainImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png");
-            ImageSource villainDeckBackImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
-            ImageSource villainInstImg = getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
+            ImageSource villainImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png");
+            ImageSource villainDeckBackImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
+            ImageSource villainInstImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
             initPlayerTemplate(villainDeckBackImg, villainImg, villainInstImg);
 
-            ImageSource envDeckBackImg = getImageSource("Images/Environment/InsulaPrimus/NonPlayable/insula_primus_back.png");
+            ImageSource envDeckBackImg = Utility.getImageSource("Images/Environment/InsulaPrimus/NonPlayable/insula_primus_back.png");
 
             initPlayerTemplate(envDeckBackImg);
 
@@ -138,8 +139,8 @@ namespace SentinelsOfTheMultiverse
             {
                 string heroName = heroes[ii].getCharacterName();
 
-                ImageSource heroDeckBackImg = getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png");
-                ImageSource heroImg = getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png");
+                ImageSource heroDeckBackImg = Utility.getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png");
+                ImageSource heroImg = Utility.getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png");
                 initPlayerTemplate(heroDeckBackImg, heroImg);
             }   
         }
@@ -155,13 +156,13 @@ namespace SentinelsOfTheMultiverse
                 charInst.Source = characterInstructions;
 
                 charInst.MouseUp += new MouseButtonEventHandler(View_Card_Full);
-                addElementToGrid(charInst, VILLAIN_ROW_NUM, 1);
+                Utility.addElementToGrid(charInst, VILLAIN_ROW_NUM, 1, gridLayout);
 
                 Image charCardImg = new Image();
                 charCardImg.Height = CARD_HEIGHT;
                 charCardImg.Source = characterCard;
                 charCardImg.MouseUp += new MouseButtonEventHandler(View_Card_Full);
-                addElementToGrid(charCardImg, VILLAIN_ROW_NUM, 0);
+                Utility.addElementToGrid(charCardImg, VILLAIN_ROW_NUM, 0, gridLayout);
 
                 deckBackRow = VILLAIN_ROW_NUM;
             }
@@ -175,7 +176,7 @@ namespace SentinelsOfTheMultiverse
                 heroCharacterImg.Height = CARD_HEIGHT;
                 heroCharacterImg.Source = characterCard;
                 heroCharacterImg.MouseUp += new MouseButtonEventHandler(View_Card_Full);
-                addElementToGrid(heroCharacterImg, HERO_ROW_NUM, 0);
+                Utility.addElementToGrid(heroCharacterImg, HERO_ROW_NUM, 0, gridLayout);
 
                 deckBackRow = HERO_ROW_NUM;
             }
@@ -184,31 +185,13 @@ namespace SentinelsOfTheMultiverse
             deckBackImg.Height = CARD_HEIGHT;
             deckBackImg.Source = deckBack;
             deckBackImg.MouseUp += new MouseButtonEventHandler(View_Card_Full);
-            addElementToGrid(deckBackImg, deckBackRow, DECK_COLUMN);
+            Utility.addElementToGrid(deckBackImg, deckBackRow, DECK_COLUMN, gridLayout);
         }
 
         private int getNextCard()
         {
             NEXT_CARD++;
             return NEXT_CARD - 1;
-        }
-
-        private void addElementToGrid(UIElement elem, int row, int col)
-        {
-            Grid.SetRow(elem, row);
-            Grid.SetColumn(elem, col);
-            gridLayout.Children.Add(elem);
-        }
-
-
-        public static ImageSource getImageSource(string path)
-        {
-            BitmapImage src = new BitmapImage();
-            src.BeginInit();
-            src.UriSource = new Uri(path, UriKind.Relative);
-            src.EndInit();
-
-            return src;
         }
 
         private void View_Hand(object sender, RoutedEventArgs e)
@@ -244,7 +227,7 @@ namespace SentinelsOfTheMultiverse
             }
             drawThisCard.cardImage.Height = CARD_HEIGHT;
             drawThisCard.cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
-            addElementToGrid(drawThisCard.cardImage,HERO_ROW_NUM, getNextCard());
+            Utility.addElementToGrid(drawThisCard.cardImage,HERO_ROW_NUM, getNextCard(), gridLayout);
             initHandViewer();
         }
     }

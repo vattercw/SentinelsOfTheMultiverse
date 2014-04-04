@@ -15,7 +15,8 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestInitialization()
         {
             //GameEngine testEngine = new GameEngine();
-
+            Start test = new Start();
+            test.beginGame();
             bool pass =(GameEngine.getPlayers() != null)
                      && (GameEngine.getHeroes() != null) && (GameEngine.getVillain() != null) &&
                         (GameEngine.getEnvironment() != null);

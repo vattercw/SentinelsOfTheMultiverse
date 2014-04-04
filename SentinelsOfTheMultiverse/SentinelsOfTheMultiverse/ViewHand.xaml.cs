@@ -51,8 +51,6 @@ namespace SentinelsOfTheMultiverse
             Button playButton = new Button();
             playButton.Content = "Play Card";
 
-            playButton.Click += new RoutedEventHandler(Play_Card);
-
             Button cancelButton = new Button();
             cancelButton.Content = "Cancel Action";
 
@@ -61,6 +59,8 @@ namespace SentinelsOfTheMultiverse
 
             Button endTurnButton = new Button();
             endTurnButton.Content = "End Turn!";
+
+            playButton.Click += new RoutedEventHandler(Play_Card);
 
             closeButton.Click += new RoutedEventHandler(Close_Action);
 
@@ -108,14 +108,19 @@ namespace SentinelsOfTheMultiverse
                 
                 Grid.SetColumn(temp, k);
                 temp.AddHandler(UIElement.MouseUpEvent, new RoutedEventHandler(card_mouseUp_eventHandler), true);
+
+                temp.Margin = Utility.cardSpacing;
+
                 cardLayout.Children.Add(temp);
             }
         }
 
         public void card_mouseUp_eventHandler(object sender, RoutedEventArgs e)
         {
+            if (imageSelected != null) imageSelected.Effect = null;
+
             imageSelected = (Image)sender;
-            imageSelected.Effect = selectionGlow();
+            imageSelected.Effect = Utility.selectionGlow();
             
 
             for (int i = 0; i < handShow.Count ; i++)
@@ -162,26 +167,6 @@ namespace SentinelsOfTheMultiverse
                 GameEngine.playerPlayedCard = true;
                 this.Hide();
             }
-        }
-
-        public static DropShadowEffect selectionGlow()
-        {
-            DropShadowEffect glowEffect = new DropShadowEffect();
-            glowEffect.Direction = 0;
-            glowEffect.ShadowDepth = 0;
-            glowEffect.Opacity = 1;
-
-
-            Color cardGlowColor = new Color();
-            cardGlowColor.ScA = 0.5F;
-            cardGlowColor.ScR = 255;
-            cardGlowColor.ScG = 255;
-            cardGlowColor.ScB = 110;
-
-            glowEffect.Color = cardGlowColor;
-
-            return glowEffect;
-
         }
     }
 }

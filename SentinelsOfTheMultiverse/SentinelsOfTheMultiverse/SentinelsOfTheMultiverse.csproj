@@ -81,6 +81,7 @@
     <Compile Include="Tests\GameEngineTest.cs" />
     <Compile Include="Tests\HeroTest.cs" />
     <Compile Include="Tests\DeckTest.cs" />
+    <Compile Include="Data\Utility.cs" />
     <Compile Include="ViewCard.xaml.cs">
       <DependentUpon>ViewCard.xaml</DependentUpon>
     </Compile>

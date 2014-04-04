@@ -32,19 +32,23 @@ namespace SentinelsOfTheMultiverse
 
         private void Start_Game(object sender, RoutedEventArgs e)
         {
-
-            List<string> heroesStr = new List<string>();
-           string _villainStr = GameEngine.VILLAIN_NAMESPACE + "BaronBlade";
-           string _envStr = GameEngine.ENVIRONMENT_NAMESPACE + "InsulaPrimus";
-
-           heroesStr.Add(GameEngine.HERO_NAMESPACE + "Haka");
-           heroesStr.Add(GameEngine.HERO_NAMESPACE + "Haka");
-
-            GameEngine.initPlayers(heroesStr, _villainStr, _envStr);
-            
+            beginGame();
             GameBoard game = new GameBoard();
             game.Show();
             GameEngine.startGame();
+            this.Close();
+        }
+
+        public void beginGame()
+        {
+            List<string> heroesStr = new List<string>();
+            string _villainStr = GameEngine.VILLAIN_NAMESPACE + "BaronBlade";
+            string _envStr = GameEngine.ENVIRONMENT_NAMESPACE + "InsulaPrimus";
+
+            heroesStr.Add(GameEngine.HERO_NAMESPACE + "Haka");
+            heroesStr.Add(GameEngine.HERO_NAMESPACE + "Haka");
+
+            GameEngine.initPlayers(heroesStr, _villainStr, _envStr);
         }
     }
 }

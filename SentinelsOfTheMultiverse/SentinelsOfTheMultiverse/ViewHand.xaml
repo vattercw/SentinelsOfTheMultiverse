@@ -1,7 +1,7 @@
 ﻿<Window x:Class="SentinelsOfTheMultiverse.ViewHand"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="View Player Hand!" Height="350" Width="1000">
+        Title="View Player Hand!" Height="400" Width="1200">
     <Grid>
         
     </Grid>

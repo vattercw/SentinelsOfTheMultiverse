@@ -14,9 +14,9 @@ namespace SentinelsOfTheMultiverse.Tests
     class DeckTest
     {
         List<Card> cardsTest = new List<Card>();
-        string[] files = { "dominion", "elbow_smash", "enduring_intercession", "ground_pound", "haka_back",
-                         "haka_death", "haka_hero", "haka_of_battle", "haka_of_restoration", "haka_of_shielding",
-                         "mere", "punish_the_weak", "rampage", "savage_mana", "ta_moko", "taiaha", "vitality_surge"};
+        string[] files = { "dominion", "elbow_smash", "enduring_intercession", "ground_pound", "haka_of_battle", 
+                           "haka_of_restoration", "haka_of_shielding", "mere", "punish_the_weak", "rampage", 
+                           "savage_mana", "ta_moko", "taiaha", "vitality_surge"};
 
         [Test]
         [ExpectedException(typeof(DirectoryNotFoundException))]
@@ -30,7 +30,7 @@ namespace SentinelsOfTheMultiverse.Tests
         {
             int count = files.Length;
             Deck testHaka = new Deck("haka", IPlayer.PlayerType.Hero);
-            Assert.IsTrue(testHaka.getCards().Count.Equals(count));
+            Assert.AreEqual(testHaka.getCards().Count, count);
         }
 
         [Test]
