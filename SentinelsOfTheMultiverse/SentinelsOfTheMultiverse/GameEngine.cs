@@ -28,8 +28,6 @@ namespace SentinelsOfTheMultiverse
         public static Boolean playerPlayedCard;
         public static Boolean playerUsedPower;
 
-        public static bool playCard;
-        public static bool playPower;
         
         public static void startGame()
         {
@@ -69,13 +67,13 @@ namespace SentinelsOfTheMultiverse
 
         public static void nextTurn()
         {
-            playerPlayedCard = false;
             playerTurn++;
             if (playerTurn == getPlayers().Count)
             {
                 playerTurn = 0;
             }
-            getPlayers()[playerTurn].playerTurn(playCard, playPower);
+            getPlayers()[playerTurn].playerTurn(playerPlayedCard, playerUsedPower);
+            playerPlayedCard = false;
         }
 
         #region GET SET REGION
