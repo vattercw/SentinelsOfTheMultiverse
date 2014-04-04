@@ -80,10 +80,11 @@ namespace SentinelsOfTheMultiverse
             Content = cardLayout;
                  
         }
-
+        
         private void End_Turn(object sender, RoutedEventArgs e)
         {
             GameEngine.nextTurn();
+            gameBoard.initBoard();
             this.Hide();
         }
 

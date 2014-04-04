@@ -24,7 +24,7 @@ namespace SentinelsOfTheMultiverse.Data
             return characterName;
         }
 
-        public override void playerTurn()
+        public override void playerTurn(bool isCardPlayed=false, bool isPowerUsed=false)
         {
             startPhase();
             playPhase();
@@ -46,6 +46,7 @@ namespace SentinelsOfTheMultiverse.Data
         public override void endPhase()
         {
             //conditionals for end turn effects
+            //plays card from deck.
         }
 
         internal int getLifeTotal()

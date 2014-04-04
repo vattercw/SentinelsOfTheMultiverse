@@ -12,7 +12,7 @@ namespace SentinelsOfTheMultiverse.Data
         public string characterName {get; set;}
         int lifeTotal { get; set; }
 
-        public abstract void playerTurn();
+        public abstract void playerTurn(bool playedCard, bool playedPower);
         public abstract void startPhase();
         public abstract Boolean playPhase();
         public abstract void endPhase();

@@ -17,7 +17,7 @@ namespace SentinelsOfTheMultiverse
         static Villain villain;
         static GameEnvironment environment;
 
-        static int playerTurn = 0;
+        static public int playerTurn = 0;
 
         public static int MAXPLAYER = 6;
         public static int VILLIANNUM = 0;
@@ -34,10 +34,10 @@ namespace SentinelsOfTheMultiverse
         public static void startGame()
         {
             var cp = getPlayers()[0];
-            while (getWinCon())
-            //for (int ii = 0; ii < 5; ii++)
-            {
-            }
+            //while (getWinCon())
+            ////for (int ii = 0; ii < 5; ii++)
+            //{
+            //}
         }
 
         private static bool getWinCon()
@@ -69,7 +69,7 @@ namespace SentinelsOfTheMultiverse
 
         public static void nextTurn()
         {
-            getPlayers()[playerTurn].playerTurn();
+            getPlayers()[playerTurn].playerTurn(playCard, playPower);
 
             playerTurn++;
             if (playerTurn == getPlayers().Count)

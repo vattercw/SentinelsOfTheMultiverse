@@ -33,7 +33,7 @@ namespace SentinelsOfTheMultiverse
             return characterName;
         }
 
-        public override void playerTurn()
+        public override void playerTurn(bool isCardPlayed, bool isPowerUsed)
         {
             startPhase();
             Boolean play = playPhase();

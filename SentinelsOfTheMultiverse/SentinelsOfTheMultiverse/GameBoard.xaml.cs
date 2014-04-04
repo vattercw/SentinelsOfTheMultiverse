@@ -54,7 +54,7 @@ namespace SentinelsOfTheMultiverse
 
         }
 
-        private void initBoard()
+        public void initBoard()
         {
 
             gridLayout = initGrid();

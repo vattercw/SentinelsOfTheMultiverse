@@ -37,7 +37,7 @@ namespace SentinelsOfTheMultiverse.Data
             } 
         }
 
-        public override void playerTurn()
+        public override void playerTurn(bool playedCard=false, bool playedPower=false)
         {
             startPhase();
             playPhase();
