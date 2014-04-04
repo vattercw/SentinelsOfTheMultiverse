@@ -13,6 +13,11 @@ namespace SentinelsOfTheMultiverse.Data
         int lifeTotal { get; set; }
         public List<Card> cardsOnField { get; set; }
 
+        //public IPlayer()
+        //{
+        //    characterName = this.GetType().Name;
+        //}
+
         public abstract void playerTurn(bool playedCard, bool playedPower);
         public abstract void startPhase();
         public abstract Boolean playPhase();

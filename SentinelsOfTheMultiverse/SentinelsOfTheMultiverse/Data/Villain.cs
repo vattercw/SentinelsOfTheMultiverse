@@ -50,6 +50,7 @@ namespace SentinelsOfTheMultiverse.Data
         {
             //conditionals for end turn effects
             //plays card from deck.
+            drawPhase(1);
         }
 
         internal int getLifeTotal()
@@ -58,7 +59,8 @@ namespace SentinelsOfTheMultiverse.Data
         }
         public override void drawPhase(int numCards)
         {
-            cardsOnField.AddRange(deck.draw(numCards));
+            List<Card> drawnCards = deck.draw(numCards);
+            cardsOnField.AddRange(drawnCards);
         }
     }
 }

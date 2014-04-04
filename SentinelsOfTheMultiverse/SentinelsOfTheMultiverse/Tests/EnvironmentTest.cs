@@ -27,7 +27,7 @@ namespace SentinelsOfTheMultiverse.Tests
         public void testInitialization()
         {
             InsulaPrimus env = new InsulaPrimus();
-            Assert.NotNull(env.inPlay);
+            Assert.NotNull(env.cardsOnField);
             Assert.NotNull(env.deck);
         }
     }

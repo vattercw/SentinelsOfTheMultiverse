@@ -38,9 +38,7 @@ namespace SentinelsOfTheMultiverse
         public override void playerTurn(bool isCardPlayed, bool isPowerUsed)
         {
             startPhase();
-            Boolean play = playPhase();
-            Boolean power = powerPhase();
-            if (play || power == true)
+            if (isCardPlayed || isPowerUsed== true)
             {
                 drawPhase(1);
             }

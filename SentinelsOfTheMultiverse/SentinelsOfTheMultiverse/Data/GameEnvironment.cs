@@ -21,13 +21,9 @@ namespace SentinelsOfTheMultiverse.Data
             cardsOnField = new List<Card>();
         }
 
-        public List<string> inPlay 
-        { 
-            get{
-                return _inPlay;
-        }   set{
-                _inPlay = value;
-            } 
+        public string getCharacterName()
+        {
+            return envName;
         }
 
         public Deck deck 
@@ -49,10 +45,7 @@ namespace SentinelsOfTheMultiverse.Data
 
         public override void startPhase()
         {
-            if (inPlay.Count == 0)
-            {
-                return;
-            }
+          
             //conditionals for start turn effects
         }
 
@@ -65,7 +58,7 @@ namespace SentinelsOfTheMultiverse.Data
         public override void endPhase()
         {
             //conditionals for end turn effects
-            deck.draw(1);
+            drawPhase(1);
         }
 
         public override void drawPhase(int numCards)

@@ -166,7 +166,6 @@
     <Resource Include="Images\Icons\haka_cover.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Environment\InsulaPrimus\back_of_card.png" />
     <Resource Include="Images\Environment\InsulaPrimus\enraged_trex.png" />
     <Resource Include="Images\Environment\InsulaPrimus\obsidian_field.png" />
     <Resource Include="Images\Environment\InsulaPrimus\primordial_plant_life.png" />
@@ -196,11 +195,6 @@
     <Resource Include="Images\Villain\BaronBlade\mobile_defense_platform.png" />
     <Resource Include="Images\Villain\BaronBlade\powerer_remote_turret.png" />
     <Resource Include="Images\Villain\BaronBlade\slash_and_burn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Hero\Haka\NonPlayable\haka_back.png" />
-    <Resource Include="Images\Hero\Haka\NonPlayable\haka_death.png" />
-    <Resource Include="Images\Hero\Haka\NonPlayable\haka_hero.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

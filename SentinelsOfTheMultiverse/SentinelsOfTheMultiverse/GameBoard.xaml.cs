@@ -104,6 +104,22 @@ namespace SentinelsOfTheMultiverse
 	                Utility.addElementToGrid(hero.cardsOnField[k].cardImage, HERO_ROW_NUM, k+4, gridLayout);
 	            }
 	        }
+
+            for (int k = 0; k < villain.cardsOnField.Count; k++)
+            {
+                villain.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
+                villain.cardsOnField[k].cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
+
+                Utility.addElementToGrid(villain.cardsOnField[k].cardImage, VILLAIN_ROW_NUM, k + 4, gridLayout);
+            }
+
+            for (int k = 0; k < env.cardsOnField.Count; k++)
+            {
+                env.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
+                env.cardsOnField[k].cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
+
+                Utility.addElementToGrid(env.cardsOnField[k].cardImage, ENVIRONMENT_ROW_NUM, k + 4, gridLayout);
+            }
 	    }
 
 
@@ -146,7 +162,7 @@ namespace SentinelsOfTheMultiverse
             ImageSource villainInstImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
             initPlayerTemplate(villainDeckBackImg, villainImg, villainInstImg);
 
-            ImageSource envDeckBackImg = Utility.getImageSource("Images/Environment/InsulaPrimus/NonPlayable/insula_primus_back.png");
+            ImageSource envDeckBackImg = Utility.getImageSource("Images/Environment/"+env.getCharacterName()+ "/NonPlayable/"+ "insula_primus_back.png");
 
             initPlayerTemplate(envDeckBackImg);
 

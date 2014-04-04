@@ -20,7 +20,7 @@ namespace SentinelsOfTheMultiverse.Tests
         {
             Hero heroTest = new Haka();
             Assert.IsNotNull(heroTest);
-            Assert.AreEqual("Haka", heroTest.getCharacterName());
+            Assert.AreEqual("Haka", heroTest.characterName);
         }
 
         [Test, RequiresSTA]
