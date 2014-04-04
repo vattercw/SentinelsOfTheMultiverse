@@ -28,7 +28,6 @@ namespace SentinelsOfTheMultiverse
             startButton.Click += new RoutedEventHandler(Start_Game);
             Grid myGrid = new Grid();
             Content = startButton;
-
         }
 
         private void Start_Game(object sender, RoutedEventArgs e)

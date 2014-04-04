@@ -25,6 +25,8 @@ namespace SentinelsOfTheMultiverse
         public static string HERO_NAMESPACE = "SentinelsOfTheMultiverse.Data.Heroes.";
         public static string VILLAIN_NAMESPACE = "SentinelsOfTheMultiverse.Data.Villains.";
         public static string ENVIRONMENT_NAMESPACE = "SentinelsOfTheMultiverse.Data.Environments.";
+        public static Boolean playerPlayedCard;
+        public static Boolean playerUsedPower;
 
         //public GameEngine()
         //{
