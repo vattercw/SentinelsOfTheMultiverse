@@ -17,7 +17,7 @@ namespace SentinelsOfTheMultiverse
         static Villain villain;
         static GameEnvironment environment;
 
-        public static int playerTurn = 0;
+        static int playerTurn = 0;
 
         public static int MAXPLAYER = 6;
         public static int VILLIANNUM = 0;
@@ -26,30 +26,22 @@ namespace SentinelsOfTheMultiverse
         public static string VILLAIN_NAMESPACE = "SentinelsOfTheMultiverse.Data.Villains.";
         public static string ENVIRONMENT_NAMESPACE = "SentinelsOfTheMultiverse.Data.Environments.";
 
-        //public GameEngine()
-        //{
-        //    startScreen.begin();
-            
-        //    initPlayers();
-        //    //newTurn();
-        //}
-
+        public static bool playCard;
+        public static bool playPower;
+        
         public static void startGame()
         {
             var cp = getPlayers()[0];
-            //    TODO: while (getWinCon())
-            for (int ii = 0; ii < 5; ii++)
+            while (getWinCon())
+            //for (int ii = 0; ii < 5; ii++)
             {
-                cp.playerTurn();
-                nextTurn();
             }
         }
 
-
-        //private bool getWinCon()
-        //{
-        //    return villain.getLifeTotal() <= 0;
-        //}
+        private static bool getWinCon()
+        {
+            return villain.getLifeTotal() <= 0;
+        }
 
         public static void initPlayers(List<string> heroesStr, string villainStr, string envStr)
         {
@@ -75,7 +67,6 @@ namespace SentinelsOfTheMultiverse
 
         public static void nextTurn()
         {
-            
             getPlayers()[playerTurn].playerTurn();
 
             playerTurn++;
