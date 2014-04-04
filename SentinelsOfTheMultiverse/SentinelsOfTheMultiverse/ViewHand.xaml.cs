@@ -77,16 +77,8 @@ namespace SentinelsOfTheMultiverse
 
             sideBar.Children.Add(endTurnButton);
 
-<<<<<<< HEAD
             SizeToContent = System.Windows.SizeToContent.WidthAndHeight;
             Content = cardLayout;
-            
-=======
-            Content = cardLayout;
-
-            this.SizeToContent = SizeToContent.WidthAndHeight;
-                 
->>>>>>> a21353270c1e04bf0408689933a482a59235ae03
         }
         
         private void End_Turn(object sender, RoutedEventArgs e)
