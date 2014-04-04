@@ -16,6 +16,7 @@ namespace SentinelsOfTheMultiverse
         public List<Card> hand { get; set; }
         public Deck deck { get; set; }
         string characterName;
+        public List<Card> cardsOnField { get; set; }
 
         //override int lifeTotal { get; set; }
 
@@ -25,6 +26,7 @@ namespace SentinelsOfTheMultiverse
             deck = new Deck(characterName, IPlayer.PlayerType.Hero);
             deck.shuffle();
             hand = new List<Card>();
+            cardsOnField = new List<Card>();
             drawPhase(4);
         }
 
@@ -64,7 +66,7 @@ namespace SentinelsOfTheMultiverse
             return true;
         }
 
-        public void drawPhase(int numCards)
+        public override void drawPhase(int numCards)
         {
             hand.AddRange(deck.draw(numCards));
         }
@@ -77,6 +79,5 @@ namespace SentinelsOfTheMultiverse
         {
             return hand;
         }
-
     }
 }

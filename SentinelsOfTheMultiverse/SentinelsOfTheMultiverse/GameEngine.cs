@@ -69,13 +69,12 @@ namespace SentinelsOfTheMultiverse
 
         public static void nextTurn()
         {
-            getPlayers()[playerTurn].playerTurn(playCard, playPower);
-
             playerTurn++;
             if (playerTurn == getPlayers().Count)
             {
                 playerTurn = 0;
             }
+            getPlayers()[playerTurn].playerTurn(playCard, playPower);
         }
 
         #region GET SET REGION
