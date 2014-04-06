@@ -39,6 +39,8 @@ namespace SentinelsOfTheMultiverse
             private int HERO_ROW_NUM = 2;    
             private double CARD_HEIGHT=200;
             private int DECK_COLUMN=2;
+            private int CHARACTER_COLUMN= 0;
+            private int INSTRUCTION_COLUMN = 1;
             
 
 
@@ -96,13 +98,15 @@ namespace SentinelsOfTheMultiverse
 	        Villain villain = GameEngine.getVillain();
 	        GameEnvironment env = GameEngine.getEnvironment();
 	
-	        foreach (Hero hero in GameEngine.getHeroes())
+            for(int i= 0; i<GameEngine.getHeroes().Count; i++)
 	        {
+                Hero hero = GameEngine.getHeroes()[i];
+
 	            for(int k = 0; k < hero.cardsOnField.Count; k++){
                     hero.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
 	                hero.cardsOnField[k].cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
 	
-	                Utility.addElementToGrid(hero.cardsOnField[k].cardImage, HERO_ROW_NUM, k+4, gridLayout);
+	                Utility.addElementToGrid(hero.cardsOnField[k].cardImage, HERO_ROW_NUM + i, k+4, gridLayout);
 	            }
 	        }
 
@@ -161,11 +165,10 @@ namespace SentinelsOfTheMultiverse
             ImageSource villainImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png");
             ImageSource villainDeckBackImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
             ImageSource villainInstImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
-            initPlayerTemplate(villainDeckBackImg, villainImg, villainInstImg);
 
             ImageSource envDeckBackImg = Utility.getImageSource("Images/Environment/"+env.getCharacterName()+ "/NonPlayable/"+ "insula_primus_back.png");
 
-            initPlayerTemplate(envDeckBackImg);
+            drawNPCBoard(villainImg, villainInstImg, villainDeckBackImg, envDeckBackImg);
 
 
             for (int ii = 0; ii < heroes.Count; ii++)
@@ -174,51 +177,45 @@ namespace SentinelsOfTheMultiverse
 
                 ImageSource heroDeckBackImg = Utility.getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png");
                 ImageSource heroImg = Utility.getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png");
-                initPlayerTemplate(heroDeckBackImg, heroImg);
+                drawHeroTemplate(heroDeckBackImg, heroImg, ii);
             }
         }
+        
 
         //TODO: later add ImageSource graveYardTop
-        private void initPlayerTemplate(ImageSource deckBack, ImageSource characterCard=null, ImageSource characterInstructions=null)
+        private void drawHeroTemplate(ImageSource deckBack, ImageSource characterCard, int heroIndex)
         {
-            int deckBackRow;
-            if (characterInstructions != null)//villain
-            {
-                Image charInst = new Image();
-                charInst.Height = CARD_HEIGHT;
-                charInst.Source = characterInstructions;
+            int currentHeroRow = HERO_ROW_NUM + heroIndex;
+            Image heroCharacterImg = CardImageFromImageSource(characterCard);
+            Utility.addElementToGrid(heroCharacterImg, currentHeroRow, CHARACTER_COLUMN, gridLayout);
 
-                charInst.MouseUp += new MouseButtonEventHandler(View_Card_Full);
-                Utility.addElementToGrid(charInst, VILLAIN_ROW_NUM, 1, gridLayout);
+            Image deckBackImg = CardImageFromImageSource(deckBack);
+            Utility.addElementToGrid(deckBackImg, currentHeroRow, DECK_COLUMN, gridLayout);
+        }
 
-                Image charCardImg = new Image();
-                charCardImg.Height = CARD_HEIGHT;
-                charCardImg.Source = characterCard;
-                charCardImg.MouseUp += new MouseButtonEventHandler(View_Card_Full);
-                Utility.addElementToGrid(charCardImg, VILLAIN_ROW_NUM, 0, gridLayout);
+        private void drawNPCBoard(ImageSource villainCard, ImageSource villainInstSrc, ImageSource villainDeckSrc, ImageSource envDeckSrc)
+        {
+            Image villainImage= CardImageFromImageSource(villainCard);
+            Utility.addElementToGrid(villainImage, VILLAIN_ROW_NUM, CHARACTER_COLUMN, gridLayout);
 
-                deckBackRow = VILLAIN_ROW_NUM;
-            }
-            else if (characterCard == null)//environment
-            {
-                deckBackRow = ENVIRONMENT_ROW_NUM;
-            }
-            else//hero
-            {
-                Image heroCharacterImg = new Image();
-                heroCharacterImg.Height = CARD_HEIGHT;
-                heroCharacterImg.Source = characterCard;
-                heroCharacterImg.MouseUp += new MouseButtonEventHandler(View_Card_Full);
-                Utility.addElementToGrid(heroCharacterImg, HERO_ROW_NUM, 0, gridLayout);
+            Image instructionImage = CardImageFromImageSource(villainInstSrc);
+            Utility.addElementToGrid(instructionImage, VILLAIN_ROW_NUM, INSTRUCTION_COLUMN, gridLayout);
 
-                deckBackRow = HERO_ROW_NUM;
-            }
+            Image villainDeckImage = CardImageFromImageSource(villainDeckSrc);
+            Utility.addElementToGrid(villainDeckImage, VILLAIN_ROW_NUM, DECK_COLUMN, gridLayout);
 
-            Image deckBackImg = new Image();
-            deckBackImg.Height = CARD_HEIGHT;
-            deckBackImg.Source = deckBack;
-            deckBackImg.MouseUp += new MouseButtonEventHandler(View_Card_Full);
-            Utility.addElementToGrid(deckBackImg, deckBackRow, DECK_COLUMN, gridLayout);
+            Image envDeckImg = CardImageFromImageSource(envDeckSrc);
+            Utility.addElementToGrid(envDeckImg, ENVIRONMENT_ROW_NUM, DECK_COLUMN, gridLayout);
+
+        }
+
+        private Image CardImageFromImageSource(ImageSource imgSrc)
+        {
+            Image tempImage = new Image();
+            tempImage.Height = CARD_HEIGHT;
+            tempImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
+            tempImage.Source = imgSrc;
+            return tempImage;
         }
 
         private int getNextCard()
