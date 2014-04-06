@@ -141,7 +141,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Graveyard.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Hero\Haka\dominion.png" />
     <Resource Include="Images\Hero\Haka\elbow_smash.png" />

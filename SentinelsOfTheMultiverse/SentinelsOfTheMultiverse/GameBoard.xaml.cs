@@ -34,13 +34,15 @@ namespace SentinelsOfTheMultiverse
             private string HERO_IMAGE_PATH="Images/Hero/";
             private string VILLAIN_IMAGE_PATH = "Images/Villain/";    
 
-            private int VILLAIN_ROW_NUM=1;
-            private int ENVIRONMENT_ROW_NUM=0;
-            private int HERO_ROW_NUM = 2;    
-            private double CARD_HEIGHT=200;
-            private int DECK_COLUMN=2;
-            private int CHARACTER_COLUMN= 0;
-            private int INSTRUCTION_COLUMN = 1;
+            private readonly int VILLAIN_ROW_NUM=1;
+            private readonly int ENVIRONMENT_ROW_NUM=0;
+            private readonly int HERO_ROW_NUM = 2;    
+            private readonly double CARD_HEIGHT=200;
+            private readonly int DECK_COLUMN=2;
+            private readonly int CHARACTER_COLUMN= 0;
+            private readonly int INSTRUCTION_COLUMN = 3;
+            private static readonly string GRAVEYARD_IMAGE_PATH = "Images/Graveyard.png";
+            private int GRAVEYARD_COL_NUM= 1;
             
 
 
@@ -62,26 +64,10 @@ namespace SentinelsOfTheMultiverse
         {
 
             gridLayout = initGrid();
-            Button showHandButton = new Button();
-            showHandButton.Content = "Show Your Hand!";
-            showHandButton.Width = 150;
-            showHandButton.Height = 50;
-            showHandButton.Click += new RoutedEventHandler(View_Hand);
 
-            Grid.SetRow(showHandButton, 0);
+            addShowHandButton();
 
-            Label currentPlayerLabel = new Label();
-            currentPlayerLabel.Width= 200;
-            currentPlayerLabel.Height= 100;
-            //IPlayer currCharName= GameEngine.getCurrentPlayer();
-            
-            int currIndex = GameEngine.playerTurn;
-            currentPlayerLabel.Content = currIndex;
-            currentPlayerLabel.VerticalAlignment = VerticalAlignment.Top;
-            
-            Utility.addElementToGrid(currentPlayerLabel, 0, 0, gridLayout);
-
-            gridLayout.Children.Add(showHandButton);
+            addCurrentPlayerLabel();
 
             List<Hero> heroes = GameEngine.getHeroes();
             Villain villain = GameEngine.getVillain();
@@ -91,6 +77,28 @@ namespace SentinelsOfTheMultiverse
             updatePlayersBoard();
 
             Content = gridLayout;
+        }
+
+        private void addCurrentPlayerLabel()
+        {
+            Label currentPlayerLabel = new Label();
+            currentPlayerLabel.Width = 200;
+            currentPlayerLabel.Height = 100;
+
+            int currIndex = GameEngine.playerTurn;
+            currentPlayerLabel.Content = currIndex;
+            currentPlayerLabel.VerticalAlignment = VerticalAlignment.Top;
+            Utility.addElementToGrid(currentPlayerLabel, 0, 0, gridLayout);
+        }
+
+        private void addShowHandButton()
+        {
+            Button showHandButton = new Button();
+            showHandButton.Content = "Show Your Hand!";
+            showHandButton.Width = 150;
+            showHandButton.Height = 50;
+            showHandButton.Click += new RoutedEventHandler(View_Hand);
+            Utility.addElementToGrid(showHandButton, 0, 0, gridLayout);
         }
 
         private void updatePlayersBoard()
@@ -190,7 +198,9 @@ namespace SentinelsOfTheMultiverse
             Image deckBackImg = CardImageFromImageSource(deckBack);
             Utility.addElementToGrid(deckBackImg, currentHeroRow, DECK_COLUMN, gridLayout);
 
-            
+            ImageSource graveyardSrc= Utility.getImageSource(GRAVEYARD_IMAGE_PATH);
+            Image graveYardImg = CardImageFromImageSource(graveyardSrc);
+            Utility.addElementToGrid(graveYardImg, currentHeroRow, GRAVEYARD_COL_NUM, gridLayout);
         }
 
         private void drawNPCBoard(ImageSource villainCard, ImageSource villainInstSrc, ImageSource villainDeckSrc, ImageSource envDeckSrc)
@@ -206,7 +216,13 @@ namespace SentinelsOfTheMultiverse
 
             Image envDeckImg = CardImageFromImageSource(envDeckSrc);
             Utility.addElementToGrid(envDeckImg, ENVIRONMENT_ROW_NUM, DECK_COLUMN, gridLayout);
+            
+            ImageSource graveyardSrc = Utility.getImageSource(GRAVEYARD_IMAGE_PATH);
+            Image envGraveYardImg = CardImageFromImageSource(graveyardSrc);
+            Utility.addElementToGrid(envGraveYardImg, ENVIRONMENT_ROW_NUM, GRAVEYARD_COL_NUM, gridLayout);
 
+            Image villainGraveYardImg = CardImageFromImageSource(graveyardSrc);
+            Utility.addElementToGrid(villainGraveYardImg, VILLAIN_ROW_NUM, GRAVEYARD_COL_NUM, gridLayout);
         }
 
         private Image CardImageFromImageSource(ImageSource imgSrc)

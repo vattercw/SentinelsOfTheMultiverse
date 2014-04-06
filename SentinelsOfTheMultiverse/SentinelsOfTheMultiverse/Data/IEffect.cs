@@ -9,8 +9,8 @@ namespace SentinelsOfTheMultiverse.Data
     /*
      * The effect interface handles all "card actions" such as deal damage, prevent damage, discard cards, etc
      * */
-    public interface IEffect
+    public abstract class IEffect
     {
-        public void execute();
+        public abstract void Execute();
     }
 }
