@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Effects\OneShotEffect.cs" />
     <Compile Include="Data\Villians\BaronBlade.cs" />
     <Compile Include="Data\Card.cs" />
     <Compile Include="Data\Deck.cs" />
@@ -140,9 +141,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Effects\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\Hero\Haka\dominion.png" />
     <Resource Include="Images\Hero\Haka\elbow_smash.png" />

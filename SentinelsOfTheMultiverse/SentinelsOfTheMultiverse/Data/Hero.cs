@@ -15,6 +15,7 @@ namespace SentinelsOfTheMultiverse
 
         public List<Card> hand { get; set; }
         public Deck deck { get; set; }
+        public List<Card> graveyard { get; set; }
         string characterName;
         public List<Card> cardsOnField { get; set; }
 

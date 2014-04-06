@@ -181,8 +181,6 @@ namespace SentinelsOfTheMultiverse
             }
         }
         
-
-        //TODO: later add ImageSource graveYardTop
         private void drawHeroTemplate(ImageSource deckBack, ImageSource characterCard, int heroIndex)
         {
             int currentHeroRow = HERO_ROW_NUM + heroIndex;
@@ -191,6 +189,8 @@ namespace SentinelsOfTheMultiverse
 
             Image deckBackImg = CardImageFromImageSource(deckBack);
             Utility.addElementToGrid(deckBackImg, currentHeroRow, DECK_COLUMN, gridLayout);
+
+            
         }
 
         private void drawNPCBoard(ImageSource villainCard, ImageSource villainInstSrc, ImageSource villainDeckSrc, ImageSource envDeckSrc)
