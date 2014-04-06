@@ -31,20 +31,20 @@ namespace SentinelsOfTheMultiverse
 
         #region Constants
 
-            private string HERO_IMAGE_PATH="Images/Hero/";
-            private string VILLAIN_IMAGE_PATH = "Images/Villain/";    
+            private readonly string HERO_IMAGE_PATH="Images/Hero/";
+            private readonly string VILLAIN_IMAGE_PATH = "Images/Villain/";
+            private static readonly string GRAVEYARD_IMAGE_PATH = "Images/Graveyard.png";
 
-            private readonly int VILLAIN_ROW_NUM=1;
-            private readonly int ENVIRONMENT_ROW_NUM=0;
-            private readonly int HERO_ROW_NUM = 2;    
-            private readonly double CARD_HEIGHT=200;
+            private readonly int VILLAIN_ROW=1;
+            private readonly int ENVIRONMENT_ROW=0;
+            private readonly int HERO_ROW = 2;    
+        
+        private readonly double CARD_HEIGHT=200;
+
             private readonly int DECK_COLUMN=2;
             private readonly int CHARACTER_COLUMN= 0;
             private readonly int INSTRUCTION_COLUMN = 3;
-            private static readonly string GRAVEYARD_IMAGE_PATH = "Images/Graveyard.png";
-            private int GRAVEYARD_COL_NUM= 1;
-            
-
+            private readonly int GRAVEYARD_COLUMN= 1;
 
         #endregion
 
@@ -113,8 +113,8 @@ namespace SentinelsOfTheMultiverse
 	            for(int k = 0; k < hero.cardsOnField.Count; k++){
                     hero.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
 	                hero.cardsOnField[k].cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
-	
-	                Utility.addElementToGrid(hero.cardsOnField[k].cardImage, HERO_ROW_NUM + i, k+4, gridLayout);
+
+	                Utility.addElementToGrid(hero.cardsOnField[k].cardImage, HERO_ROW + i, k+4, gridLayout);
 	            }
 	        }
 
@@ -123,7 +123,7 @@ namespace SentinelsOfTheMultiverse
                 villain.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
                 villain.cardsOnField[k].cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
 
-                Utility.addElementToGrid(villain.cardsOnField[k].cardImage, VILLAIN_ROW_NUM, k + 4, gridLayout);
+                Utility.addElementToGrid(villain.cardsOnField[k].cardImage, VILLAIN_ROW, k + 4, gridLayout);
             }
 
             for (int k = 0; k < env.cardsOnField.Count; k++)
@@ -131,7 +131,7 @@ namespace SentinelsOfTheMultiverse
                 env.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
                 env.cardsOnField[k].cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
 
-                Utility.addElementToGrid(env.cardsOnField[k].cardImage, ENVIRONMENT_ROW_NUM, k + 4, gridLayout);
+                Utility.addElementToGrid(env.cardsOnField[k].cardImage, ENVIRONMENT_ROW, k + 4, gridLayout);
             }
 	    }
 
@@ -181,48 +181,53 @@ namespace SentinelsOfTheMultiverse
 
             for (int ii = 0; ii < heroes.Count; ii++)
             {
-                string heroName = heroes[ii].getCharacterName();
-
-                ImageSource heroDeckBackImg = Utility.getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png");
-                ImageSource heroImg = Utility.getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png");
-                drawHeroTemplate(heroDeckBackImg, heroImg, ii);
+                drawHeroTemplate(heroes[ii], HERO_ROW+ ii);
             }
         }
         
-        private void drawHeroTemplate(ImageSource deckBack, ImageSource characterCard, int heroIndex)
+        private void drawHeroTemplate(Hero hero, int currentHeroRow)
         {
-            int currentHeroRow = HERO_ROW_NUM + heroIndex;
+            string heroName = hero.getCharacterName();
+            ImageSource deckBack = Utility.getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png");
+            ImageSource characterCard = Utility.getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png");
+            
             Image heroCharacterImg = CardImageFromImageSource(characterCard);
             Utility.addElementToGrid(heroCharacterImg, currentHeroRow, CHARACTER_COLUMN, gridLayout);
 
             Image deckBackImg = CardImageFromImageSource(deckBack);
             Utility.addElementToGrid(deckBackImg, currentHeroRow, DECK_COLUMN, gridLayout);
 
-            ImageSource graveyardSrc= Utility.getImageSource(GRAVEYARD_IMAGE_PATH);
+            ImageSource graveyardSrc;
+            if (hero.graveyard.Count == 0)
+            {
+                graveyardSrc = Utility.getImageSource(GRAVEYARD_IMAGE_PATH);
+            }else{
+                graveyardSrc = hero.graveyard[hero.graveyard.Count-1].cardImage.Source;
+            }
             Image graveYardImg = CardImageFromImageSource(graveyardSrc);
-            Utility.addElementToGrid(graveYardImg, currentHeroRow, GRAVEYARD_COL_NUM, gridLayout);
+            Utility.addElementToGrid(graveYardImg, currentHeroRow, GRAVEYARD_COLUMN, gridLayout);
         }
 
         private void drawNPCBoard(ImageSource villainCard, ImageSource villainInstSrc, ImageSource villainDeckSrc, ImageSource envDeckSrc)
         {
             Image villainImage= CardImageFromImageSource(villainCard);
-            Utility.addElementToGrid(villainImage, VILLAIN_ROW_NUM, CHARACTER_COLUMN, gridLayout);
+            Utility.addElementToGrid(villainImage, VILLAIN_ROW, CHARACTER_COLUMN, gridLayout);
 
             Image instructionImage = CardImageFromImageSource(villainInstSrc);
-            Utility.addElementToGrid(instructionImage, VILLAIN_ROW_NUM, INSTRUCTION_COLUMN, gridLayout);
+            Utility.addElementToGrid(instructionImage, VILLAIN_ROW, INSTRUCTION_COLUMN, gridLayout);
 
             Image villainDeckImage = CardImageFromImageSource(villainDeckSrc);
-            Utility.addElementToGrid(villainDeckImage, VILLAIN_ROW_NUM, DECK_COLUMN, gridLayout);
+            Utility.addElementToGrid(villainDeckImage, VILLAIN_ROW, DECK_COLUMN, gridLayout);
 
             Image envDeckImg = CardImageFromImageSource(envDeckSrc);
-            Utility.addElementToGrid(envDeckImg, ENVIRONMENT_ROW_NUM, DECK_COLUMN, gridLayout);
+            Utility.addElementToGrid(envDeckImg, ENVIRONMENT_ROW, DECK_COLUMN, gridLayout);
             
             ImageSource graveyardSrc = Utility.getImageSource(GRAVEYARD_IMAGE_PATH);
             Image envGraveYardImg = CardImageFromImageSource(graveyardSrc);
-            Utility.addElementToGrid(envGraveYardImg, ENVIRONMENT_ROW_NUM, GRAVEYARD_COL_NUM, gridLayout);
+            Utility.addElementToGrid(envGraveYardImg, ENVIRONMENT_ROW, GRAVEYARD_COLUMN, gridLayout);
 
             Image villainGraveYardImg = CardImageFromImageSource(graveyardSrc);
-            Utility.addElementToGrid(villainGraveYardImg, VILLAIN_ROW_NUM, GRAVEYARD_COL_NUM, gridLayout);
+            Utility.addElementToGrid(villainGraveYardImg, VILLAIN_ROW, GRAVEYARD_COLUMN, gridLayout);
         }
 
         private Image CardImageFromImageSource(ImageSource imgSrc)
