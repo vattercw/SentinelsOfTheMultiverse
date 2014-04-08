@@ -271,7 +271,6 @@ namespace SentinelsOfTheMultiverse
                     hero.getPlayerHand().RemoveAt(i);
                     break;
                 }
-
             }
             ((Hero)GameEngine.getCurrentPlayer()).cardsOnField.Add(drawThisCard);
         }

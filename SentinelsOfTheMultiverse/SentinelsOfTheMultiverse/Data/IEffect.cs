@@ -11,6 +11,7 @@ namespace SentinelsOfTheMultiverse.Data
      * */
     public abstract class IEffect
     {
+        public enum DamageType { Projectile, Fire, Ice, Melee};
         public abstract void Execute();
     }
 }
