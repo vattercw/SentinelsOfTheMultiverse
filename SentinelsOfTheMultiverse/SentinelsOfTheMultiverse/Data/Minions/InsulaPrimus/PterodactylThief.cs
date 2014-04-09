@@ -15,7 +15,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus
             effectPhase = "attacked";
         }
 
-        public static override void executeEffect()
+        public override void executeEffect()
         {
             throw new NotImplementedException();
         }

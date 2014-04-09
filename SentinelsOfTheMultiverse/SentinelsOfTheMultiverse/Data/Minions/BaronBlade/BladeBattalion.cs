@@ -15,7 +15,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
             effectPhase = "end";
         }
 
-        public static override void executeEffect()
+        public override void executeEffect()
         {
             throw new NotImplementedException();
         }

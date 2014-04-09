@@ -57,7 +57,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\Effects\DamageEffects.cs" />
-    <Compile Include="Data\Minions\BladeBattalion.cs" />
+    <Compile Include="Data\Minions\BaronBlade\BladeBattalion.cs" />
+    <Compile Include="Data\Minions\BaronBlade\ElementalRedistributor.cs" />
+    <Compile Include="Data\Minions\BaronBlade\MobileDefensePlatform.cs" />
+    <Compile Include="Data\Minions\BaronBlade\PoweredRemoteTurret.cs" />
+    <Compile Include="Data\Minions\InsulaPrimus\EnragedTRex.cs" />
+    <Compile Include="Data\Minions\InsulaPrimus\PterodactylThief.cs" />
+    <Compile Include="Data\Minions\InsulaPrimus\VelociraptorPack.cs" />
     <Compile Include="Data\Villians\BaronBlade.cs" />
     <Compile Include="Data\Card.cs" />
     <Compile Include="Data\Deck.cs" />

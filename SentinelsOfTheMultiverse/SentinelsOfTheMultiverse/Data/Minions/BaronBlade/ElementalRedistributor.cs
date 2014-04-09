@@ -15,7 +15,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
             health = 10;
             effectPhase = "attacked";
         }
-        public static override void executeEffect()
+        public override void executeEffect()
         {
             throw new NotImplementedException();
         }

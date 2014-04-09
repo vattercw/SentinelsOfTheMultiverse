@@ -16,7 +16,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
             effectPhase = "ongoing";
         }
 
-        public static override void executeEffect()
+        public override void executeEffect()
         {
             GameEngine.getVillain().addImmunity("all");
         }

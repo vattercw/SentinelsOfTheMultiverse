@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using SentinelsOfTheMultiverse.Data;
+using SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -14,9 +15,9 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestMinionInitalization()
         {
-            Minion minionTest = new Minion("nameSpace", 100);
-            Assert.AreEqual("nameSpace", minionTest.getMinionName());
-            Assert.AreEqual(100, minionTest.getCurrentHealth());
+            Minion minionTest = new EnragedTRex();
+            Assert.AreEqual("EnragedTRex", minionTest.getMinionName());
+            Assert.AreEqual(15, minionTest.getCurrentHealth());
         }
     }
 }

@@ -10,13 +10,13 @@ namespace SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus
     {
         public EnragedTRex()
         {
-            maxHealth = 10;
-            health = 10;
+            maxHealth = 15;
+            health = 15;
             effectPhase = "attacked";
         }
 
 
-        public static override void executeEffect()
+        public override void executeEffect()
         {
             throw new NotImplementedException();
         }

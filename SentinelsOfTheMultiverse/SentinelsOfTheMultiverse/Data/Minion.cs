@@ -36,6 +36,6 @@ namespace SentinelsOfTheMultiverse.Data
             return 0; //TODO: implement
         }
 
-        public abstract static void executeEffect();
+        public abstract void executeEffect();
     }
 }
