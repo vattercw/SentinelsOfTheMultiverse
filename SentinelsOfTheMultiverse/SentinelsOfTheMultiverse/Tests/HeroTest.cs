@@ -18,21 +18,21 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestHeroInitalization()
         {
-            Hero heroTest = new Haka();
+            Hero heroTest = ObjectMother.TestHero();
             Assert.AreEqual("Haka", heroTest.getCharacterName());
         }
 
         [Test, RequiresSTA]
         public void TestHeroHandInitilization()
         {
-            Hero heroTest = new Haka();
+            Hero heroTest = ObjectMother.TestHero();
             Assert.IsNotNull(heroTest.hand);
         }
 
         [Test, RequiresSTA]
         public void TestHeroHandPopulate()
         {
-            Hero heroTest = new Haka();
+            Hero heroTest = ObjectMother.TestHero();
             Assert.AreEqual(heroTest.hand.Count, 4);
         }
 
@@ -40,7 +40,7 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestValidityOfHand()
         {
             bool containsAll = true;
-            Hero heroTest = new Haka();
+            Hero heroTest = ObjectMother.TestHero();
             foreach (var card in heroTest.getPlayerHand())
             {
                 containsAll = containsAll && files.Contains(card.getName());
@@ -55,5 +55,24 @@ namespace SentinelsOfTheMultiverse.Tests
             GameEngine.nextTurn();
             Assert.AreNotEqual(currPlay, GameEngine.getCurrentPlayer());
         }
+
+        [Test, RequiresSTA]
+        public void TestPlayerLifeInit()
+        {
+            Hero hero = ObjectMother.TestHero();
+            Assert.AreEqual(hero.lifePoints, 34);
+        }
+
+        [Test, RequiresSTA]
+        public void TestPlayerImmunization()
+        {
+            Hero hero = ObjectMother.TestHero();
+            Assert.AreEqual(hero.getImmunities(), new List<String>());
+            hero.addImmunity("Projectile");
+            List<String> testImmunities = new List<String>();
+            testImmunities.Add("Projectile");
+            Assert.AreEqual(hero.getImmunities(), testImmunities);
+        }
+
     }
 }

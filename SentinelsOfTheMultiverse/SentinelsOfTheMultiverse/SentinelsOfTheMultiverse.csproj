@@ -78,6 +78,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\ObjectMother.cs" />
     <Compile Include="Tests\UtilityTest.cs" />
     <Compile Include="Tests\MinionTest.cs" />
     <Compile Include="Tests\EnvironmentTest.cs" />

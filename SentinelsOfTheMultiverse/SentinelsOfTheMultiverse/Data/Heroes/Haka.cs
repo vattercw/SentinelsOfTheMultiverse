@@ -10,9 +10,13 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 {
     public class Haka: Hero
     {
+
+       
+
         public Haka()
         {
-            
+            lifePoints = 34;    
         }
+
     }
 }

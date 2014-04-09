@@ -11,7 +11,7 @@ namespace SentinelsOfTheMultiverse.Data
         List<Minion> minions { get; set; }
         Deck deck { get; set; }
         string characterName;
-        int _lifeTotal;
+        public int lifePoints;
         public List<Card> cardsOnField { get; set; }
 
         public Villain()
@@ -53,14 +53,11 @@ namespace SentinelsOfTheMultiverse.Data
             drawPhase(1);
         }
 
-        internal int getLifeTotal()
-        {
-            return _lifeTotal;
-        }
         public override void drawPhase(int numCards)
         {
             List<Card> drawnCards = deck.draw(numCards);
             cardsOnField.AddRange(drawnCards);
         }
+
     }
 }

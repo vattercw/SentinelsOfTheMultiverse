@@ -9,6 +9,8 @@ namespace SentinelsOfTheMultiverse.Data.Villains
     {
         public BaronBlade()
         {
+            this.lifePoints = 40;
         }
+
     }
 }

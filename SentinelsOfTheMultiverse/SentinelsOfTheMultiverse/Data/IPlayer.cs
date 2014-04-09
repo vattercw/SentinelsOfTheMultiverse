@@ -10,8 +10,9 @@ namespace SentinelsOfTheMultiverse.Data
     {
         Deck deck { get;  set; }
         public string characterName {get; set;}
-        int lifeTotal { get; set; }
+        int lifeTotal { get; set; } //get rid of?
         public List<Card> cardsOnField { get; set; }
+        public List<String> immunities = new List<String>();
 
         //public IPlayer()
         //{
@@ -23,6 +24,30 @@ namespace SentinelsOfTheMultiverse.Data
         public abstract Boolean playPhase();
         public abstract void endPhase();
         public abstract void drawPhase(int numCards);
+        
+
+        public List<string> getImmunities()
+        {
+            return immunities;
+        }
+
+        public void addImmunity(String immunityName)
+        {
+            if (!immunities.Contains(immunityName))
+            {
+                immunities.Add(immunityName);
+            }
+        }
+
+        public void removeImmunity(String immunityName)
+        {
+            if (immunities.Contains(immunityName))
+            {
+                immunities.Remove(immunityName);
+            }
+        }
+
+
 
         public enum PlayerType { Hero, Villain, Minion, Environment };
     }

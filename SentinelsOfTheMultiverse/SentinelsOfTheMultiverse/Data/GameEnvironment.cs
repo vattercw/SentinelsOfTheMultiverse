@@ -63,7 +63,8 @@ namespace SentinelsOfTheMultiverse.Data
 
         public override void drawPhase(int numCards)
         {
-            cardsOnField.AddRange(deck.draw(numCards));
+            throw new NotImplementedException();
         }
+
     }
 }

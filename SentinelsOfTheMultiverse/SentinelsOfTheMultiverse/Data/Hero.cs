@@ -19,6 +19,9 @@ namespace SentinelsOfTheMultiverse
         string characterName;
         public List<Card> cardsOnField { get; set; }
 
+        //made public so no need for get, just an attribute
+        public int lifePoints;
+
         //override int lifeTotal { get; set; }
 
         public Hero()
@@ -79,5 +82,6 @@ namespace SentinelsOfTheMultiverse
         {
             return hand;
         }
+
     }
 }
