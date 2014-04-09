@@ -26,12 +26,11 @@ namespace SentinelsOfTheMultiverse.Data.Effects
         {
             foreach (Hero hero in heroes)
             {
-                int totalDamage = hero.getDamageAmplification() + damageAmount;
-                DealDamageToHero(hero, totalDamage, damageType);
+                DealDamageToHero(hero, damageAmount, damageType);
             }
 
             int totalVillainDamage = villain.getDamageAmplification() + damageAmount;
-            DealDamageToVillain(totalVillainDamage, damageType);
+            DealDamageToVillain(villain, totalVillainDamage, damageType);
 
             foreach (Minion minion in minions)
             {
@@ -40,7 +39,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
             }
         }
 
-        private static void DealDamageToHero(Hero hero, int damageAmount, DamageType damageType)
+        public static void DealDamageToHero(Hero hero, int damageAmount, DamageType damageType)
         {
             for (int i = 0; i < hero.getImmunities().Count; i++)
             {
@@ -50,12 +49,17 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                     return;
                 }
             }
-            hero.lifePoints -= damageAmount;
+            int totalDamage = hero.getDamageAmplification() + damageAmount;
+            hero.lifePoints -= totalDamage;
         }
 
-        private static void DealDamageToVillain(int damageAmount, DamageType damageType)
+        public static void DealDamageToVillain(Villain vil, int damageAmount, DamageType damageType)
         {
-            
+            if (vil == null)
+            {
+                int totalDamage = vil.getDamageAmplification() + damageAmount;
+                vil.lifePoints -= totalDamage;
+            }
         }
 
         public static void DealDamageToMinion(Minion targetMinion, int damageAmount, DamageType damageType)

@@ -65,5 +65,10 @@ namespace SentinelsOfTheMultiverse.Data
             //TODO: add damage amplification
             return 0;
         }
+
+        internal List<Minion> getMinions()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
