@@ -59,5 +59,11 @@ namespace SentinelsOfTheMultiverse.Data
             cardsOnField.AddRange(drawnCards);
         }
 
+
+        internal int getDamageAmplification()
+        {
+            //TODO: add damage amplification
+            return 0;
+        }
     }
 }

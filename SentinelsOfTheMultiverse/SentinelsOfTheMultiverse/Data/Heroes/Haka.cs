@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SentinelsOfTheMultiverse.Data.Effects;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -16,6 +17,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public Haka()
         {
             lifePoints = 34;    
+        }
+
+        public void Rampage()
+        {
+            
         }
 
     }

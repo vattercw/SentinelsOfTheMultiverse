@@ -82,5 +82,11 @@ namespace SentinelsOfTheMultiverse
             return hand;
         }
 
+        public int getDamageAmplification()
+        {
+            //TODO add damage amp
+            return 0;
+        }
+
     }
 }

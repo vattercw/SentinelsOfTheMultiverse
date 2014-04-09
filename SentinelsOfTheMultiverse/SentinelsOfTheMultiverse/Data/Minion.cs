@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse.Data
 {
-    class Minion
+    public class Minion
     {
         private int maxHealth;
         private int health;
@@ -30,5 +30,10 @@ namespace SentinelsOfTheMultiverse.Data
             return health;
         }
 
+
+        internal int getDamageAmplification()
+        {
+            return 0; //TODO: implement
+        }
     }
 }
