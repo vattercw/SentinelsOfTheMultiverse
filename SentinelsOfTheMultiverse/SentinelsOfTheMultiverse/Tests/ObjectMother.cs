@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SentinelsOfTheMultiverse.Data;
+using SentinelsOfTheMultiverse.Data.Environments;
 using SentinelsOfTheMultiverse.Data.Heroes;
 using SentinelsOfTheMultiverse.Data.Villains;
 
@@ -16,9 +17,14 @@ namespace SentinelsOfTheMultiverse.Tests
             return new Haka();
         }
 
-        public static Villain TestVillian()
+        public static Villain TestVillain()
         {
             return new BaronBlade();
+        }
+
+        public static GameEnvironment TestEnvironment()
+        {
+            return new InsulaPrimus();
         }
     }
 }

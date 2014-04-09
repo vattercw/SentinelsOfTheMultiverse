@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SentinelsOfTheMultiverse.Data;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -17,7 +18,7 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void testPlayerTurn()
         {
-            InsulaPrimus env = new InsulaPrimus();
+            GameEnvironment env = ObjectMother.TestEnvironment();
             var numBeforeEnd = env.deck.getCards().Count;
             env.playerTurn();
             Assert.AreNotEqual(numBeforeEnd, env.deck.getCards().Count);
@@ -26,7 +27,7 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void testInitialization()
         {
-            InsulaPrimus env = new InsulaPrimus();
+            GameEnvironment env = ObjectMother.TestEnvironment();
             Assert.NotNull(env.cardsOnField);
             Assert.NotNull(env.deck);
         }

@@ -22,7 +22,6 @@ namespace SentinelsOfTheMultiverse
         //made public so no need for get, just an attribute
         public int lifePoints;
 
-        //override int lifeTotal { get; set; }
 
         public Hero()
         {
