@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse.Data
 {
-    public class Minion
+    public abstract class Minion
     {
-        private int maxHealth;
-        private int health;
-        private String  minionName;
+        public int maxHealth;
+        public int health;
+        public String  minionName;
+        public String effectPhase;
 
 
-        public Minion(String name, int maxHealthNum)
+        public Minion()
         {
-            maxHealth = maxHealthNum;
-            health = maxHealthNum;
-            minionName = name;
+            minionName = this.GetType().Name;
+
         }
 
         public String getMinionName()
@@ -35,5 +35,7 @@ namespace SentinelsOfTheMultiverse.Data
         {
             return 0; //TODO: implement
         }
+
+        public abstract static void executeEffect();
     }
 }
