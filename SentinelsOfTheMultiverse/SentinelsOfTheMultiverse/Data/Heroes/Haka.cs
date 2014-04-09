@@ -21,8 +21,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Rampage()
         {
-            DamageEffects.DealDamage(null, GameEngine.getVillain(), new List<Minion>(), 2, DamageEffects.DamageType.Melee);
+            DamageEffects.DealDamage(null, GameEngine.getVillain(), GameEngine.getVillain().getMinions(), 2, DamageEffects.DamageType.Melee);
         }
-
     }
 }

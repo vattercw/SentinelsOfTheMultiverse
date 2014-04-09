@@ -64,7 +64,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 
         public static void DealDamageToMinion(Minion targetMinion, int damageAmount, DamageType damageType)
         {
-
+            //TODO: deal damage to minion
         }
     }
 }
