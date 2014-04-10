@@ -94,7 +94,7 @@ namespace SentinelsOfTheMultiverse
 
         private void Discard_Button(object sender, RoutedEventArgs e)
         {
-            CardDrawingEffects.DiscardCardFromHand(new List<Card> (){cardClicked});//cardClickedArray);
+            CardDrawingEffects.DiscardCardFromHand(cardClickedArray);
             paintCards();
         }
         
