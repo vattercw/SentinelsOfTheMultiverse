@@ -53,6 +53,13 @@ namespace SentinelsOfTheMultiverse
             gameBoard = game;
 
             updateHandView();
+
+            Closing += Window_Closed;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            gameBoard.updateBoard();
         }
 
         private void addButtons()
@@ -102,6 +109,7 @@ namespace SentinelsOfTheMultiverse
         {
             CardDrawingEffects.DiscardCardFromHand(cardClickedArray);
             updateHandView();
+            gameBoard.updateBoard();
         }
         
         private void End_Turn(object sender, RoutedEventArgs e)
@@ -211,5 +219,7 @@ namespace SentinelsOfTheMultiverse
                 return;
             }
         }
+
+        
     }
 }

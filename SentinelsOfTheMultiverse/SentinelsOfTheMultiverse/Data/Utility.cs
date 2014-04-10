@@ -43,9 +43,9 @@ namespace SentinelsOfTheMultiverse
 
             Color cardGlowColor = new Color();
             cardGlowColor.ScA = 1;
-            cardGlowColor.ScR = 1;
-            cardGlowColor.ScG = 0.53F;
-            cardGlowColor.ScB = 0.59F;
+            cardGlowColor.ScR = 0.3F;
+            cardGlowColor.ScG = 0.0F;
+            cardGlowColor.ScB = 0.49F;
 
             glowEffect.Color = cardGlowColor;
 
