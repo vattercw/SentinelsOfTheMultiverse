@@ -47,5 +47,23 @@ namespace SentinelsOfTheMultiverse.Tests
             testImmunities.Add("Projectile");
             Assert.AreEqual(villain.getImmunities(), testImmunities);
         }
+
+        [Test, RequiresSTA]
+        public void TestGetMinionEmpty()
+        {
+            Villain test = ObjectMother.TestVillain();
+            Assert.AreEqual(test.getMinions(), new List<Minion>());
+        }
+
+        [Test, RequiresSTA]
+        public void TestGetMinion()
+        {
+            Villain test = ObjectMother.TestVillain();
+            test.addMinion(ObjectMother.TestMinion(), ObjectMother.TestMinion().effectPhase);
+            List<Minion> testList = new List<Minion>();
+            testList.Add(ObjectMother.TestMinion());
+            List<Minion> actual = test.getMinions();
+            Assert.AreEqual(actual.Count, testList.Count);
+        }
     }
 }

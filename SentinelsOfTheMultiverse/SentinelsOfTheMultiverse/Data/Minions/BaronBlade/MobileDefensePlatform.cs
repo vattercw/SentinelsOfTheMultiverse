@@ -14,7 +14,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
             maxHealth = 10;
             health = 10;
             effectPhase = "ongoing";
-            GameEngine.getVillain().addMinion(this, effectPhase);
+           // GameEngine.getVillain().addMinion(this, effectPhase);
         }
 
         public override void executeEffect()
