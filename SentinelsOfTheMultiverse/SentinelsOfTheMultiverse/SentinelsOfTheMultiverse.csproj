@@ -154,22 +154,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Hero\Haka\dominion.png" />
-    <Resource Include="Images\Hero\Haka\elbow_smash.png" />
-    <Resource Include="Images\Hero\Haka\enduring_intercession.png" />
-    <Resource Include="Images\Hero\Haka\ground_pound.png" />
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_back.png" />
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_death.png" />
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_hero.png" />
-    <Resource Include="Images\Hero\Haka\haka_of_battle.png" />
-    <Resource Include="Images\Hero\Haka\haka_of_restoration.png" />
-    <Resource Include="Images\Hero\Haka\haka_of_shielding.png" />
     <Resource Include="Images\Hero\Haka\mere.png" />
-    <Resource Include="Images\Hero\Haka\punish_the_weak.png" />
     <Resource Include="Images\Hero\Haka\rampage.png" />
-    <Resource Include="Images\Hero\Haka\savage_mana.png" />
     <Resource Include="Images\Hero\Haka\taiaha.png" />
-    <Resource Include="Images\Hero\Haka\ta_moko.png" />
-    <Resource Include="Images\Hero\Haka\vitality_surge.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\bb_cover.png" />
@@ -206,6 +196,24 @@
     <Resource Include="Images\Villain\BaronBlade\mobile_defense_platform.png" />
     <Resource Include="Images\Villain\BaronBlade\powerer_remote_turret.png" />
     <Resource Include="Images\Villain\BaronBlade\slash_and_burn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Hero\Haka\ElbowSmash.png" />
+    <Resource Include="Images\Hero\Haka\EnduringIntercession.png" />
+    <Resource Include="Images\Hero\Haka\GroundPound.png" />
+    <Resource Include="Images\Hero\Haka\HakaOfBattle.png" />
+    <Resource Include="Images\Hero\Haka\HakaOfRestoration.png" />
+    <Resource Include="Images\Hero\Haka\HakaOfShielding.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Hero\Haka\PunishTheWeak.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Hero\Haka\SavageMana.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Hero\Haka\TaMoko.png" />
+    <Resource Include="Images\Hero\Haka\VitalitySurge.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

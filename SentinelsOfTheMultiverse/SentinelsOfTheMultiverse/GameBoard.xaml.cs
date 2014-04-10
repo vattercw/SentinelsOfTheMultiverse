@@ -26,6 +26,7 @@ namespace SentinelsOfTheMultiverse
         private ViewHand handViewer;
 
         private Card drawThisCard;
+        public List<Card> selectedCards= new List<Card>();
 
         private int NEXT_CARD = 3;
 
@@ -39,7 +40,7 @@ namespace SentinelsOfTheMultiverse
             private readonly int ENVIRONMENT_ROW=0;
             private readonly int HERO_ROW = 2;    
         
-        private readonly double CARD_HEIGHT=200;
+            private readonly double CARD_HEIGHT=200;
 
             private readonly int DECK_COLUMN=2;
             private readonly int CHARACTER_COLUMN= 0;
@@ -62,7 +63,6 @@ namespace SentinelsOfTheMultiverse
 
         public void updateBoard()
         {
-
             gridLayout = initGrid();
 
             addShowHandButton();

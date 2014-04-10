@@ -68,7 +68,7 @@ namespace SentinelsOfTheMultiverse.Data
 
         internal List<Minion> getMinions()
         {
-            throw new NotImplementedException();
+            return new List<Minion>();//TODO fix later
         }
     }
 }

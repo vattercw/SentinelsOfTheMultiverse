@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,5 +51,11 @@ namespace SentinelsOfTheMultiverse.Data
 
 
         public enum PlayerType { Hero, Villain, Minion, Environment };
+
+        internal void CardMethod(string methodName)
+        {
+            MethodInfo theMethod = GetType().GetMethod(methodName);
+            theMethod.Invoke(this, null);
+        }
     }
 }
