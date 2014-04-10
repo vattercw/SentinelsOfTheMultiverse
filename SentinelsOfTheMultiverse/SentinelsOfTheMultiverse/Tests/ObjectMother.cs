@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SentinelsOfTheMultiverse.Data;
 using SentinelsOfTheMultiverse.Data.Environments;
 using SentinelsOfTheMultiverse.Data.Heroes;
+using SentinelsOfTheMultiverse.Data.Minions;
 using SentinelsOfTheMultiverse.Data.Villains;
 
 namespace SentinelsOfTheMultiverse.Tests
@@ -25,6 +26,11 @@ namespace SentinelsOfTheMultiverse.Tests
         public static GameEnvironment TestEnvironment()
         {
             return new InsulaPrimus();
+        }
+
+        public static Minion TestMinion()
+        {
+            return new BladeBattalion();
         }
     }
 }

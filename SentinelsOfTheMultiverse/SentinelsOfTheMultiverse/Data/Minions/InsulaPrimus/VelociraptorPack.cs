@@ -13,6 +13,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus
             maxHealth = 5;
             health = 5;
             effectPhase = "end";
+            GameEngine.getVillain().addMinion(this, effectPhase);
         }
 
         public override void executeEffect()

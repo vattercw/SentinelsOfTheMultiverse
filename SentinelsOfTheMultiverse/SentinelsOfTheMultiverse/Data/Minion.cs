@@ -37,5 +37,6 @@ namespace SentinelsOfTheMultiverse.Data
         }
 
         public abstract void executeEffect();
+
     }
 }

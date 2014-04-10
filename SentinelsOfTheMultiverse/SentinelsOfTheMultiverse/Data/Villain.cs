@@ -14,6 +14,11 @@ namespace SentinelsOfTheMultiverse.Data
         public int lifePoints;
         public List<Card> cardsOnField { get; set; }
 
+        List<Minion> endTurnMinion = new List<Minion>();
+        List<Minion> startTurnMinion = new List<Minion>();
+        List<Minion> onAttackMinion = new List<Minion>();
+        List<Minion> ongoingMinion = new List<Minion>();
+
         public Villain()
         {
             characterName = this.GetType().Name;
@@ -57,6 +62,10 @@ namespace SentinelsOfTheMultiverse.Data
         {
             List<Card> drawnCards = deck.draw(numCards);
             cardsOnField.AddRange(drawnCards);
+            for (int i = 0; i < drawnCards.Count; i++)
+            {
+                this.CardMethod(drawnCards[i].getName());
+            }
         }
 
 
@@ -66,9 +75,87 @@ namespace SentinelsOfTheMultiverse.Data
             return 0;
         }
 
-        internal List<Minion> getMinions()
+        internal List<Minion> getStartPhaseMinions()
         {
-            return new List<Minion>();//TODO fix later
+            return startTurnMinion;//TODO fix later
+        }
+
+        internal List<Minion> getEndPhaseMinions()
+        {
+            return endTurnMinion;//TODO fix later
+        }
+
+        internal List<Minion> getOnAttackMinions()
+        {
+            return onAttackMinion;//TODO fix later
+        }
+
+        internal List<Minion> getOngoingEffectMinions()
+        {
+            return ongoingMinion;//TODO fix later
+        }
+
+        public void addMinion(Minion minion, String type)
+        {
+            if (type.Equals("start"))
+            {
+                startTurnMinion.Add(minion);
+                return;
+            }
+
+            if (type.Equals("end"))
+            {
+                endTurnMinion.Add(minion);
+                return;
+            }
+
+            if (type.Equals("attacked"))
+            {
+                onAttackMinion.Add(minion);
+                return;
+            }
+
+            if (type.Equals("ongoing"))
+            {
+                ongoingMinion.Add(minion);
+                return;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+
+        internal void removeMinion(Minion minion)
+        {
+            if (minion.effectPhase.Equals("start"))
+            {
+                startTurnMinion.Remove(minion);
+                return;
+            }
+
+            if (minion.effectPhase.Equals("end"))
+            {
+                endTurnMinion.Remove(minion);
+                return;
+            }
+
+            if (minion.effectPhase.Equals("attacked"))
+            {
+                onAttackMinion.Remove(minion);
+                return;
+            }
+
+            if (minion.effectPhase.Equals("ongoing"))
+            {
+                ongoingMinion.Remove(minion);
+                return;
+            }
+            else
+            {
+                return;
+            }
         }
     }
 }
