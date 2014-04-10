@@ -15,6 +15,8 @@ namespace SentinelsOfTheMultiverse.Data
         List<Minion> onAttackMinion = new List<Minion>();
         List<Minion> ongoingMinion = new List<Minion>();
 
+        
+
         public Villain()
         {
             characterName = this.GetType().Name;
@@ -102,27 +104,27 @@ namespace SentinelsOfTheMultiverse.Data
             return allMinions;
         }
 
-        public void addMinion(Minion minion, String type)
+        public void addMinion(Minion minion, Minion.MinionType type)
         {
-            if (type.Equals("start"))
+            if (type.Equals(Minion.MinionType.Start))
             {
                 startTurnMinion.Add(minion);
                 return;
             }
 
-            if (type.Equals("end"))
+            if (type.Equals(Minion.MinionType.End))
             {
                 endTurnMinion.Add(minion);
                 return;
             }
 
-            if (type.Equals("attacked"))
+            if (type.Equals(Minion.MinionType.OnAttack))
             {
                 onAttackMinion.Add(minion);
                 return;
             }
 
-            if (type.Equals("ongoing"))
+            if (type.Equals(Minion.MinionType.Ongoing))
             {
                 ongoingMinion.Add(minion);
                 return;
@@ -136,25 +138,25 @@ namespace SentinelsOfTheMultiverse.Data
 
         internal void removeMinion(Minion minion)
         {
-            if (minion.effectPhase.Equals("start"))
+            if (minion.effectPhase.Equals(Minion.MinionType.Start))
             {
                 startTurnMinion.Remove(minion);
                 return;
             }
 
-            if (minion.effectPhase.Equals("end"))
+            if (minion.effectPhase.Equals(Minion.MinionType.End))
             {
                 endTurnMinion.Remove(minion);
                 return;
             }
 
-            if (minion.effectPhase.Equals("attacked"))
+            if (minion.effectPhase.Equals(Minion.MinionType.OnAttack))
             {
                 onAttackMinion.Remove(minion);
                 return;
             }
 
-            if (minion.effectPhase.Equals("ongoing"))
+            if (minion.effectPhase.Equals(Minion.MinionType.Ongoing))
             {
                 ongoingMinion.Remove(minion);
                 return;

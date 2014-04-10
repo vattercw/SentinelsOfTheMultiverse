@@ -40,7 +40,7 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestValidityOfHand()
         {
             bool containsAll = true;
-            Hero heroTest = ObjectMother.TestHero();
+            Hero heroTest = new Haka();
             foreach (var card in heroTest.getPlayerHand())
             {
                 containsAll = containsAll && files.Contains(card.getName());

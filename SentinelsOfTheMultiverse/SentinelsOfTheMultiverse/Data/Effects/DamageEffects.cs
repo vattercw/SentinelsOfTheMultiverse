@@ -8,7 +8,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 {
     public static class DamageEffects
     {
-        public enum DamageType { Projectile, Fire, Ice, Melee };
+        public enum DamageType { Projectile, Fire, Ice, Melee, Toxic };
         private static int _damageAmplification;
         static int DamageAmplification
         {

@@ -11,8 +11,9 @@ namespace SentinelsOfTheMultiverse.Data
         public int maxHealth;
         public int health;
         public String  minionName;
-        public String effectPhase;
+        public Enum effectPhase;
 
+        public enum MinionType { Ongoing, OnAttack, Start, End };
 
         public Minion()
         {

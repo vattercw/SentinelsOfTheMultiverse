@@ -13,8 +13,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
         {
             maxHealth = 10;
             health = 10;
-            effectPhase = "attacked";
-            //GameEngine.getVillain().addMinion(this, effectPhase);
+            effectPhase = Minion.MinionType.OnAttack;
         }
         public override void executeEffect()
         {

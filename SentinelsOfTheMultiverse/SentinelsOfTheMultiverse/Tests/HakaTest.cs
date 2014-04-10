@@ -25,5 +25,11 @@ namespace SentinelsOfTheMultiverse.Tests
             Assert.AreEqual(baronBlade.lifeTotal, 38);
         }
 
+        [Test(), RequiresSTA]
+        public void TestElbowSmash()
+        {
+            //test smash
+        }
+
     }
 }
