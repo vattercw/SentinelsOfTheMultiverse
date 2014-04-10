@@ -83,6 +83,12 @@ namespace SentinelsOfTheMultiverse
         
         private void End_Turn(object sender, RoutedEventArgs e)
         {
+            //TODO attempting to fix bug # 2
+            //if (GameEngine.isFirstTurn)
+            //{
+            //    GameEngine.getCurrentPlayer().playerTurn(GameEngine.playerPlayedCard, GameEngine.playerUsedPower);
+            //    GameEngine.isFirstTurn = false;
+            //}
             GameEngine.nextTurn();
             gameBoard.updateBoard();
             this.Close();
@@ -164,6 +170,7 @@ namespace SentinelsOfTheMultiverse
             }
             else
             {
+                GameEngine.getCurrentPlayer().CardMethod(cardClicked.getName());
                 gameBoard.drawCardSelected(cardClicked);
                 GameEngine.playerPlayedCard = true;
                 gameBoard.updateBoard();

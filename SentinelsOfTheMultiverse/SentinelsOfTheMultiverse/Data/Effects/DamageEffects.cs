@@ -24,18 +24,25 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 
         public static void DealDamage(List<Hero> heroes, Villain villain, List<Minion> minions, int damageAmount, DamageType damageType)
         {
-            foreach (Hero hero in heroes)
+            if (heroes != null)
             {
-                DealDamageToHero(hero, damageAmount, damageType);
+                foreach (Hero hero in heroes)
+                {
+                    DealDamageToHero(hero, damageAmount, damageType);
+                }
             }
-
-            int totalVillainDamage = villain.getDamageAmplification() + damageAmount;
-            DealDamageToVillain(villain, totalVillainDamage, damageType);
-
-            foreach (Minion minion in minions)
+            if (villain != null)
             {
-                int totalMinionDamage = minion.getDamageAmplification() + damageAmount; //TODO: + getGlobalDamageAmplification();
-                DealDamageToMinion(minion, totalMinionDamage, damageType);
+                int totalVillainDamage = villain.getDamageAmplification() + damageAmount;
+                DealDamageToVillain(villain, totalVillainDamage, damageType);
+            }
+            if (minions != null)
+            {
+                foreach (Minion minion in minions)
+                {
+                    int totalMinionDamage = minion.getDamageAmplification() + damageAmount; //TODO: + getGlobalDamageAmplification();
+                    DealDamageToMinion(minion, totalMinionDamage, damageType);
+                }
             }
         }
 
@@ -55,7 +62,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 
         public static void DealDamageToVillain(Villain vil, int damageAmount, DamageType damageType)
         {
-            if (vil == null)
+            if (vil != null)
             {
                 int totalDamage = vil.getDamageAmplification() + damageAmount;
                 vil.lifePoints -= totalDamage;
