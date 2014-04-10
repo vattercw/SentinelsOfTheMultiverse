@@ -77,22 +77,32 @@ namespace SentinelsOfTheMultiverse.Data
 
         internal List<Minion> getStartPhaseMinions()
         {
-            return startTurnMinion;//TODO fix later
+            return startTurnMinion;
         }
 
         internal List<Minion> getEndPhaseMinions()
         {
-            return endTurnMinion;//TODO fix later
+            return endTurnMinion;
         }
 
         internal List<Minion> getOnAttackMinions()
         {
-            return onAttackMinion;//TODO fix later
+            return onAttackMinion;
         }
 
         internal List<Minion> getOngoingEffectMinions()
         {
-            return ongoingMinion;//TODO fix later
+            return ongoingMinion;
+        }
+
+        public List<Minion> getMinions()
+        {
+            List<Minion> allMinions = new List<Minion>();
+            allMinions.AddRange(getStartPhaseMinions());
+            allMinions.AddRange(getEndPhaseMinions());
+            allMinions.AddRange(getOnAttackMinions());
+            allMinions.AddRange(getOngoingEffectMinions());
+            return allMinions;
         }
 
         public void addMinion(Minion minion, String type)
