@@ -1,5 +1,6 @@
 ﻿using SentinelsOfTheMultiverse.Data;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,11 +26,11 @@ namespace SentinelsOfTheMultiverse
 
         StackPanel sideBar = new StackPanel();
 
-        Image imageSelected = null;
+        ArrayList imageSelectedArray = new ArrayList();
 
         List<Card> handShow;
 
-        Card cardClicked = null;
+        ArrayList cardClickedArray = new ArrayList();
 
         GameBoard gameBoard;
 
@@ -95,8 +96,15 @@ namespace SentinelsOfTheMultiverse
 
         private void Cancel_Action(object sender, RoutedEventArgs e)
         {
-            imageSelected.Effect = null;
-            imageSelected = null;
+            for(int k = 0; k < imageSelectedArray.Count; k++)
+            {
+                if (((Image)imageSelectedArray[k]) != null)
+                {
+                    ((Image)imageSelectedArray[k]).Effect = null;
+                }
+            }
+            imageSelectedArray.Clear();
+            cardClickedArray.Clear();
         }
 
         public void paintCards(List<Card> handToShow)
@@ -118,21 +126,24 @@ namespace SentinelsOfTheMultiverse
 
         public void card_mouseUp_eventHandler(object sender, RoutedEventArgs e)
         {
-            if (imageSelected != null) imageSelected.Effect = null;
-
-            imageSelected = (Image)sender;
-            imageSelected.Effect = Utility.selectionGlow();
-            
-
-            for (int i = 0; i < handShow.Count ; i++)
+            imageSelectedArray.Add((Image)sender);
+            foreach (Image imageSelected in imageSelectedArray)
             {
-                if (handShow[i].cardImage.Source == imageSelected.Source)
+                imageSelected.Effect = Utility.selectionGlow();
+            }
+
+
+            for (int i = 0; i < handShow.Count; i++)
+            {
+                for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    cardClicked = handShow[i];
-                    break;
+                    if (handShow[i].cardImage.Source == ((Image)imageSelectedArray[k]).Source && !cardClickedArray.Contains(handShow[i]))
+                    {
+                        cardClickedArray.Add(handShow[i]);
+                        break; 
+                    }
                 }
             }
-           
         }
 
         public Grid initGrid(List<Card> handToShow)
@@ -158,16 +169,17 @@ namespace SentinelsOfTheMultiverse
         }
 
         public void Play_Card(object sender, RoutedEventArgs e) {
-            if (imageSelected == null)
+            if (cardClickedArray.Count == 1)
             {
-                return;
-            }
-            else
-            {
-                gameBoard.drawCardSelected(cardClicked);
+                gameBoard.drawCardSelected((Card)cardClickedArray[0]);
                 GameEngine.playerPlayedCard = true;
                 gameBoard.updateBoard();
                 this.Close();
+            }
+            else
+            {
+                Cancel_Action(sender, e);
+                return;
             }
         }
     }

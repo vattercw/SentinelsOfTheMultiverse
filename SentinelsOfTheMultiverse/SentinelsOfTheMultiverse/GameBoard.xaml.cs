@@ -112,7 +112,7 @@ namespace SentinelsOfTheMultiverse
 
 	            for(int k = 0; k < hero.cardsOnField.Count; k++){
                     hero.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
-	                hero.cardsOnField[k].cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
+	                hero.cardsOnField[k].cardImage.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
 	                Utility.addElementToGrid(hero.cardsOnField[k].cardImage, HERO_ROW + i, k+4, gridLayout);
 	            }
@@ -121,7 +121,7 @@ namespace SentinelsOfTheMultiverse
             for (int k = 0; k < villain.cardsOnField.Count; k++)
             {
                 villain.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
-                villain.cardsOnField[k].cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
+                villain.cardsOnField[k].cardImage.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
                 Utility.addElementToGrid(villain.cardsOnField[k].cardImage, VILLAIN_ROW, k + 4, gridLayout);
             }
@@ -129,7 +129,7 @@ namespace SentinelsOfTheMultiverse
             for (int k = 0; k < env.cardsOnField.Count; k++)
             {
                 env.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
-                env.cardsOnField[k].cardImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
+                env.cardsOnField[k].cardImage.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
                 Utility.addElementToGrid(env.cardsOnField[k].cardImage, ENVIRONMENT_ROW, k + 4, gridLayout);
             }
@@ -234,8 +234,9 @@ namespace SentinelsOfTheMultiverse
         {
             Image tempImage = new Image();
             tempImage.Height = CARD_HEIGHT;
-            tempImage.MouseUp += new MouseButtonEventHandler(View_Card_Full);
+            tempImage.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             tempImage.Source = imgSrc;
+            tempImage.Margin = Utility.cardSpacing;
             return tempImage;
         }
 
@@ -252,13 +253,17 @@ namespace SentinelsOfTheMultiverse
             Button handVisibleButton = (Button)sender;         
         }
 
-        private void View_Card_Full(object sender, MouseButtonEventArgs e)
+        private void Mouse_Click_Listener(object sender, MouseButtonEventArgs e)
         {
-            Image expandCard = (Image)sender;
 
-            ViewCard showCard = new ViewCard(expandCard.Source);
+            if (e.ClickCount == 2)
+            {
+                Image expandCard = (Image)sender;
 
-            showCard.Show();
+                ViewCard showCard = new ViewCard(expandCard.Source);
+
+                showCard.Show();
+            }
         }
 
         internal void drawCardSelected(Card cardClicked)

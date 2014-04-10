@@ -26,14 +26,17 @@ namespace SentinelsOfTheMultiverse
             StackPanel sp = new StackPanel();
             sp.Children.Add(magnifiedCard);
 
-            sp.MouseUp += new MouseButtonEventHandler(CloseWindow);
+            sp.MouseDown += new MouseButtonEventHandler(CloseWindow);
 
             Content = sp;
         }
 
         public void CloseWindow(object sender, MouseButtonEventArgs e)
         {
-            this.Close();
+            if (e.ClickCount == 2)
+            {
+                this.Close();
+            }
         }
 
     }
