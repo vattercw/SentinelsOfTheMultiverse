@@ -1,4 +1,5 @@
 ﻿using SentinelsOfTheMultiverse.Data;
+using SentinelsOfTheMultiverse.Data.Effects;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +29,17 @@ namespace SentinelsOfTheMultiverse
 
         ArrayList imageSelectedArray = new ArrayList();
 
-        List<Card> handShow;
+        List<Card> handShow
+        {
+            get
+            {
+                return ((Hero)GameEngine.getCurrentPlayer()).getPlayerHand();
+            }
+            set
+            {
+                handShow= value;
+            }
+        }
 
         ArrayList cardClickedArray = new ArrayList();
 
@@ -39,12 +50,11 @@ namespace SentinelsOfTheMultiverse
         {
             InitializeComponent();
 
-            handShow = hand;
             gameBoard = game;
 
             cardLayout = initGrid(hand);
 
-            paintCards(hand);
+            paintCards();
 
 
             cardLayout.Children.Add(sideBar);
@@ -57,29 +67,35 @@ namespace SentinelsOfTheMultiverse
                 sideBar.Children.Add(playButton);
             }
 
+            Button discardButton = new Button();
+            discardButton.Content = "Discard";
+            discardButton.Click += new RoutedEventHandler(Discard_Button);
+
             Button cancelButton = new Button();
             cancelButton.Content = "Cancel Action";
+            cancelButton.Click += new RoutedEventHandler(Cancel_Action);
 
             Button closeButton = new Button();
             closeButton.Content = "Close";
+            closeButton.Click += new RoutedEventHandler(Close_Action);
 
             Button endTurnButton = new Button();
             endTurnButton.Content = "End Turn!";
-
-            closeButton.Click += new RoutedEventHandler(Close_Action);
-
-            cancelButton.Click += new RoutedEventHandler(Cancel_Action);
-
             endTurnButton.Click += new RoutedEventHandler(End_Turn);
 
             sideBar.Children.Add(cancelButton);
-
             sideBar.Children.Add(closeButton);
-
             sideBar.Children.Add(endTurnButton);
+            sideBar.Children.Add(discardButton);
 
             SizeToContent = System.Windows.SizeToContent.WidthAndHeight;
             Content = cardLayout;
+        }
+
+        private void Discard_Button(object sender, RoutedEventArgs e)
+        {
+            CardDrawingEffects.DiscardCardFromHand(new List<Card> (){cardClicked});//cardClickedArray);
+            paintCards();
         }
         
         private void End_Turn(object sender, RoutedEventArgs e)
@@ -113,13 +129,13 @@ namespace SentinelsOfTheMultiverse
             cardClickedArray.Clear();
         }
 
-        public void paintCards(List<Card> handToShow)
+        public void paintCards()
         {
-            var numCards = handToShow.Count;
+            var numCards = handShow.Count;
             for (int k = 0; k < numCards; k++)
             {
                 Image temp = new Image();
-                temp.Source = handToShow[k].cardImage.Source;
+                temp.Source = handShow[k].cardImage.Source;
                 
                 Grid.SetColumn(temp, k);
                 temp.AddHandler(UIElement.MouseUpEvent, new RoutedEventHandler(card_mouseUp_eventHandler), true);

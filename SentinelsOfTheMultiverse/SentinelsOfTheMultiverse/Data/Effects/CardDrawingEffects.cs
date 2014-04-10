@@ -12,5 +12,18 @@ namespace SentinelsOfTheMultiverse.Data.Effects
         {
             GameEngine.getCurrentPlayer().drawPhase(numCards);
         }
+
+        public static void DiscardCardFromHand(List<Card> cardsToDiscard)
+        {
+            foreach (Card card in cardsToDiscard)
+            {
+                ((Hero)GameEngine.getCurrentPlayer()).DiscardCard(card);
+            }
+        }
+
+        public static void DestroyCard(Card card)
+        {
+            //check selected cards from wherever we store it
+        }
     }
 }

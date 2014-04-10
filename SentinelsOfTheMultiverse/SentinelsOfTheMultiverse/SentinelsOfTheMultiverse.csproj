@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Effects\CardDrawingEffects.cs" />
     <Compile Include="Data\Effects\DamageEffects.cs" />
     <Compile Include="Data\Minions\BaronBlade\BladeBattalion.cs" />
     <Compile Include="Data\Minions\BaronBlade\ElementalRedistributor.cs" />
@@ -153,13 +154,13 @@
     <Resource Include="Images\Graveyard.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Hero\Haka\dominion.png" />
+    <Content Include="Images\Hero\Haka\Dominion.png" />
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_back.png" />
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_death.png" />
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_hero.png" />
-    <Resource Include="Images\Hero\Haka\mere.png" />
-    <Resource Include="Images\Hero\Haka\rampage.png" />
-    <Resource Include="Images\Hero\Haka\taiaha.png" />
+    <Resource Include="Images\Hero\Haka\Mere.png" />
+    <Resource Include="Images\Hero\Haka\Rampage.png" />
+    <Resource Include="Images\Hero\Haka\Taiaha.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\bb_cover.png" />

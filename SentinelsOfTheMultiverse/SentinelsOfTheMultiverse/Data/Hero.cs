@@ -88,5 +88,11 @@ namespace SentinelsOfTheMultiverse
             return 0;
         }
 
+        public void DiscardCard(Card card)
+        {
+            hand.Remove(card);
+            graveyard.Add(card);
+        }
+
     }
 }
