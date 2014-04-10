@@ -52,24 +52,15 @@ namespace SentinelsOfTheMultiverse
 
             gameBoard = game;
 
-            cardLayout = initGrid(hand);
+            updateHandView();
+        }
 
-            paintCards();
-
-
-            cardLayout.Children.Add(sideBar);
-
-            if (!GameEngine.playerPlayedCard)
-            {
-                Button playButton = new Button();
-                playButton.Content = "Play Card";
-                playButton.Click += new RoutedEventHandler(Play_Card);
-                sideBar.Children.Add(playButton);
-            }
-
+        private void addButtons()
+        {
+            sideBar.Children.RemoveRange(0, sideBar.Children.Count);
             Button discardButton = new Button();
             discardButton.Content = "Discard";
-            discardButton.Click += new RoutedEventHandler(Discard_Button);
+            discardButton.Click += new RoutedEventHandler(Discard_Action);
 
             Button cancelButton = new Button();
             cancelButton.Content = "Cancel Action";
@@ -82,20 +73,35 @@ namespace SentinelsOfTheMultiverse
             Button endTurnButton = new Button();
             endTurnButton.Content = "End Turn!";
             endTurnButton.Click += new RoutedEventHandler(End_Turn);
+            
+            if (!GameEngine.playerPlayedCard)
+            {
+                Button playButton = new Button();
+                playButton.Content = "Play Card";
+                playButton.Click += new RoutedEventHandler(Play_Card);
+                sideBar.Children.Add(playButton);
+            }
 
             sideBar.Children.Add(cancelButton);
             sideBar.Children.Add(closeButton);
             sideBar.Children.Add(endTurnButton);
             sideBar.Children.Add(discardButton);
-
-            SizeToContent = System.Windows.SizeToContent.WidthAndHeight;
-            Content = cardLayout;
         }
 
-        private void Discard_Button(object sender, RoutedEventArgs e)
+        private void updateHandView(){
+            cardLayout.Children.RemoveRange(0, cardLayout.Children.Count);
+            cardLayout = initGrid(handShow);
+            paintCards();
+            addButtons();
+            cardLayout.Children.Add(sideBar);
+            Content = cardLayout;
+            SizeToContent = System.Windows.SizeToContent.WidthAndHeight;
+        }
+
+        private void Discard_Action(object sender, RoutedEventArgs e)
         {
             CardDrawingEffects.DiscardCardFromHand(cardClickedArray);
-            paintCards();
+            updateHandView();
         }
         
         private void End_Turn(object sender, RoutedEventArgs e)

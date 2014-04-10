@@ -21,7 +21,9 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Rampage()
         {
-            DamageEffects.DealDamage(null, GameEngine.getVillain(), GameEngine.getVillain().getMinions(), 2, DamageEffects.DamageType.Melee);
+            Villain villain = GameEngine.getVillain();
+
+            DamageEffects.DealDamage(null, villain, villain.getMinions(), 2, DamageEffects.DamageType.Melee);
             //destroy the card here
         }
 
