@@ -20,8 +20,9 @@ namespace SentinelsOfTheMultiverse.Tests
             Villain baronBlade = ObjectMother.TestVillain();
             //Minion min1 = ObjectMother.TestMinion();
 
-            haka.Rampage();
-            Assert.AreEqual(baronBlade.lifePoints, 38);
+            Card rampageCard = new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\Rampage.png", "Rampage");
+            haka.Rampage(rampageCard);
+            Assert.AreEqual(baronBlade.lifeTotal, 38);
         }
 
     }

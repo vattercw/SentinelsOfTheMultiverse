@@ -208,7 +208,7 @@ namespace SentinelsOfTheMultiverse
             if (cardClickedArray.Count == 1)
             {
                 gameBoard.drawCardSelected(cardClickedArray[0]);
-                GameEngine.getCurrentPlayer().CardMethod(cardClickedArray[0].getName());
+                GameEngine.getCurrentPlayer().CardMethod(cardClickedArray[0]);
                 GameEngine.playerPlayedCard = true;
                 gameBoard.updateBoard();
                 this.Close();

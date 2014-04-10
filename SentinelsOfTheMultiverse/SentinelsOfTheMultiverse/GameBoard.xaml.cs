@@ -176,7 +176,7 @@ namespace SentinelsOfTheMultiverse
             ImageSource villainDeckBackImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
             ImageSource villainInstImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
 
-            ImageSource envDeckBackImg = Utility.getImageSource("Images/Environment/"+env.getCharacterName()+ "/NonPlayable/"+ "insula_primus_back.png");
+            ImageSource envDeckBackImg = Utility.getImageSource("Images/Environment/"+env.characterName+ "/NonPlayable/"+ "insula_primus_back.png");
 
             drawNPCBoard(villainImg, villainInstImg, villainDeckBackImg, envDeckBackImg);
 

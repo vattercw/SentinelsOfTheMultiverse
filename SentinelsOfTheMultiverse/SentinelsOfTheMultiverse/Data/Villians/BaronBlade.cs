@@ -10,7 +10,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
     {
         public BaronBlade()
         {
-            this.lifePoints = 40;
+            lifeTotal = 40;
         }
 
         //One Shot Cards

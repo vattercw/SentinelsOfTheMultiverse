@@ -9,16 +9,13 @@ namespace SentinelsOfTheMultiverse.Data
 {
     public abstract class IPlayer
     {
-        Deck deck { get;  set; }
+        public Deck deck { get;  set; }
         public string characterName {get; set;}
-        int lifeTotal { get; set; } //get rid of?
+        public int lifeTotal { get; set; } //get rid of?
         public List<Card> cardsOnField { get; set; }
         public List<String> immunities = new List<String>();
+        public List<Card> graveyard { get; set; }
 
-        //public IPlayer()
-        //{
-        //    characterName = this.GetType().Name;
-        //}
 
         public abstract void playerTurn(bool playedCard, bool playedPower);
         public abstract void startPhase();
@@ -52,10 +49,10 @@ namespace SentinelsOfTheMultiverse.Data
 
         public enum PlayerType { Hero, Villain, Minion, Environment };
 
-        internal void CardMethod(string methodName)
+        internal void CardMethod(Card card)
         {
-            MethodInfo theMethod = GetType().GetMethod(methodName);
-            theMethod.Invoke(this, null);
+            MethodInfo theMethod = GetType().GetMethod(card.getName());
+            theMethod.Invoke(this, new object[]{card});
         }
     }
 }

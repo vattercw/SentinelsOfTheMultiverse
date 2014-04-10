@@ -21,9 +21,10 @@ namespace SentinelsOfTheMultiverse.Data.Effects
             }
         }
 
-        public static void DestroyCard(Card card)
+        public static void DestroyCard(Card card, IPlayer player)
         {
-            //check selected cards from wherever we store it
+            player.cardsOnField.Remove(card);
+            player.graveyard.Add(card);
         }
     }
 }

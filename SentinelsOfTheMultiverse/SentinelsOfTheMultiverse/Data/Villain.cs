@@ -9,10 +9,6 @@ namespace SentinelsOfTheMultiverse.Data
     public abstract class Villain : IPlayer
     {
         List<Minion> minions { get; set; }
-        Deck deck { get; set; }
-        string characterName;
-        public int lifePoints;
-        public List<Card> cardsOnField { get; set; }
 
         List<Minion> endTurnMinion = new List<Minion>();
         List<Minion> startTurnMinion = new List<Minion>();
@@ -24,6 +20,7 @@ namespace SentinelsOfTheMultiverse.Data
             characterName = this.GetType().Name;
             deck = new Deck(characterName, IPlayer.PlayerType.Villain);
             cardsOnField = new List<Card>();
+            graveyard = new List<Card>();
         }
 
         public String getCharacterName()

@@ -34,7 +34,7 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestVillainLifeInit()
         {
             Villain villain = ObjectMother.TestVillain();
-            Assert.AreEqual(villain.lifePoints, 40);
+            Assert.AreEqual(villain.lifeTotal, 40);
         }
 
         [Test, RequiresSTA]

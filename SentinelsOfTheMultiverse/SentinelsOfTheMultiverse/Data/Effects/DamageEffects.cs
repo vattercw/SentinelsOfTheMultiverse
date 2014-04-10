@@ -57,7 +57,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                 }
             }
             int totalDamage = hero.getDamageAmplification() + damageAmount;
-            hero.lifePoints -= totalDamage;
+            hero.lifeTotal -= totalDamage;
         }
 
         public static void DealDamageToVillain(Villain vil, int damageAmount, DamageType damageType)
@@ -65,7 +65,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
             if (vil != null)
             {
                 int totalDamage = vil.getDamageAmplification() + damageAmount;
-                vil.lifePoints -= totalDamage;
+                vil.lifeTotal -= totalDamage;
             }
         }
 

@@ -60,7 +60,7 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestPlayerLifeInit()
         {
             Hero hero = ObjectMother.TestHero();
-            Assert.AreEqual(hero.lifePoints, 34);
+            Assert.AreEqual(hero.lifeTotal, 34);
         }
 
         [Test, RequiresSTA]

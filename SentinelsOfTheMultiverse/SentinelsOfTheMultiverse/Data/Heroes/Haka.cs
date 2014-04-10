@@ -12,22 +12,20 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
     public class Haka: Hero
     {
 
-       
-
         public Haka()
         {
-            lifePoints = 34;    
+            lifeTotal = 34;    
         }
 
-        public void Rampage()
+        public void Rampage(Card card)
         {
             Villain villain = GameEngine.getVillain();
 
             DamageEffects.DealDamage(null, villain, villain.getMinions(), 2, DamageEffects.DamageType.Melee);
-            //destroy the card here
+            CardDrawingEffects.DestroyCard(card, this);
         }
 
-        public void ElbowSmash()
+        public void ElbowSmash(Card card)
         {
 
         }
