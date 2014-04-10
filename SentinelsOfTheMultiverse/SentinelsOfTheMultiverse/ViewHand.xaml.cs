@@ -27,7 +27,7 @@ namespace SentinelsOfTheMultiverse
 
         StackPanel sideBar = new StackPanel();
 
-        ArrayList imageSelectedArray = new ArrayList();
+        List<Image> imageSelectedArray = new List<Image>();
 
         List<Card> handShow
         {
@@ -41,7 +41,7 @@ namespace SentinelsOfTheMultiverse
             }
         }
 
-        ArrayList cardClickedArray = new ArrayList();
+        List<Card> cardClickedArray = new List<Card>();
 
         GameBoard gameBoard;
 
@@ -120,9 +120,9 @@ namespace SentinelsOfTheMultiverse
         {
             for(int k = 0; k < imageSelectedArray.Count; k++)
             {
-                if (((Image)imageSelectedArray[k]) != null)
+                if (imageSelectedArray[k] != null)
                 {
-                    ((Image)imageSelectedArray[k]).Effect = null;
+                    imageSelectedArray[k].Effect = null;
                 }
             }
             imageSelectedArray.Clear();
@@ -159,7 +159,7 @@ namespace SentinelsOfTheMultiverse
             {
                 for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    if (handShow[i].cardImage.Source == ((Image)imageSelectedArray[k]).Source && !cardClickedArray.Contains(handShow[i]))
+                    if (handShow[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(handShow[i]))
                     {
                         cardClickedArray.Add(handShow[i]);
                         break; 
@@ -193,8 +193,8 @@ namespace SentinelsOfTheMultiverse
         public void Play_Card(object sender, RoutedEventArgs e) {
             if (cardClickedArray.Count == 1)
             {
-                gameBoard.drawCardSelected((Card)cardClickedArray[0]);
-                GameEngine.getCurrentPlayer().CardMethod(((Card)cardClickedArray[0]).getName());
+                gameBoard.drawCardSelected(cardClickedArray[0]);
+                GameEngine.getCurrentPlayer().CardMethod(cardClickedArray[0].getName());
                 GameEngine.playerPlayedCard = true;
                 gameBoard.updateBoard();
                 this.Close();
