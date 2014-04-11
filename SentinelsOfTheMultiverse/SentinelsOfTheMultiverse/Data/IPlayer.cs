@@ -18,21 +18,22 @@ namespace SentinelsOfTheMultiverse.Data
         public List<String> immunities = new List<String>();
         public List<Card> graveyard { get; set; }
 
-        public int damageAmplification
+        public int damageAmplificationFromPlayer
         {
             get
             {
-                return _damageAmplification;
+                return _damageAmplificationFromPlayer;
             }
             set
             {
-                _damageAmplification = value;
+                _damageAmplificationFromPlayer = value;
             }
         }
+        public int damageAmplificationToPlayer { get; set; }
 
         #endregion
         #region PrivateFields
-            private int _damageAmplification;
+            private int _damageAmplificationFromPlayer;
         #endregion
 
         public abstract void playerTurn(bool playedCard, bool playedPower);
@@ -40,8 +41,6 @@ namespace SentinelsOfTheMultiverse.Data
         public abstract Boolean playPhase();
         public abstract void endPhase();
         public abstract void drawPhase(int numCards);
-
-        
 
         public List<string> getImmunities()
         {
@@ -73,5 +72,8 @@ namespace SentinelsOfTheMultiverse.Data
             MethodInfo theMethod = GetType().GetMethod(card.getName());
             theMethod.Invoke(this, new object[]{card});
         }
+
+        internal List<Ongoings> ongoingEffects { get; set; } 
+        internal delegate void Ongoings();
     }
 }

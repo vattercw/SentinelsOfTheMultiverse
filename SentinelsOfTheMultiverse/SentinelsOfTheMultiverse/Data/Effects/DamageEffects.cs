@@ -9,16 +9,16 @@ namespace SentinelsOfTheMultiverse.Data.Effects
     public static class DamageEffects
     {
         public enum DamageType { Projectile, Fire, Ice, Melee, Toxic };
-        private static int _damageAmplification;
-        static int DamageAmplification
+        private static int _globalDamageAmplification;
+        static int GlobalDamageAmplification
         {
             get
             {
-                return _damageAmplification;
+                return _globalDamageAmplification;
             }
             set
             {
-                _damageAmplification = value;
+                _globalDamageAmplification = value;
             }
         }
 
@@ -56,7 +56,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                     return;
                 }
             }
-            int totalDamage = hero.damageAmplification + damageAmount;
+            int totalDamage = hero.damageAmplificationToPlayer + damageAmount;
             hero.lifeTotal -= totalDamage;
         }
 

@@ -17,6 +17,7 @@ namespace SentinelsOfTheMultiverse
 
         public Hero()
         {
+            ongoingEffects = new List<Ongoings>();
             characterName = this.GetType().Name;
             deck = new Deck(characterName, IPlayer.PlayerType.Hero);
             deck.shuffle();
@@ -47,9 +48,13 @@ namespace SentinelsOfTheMultiverse
 
         public override void startPhase()
         {
-            damageAmplification = 0;//TODO check ongoing cards for damage amp
+            foreach (Ongoings ongoingEffect in ongoingEffects)
+            {
+                ongoingEffect();
+            }
             //conditionals for start turn effects
         }
+
 
         public override Boolean playPhase()
         {

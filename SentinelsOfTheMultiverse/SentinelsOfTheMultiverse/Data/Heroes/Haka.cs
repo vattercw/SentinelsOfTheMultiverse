@@ -11,11 +11,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 {
     public class Haka: Hero
     {
-
         public Haka()
         {
-            lifeTotal = 34;    
+            lifeTotal = 34;
         }
+
 
         public void Rampage(Card card)
         {
@@ -56,14 +56,21 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 //TODO: tell user they must discard at least one card
                 throw new NotImplementedException("user must discard at least one card");
             }
-            damageAmplification += GameBoard.discardedCardsThisTurn.Count;
+            damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
             CardDrawingEffects.DestroyCard(card, this);
         }
-
+        
         public void TaMoko(Card card)
         {
             card.cardType = Card.CardType.Ongoing;
-            damageAmplification -= 1;
+           
+            TaMokoEffect();
+            ongoingEffects.Add(TaMokoEffect);
+        }
+
+        void TaMokoEffect()
+        {
+            damageAmplificationToPlayer -= 1;
         }
 /*
         public void HakaOfRestoration(Card card)

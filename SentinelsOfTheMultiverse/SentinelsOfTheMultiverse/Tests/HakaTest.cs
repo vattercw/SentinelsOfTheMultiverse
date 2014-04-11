@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SentinelsOfTheMultiverse.Data.Villains;
+using SentinelsOfTheMultiverse.Data.Effects;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -31,6 +32,23 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestElbowSmash()
         {
             //test smash
+        }
+
+        [Test(), RequiresSTA]
+        public void TestTaMoko()
+        {
+            Start game = new Start();
+            game.beginGame();
+            Haka haka = (Haka) ObjectMother.TestHero();
+            int startingLifeTotal = haka.lifeTotal;
+
+            Card tamokoCard = new Card("Images\\Hero\\Haka\\TaMoko.png", "TaMoko");
+            haka.TaMoko(tamokoCard);
+            DamageEffects.DealDamageToHero(haka, 2, DamageEffects.DamageType.Melee);
+            
+            Assert.AreEqual(startingLifeTotal-1, haka.lifeTotal);
+
+            CardDrawingEffects.DestroyCard(tamokoCard, haka);
         }
 
     }
