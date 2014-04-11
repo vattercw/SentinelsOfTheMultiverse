@@ -86,6 +86,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\BaronBladeTest.cs" />
+    <Compile Include="Tests\HakaTest.cs" />
     <Compile Include="Tests\ObjectMother.cs" />
     <Compile Include="Tests\UtilityTest.cs" />
     <Compile Include="Tests\MinionTest.cs" />
@@ -181,22 +183,22 @@
     <Resource Include="Data\NumOfCards.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Villain\BaronBlade\backlash_field.png" />
+    <Resource Include="Images\Villain\BaronBlade\BacklashField.png" />
     <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_back.png" />
     <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_death.png" />
     <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_initial.png" />
     <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_instr_back.png" />
     <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_instr_front.png" />
-    <Resource Include="Images\Villain\BaronBlade\blade_battalion.png" />
-    <Resource Include="Images\Villain\BaronBlade\consider_the_price_of_victory.png" />
-    <Resource Include="Images\Villain\BaronBlade\devious_disruption.png" />
-    <Resource Include="Images\Villain\BaronBlade\elemental_redistributor.png" />
-    <Resource Include="Images\Villain\BaronBlade\flesh_repair_nanites.png" />
-    <Resource Include="Images\Villain\BaronBlade\hasten_doom.png" />
-    <Resource Include="Images\Villain\BaronBlade\living_force_field.png" />
-    <Resource Include="Images\Villain\BaronBlade\mobile_defense_platform.png" />
-    <Resource Include="Images\Villain\BaronBlade\powerer_remote_turret.png" />
-    <Resource Include="Images\Villain\BaronBlade\slash_and_burn.png" />
+    <Resource Include="Images\Villain\BaronBlade\BladeBattalion.png" />
+    <Resource Include="Images\Villain\BaronBlade\ConsiderThePriceOfVictory.png" />
+    <Resource Include="Images\Villain\BaronBlade\DeviousDisruption.png" />
+    <Resource Include="Images\Villain\BaronBlade\ElementalRedistributor.png" />
+    <Resource Include="Images\Villain\BaronBlade\FleshRepairNanites.png" />
+    <Resource Include="Images\Villain\BaronBlade\HastenDoom.png" />
+    <Resource Include="Images\Villain\BaronBlade\LivingForceField.png" />
+    <Resource Include="Images\Villain\BaronBlade\MobileDefensePlatform.png" />
+    <Resource Include="Images\Villain\BaronBlade\PoweredRemoteTurret.png" />
+    <Resource Include="Images\Villain\BaronBlade\SlashAndBurn.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Hero\Haka\ElbowSmash.png" />

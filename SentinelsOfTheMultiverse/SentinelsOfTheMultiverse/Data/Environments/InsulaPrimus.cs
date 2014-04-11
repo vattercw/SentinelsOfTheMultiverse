@@ -29,17 +29,17 @@ namespace SentinelsOfTheMultiverse.Data.Environments
         }
 
         //Minions
-        public static void MakePterodactylThief()
+        public static void PterodactylThief()
         {
 
         }
 
-        public static void MakeVelociraptorPack()
+        public static void VelociraptorPack()
         {
 
         }
 
-        public static void MakeEnragedTRex()
+        public static void EnragedTRex()
         {
 
         }

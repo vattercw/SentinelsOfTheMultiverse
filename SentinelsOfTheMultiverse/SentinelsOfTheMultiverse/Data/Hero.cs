@@ -14,14 +14,6 @@ namespace SentinelsOfTheMultiverse
     {
 
         public List<Card> hand { get; set; }
-        public Deck deck { get; set; }
-        public List<Card> graveyard { get; set; }
-        string characterName;
-        public List<Card> cardsOnField { get; set; }
-
-        //made public so no need for get, just an attribute
-        public int lifePoints;
-
 
         public Hero()
         {
@@ -90,6 +82,7 @@ namespace SentinelsOfTheMultiverse
 
         public void DiscardCard(Card card)
         {
+            GameBoard.discardedCardsThisTurn.Add(card);
             hand.Remove(card);
             graveyard.Add(card);
         }

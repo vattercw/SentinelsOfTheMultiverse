@@ -12,24 +12,88 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
     public class Haka: Hero
     {
 
-       
-
         public Haka()
         {
-            lifePoints = 34;    
+            lifeTotal = 34;    
         }
 
-        public void Rampage()
+        public void Rampage(Card card)
         {
-            DamageEffects.DealDamage(null, GameEngine.getVillain(), GameEngine.getVillain().getMinions(), 2, DamageEffects.DamageType.Melee);
-            //destroy the card here
+            Villain villain = GameEngine.getVillain();
+
+            DamageEffects.DealDamage(null, villain, villain.getMinions(), 2, DamageEffects.DamageType.Melee);
+            CardDrawingEffects.DestroyCard(card, this);
         }
 
-        public void ElbowSmash()
+        public void ElbowSmash(Card card)
         {
-
+            throw new NotImplementedException();
         }
 
+        public void Dominion(Card card)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void EnduringIntercession(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GroundPound(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HakaOfBattle(Card card)
+        {
+            CardDrawingEffects.DrawCards(2);
+            if (GameBoard.discardedCardsThisTurn.Count < 1)
+            {
+                //TODO: tell user they must discard at least one card
+                throw new NotImplementedException("user must discard at least one card");
+            }
+            damageAmplification += 1;
+        }
+
+        public void HakaOfRestoration(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void HakaOfShielding(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Mere(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PunishTheWeak(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SavageMana(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Taiaha(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TaMoko(Card card)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void VitalitySurge(Card card)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

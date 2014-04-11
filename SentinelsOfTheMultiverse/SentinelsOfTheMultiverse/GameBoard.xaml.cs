@@ -23,9 +23,10 @@ namespace SentinelsOfTheMultiverse
         private ViewHand handViewer;
 
         private Card drawThisCard;
-        public List<Card> selectedCards= new List<Card>();
-        public List<Card> cardClickedArray = new List<Card>();
-        public List<Image> imageSelectedArray = new List<Image>();
+        public static List<Card> selectedCards= new List<Card>();
+        public static List<Card> discardedCardsThisTurn = new List<Card>();
+        public static List<Card> cardClickedArray = new List<Card>();
+        public static List<Image> imageSelectedArray = new List<Image>();
 
         private int NEXT_CARD = 3;
 
@@ -173,7 +174,7 @@ namespace SentinelsOfTheMultiverse
             ImageSource villainDeckBackImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
             ImageSource villainInstImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
 
-            ImageSource envDeckBackImg = Utility.getImageSource("Images/Environment/"+env.getCharacterName()+ "/NonPlayable/"+ "insula_primus_back.png");
+            ImageSource envDeckBackImg = Utility.getImageSource("Images/Environment/"+env.characterName+ "/NonPlayable/"+ "insula_primus_back.png");
 
             drawNPCBoard(villainImg, villainInstImg, villainDeckBackImg, envDeckBackImg);
 

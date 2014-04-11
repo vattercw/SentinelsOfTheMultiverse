@@ -8,31 +8,14 @@ namespace SentinelsOfTheMultiverse.Data
 {
     public abstract class GameEnvironment : IPlayer
     {
-        private List<string> _inPlay= new List<string>();
-        private Deck _deck;
-        private string envName;
-        public List<Card> cardsOnField { get; set; }
-
+              
         public GameEnvironment()
         {
-            envName = this.GetType().Name;
-            deck = new Deck(envName, IPlayer.PlayerType.Environment);
+            characterName = this.GetType().Name;
+            deck = new Deck(characterName, IPlayer.PlayerType.Environment);
             deck.shuffle();
+            graveyard = new List<Card>();
             cardsOnField = new List<Card>();
-        }
-
-        public string getCharacterName()
-        {
-            return envName;
-        }
-
-        public Deck deck 
-        { 
-            get{
-                return _deck;
-        }   set{
-                _deck = value;
-            } 
         }
 
         public override void playerTurn(bool playedCard=false, bool playedPower=false)

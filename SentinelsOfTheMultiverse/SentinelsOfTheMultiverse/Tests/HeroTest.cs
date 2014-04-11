@@ -40,7 +40,7 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestValidityOfHand()
         {
             bool containsAll = true;
-            Hero heroTest = ObjectMother.TestHero();
+            Hero heroTest = new Haka();
             foreach (var card in heroTest.getPlayerHand())
             {
                 containsAll = containsAll && files.Contains(card.getName());
@@ -60,7 +60,7 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestPlayerLifeInit()
         {
             Hero hero = ObjectMother.TestHero();
-            Assert.AreEqual(hero.lifePoints, 34);
+            Assert.AreEqual(hero.lifeTotal, 34);
         }
 
         [Test, RequiresSTA]

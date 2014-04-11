@@ -40,7 +40,7 @@ namespace SentinelsOfTheMultiverse
 
         private static bool getWinCon()
         {
-            return villain.lifePoints <= 0;
+            return villain.lifeTotal <= 0;
         }
 
         public static void initPlayers(List<string> heroesStr, string villainStr, string envStr)
@@ -111,5 +111,6 @@ namespace SentinelsOfTheMultiverse
             return environment;
         }
         #endregion
+
     }
 }
