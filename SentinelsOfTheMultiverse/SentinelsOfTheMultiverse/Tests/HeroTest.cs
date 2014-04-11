@@ -48,13 +48,13 @@ namespace SentinelsOfTheMultiverse.Tests
             Assert.True(containsAll);
         }
 
-        [Test, RequiresSTA] //TODO: test a diff way
-        public void TestPlayerTurnCard()
-        {
-            var currPlay = GameEngine.getCurrentPlayer();
-            GameEngine.nextTurn();
-            Assert.AreNotEqual(currPlay, GameEngine.getCurrentPlayer());
-        }
+        //[Test, RequiresSTA]
+        //public void TestPlayerTurnCard()
+        //{
+        //    var currPlay = GameEngine.getCurrentPlayer();
+        //    GameEngine.nextTurn();
+        //    Assert.AreNotEqual(currPlay, GameEngine.getCurrentPlayer());
+        //}
 
         [Test, RequiresSTA]
         public void TestPlayerLifeInit()

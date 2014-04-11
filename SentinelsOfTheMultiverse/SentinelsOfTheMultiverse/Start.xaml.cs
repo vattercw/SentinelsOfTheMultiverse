@@ -30,12 +30,12 @@ namespace SentinelsOfTheMultiverse
             Content = startButton;
         }
 
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private void Start_Game(object sender, RoutedEventArgs e)
         {
             beginGame();
             GameBoard game = new GameBoard();
             game.Show();
-            GameEngine.startGame();
             this.Close();
         }
 

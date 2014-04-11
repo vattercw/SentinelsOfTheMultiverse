@@ -29,16 +29,11 @@ namespace SentinelsOfTheMultiverse
         public static Boolean playerPlayedCard;
         public static Boolean playerUsedPower;
 
-        
-        public static void startGame()
-        {
 
-        }
-
-        private static bool getWinCon()
-        {
-            return villain.lifeTotal <= 0;
-        }
+        //private static bool getWinCon()
+        //{
+        //    return villain.lifeTotal <= 0;
+        //}
 
         public static void initPlayers(List<string> heroesStr, string villainStr, string envStr)
         {
@@ -69,7 +64,7 @@ namespace SentinelsOfTheMultiverse
             {
                 playerTurn = 0;
             }
-            getPlayers()[playerTurn].playerTurn(playerPlayedCard, playerUsedPower);
+            getCurrentPlayer().playerTurn(playerPlayedCard, playerUsedPower);
             playerPlayedCard = false;
         }
 
