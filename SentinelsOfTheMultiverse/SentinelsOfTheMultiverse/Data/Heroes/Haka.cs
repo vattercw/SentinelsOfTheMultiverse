@@ -25,25 +25,27 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             CardDrawingEffects.DestroyCard(card, this);
         }
 
-        //public void ElbowSmash(Card card)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        /*
+        public void ElbowSmash(Card card)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void Dominion(Card card)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void Dominion(Card card)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void EnduringIntercession(Card card)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void EnduringIntercession(Card card)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void GroundPound(Card card)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void GroundPound(Card card)
+        {
+            throw new NotImplementedException();
+        }
+        */
 
         public void HakaOfBattle(Card card)
         {
@@ -56,45 +58,46 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             damageAmplification += GameBoard.discardedCardsThisTurn.Count;
             CardDrawingEffects.DestroyCard(card, this);
         }
+/*
+        public void HakaOfRestoration(Card card)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void HakaOfRestoration(Card card)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void HakaOfShielding(Card card)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void HakaOfShielding(Card card)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void Mere(Card card)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void Mere(Card card)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void PunishTheWeak(Card card)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void PunishTheWeak(Card card)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void SavageMana(Card card)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void SavageMana(Card card)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void Taiaha(Card card)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void Taiaha(Card card)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void TaMoko(Card card)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public void TaMoko(Card card)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void VitalitySurge(Card card)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void VitalitySurge(Card card)
+        {
+            throw new NotImplementedException();
+        }
+ * */
     }
 }
