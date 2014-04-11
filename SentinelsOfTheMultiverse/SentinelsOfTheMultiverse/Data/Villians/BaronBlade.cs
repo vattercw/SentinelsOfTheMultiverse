@@ -15,23 +15,24 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         }
 
         //One Shot Cards
-        public void HastenDoom(){
+        public void HastenDoom(Card card)
+        {
 
             DamageEffects.DealDamage(GameEngine.getHeroes(), null, null, 2, DamageEffects.DamageType.Toxic);
             GameEngine.getVillain().drawPhase(1);
         }
 
-        public void FleshRepairNanites()
+        public void FleshRepairNanites(Card card)
         {
             GameEngine.getVillain().lifeTotal += 10;
         }
 
-        public static void DeviousDisruption()
+        public static void DeviousDisruption(Card card)
         {
 
         }
 
-        public void SlashAndBurn()
+        public void SlashAndBurn(Card card)
         {
             int damage = GameEngine.getHeroes().Count;
             Hero lowestHP = GameEngine.getHeroes()[0];
@@ -60,40 +61,40 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
         }
 
-        public void ConsiderThePriceOfVictory()
+        public void ConsiderThePriceOfVictory(Card card)
         {
 
         }
 
         //Ongoing Cards
-        public void LivingForceField()
+        public void LivingForceField(Card card)
         {
 
         }
 
-        public void BacklashField()
+        public void BacklashField(Card card)
         {
 
         }
 
         //Devices and Minions
 
-        public void PoweredRemoteTurret()
+        public void PoweredRemoteTurret(Card card)
         {
             GameEngine.getVillain().addMinion(new PoweredRemoteTurret());
         }
 
-        public void MobileDefencePlatform()
+        public void MobileDefencePlatform(Card card)
         {
             GameEngine.getVillain().addMinion(new MobileDefensePlatform());
         }
 
-        public void ElementalRedistributor()
+        public void ElementalRedistributor(Card card)
         {
             GameEngine.getVillain().addMinion(new ElementalRedistributor());
         }
 
-        public void BladeBattalion()
+        public void BladeBattalion(Card card)
         {
             GameEngine.getVillain().addMinion(new BladeBattalion());
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using SentinelsOfTheMultiverse.Data;
 using SentinelsOfTheMultiverse.Data.Villains;
 
 namespace SentinelsOfTheMultiverse.Tests
@@ -13,9 +14,15 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestHastenDoom()
         {
-            Start game = new Start();
+            ObjectMother.TestGame();
             BaronBlade test = new BaronBlade();
-            test.HastenDoom();
+            Card hastenCard = new Card("Images\\Villain\\BaronBlade\\HastenDoom.png", "HastenDoom");
+            test.HastenDoom(hastenCard);
+
+            for(int i=0; i < GameEngine.getHeroes().Count; i++){
+            Assert.AreEqual(GameEngine.getHeroes()[i].lifeTotal, 32);
+            }
+
         }
 
         [Test(), RequiresSTA]
