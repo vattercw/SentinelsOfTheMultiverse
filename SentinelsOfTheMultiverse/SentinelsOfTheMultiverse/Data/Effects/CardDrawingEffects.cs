@@ -8,7 +8,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 {
     public static class CardDrawingEffects
     {
-        public static void DrawCard(int numCards)
+        public static void DrawCards(int numCards)
         {
             GameEngine.getCurrentPlayer().drawPhase(numCards);
         }

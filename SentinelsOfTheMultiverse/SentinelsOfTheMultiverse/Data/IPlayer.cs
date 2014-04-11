@@ -9,6 +9,8 @@ namespace SentinelsOfTheMultiverse.Data
 {
     public abstract class IPlayer
     {
+
+        #region Properties
         public Deck deck { get;  set; }
         public string characterName {get; set;}
         public int lifeTotal { get; set; } //get rid of?
@@ -16,12 +18,26 @@ namespace SentinelsOfTheMultiverse.Data
         public List<String> immunities = new List<String>();
         public List<Card> graveyard { get; set; }
 
+        public int damageAmplification
+        {
+            get
+            {
+                return damageAmplification;
+            }
+            set
+            {
+                damageAmplification = value;
+            }
+        }
+
+        #endregion
 
         public abstract void playerTurn(bool playedCard, bool playedPower);
         public abstract void startPhase();
         public abstract Boolean playPhase();
         public abstract void endPhase();
         public abstract void drawPhase(int numCards);
+
         
 
         public List<string> getImmunities()

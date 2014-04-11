@@ -82,6 +82,7 @@ namespace SentinelsOfTheMultiverse
 
         public void DiscardCard(Card card)
         {
+            GameBoard.discardedCardsThisTurn.Add(card);
             hand.Remove(card);
             graveyard.Add(card);
         }

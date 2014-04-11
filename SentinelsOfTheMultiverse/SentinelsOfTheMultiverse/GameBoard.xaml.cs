@@ -26,9 +26,10 @@ namespace SentinelsOfTheMultiverse
         private ViewHand handViewer;
 
         private Card drawThisCard;
-        public List<Card> selectedCards= new List<Card>();
-        public List<Card> cardClickArray = new List<Card>();
-        public List<Image> imageSelectedArray = new List<Image>();
+        public static List<Card> selectedCards= new List<Card>();
+        public static List<Card> discardedCardsThisTurn = new List<Card>();
+        public static List<Card> cardClickArray = new List<Card>();
+        public static List<Image> imageSelectedArray = new List<Image>();
 
         private int NEXT_CARD = 3;
 
