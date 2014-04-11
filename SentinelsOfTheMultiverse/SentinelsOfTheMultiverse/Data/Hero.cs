@@ -47,6 +47,7 @@ namespace SentinelsOfTheMultiverse
 
         public override void startPhase()
         {
+            damageAmplification = 0;//TODO check ongoing cards for damage amp
             //conditionals for start turn effects
         }
 
@@ -72,12 +73,6 @@ namespace SentinelsOfTheMultiverse
         public List<Card> getPlayerHand()
         {
             return hand;
-        }
-
-        public int getDamageAmplification()
-        {
-            //TODO add damage amp
-            return 0;
         }
 
         public void DiscardCard(Card card)

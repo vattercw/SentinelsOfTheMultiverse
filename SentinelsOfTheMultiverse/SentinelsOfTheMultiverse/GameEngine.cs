@@ -32,10 +32,7 @@ namespace SentinelsOfTheMultiverse
         
         public static void startGame()
         {
-            //while (getWinCon())
-            ////for (int ii = 0; ii < 5; ii++)
-            //{
-            //}
+
         }
 
         private static bool getWinCon()

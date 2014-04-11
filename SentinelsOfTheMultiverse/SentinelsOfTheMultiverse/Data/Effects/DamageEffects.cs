@@ -56,7 +56,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                     return;
                 }
             }
-            int totalDamage = hero.getDamageAmplification() + damageAmount;
+            int totalDamage = hero.damageAmplification + damageAmount;
             hero.lifeTotal -= totalDamage;
         }
 

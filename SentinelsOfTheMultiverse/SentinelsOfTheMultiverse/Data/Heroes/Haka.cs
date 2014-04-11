@@ -53,7 +53,8 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 //TODO: tell user they must discard at least one card
                 throw new NotImplementedException("user must discard at least one card");
             }
-            damageAmplification += 1;
+            damageAmplification += GameBoard.discardedCardsThisTurn.Count;
+            CardDrawingEffects.DestroyCard(card, this);
         }
 
         public void HakaOfRestoration(Card card)
