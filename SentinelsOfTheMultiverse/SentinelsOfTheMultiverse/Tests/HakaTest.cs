@@ -44,11 +44,14 @@ namespace SentinelsOfTheMultiverse.Tests
 
             Card tamokoCard = new Card("Images\\Hero\\Haka\\TaMoko.png", "TaMoko");
             haka.TaMoko(tamokoCard);
+
             DamageEffects.DealDamageToHero(haka, 2, DamageEffects.DamageType.Melee);
-            
             Assert.AreEqual(startingLifeTotal-1, haka.lifeTotal);
 
-            CardDrawingEffects.DestroyCard(tamokoCard, haka);
+            tamokoCard.SendToGraveyard(haka, haka.cardsOnField);
+
+            DamageEffects.DealDamageToHero(haka, 2, DamageEffects.DamageType.Melee);
+            Assert.AreEqual(startingLifeTotal - 3, haka.lifeTotal);
         }
 
     }

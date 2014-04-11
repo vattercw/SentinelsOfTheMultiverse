@@ -21,10 +21,5 @@ namespace SentinelsOfTheMultiverse.Data.Effects
             }
         }
 
-        public static void DestroyCard(Card card, IPlayer player)
-        {
-            player.cardsOnField.Remove(card);
-            player.graveyard.Add(card);
-        }
     }
 }

@@ -9,12 +9,13 @@ namespace SentinelsOfTheMultiverse.Data
 {
     public class Deck
     {
-        List<Card> cards = new List<Card>();
+        public List<Card> cards { get; set; }
 
         public Deck(string characterName, IPlayer.PlayerType playerType)
         {
             var files = Directory.GetFiles(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Images\\"+playerType+"\\" + characterName);
 
+            cards = new List<Card>();
             foreach (var filename in files)
             {
                 var cardName = Path.GetFileNameWithoutExtension(filename);
@@ -48,16 +49,6 @@ namespace SentinelsOfTheMultiverse.Data
             }
 
             return drawnCards;
-        }
-
-        public void printDeck()
-        {
-            //Debug.WriteLine("deck: " + String.Join(", ", this.cards));
-        }
-
-        public List<Card> getCards()
-        {
-            return this.cards;
         }
     }
 }

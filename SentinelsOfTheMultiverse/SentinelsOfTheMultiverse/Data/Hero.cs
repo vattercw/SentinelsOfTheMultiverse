@@ -45,13 +45,10 @@ namespace SentinelsOfTheMultiverse
             }
             endPhase();
         }
-
+        
+        
         public override void startPhase()
         {
-            foreach (Ongoings ongoingEffect in ongoingEffects)
-            {
-                ongoingEffect();
-            }
             //conditionals for start turn effects
         }
 

@@ -73,7 +73,28 @@ namespace SentinelsOfTheMultiverse.Data
             theMethod.Invoke(this, new object[]{card});
         }
 
-        internal List<Ongoings> ongoingEffects { get; set; } 
+        private List<Ongoings> _ongoingEffects = new List<Ongoings>();
+        internal List<Ongoings> ongoingEffects
+        {
+            get {return _ongoingEffects; }
+            set
+            {
+                _ongoingEffects = value;
+                updateOngoingEffects();
+            }
+        }
+
+        public void updateOngoingEffects()
+        {
+            damageAmplificationFromPlayer = 0;
+            damageAmplificationToPlayer = 0;
+            foreach (Ongoings ongoingEffect in ongoingEffects)
+            {
+                ongoingEffect();
+            }
+        }
+
+
         internal delegate void Ongoings();
     }
 }

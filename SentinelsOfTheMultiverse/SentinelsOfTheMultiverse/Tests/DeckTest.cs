@@ -30,7 +30,7 @@ namespace SentinelsOfTheMultiverse.Tests
         {
             int count = files.Length;
             Deck testHaka = new Deck("haka", IPlayer.PlayerType.Hero);
-            Assert.AreEqual(testHaka.getCards().Count, count);
+            Assert.AreEqual(testHaka.cards.Count, count);
         }
 
         [Test]
@@ -57,15 +57,15 @@ namespace SentinelsOfTheMultiverse.Tests
             testHakaShuffled.shuffle();
             int sameCount = 0;
 
-            for (int i = 0; i < testHaka.getCards().Count; i++)
+            for (int i = 0; i < testHaka.cards.Count; i++)
             {
-                if (testHaka.getCards()[i] == testHakaShuffled.getCards()[i])
+                if (testHaka.cards[i] == testHakaShuffled.cards[i])
                 {
                     sameCount++;
                 }
             }
 
-            Assert.False(testHaka.getCards().Count == sameCount);
+            Assert.False(testHaka.cards.Count == sameCount);
         }
     }
 }

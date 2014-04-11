@@ -17,7 +17,7 @@ namespace SentinelsOfTheMultiverse.Tests
 
         private List<string> getDeckCardsString(IPlayer p){
             var L = new List<string>();
-            var deckAndHand= p.deck.getCards();
+            var deckAndHand= p.deck.cards;
             deckAndHand.AddRange(((Hero)p).hand);
             foreach (var card in deckAndHand)
                 L.Add(card.getName());

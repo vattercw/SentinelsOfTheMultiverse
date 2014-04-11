@@ -22,7 +22,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardType = Card.CardType.OneShot;
             Villain villain = GameEngine.getVillain();
             DamageEffects.DealDamage(null, villain, villain.getMinions(), 2, DamageEffects.DamageType.Melee);
-            CardDrawingEffects.DestroyCard(card, this);
+            card.SendToGraveyard(this, cardsOnField);
         }
 
         /*
@@ -57,14 +57,15 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 throw new NotImplementedException("user must discard at least one card");
             }
             damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
-            CardDrawingEffects.DestroyCard(card, this);
+            card.SendToGraveyard(this, cardsOnField);
         }
         
         public void TaMoko(Card card)
         {
             card.cardType = Card.CardType.Ongoing;
-           
-            TaMokoEffect();
+            cardsOnField.Add(card);
+            card.effects.Add(TaMokoEffect);
+            TaMokoEffect();//may or may not need this here
             ongoingEffects.Add(TaMokoEffect);
         }
 
