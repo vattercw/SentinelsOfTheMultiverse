@@ -106,6 +106,7 @@ namespace SentinelsOfTheMultiverse
             //    GameEngine.getCurrentPlayer().playerTurn(GameEngine.playerPlayedCard, GameEngine.playerUsedPower);
             //    GameEngine.isFirstTurn = false;
             //}
+            gameBoard.Clear_Selection(sender, e);
             GameEngine.nextTurn();
             gameBoard.updateBoard();
             this.Close();
@@ -138,7 +139,7 @@ namespace SentinelsOfTheMultiverse
                 temp.Source = handShow[k].cardImage.Source;
                 
                 Grid.SetColumn(temp, k);
-                temp.AddHandler(UIElement.MouseDownEvent, new RoutedEventHandler(card_mouseDown_eventHandler), true);
+                temp.AddHandler(UIElement.MouseDownEvent, new RoutedEventHandler(Card_Selection_Handler), true);
 
                 temp.Margin = Utility.cardSpacing;
 
@@ -146,14 +147,9 @@ namespace SentinelsOfTheMultiverse
             }
         }
 
-        public void card_mouseDown_eventHandler(object sender, RoutedEventArgs e)
+        public void Card_Selection_Handler(object sender, RoutedEventArgs e)
         {
-            imageSelectedArray.Add((Image)sender);
-            foreach (Image imageSelected in imageSelectedArray)
-            {
-                if(imageSelected.Effect == null) imageSelected.Effect = Utility.selectionGlow();
-            }
-
+            if (!imageSelectedArray.Contains((Image)sender)) imageSelectedArray.Add((Image)sender);
 
             for (int i = 0; i < handShow.Count; i++)
             {
@@ -161,6 +157,7 @@ namespace SentinelsOfTheMultiverse
                 {
                     if (handShow[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(handShow[i]))
                     {
+                        if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowHero();
                         cardClickedArray.Add(handShow[i]);
                         break; 
                     }

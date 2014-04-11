@@ -25,7 +25,7 @@ namespace SentinelsOfTheMultiverse.Tests
         public void testSelectionHighlight()
         {
             Image testImage = new Image();
-            testImage.Effect = Utility.selectionGlow();
+            testImage.Effect = Utility.selectionGlowHero();
             Assert.NotNull(testImage.Effect);
         }
 

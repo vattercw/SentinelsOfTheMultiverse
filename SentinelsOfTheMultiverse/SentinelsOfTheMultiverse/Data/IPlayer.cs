@@ -54,8 +54,8 @@ namespace SentinelsOfTheMultiverse.Data
 
         internal void CardMethod(string methodName)
         {
-            MethodInfo theMethod = GetType().GetMethod(methodName);
-            theMethod.Invoke(this, null);
+            //MethodInfo theMethod = GetType().GetMethod(methodName);
+            //theMethod.Invoke(this, null);
         }
     }
 }
