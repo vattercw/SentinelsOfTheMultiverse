@@ -56,10 +56,10 @@ namespace SentinelsOfTheMultiverse
             return true;
         }
 
-        public Boolean powerPhase()
-        {
-            return true;
-        }
+        //public Boolean powerPhase()
+        //{
+        //    return true;
+        //}
 
         public override void drawPhase(int numCards)
         {

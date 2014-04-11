@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 namespace SentinelsOfTheMultiverse
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public partial class GameBoard : Window
     {
         //private GameEngine game = new GameEngine();
@@ -42,10 +43,10 @@ namespace SentinelsOfTheMultiverse
         
             private readonly double CARD_HEIGHT=200;
 
-            private readonly int DECK_COLUMN=2;
-            private readonly int CHARACTER_COLUMN= 0;
-            private readonly int INSTRUCTION_COLUMN = 3;
-            private readonly int GRAVEYARD_COLUMN= 1;
+            private readonly int DECK_COLUMN=3;
+            private readonly int CHARACTER_COLUMN= 1;
+            private readonly int INSTRUCTION_COLUMN = 4;
+            private readonly int GRAVEYARD_COLUMN= 2;
 
         #endregion
 
@@ -89,6 +90,16 @@ namespace SentinelsOfTheMultiverse
             currentPlayerLabel.Content = currIndex;
             currentPlayerLabel.VerticalAlignment = VerticalAlignment.Top;
             Utility.addElementToGrid(currentPlayerLabel, 0, 0, gridLayout);
+        }
+
+        private void addHealthLabel(IPlayer playerRujisMom, int row)
+        {
+            Label playerHealthLabel = new Label();
+            playerHealthLabel.Width = 50;
+            playerHealthLabel.Height = 40;
+
+            playerHealthLabel.Content = playerRujisMom.lifeTotal;
+            Utility.addElementToGrid(playerHealthLabel, row, 0, gridLayout);
         }
 
         private void addShowHandButton()
@@ -150,7 +161,7 @@ namespace SentinelsOfTheMultiverse
             gridLayout.Children.RemoveRange(0, gridLayout.Children.Count);
             Grid myGrid = new Grid();
 
-            for (int ll = 0; ll < GameEngine.getHeroes().Count+2; ll++)
+            for (int ll = 0; ll < GameEngine.getHeroes().Count+3; ll++)
             {
                 RowDefinition row = new RowDefinition();
                 row.Height = GridLength.Auto;
@@ -168,16 +179,7 @@ namespace SentinelsOfTheMultiverse
 
         private void initBoard(List<Hero> heroes, Villain villain, GameEnvironment env)
         {
-            string villainName = villain.getCharacterName();
-            
-            ImageSource villainImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png");
-            ImageSource villainDeckBackImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
-            ImageSource villainInstImg = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
-
-            ImageSource envDeckBackImg = Utility.getImageSource("Images/Environment/"+env.characterName+ "/NonPlayable/"+ "insula_primus_back.png");
-
-            drawNPCBoard(villainImg, villainInstImg, villainDeckBackImg, envDeckBackImg);
-
+            drawNPCBoard(villain, env);
 
             for (int ii = 0; ii < heroes.Count; ii++)
             {
@@ -197,6 +199,8 @@ namespace SentinelsOfTheMultiverse
             Image deckBackImg = CardImageFromImageSource(deckBack);
             Utility.addElementToGrid(deckBackImg, currentHeroRow, DECK_COLUMN, gridLayout);
 
+            addHealthLabel(hero, currentHeroRow);
+
             ImageSource graveyardSrc;
             if (hero.graveyard.Count == 0)
             {
@@ -208,8 +212,14 @@ namespace SentinelsOfTheMultiverse
             Utility.addElementToGrid(graveYardImg, currentHeroRow, GRAVEYARD_COLUMN, gridLayout);
         }
 
-        private void drawNPCBoard(ImageSource villainCard, ImageSource villainInstSrc, ImageSource villainDeckSrc, ImageSource envDeckSrc)
+        private void drawNPCBoard(Villain villain, GameEnvironment env)
         {
+            string villainName = villain.getCharacterName();
+            ImageSource villainCard = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png");
+            ImageSource villainDeckSrc = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
+            ImageSource villainInstSrc = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
+            ImageSource envDeckSrc = Utility.getImageSource("Images/Environment/" + env.characterName + "/NonPlayable/" + "insula_primus_back.png");
+
             Image villainImage= CardImageFromImageSource(villainCard);
             Utility.addElementToGrid(villainImage, VILLAIN_ROW, CHARACTER_COLUMN, gridLayout);
 
@@ -218,6 +228,8 @@ namespace SentinelsOfTheMultiverse
 
             Image villainDeckImage = CardImageFromImageSource(villainDeckSrc);
             Utility.addElementToGrid(villainDeckImage, VILLAIN_ROW, DECK_COLUMN, gridLayout);
+
+            addHealthLabel(villain, VILLAIN_ROW);
 
             Image envDeckImg = CardImageFromImageSource(envDeckSrc);
             Utility.addElementToGrid(envDeckImg, ENVIRONMENT_ROW, DECK_COLUMN, gridLayout);

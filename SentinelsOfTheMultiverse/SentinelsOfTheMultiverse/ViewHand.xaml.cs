@@ -18,9 +18,7 @@ using System.Windows.Shapes;
 
 namespace SentinelsOfTheMultiverse
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public partial class ViewHand : Window
     {
         Grid cardLayout = new Grid();
