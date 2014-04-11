@@ -15,23 +15,24 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         }
 
         //One Shot Cards
-        public static void HastenDoom(){
+        public void HastenDoom(Card card)
+        {
 
             DamageEffects.DealDamage(GameEngine.getHeroes(), null, null, 2, DamageEffects.DamageType.Toxic);
             GameEngine.getVillain().drawPhase(1);
         }
 
-        public static void FleshRepairNanites()
+        public void FleshRepairNanites(Card card)
         {
             GameEngine.getVillain().lifeTotal += 10;
         }
 
-        public static void DeviousDisruption()
-        {
+        //public static void DeviousDisruption(Card card)
+        //{
 
-        }
+        //}
 
-        public static void SlashAndBurn()
+        public void SlashAndBurn(Card card)
         {
             int damage = GameEngine.getHeroes().Count;
             Hero lowestHP = GameEngine.getHeroes()[0];
@@ -54,48 +55,56 @@ namespace SentinelsOfTheMultiverse.Data.Villains
                 }
             }
             int fireDamage = 2;
-
-            DamageEffects.DealDamageToHero(lowestHP, damage, DamageEffects.DamageType.Melee);
-            DamageEffects.DealDamageToHero(highestHP, damage + fireDamage, DamageEffects.DamageType.Fire);
-
-        }
-
-        public static void ConsiderThePriceOfVictory()
-        {
-
-        }
-
-        //Ongoing Cards
-        public static void LivingForceField()
-        {
+            if (lowestHP.Equals(highestHP))
+            {
+                DamageEffects.DealDamageToHero(highestHP, damage + fireDamage, DamageEffects.DamageType.Fire);
+            }
+            else
+            {
+                DamageEffects.DealDamageToHero(lowestHP, damage, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamageToHero(highestHP, damage + fireDamage, DamageEffects.DamageType.Fire);
+            }
 
         }
 
-        public static void BacklashField()
-        {
+        //public void ConsiderThePriceOfVictory(Card card)
+        //{
 
-        }
+        //}
+
+        ////Ongoing Cards
+        //public void LivingForceField(Card card)
+        //{
+
+        //}
+
+        //public void BacklashField(Card card)
+        //{
+
+        //}
 
         //Devices and Minions
 
-        public static void PoweredRemoteTurret()
+        public void PoweredRemoteTurret(Card card)
         {
-            GameEngine.getVillain().addMinion(new PoweredRemoteTurret(), Minion.MinionType.End);
+            PoweredRemoteTurret turret = new PoweredRemoteTurret();
+            GameEngine.getVillain().addMinion(turret);
         }
 
-        public static void MobileDefencePlatform()
+        public void MobileDefencePlatform(Card card)
         {
-            GameEngine.getVillain().addMinion(new MobileDefensePlatform(), Minion.MinionType.Ongoing);
+            MobileDefensePlatform platform = new MobileDefensePlatform();
+            GameEngine.getVillain().addMinion(platform);
         }
 
-        public static void ElementalRedistributor()
+        public void ElementalRedistributor(Card card)
         {
-            GameEngine.getVillain().addMinion(new ElementalRedistributor(), Minion.MinionType.OnAttack);
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
         }
 
-        public static void BladeBattalion()
+        public void BladeBattalion(Card card)
         {
-            GameEngine.getVillain().addMinion(new BladeBattalion(), Minion.MinionType.End);
+            GameEngine.getVillain().addMinion(new BladeBattalion());
         }
     }
 }

@@ -76,7 +76,6 @@
     <Compile Include="Data\Minion.cs" />
     <Compile Include="Data\Villain.cs" />
     <Compile Include="GameEngine.cs" />
-    <Compile Include="HandPanel.cs" />
     <Compile Include="Data\Environments\InsulaPrimus.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="GameBoard.xaml.cs">

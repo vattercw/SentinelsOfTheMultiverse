@@ -19,12 +19,13 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Rampage(Card card)
         {
+            card.cardType = Card.CardType.OneShot;
             Villain villain = GameEngine.getVillain();
-
             DamageEffects.DealDamage(null, villain, villain.getMinions(), 2, DamageEffects.DamageType.Melee);
             CardDrawingEffects.DestroyCard(card, this);
         }
 
+        /*
         public void ElbowSmash(Card card)
         {
             throw new NotImplementedException();
@@ -44,9 +45,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             throw new NotImplementedException();
         }
+        */
 
         public void HakaOfBattle(Card card)
         {
+            card.cardType = Card.CardType.OneShot;
             CardDrawingEffects.DrawCards(2);
             if (GameBoard.discardedCardsThisTurn.Count < 1)
             {
@@ -57,6 +60,12 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             CardDrawingEffects.DestroyCard(card, this);
         }
 
+        public void TaMoko(Card card)
+        {
+            card.cardType = Card.CardType.Ongoing;
+            damageAmplification -= 1;
+        }
+/*
         public void HakaOfRestoration(Card card)
         {
             throw new NotImplementedException();
@@ -86,15 +95,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             throw new NotImplementedException();
         }
-
-        public void TaMoko(Card card)
-        {
-            throw new NotImplementedException();
-        }
-
+ * 
         public void VitalitySurge(Card card)
         {
             throw new NotImplementedException();
         }
+ * */
     }
 }

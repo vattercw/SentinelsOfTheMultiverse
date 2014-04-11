@@ -11,10 +11,13 @@ namespace SentinelsOfTheMultiverse.Data
 {
     public class Card
     {
+        public enum CardType {OneShot, Ongoing, Equipment};
         string cardName;
         List<IEffect> effects;
         public Image cardImage = new Image();
         public string cardImageStr = "";
+        public CardType cardType { get; set; }
+        
 
         public Card(string cardPath, string name)
         {
