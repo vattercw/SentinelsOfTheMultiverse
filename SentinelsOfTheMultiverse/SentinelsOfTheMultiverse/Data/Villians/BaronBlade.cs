@@ -15,13 +15,13 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         }
 
         //One Shot Cards
-        public static void HastenDoom(){
+        public void HastenDoom(){
 
             DamageEffects.DealDamage(GameEngine.getHeroes(), null, null, 2, DamageEffects.DamageType.Toxic);
             GameEngine.getVillain().drawPhase(1);
         }
 
-        public static void FleshRepairNanites()
+        public void FleshRepairNanites()
         {
             GameEngine.getVillain().lifeTotal += 10;
         }
@@ -31,7 +31,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
         }
 
-        public static void SlashAndBurn()
+        public void SlashAndBurn()
         {
             int damage = GameEngine.getHeroes().Count;
             Hero lowestHP = GameEngine.getHeroes()[0];
@@ -60,42 +60,42 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
         }
 
-        public static void ConsiderThePriceOfVictory()
+        public void ConsiderThePriceOfVictory()
         {
 
         }
 
         //Ongoing Cards
-        public static void LivingForceField()
+        public void LivingForceField()
         {
 
         }
 
-        public static void BacklashField()
+        public void BacklashField()
         {
 
         }
 
         //Devices and Minions
 
-        public static void PoweredRemoteTurret()
+        public void PoweredRemoteTurret()
         {
-            GameEngine.getVillain().addMinion(new PoweredRemoteTurret(), Minion.MinionType.End);
+            GameEngine.getVillain().addMinion(new PoweredRemoteTurret());
         }
 
-        public static void MobileDefencePlatform()
+        public void MobileDefencePlatform()
         {
-            GameEngine.getVillain().addMinion(new MobileDefensePlatform(), Minion.MinionType.Ongoing);
+            GameEngine.getVillain().addMinion(new MobileDefensePlatform());
         }
 
-        public static void ElementalRedistributor()
+        public void ElementalRedistributor()
         {
-            GameEngine.getVillain().addMinion(new ElementalRedistributor(), Minion.MinionType.OnAttack);
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
         }
 
-        public static void BladeBattalion()
+        public void BladeBattalion()
         {
-            GameEngine.getVillain().addMinion(new BladeBattalion(), Minion.MinionType.End);
+            GameEngine.getVillain().addMinion(new BladeBattalion());
         }
     }
 }

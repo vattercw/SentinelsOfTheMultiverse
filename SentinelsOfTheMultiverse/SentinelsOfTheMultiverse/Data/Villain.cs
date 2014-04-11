@@ -104,27 +104,27 @@ namespace SentinelsOfTheMultiverse.Data
             return allMinions;
         }
 
-        public void addMinion(Minion minion, Minion.MinionType type)
+        public void addMinion(Minion minion)
         {
-            if (type.Equals(Minion.MinionType.Start))
+            if (minion.effectPhase.Equals(Minion.MinionType.Start))
             {
                 startTurnMinion.Add(minion);
                 return;
             }
 
-            if (type.Equals(Minion.MinionType.End))
+            if (minion.effectPhase.Equals(Minion.MinionType.End))
             {
                 endTurnMinion.Add(minion);
                 return;
             }
 
-            if (type.Equals(Minion.MinionType.OnAttack))
+            if (minion.effectPhase.Equals(Minion.MinionType.OnAttack))
             {
                 onAttackMinion.Add(minion);
                 return;
             }
 
-            if (type.Equals(Minion.MinionType.Ongoing))
+            if (minion.effectPhase.Equals(Minion.MinionType.Ongoing))
             {
                 ongoingMinion.Add(minion);
                 return;

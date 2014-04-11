@@ -59,7 +59,7 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestGetMinion()
         {
             Villain test = ObjectMother.TestVillain();
-            test.addMinion(ObjectMother.TestMinion(), Minion.MinionType.End);
+            test.addMinion(ObjectMother.TestMinion());
             List<Minion> testList = new List<Minion>();
             testList.Add(ObjectMother.TestMinion());
             List<Minion> actual = test.getMinions();

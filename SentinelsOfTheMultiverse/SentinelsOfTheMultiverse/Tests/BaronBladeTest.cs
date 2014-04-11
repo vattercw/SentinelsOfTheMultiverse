@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using SentinelsOfTheMultiverse.Data.Villains;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -12,7 +13,9 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestHastenDoom()
         {
-            //test
+            Start game = new Start();
+            BaronBlade test = new BaronBlade();
+            test.HastenDoom();
         }
 
         [Test(), RequiresSTA]

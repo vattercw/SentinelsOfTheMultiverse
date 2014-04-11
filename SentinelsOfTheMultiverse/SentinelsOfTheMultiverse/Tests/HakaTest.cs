@@ -18,12 +18,12 @@ namespace SentinelsOfTheMultiverse.Tests
             //add mocks for GameEngine.getHeroes() and GameEngine.getVillain()
             ObjectMother.TestGame();
             Haka haka = (Haka)ObjectMother.TestHero();
-            Villain baronBlade = new BaronBlade();
-            //Minion min1 = ObjectMother.TestMinion();
+            Minion min1 = ObjectMother.TestMinion();
+            GameEngine.getVillain().addMinion(min1);
 
             Card rampageCard = new Card("Images\\Hero\\Haka\\Rampage.png", "Rampage");
             haka.Rampage(rampageCard);
-            Assert.AreEqual(baronBlade.lifeTotal, 38);
+            Assert.AreEqual(GameEngine.getVillain().lifeTotal, 38);
         }
 
         [Test(), RequiresSTA]
