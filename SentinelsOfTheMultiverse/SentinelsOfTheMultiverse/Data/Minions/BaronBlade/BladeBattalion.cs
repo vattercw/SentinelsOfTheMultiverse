@@ -24,7 +24,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
 
             for (int i = 0; i < GameEngine.getHeroes().Count; i++)
             {
-                if (highestHP.lifePoints < GameEngine.getHeroes()[i].lifePoints)
+                if (highestHP.lifeTotal < GameEngine.getHeroes()[i].lifeTotal)
                 {
                     highestHP = GameEngine.getHeroes()[i];
                 }

@@ -31,7 +31,7 @@ namespace SentinelsOfTheMultiverse.Data
         {
             BitmapImage src = new BitmapImage();
             src.BeginInit();
-            src.UriSource = new Uri(path, UriKind.Absolute);
+            src.UriSource = new Uri(path, UriKind.RelativeOrAbsolute);
             src.EndInit();
 
             return src;

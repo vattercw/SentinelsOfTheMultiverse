@@ -23,7 +23,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
         public static void FleshRepairNanites()
         {
-            GameEngine.getVillain().lifePoints += 10;
+            GameEngine.getVillain().lifeTotal += 10;
         }
 
         public static void DeviousDisruption()
@@ -38,7 +38,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
             for (int i = 0; i < GameEngine.getHeroes().Count; i++)
             {
-                if (lowestHP.lifePoints > GameEngine.getHeroes()[i].lifePoints)
+                if (lowestHP.lifeTotal > GameEngine.getHeroes()[i].lifeTotal)
                 {
                     lowestHP = GameEngine.getHeroes()[i];
                 }
@@ -48,7 +48,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
             for (int i = 0; i < GameEngine.getHeroes().Count; i++)
             {
-                if (highestHP.lifePoints < GameEngine.getHeroes()[i].lifePoints)
+                if (highestHP.lifeTotal < GameEngine.getHeroes()[i].lifeTotal)
                 {
                     highestHP = GameEngine.getHeroes()[i];
                 }
