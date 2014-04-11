@@ -27,10 +27,10 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             GameEngine.getVillain().lifeTotal += 10;
         }
 
-        public static void DeviousDisruption(Card card)
-        {
+        //public static void DeviousDisruption(Card card)
+        //{
 
-        }
+        //}
 
         public void SlashAndBurn(Card card)
         {
@@ -55,38 +55,46 @@ namespace SentinelsOfTheMultiverse.Data.Villains
                 }
             }
             int fireDamage = 2;
-
-            DamageEffects.DealDamageToHero(lowestHP, damage, DamageEffects.DamageType.Melee);
-            DamageEffects.DealDamageToHero(highestHP, damage + fireDamage, DamageEffects.DamageType.Fire);
-
-        }
-
-        public void ConsiderThePriceOfVictory(Card card)
-        {
-
-        }
-
-        //Ongoing Cards
-        public void LivingForceField(Card card)
-        {
+            if (lowestHP.Equals(highestHP))
+            {
+                DamageEffects.DealDamageToHero(highestHP, damage + fireDamage, DamageEffects.DamageType.Fire);
+            }
+            else
+            {
+                DamageEffects.DealDamageToHero(lowestHP, damage, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamageToHero(highestHP, damage + fireDamage, DamageEffects.DamageType.Fire);
+            }
 
         }
 
-        public void BacklashField(Card card)
-        {
+        //public void ConsiderThePriceOfVictory(Card card)
+        //{
 
-        }
+        //}
+
+        ////Ongoing Cards
+        //public void LivingForceField(Card card)
+        //{
+
+        //}
+
+        //public void BacklashField(Card card)
+        //{
+
+        //}
 
         //Devices and Minions
 
         public void PoweredRemoteTurret(Card card)
         {
-            GameEngine.getVillain().addMinion(new PoweredRemoteTurret());
+            PoweredRemoteTurret turret = new PoweredRemoteTurret();
+            GameEngine.getVillain().addMinion(turret);
         }
 
         public void MobileDefencePlatform(Card card)
         {
-            GameEngine.getVillain().addMinion(new MobileDefensePlatform());
+            MobileDefensePlatform platform = new MobileDefensePlatform();
+            GameEngine.getVillain().addMinion(platform);
         }
 
         public void ElementalRedistributor(Card card)
