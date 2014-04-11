@@ -53,13 +53,9 @@ namespace SentinelsOfTheMultiverse
         public GameBoard()
         {
             InitializeComponent();
-
             updateBoard();
-
             this.SizeToContent = SizeToContent.WidthAndHeight;
-
             DataContext = this;
-
         }
 
         public void updateBoard()
