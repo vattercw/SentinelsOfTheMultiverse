@@ -16,7 +16,8 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(),RequiresSTA]
         public void TestRampage(){
             //add mocks for GameEngine.getHeroes() and GameEngine.getVillain()
-            ObjectMother.TestGame();
+            Start game = new Start();
+            game.beginGame();
             Haka haka = (Haka)ObjectMother.TestHero();
             Minion min1 = ObjectMother.TestMinion();
             GameEngine.getVillain().addMinion(min1);

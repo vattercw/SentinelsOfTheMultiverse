@@ -15,7 +15,8 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestHastenDoom()
         {
-            ObjectMother.TestGame();
+            Start game = new Start();
+            game.beginGame();
             BaronBlade test = new BaronBlade();
             Card hastenCard = new Card("Images\\Villain\\BaronBlade\\HastenDoom.png", "HastenDoom");
             test.HastenDoom(hastenCard);
@@ -35,7 +36,9 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestFleshRepairNanites()
         {
-            ObjectMother.TestGame();
+            Start game = new Start();
+            game.beginGame();
+
             BaronBlade test = new BaronBlade();
             Card nanoCard = new Card("Images\\Villain\\BaronBlade\\FleshRepairNanites.png", "FleshRepairNanites");
             test.FleshRepairNanites(nanoCard);
@@ -46,7 +49,9 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestSlashAndBurn()
         {
-            ObjectMother.TestGame();
+            Start game = new Start();
+            game.beginGame();
+
             BaronBlade test = new BaronBlade();
             Card slashCard = new Card("Images\\Villain\\BaronBlade\\SlashAndBurn.png", "SlashAndBurn");
             test.SlashAndBurn(slashCard);
@@ -72,7 +77,8 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestTurret()
         {
-            ObjectMother.TestGame();
+            Start game = new Start();
+            game.beginGame();
             BaronBlade test = new BaronBlade();
             Card turretCard = new Card("Images\\Villain\\BaronBlade\\PoweredRemoteTurret.png", "PoweredRemoteTurret");
             test.PoweredRemoteTurret(turretCard);
@@ -83,7 +89,8 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestPlatform()
         {
-            ObjectMother.TestGame();
+            Start game = new Start();
+            game.beginGame();
             BaronBlade test = new BaronBlade();
             Card platCard = new Card("Images\\Villain\\BaronBlade\\MobileDefencePlatform.png", "MobileDefencePlatform");
             test.MobileDefencePlatform(platCard);
@@ -94,7 +101,8 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestRedistributor()
         {
-            ObjectMother.TestGame();
+            Start game = new Start();
+            game.beginGame();
             BaronBlade test = new BaronBlade();
             Card redistCard = new Card("Images\\Villain\\BaronBlade\\ElementalRedistributor.png", "ElementalRedistributor");
             test.ElementalRedistributor(redistCard);
@@ -105,7 +113,8 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestBattalion()
         {
-            ObjectMother.TestGame();
+            Start game = new Start();
+            game.beginGame();
             BaronBlade test = new BaronBlade();
             Card battleCard = new Card("Images\\Villain\\BaronBlade\\BladeBattalion.png", "BladeBattalion");
             test.BladeBattalion(battleCard);

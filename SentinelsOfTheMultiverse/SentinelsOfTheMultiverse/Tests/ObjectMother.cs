@@ -33,11 +33,5 @@ namespace SentinelsOfTheMultiverse.Tests
             return new BladeBattalion();
         }
 
-        public static void TestGame()
-        {
-            Start test = new Start();
-            test.beginGame();
-
-        }
     }
 }

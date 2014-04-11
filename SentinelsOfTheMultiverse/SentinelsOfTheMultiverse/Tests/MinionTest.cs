@@ -62,6 +62,24 @@ namespace SentinelsOfTheMultiverse.Tests
         }
 
         [Test, RequiresSTA]
+        public void TestMobileDefenseExecute()
+        {
+            Start game = new Start();
+            game.beginGame();
+            Minion minionTest = new PoweredRemoteTurret();
+            GameEngine.getVillain().addMinion(minionTest);
+            List<Minion> minions = GameEngine.getVillain().getEndPhaseMinions();
+            for (int i = 0; i < minions.Count; i++)
+            {
+                minions[i].executeEffect();
+            }
+            for (int i = 0; i < GameEngine.getHeroes().Count; i++)
+            {
+                Assert.AreEqual(GameEngine.getHeroes()[i].lifeTotal, 32);
+            }
+        }
+
+        [Test, RequiresSTA]
         public void TestRemoteTurretInitalization()
         {
             Minion minionTest = new PoweredRemoteTurret();
