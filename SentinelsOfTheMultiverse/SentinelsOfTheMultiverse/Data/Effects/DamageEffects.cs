@@ -33,15 +33,13 @@ namespace SentinelsOfTheMultiverse.Data.Effects
             }
             if (villain != null)
             {
-                int totalVillainDamage = villain.getDamageAmplification() + damageAmount;
-                DealDamageToVillain(villain, totalVillainDamage, damageType);
+                DealDamageToVillain(villain, damageAmount, damageType);
             }
             if (minions != null)
             {
                 foreach (Minion minion in minions)
                 {
-                    int totalMinionDamage = minion.getDamageAmplification() + damageAmount; //TODO: + getGlobalDamageAmplification();
-                    DealDamageToMinion(minion, totalMinionDamage, damageType);
+                    DealDamageToMinion(minion, damageAmount, damageType);
                 }
             }
         }
@@ -64,13 +62,14 @@ namespace SentinelsOfTheMultiverse.Data.Effects
         {
             if (vil != null)
             {
-                int totalDamage = vil.getDamageAmplification() + damageAmount;
-                vil.lifeTotal -= totalDamage;
+                int totalVillainDamage = vil.damageAmplificationToPlayer + damageAmount;
+                vil.lifeTotal -= totalVillainDamage;
             }
         }
 
         public static void DealDamageToMinion(Minion targetMinion, int damageAmount, DamageType damageType)
         {
+            int totalMinionDamage = targetMinion.getDamageAmplification() + damageAmount; //TODO: + getGlobalDamageAmplification();
             //TODO: deal damage to minion
         }
     }

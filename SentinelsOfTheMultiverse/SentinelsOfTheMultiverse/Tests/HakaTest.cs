@@ -54,5 +54,29 @@ namespace SentinelsOfTheMultiverse.Tests
             Assert.AreEqual(startingLifeTotal - 3, haka.lifeTotal);
         }
 
+        [Test(), RequiresSTA]
+        public void TestHakaOfBattle()
+        {
+            Start game = new Start();
+            game.beginGame();
+            Haka haka = (Haka)ObjectMother.TestHero();
+            Card hakaOfBattleCard = new Card("Images\\Hero\\Haka\\HakaOfBattle.png", "HakaOfBattle");
+            int startLifeTotal = GameEngine.getVillain().lifeTotal;
+            int startHandCount = haka.hand.Count;
+
+            haka.DiscardCard(haka.hand[0]);
+
+            haka.HakaOfBattle(hakaOfBattleCard);
+            int damageAmount= 2 +haka.damageAmplificationFromPlayer;
+            DamageEffects.DealDamageToVillain(GameEngine.getVillain(), damageAmount, DamageEffects.DamageType.Melee);
+            Assert.AreEqual(GameEngine.getVillain().lifeTotal, startLifeTotal-3);
+
+            //needs to reset haka's damage amp after first damage has been used
+            int damageAmount2 = 2 + haka.damageAmplificationFromPlayer;
+            DamageEffects.DealDamageToVillain(GameEngine.getVillain(), damageAmount, DamageEffects.DamageType.Melee);
+            Assert.AreEqual(GameEngine.getVillain().lifeTotal, startLifeTotal - 5);
+
+            //also need to test that it doesn't use the bonus damage until he is dealing it for the first time
+        }
     }
 }

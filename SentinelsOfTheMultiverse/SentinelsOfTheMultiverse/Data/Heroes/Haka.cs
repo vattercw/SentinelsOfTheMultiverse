@@ -56,9 +56,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 //TODO: tell user they must discard at least one card
                 throw new NotImplementedException("user must discard at least one card");
             }
+            //check that only happens once
             damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
             card.SendToGraveyard(this, cardsOnField);
         }
+
         
         public void TaMoko(Card card)
         {

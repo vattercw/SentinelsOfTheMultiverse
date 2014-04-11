@@ -67,13 +67,6 @@ namespace SentinelsOfTheMultiverse.Data
             }
         }
 
-
-        internal int getDamageAmplification()
-        {
-            //TODO: add damage amplification
-            return 0;
-        }
-
         internal List<Minion> getStartPhaseMinions()
         {
             return startTurnMinion;
