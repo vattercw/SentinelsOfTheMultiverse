@@ -22,14 +22,17 @@ namespace SentinelsOfTheMultiverse.Data
         {
             get
             {
-                return damageAmplification;
+                return _damageAmplification;
             }
             set
             {
-                damageAmplification = value;
+                _damageAmplification = value;
             }
         }
 
+        #endregion
+        #region PrivateFields
+            private int _damageAmplification;
         #endregion
 
         public abstract void playerTurn(bool playedCard, bool playedPower);
