@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Media.Effects;
 
 namespace SentinelsOfTheMultiverse
 {
@@ -76,6 +77,7 @@ namespace SentinelsOfTheMultiverse
             Content = gridLayout;
         }
 
+        #region LabelsAndButtons
         private void addCurrentPlayerLabel()
         {
             Label currentPlayerLabel = new Label();
@@ -108,6 +110,7 @@ namespace SentinelsOfTheMultiverse
             Utility.addElementToGrid(showHandButton, 0, 0, gridLayout);
         }
 
+        #endregion
         private void updatePlayersBoard()
 	    {
 	        Villain villain = GameEngine.getVillain();
@@ -143,6 +146,14 @@ namespace SentinelsOfTheMultiverse
 	    }
 
 
+        #region HandViewer
+        private void View_Hand(object sender, RoutedEventArgs e)
+        {
+            initHandViewer();
+            handViewer.Visibility = Utility.SHOW;
+            Button handVisibleButton = (Button)sender;
+        }
+
         public void initHandViewer()
         {
             Hero currentPlayer= (Hero)GameEngine.getCurrentPlayer();
@@ -151,9 +162,26 @@ namespace SentinelsOfTheMultiverse
                 handViewer = new ViewHand(currentPlayer.getPlayerHand(), this);
             }
 		}
-		
+
+        internal void drawCardSelected(Card cardClicked)
+        {
+            Hero hero = (Hero)GameEngine.getCurrentPlayer();
+            for (int i = 0; i < hero.getPlayerHand().Count; i++)
+            {
+                if (hero.getPlayerHand()[i].Equals(cardClicked))
+                {
+                    drawThisCard = hero.getPlayerHand()[i];
+                    hero.getPlayerHand().RemoveAt(i);
+                    break;
+                }
+            }
+            ((Hero)GameEngine.getCurrentPlayer()).cardsOnField.Add(drawThisCard);
+        }
+        #endregion
+
         private Grid initGrid()
         {
+            removeHandlers();
             gridLayout.Children.RemoveRange(0, gridLayout.Children.Count);
             Grid myGrid = new Grid();
 
@@ -254,20 +282,8 @@ namespace SentinelsOfTheMultiverse
             return NEXT_CARD - 1;
         }
 
-        private void View_Hand(object sender, RoutedEventArgs e)
-        {
-            initHandViewer();
-            handViewer.Visibility = Utility.SHOW;
-            Button handVisibleButton = (Button)sender;         
-        }
-
         private void Mouse_Click_Listener(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 1)
-            {
-                Card_Selection_Handler(sender, e);
-            }
-
             if (e.ClickCount == 2)
             {
                 Image expandCard = (Image)sender;
@@ -276,22 +292,37 @@ namespace SentinelsOfTheMultiverse
 
                 showCard.Show();
             }
+            else if (e.ClickCount == 1)
+            {
+                Card_Selection_Handler(sender, e);
+            }
         }
-
-        internal void drawCardSelected(Card cardClicked)
+        #region Handlers
+        public void removeHandlers()
         {
-            Hero hero = (Hero)GameEngine.getCurrentPlayer();
-            for(int i = 0; i < hero.getPlayerHand().Count; i++){
-                if (hero.getPlayerHand()[i].Equals(cardClicked))
+            Villain villain = GameEngine.getVillain();
+            GameEnvironment env = GameEngine.getEnvironment();
+
+            for (int i = 0; i < GameEngine.getHeroes().Count; i++)
+            {
+                Hero hero = GameEngine.getHeroes()[i];
+
+                for (int k = 0; k < hero.cardsOnField.Count; k++)
                 {
-                    drawThisCard = hero.getPlayerHand()[i];
-                    hero.getPlayerHand().RemoveAt(i);
-                    break;
+                    hero.cardsOnField[k].cardImage.MouseDown -= new MouseButtonEventHandler(Mouse_Click_Listener);
                 }
             }
-            ((Hero)GameEngine.getCurrentPlayer()).cardsOnField.Add(drawThisCard);
-        }
 
+            for (int k = 0; k < villain.cardsOnField.Count; k++)
+            {
+                villain.cardsOnField[k].cardImage.MouseDown -= new MouseButtonEventHandler(Mouse_Click_Listener);
+            }
+
+            for (int k = 0; k < env.cardsOnField.Count; k++)
+            {
+                env.cardsOnField[k].cardImage.MouseDown -= new MouseButtonEventHandler(Mouse_Click_Listener);
+            }
+        }
         public void Clear_Selection(object sender, RoutedEventArgs e)
         {
             for (int k = 0; k < imageSelectedArray.Count; k++)
@@ -307,6 +338,10 @@ namespace SentinelsOfTheMultiverse
 
         public void Card_Selection_Handler(object sender, RoutedEventArgs e)
         {
+            var heroGlow = Utility.selectionGlowHero();
+            var villainGlow = Utility.selectionGlowVillain();
+            var envGlow = Utility.selectionGlowEnvironment();
+
             if (!imageSelectedArray.Contains((Image)sender)) imageSelectedArray.Add((Image)sender);
 
             Hero hero = GameEngine.getHeroes()[GameEngine.getPlayerTurn()];
@@ -314,11 +349,10 @@ namespace SentinelsOfTheMultiverse
             {
                 for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    if (hero.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(hero.cardsOnField[i]))
+                    if (hero.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source)
                     {
-                        if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowHero();
-                        cardClickedArray.Add(hero.cardsOnField[i]);
-                        break;
+                        selectDeselectCard(hero.cardsOnField, i, k, heroGlow);
+                        return;
                     }
                 }
             }
@@ -328,11 +362,10 @@ namespace SentinelsOfTheMultiverse
             {
                 for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    if (villain.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(villain.cardsOnField[i]))
+                    if (villain.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source)
                     {
-                        if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowVillain();
-                        cardClickedArray.Add(villain.cardsOnField[i]);
-                        break;
+                        selectDeselectCard(villain.cardsOnField, i, k, villainGlow);
+                        return;
                     }
                 }
             }
@@ -342,15 +375,21 @@ namespace SentinelsOfTheMultiverse
             {
                 for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    if (env.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(env.cardsOnField[i]))
+                    if (env.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source)
                     {
-                        if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowEnvironment();
-                        cardClickedArray.Add(env.cardsOnField[i]);
-                        break;
+                        selectDeselectCard(env.cardsOnField, i, k, envGlow);
+                        return;
                     }
                 }
             }
         }
 
+        public void selectDeselectCard(List<Card> fieldCards, int fieldPosition, int boardPosition, DropShadowEffect glowEffect)
+        {
+            if (imageSelectedArray[boardPosition].Effect == null) imageSelectedArray[boardPosition].Effect = Utility.selectionGlowHero();
+            if (!cardClickedArray.Contains(fieldCards[fieldPosition])) cardClickedArray.Add(fieldCards[fieldPosition]);
+            else { cardClickedArray.Remove(fieldCards[fieldPosition]); imageSelectedArray[boardPosition].Effect = null; imageSelectedArray.RemoveAt(boardPosition); }
+        }
+        #endregion
     }
 }

@@ -167,14 +167,20 @@ namespace SentinelsOfTheMultiverse
             {
                 for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    if (handShow[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(handShow[i]))
+                    if (handShow[i].cardImage.Source == imageSelectedArray[k].Source)
                     {
-                        if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowHero();
-                        cardClickedArray.Add(handShow[i]);
-                        break; 
+                        selectDeselectCard(i, k);
+                        return;
                     }
                 }
             }
+        }
+
+        public void selectDeselectCard(int handPosition, int boardPosition)
+        {
+            if (imageSelectedArray[boardPosition].Effect == null) imageSelectedArray[boardPosition].Effect = Utility.selectionGlowHero();
+            if (!cardClickedArray.Contains(handShow[handPosition])) cardClickedArray.Add(handShow[handPosition]);
+            else { cardClickedArray.Remove(handShow[handPosition]); imageSelectedArray[boardPosition].Effect = null; imageSelectedArray.RemoveAt(boardPosition); }
         }
 
         public Grid initGrid(List<Card> handToShow)
