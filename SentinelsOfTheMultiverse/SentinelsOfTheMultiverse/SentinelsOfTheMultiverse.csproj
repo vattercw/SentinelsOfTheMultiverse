@@ -156,6 +156,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Hero\Haka\Dominion.png" />
+    <Resource Include="Images\Hero\Legacy\BackfistStrike.png" />
+    <Resource Include="Images\Hero\Legacy\BolsterAllies.png" />
+    <Resource Include="Images\Hero\Legacy\DangerSense.png" />
+    <Resource Include="Images\Hero\Legacy\FlyingSmash.png" />
+    <Resource Include="Images\Hero\Legacy\Fortitude.png" />
+    <Resource Include="Images\Hero\Legacy\HeroicInterception.png" />
+    <Resource Include="Images\Hero\Legacy\InspiringPresence.png" />
+    <Resource Include="Images\Hero\Legacy\LeadFromTheFront.png" />
+    <Resource Include="Images\Hero\Legacy\MotivationalCharge.png" />
+    <Resource Include="Images\Hero\Legacy\NextEvolution.png" />
+    <Resource Include="Images\Hero\Legacy\NonPlayable\legacy_back.png" />
+    <Resource Include="Images\Hero\Legacy\NonPlayable\legacy_cover.png" />
+    <Resource Include="Images\Hero\Legacy\NonPlayable\legacy_death.png" />
+    <Resource Include="Images\Hero\Legacy\NonPlayable\legacy_hero.png" />
+    <Resource Include="Images\Hero\Legacy\SuperhumanDurability.png" />
+    <Resource Include="Images\Hero\Legacy\SurgeOfStrength.png" />
+    <Resource Include="Images\Hero\Legacy\TakeDown.png" />
+    <Resource Include="Images\Hero\Legacy\TheLegacyRing.png" />
+    <Resource Include="Images\Hero\Legacy\Thokk.png" />
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_back.png" />
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_death.png" />
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_hero.png" />
