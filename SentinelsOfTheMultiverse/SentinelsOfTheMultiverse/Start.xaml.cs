@@ -33,13 +33,6 @@ namespace SentinelsOfTheMultiverse
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private void Start_Game(object sender, RoutedEventArgs e)
         {
-            //methods.Add(doPoop);
-            //methods.Add(doPoop2);
-            
-            //foreach (del method in methods)
-            //{
-            //    method();
-            //}
 
             beginGame();
             GameBoard game = new GameBoard();
@@ -47,21 +40,6 @@ namespace SentinelsOfTheMultiverse
             this.Close();
         }
 
-        #region DELETE THIS SHIT
-        delegate void del();
-        List<del> methods = new List<del>();
-
-        void doPoop()
-        {
-            Console.WriteLine("fuck you ");
-        }
-
-        void doPoop2()
-        {
-            Console.WriteLine("poop2");
-        }
-
-        #endregion
 
         public void beginGame()
         {
@@ -73,6 +51,7 @@ namespace SentinelsOfTheMultiverse
             heroesStr.Add(GameEngine.HERO_NAMESPACE + "Haka");
 
             GameEngine.initPlayers(heroesStr, _villainStr, _envStr);
+
         }
     }
 }
