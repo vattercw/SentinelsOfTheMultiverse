@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 
 namespace SentinelsOfTheMultiverse
 {
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    //[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public partial class ViewCard : Window
     {
         public ViewCard(ImageSource cardImage)

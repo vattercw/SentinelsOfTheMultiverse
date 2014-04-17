@@ -25,7 +25,7 @@ namespace SentinelsOfTheMultiverse.Tests
 
             Card rampageCard = new Card("Images\\Hero\\Haka\\Rampage.png", "Rampage");
             haka.Rampage(rampageCard);
-            Assert.AreEqual(GameEngine.getVillain().lifeTotal, 38);
+            Assert.AreEqual(GameEngine.getVillain().lifeTotal, 35);
         }
 
         [Test(), RequiresSTA]
