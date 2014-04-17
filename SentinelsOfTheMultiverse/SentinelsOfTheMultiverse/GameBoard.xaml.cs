@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Media.Effects;
+using SentinelsOfTheMultiverse.Data.Effects;
 
 namespace SentinelsOfTheMultiverse
 {
@@ -62,9 +63,7 @@ namespace SentinelsOfTheMultiverse
         public void updateBoard()
         {
             gridLayout = initGrid();
-
-            addShowHandButton();
-
+            initButtons();
             addCurrentPlayerLabel();
 
             List<Hero> heroes = GameEngine.getHeroes();
@@ -100,14 +99,28 @@ namespace SentinelsOfTheMultiverse
             Utility.addElementToGrid(playerHealthLabel, row, 0, gridLayout);
         }
 
-        private void addShowHandButton()
+        private void initButtons()
         {
             Button showHandButton = new Button();
             showHandButton.Content = "Show Your Hand!";
             showHandButton.Width = 150;
             showHandButton.Height = 50;
             showHandButton.Click += new RoutedEventHandler(View_Hand);
-            Utility.addElementToGrid(showHandButton, 0, 0, gridLayout);
+            Utility.addElementToGrid(showHandButton, 4, 0, gridLayout);
+
+            Button cancelSelectionButton = new Button();
+            cancelSelectionButton.Content = "Cancel Selection";
+            cancelSelectionButton.Width = 150;
+            cancelSelectionButton.Height = 50;
+            cancelSelectionButton.Click += new RoutedEventHandler(Clear_Selection);
+            Utility.addElementToGrid(cancelSelectionButton, 4, 2, gridLayout);
+
+            Button discardButton = new Button();
+            discardButton.Content = "Discard From Field";
+            discardButton.Width = 150;
+            discardButton.Height = 50;
+            discardButton.Click += new RoutedEventHandler(Discard_Action);
+            Utility.addElementToGrid(discardButton, 4, 3, gridLayout);
         }
 
         #endregion
@@ -338,10 +351,6 @@ namespace SentinelsOfTheMultiverse
 
         public void Card_Selection_Handler(object sender, RoutedEventArgs e)
         {
-            var heroGlow = Utility.selectionGlowHero();
-            var villainGlow = Utility.selectionGlowVillain();
-            var envGlow = Utility.selectionGlowEnvironment();
-
             if (!imageSelectedArray.Contains((Image)sender)) imageSelectedArray.Add((Image)sender);
 
             Hero hero = GameEngine.getHeroes()[GameEngine.getPlayerTurn()];
@@ -349,9 +358,10 @@ namespace SentinelsOfTheMultiverse
             {
                 for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    if (hero.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source)
+                    if (hero.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(hero.cardsOnField[i]))
                     {
-                        selectDeselectCard(hero.cardsOnField, i, k, heroGlow);
+                        if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowHero();
+                        cardClickedArray.Add(hero.cardsOnField[i]);
                         return;
                     }
                 }
@@ -362,9 +372,10 @@ namespace SentinelsOfTheMultiverse
             {
                 for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    if (villain.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source)
+                    if (villain.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(villain.cardsOnField[i]))
                     {
-                        selectDeselectCard(villain.cardsOnField, i, k, villainGlow);
+                        if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowVillain();
+                        cardClickedArray.Add(villain.cardsOnField[i]);
                         return;
                     }
                 }
@@ -375,21 +386,33 @@ namespace SentinelsOfTheMultiverse
             {
                 for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    if (env.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source)
+                    if (env.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(env.cardsOnField[i]))
                     {
-                        selectDeselectCard(env.cardsOnField, i, k, envGlow);
+                        if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowEnvironment();
+                        cardClickedArray.Add(env.cardsOnField[i]);
                         return;
                     }
                 }
             }
         }
 
-        public void selectDeselectCard(List<Card> fieldCards, int fieldPosition, int boardPosition, DropShadowEffect glowEffect)
+        private void Discard_Action(object sender, RoutedEventArgs e)
         {
-            if (imageSelectedArray[boardPosition].Effect == null) imageSelectedArray[boardPosition].Effect = Utility.selectionGlowHero();
-            if (!cardClickedArray.Contains(fieldCards[fieldPosition])) cardClickedArray.Add(fieldCards[fieldPosition]);
-            else { cardClickedArray.Remove(fieldCards[fieldPosition]); imageSelectedArray[boardPosition].Effect = null; imageSelectedArray.RemoveAt(boardPosition); }
+            var currentPlayer = GameEngine.getCurrentPlayer();
+
+            foreach (Card toDiscard in cardClickedArray){
+                if(currentPlayer.cardsOnField.Contains(toDiscard)) toDiscard.SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
+            }
+            cardClickedArray.Clear();
+            updateBoard();
         }
+
+        //public void selectDeselectCard(List<Card> fieldCards, int fieldPosition, int boardPosition, DropShadowEffect glowEffect)
+        //{
+        //    if (imageSelectedArray[boardPosition].Effect == null) imageSelectedArray[boardPosition].Effect = Utility.selectionGlowHero();
+        //    if (!cardClickedArray.Contains(fieldCards[fieldPosition])) cardClickedArray.Add(fieldCards[fieldPosition]);
+        //    else { cardClickedArray.Remove(fieldCards[fieldPosition]); imageSelectedArray[boardPosition].Effect = null; imageSelectedArray.RemoveAt(boardPosition); }
+        //}
         #endregion
     }
 }
