@@ -8,8 +8,8 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 {
     public static class DamageEffects
     {
-        event AttackEventHandler Attack;
-        internal delegate void AttackEventHandler(object sender, EventArgs e);
+        //event AttackEventHandler Attack;
+        //internal delegate void AttackEventHandler(object sender, EventArgs e);
 
         public enum DamageType { Projectile, Fire, Ice, Melee, Toxic };
         private static int _globalDamageAmplification;

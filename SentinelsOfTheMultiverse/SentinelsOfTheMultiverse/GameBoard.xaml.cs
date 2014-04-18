@@ -42,8 +42,6 @@ namespace SentinelsOfTheMultiverse
             private readonly int VILLAIN_ROW=1;
             private readonly int ENVIRONMENT_ROW=0;
             private readonly int HERO_ROW = 2;    
-        
-            private readonly double CARD_HEIGHT=200;
 
             private readonly int DECK_COLUMN=3;
             private readonly int CHARACTER_COLUMN= 1;
@@ -134,27 +132,24 @@ namespace SentinelsOfTheMultiverse
                 Hero hero = GameEngine.getHeroes()[i];
 
 	            for(int k = 0; k < hero.cardsOnField.Count; k++){
-                    hero.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
-	                hero.cardsOnField[k].cardImage.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
+	                hero.cardsOnField[k].MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
-	                Utility.addElementToGrid(hero.cardsOnField[k].cardImage, HERO_ROW + i, k+4, gridLayout);
+	                Utility.addElementToGrid(hero.cardsOnField[k], HERO_ROW + i, k+4, gridLayout);
 	            }
 	        }
 
             for (int k = 0; k < villain.cardsOnField.Count; k++)
             {
-                villain.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
-                villain.cardsOnField[k].cardImage.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
+                villain.cardsOnField[k].MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
-                Utility.addElementToGrid(villain.cardsOnField[k].cardImage, VILLAIN_ROW, k + 4, gridLayout);
+                Utility.addElementToGrid(villain.cardsOnField[k], VILLAIN_ROW, k + 4, gridLayout);
             }
 
             for (int k = 0; k < env.cardsOnField.Count; k++)
             {
-                env.cardsOnField[k].cardImage.Height = CARD_HEIGHT;
-                env.cardsOnField[k].cardImage.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
+                env.cardsOnField[k].MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
-                Utility.addElementToGrid(env.cardsOnField[k].cardImage, ENVIRONMENT_ROW, k + 4, gridLayout);
+                Utility.addElementToGrid(env.cardsOnField[k], ENVIRONMENT_ROW, k + 4, gridLayout);
             }
 	    }
 
@@ -227,67 +222,60 @@ namespace SentinelsOfTheMultiverse
         private void drawHeroTemplate(Hero hero, int currentHeroRow)
         {
             string heroName = hero.getCharacterName();
-            ImageSource deckBack = Utility.getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png");
-            ImageSource characterCard = Utility.getImageSource(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png");
+            Card deckBack =new Card(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png", "deckback");
+            Card characterCard = new Card(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png", "heroCard");
             
-            Image heroCharacterImg = CardImageFromImageSource(characterCard);
-            Utility.addElementToGrid(heroCharacterImg, currentHeroRow, CHARACTER_COLUMN, gridLayout);
-
-            Image deckBackImg = CardImageFromImageSource(deckBack);
-            Utility.addElementToGrid(deckBackImg, currentHeroRow, DECK_COLUMN, gridLayout);
+            Utility.addElementToGrid(characterCard, currentHeroRow, CHARACTER_COLUMN, gridLayout);
+            Utility.addElementToGrid(deckBack, currentHeroRow, DECK_COLUMN, gridLayout);
 
             addHealthLabel(hero, currentHeroRow);
 
-            ImageSource graveyardSrc;
+            //TODO: Graveyard not sure if this hsould be the card or the image changed.
+            Card graveYardImg = new Card(GRAVEYARD_IMAGE_PATH, "Graveyard_Placeholder");
             if (hero.graveyard.Count == 0)
             {
-                graveyardSrc = Utility.getImageSource(GRAVEYARD_IMAGE_PATH);
-            }else{
-                graveyardSrc = hero.graveyard[hero.graveyard.Count-1].cardImage.Source;
+                graveYardImg.Source = Utility.getImageSource(GRAVEYARD_IMAGE_PATH);
             }
-            Image graveYardImg = CardImageFromImageSource(graveyardSrc);
+            else
+            {
+                graveYardImg.Source = hero.graveyard[hero.graveyard.Count - 1].Source;
+            }
             Utility.addElementToGrid(graveYardImg, currentHeroRow, GRAVEYARD_COLUMN, gridLayout);
         }
 
         private void drawNPCBoard(Villain villain, GameEnvironment env)
         {
             string villainName = villain.getCharacterName();
-            ImageSource villainCard = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png");
-            ImageSource villainDeckSrc = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
-            ImageSource villainInstSrc = Utility.getImageSource(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
-            ImageSource envDeckSrc = Utility.getImageSource("Images/Environment/" + env.characterName + "/NonPlayable/" + "insula_primus_back.png");
+            Card villainCard= new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png", villainName+"_initial");
+            Card villainDeck = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png", villainName+"_back");
+            Card villainInst = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png", villainName+"_instr_front");
+            Card envDeck = new Card("Images/Environment/" + env.characterName + "/NonPlayable/" + "insula_primus_back.png", "insula_primus_back");
 
-            Image villainImage= CardImageFromImageSource(villainCard);
-            Utility.addElementToGrid(villainImage, VILLAIN_ROW, CHARACTER_COLUMN, gridLayout);
-
-            Image instructionImage = CardImageFromImageSource(villainInstSrc);
-            Utility.addElementToGrid(instructionImage, VILLAIN_ROW, INSTRUCTION_COLUMN, gridLayout);
-
-            Image villainDeckImage = CardImageFromImageSource(villainDeckSrc);
-            Utility.addElementToGrid(villainDeckImage, VILLAIN_ROW, DECK_COLUMN, gridLayout);
+            Utility.addElementToGrid(villainCard, VILLAIN_ROW, CHARACTER_COLUMN, gridLayout);
+            Utility.addElementToGrid(villainInst, VILLAIN_ROW, INSTRUCTION_COLUMN, gridLayout);
+            Utility.addElementToGrid(villainDeck, VILLAIN_ROW, DECK_COLUMN, gridLayout);
 
             addHealthLabel(villain, VILLAIN_ROW);
 
-            Image envDeckImg = CardImageFromImageSource(envDeckSrc);
-            Utility.addElementToGrid(envDeckImg, ENVIRONMENT_ROW, DECK_COLUMN, gridLayout);
-            
-            ImageSource graveyardSrc = Utility.getImageSource(GRAVEYARD_IMAGE_PATH);
-            Image envGraveYardImg = CardImageFromImageSource(graveyardSrc);
-            Utility.addElementToGrid(envGraveYardImg, ENVIRONMENT_ROW, GRAVEYARD_COLUMN, gridLayout);
+            Utility.addElementToGrid(envDeck, ENVIRONMENT_ROW, DECK_COLUMN, gridLayout);
 
-            Image villainGraveYardImg = CardImageFromImageSource(graveyardSrc);
-            Utility.addElementToGrid(villainGraveYardImg, VILLAIN_ROW, GRAVEYARD_COLUMN, gridLayout);
+
+            Card envGraveyard = new Card(GRAVEYARD_IMAGE_PATH, "Graveyard_Placeholder");
+            Utility.addElementToGrid(envGraveyard, ENVIRONMENT_ROW, GRAVEYARD_COLUMN, gridLayout);
+
+            Card villainGraveYard = new Card(GRAVEYARD_IMAGE_PATH, "Graveyard_Placeholder");
+            Utility.addElementToGrid(villainGraveYard, VILLAIN_ROW, GRAVEYARD_COLUMN, gridLayout);
         }
 
-        private Image CardImageFromImageSource(ImageSource imgSrc)
-        {
-            Image tempImage = new Image();
-            tempImage.Height = CARD_HEIGHT;
-            tempImage.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
-            tempImage.Source = imgSrc;
-            tempImage.Margin = Utility.cardSpacing;
-            return tempImage;
-        }
+        //private Image CardImageFromImageSource(ImageSource imgSrc)
+        //{
+        //    Image tempImage = new Image();
+        //    tempImage.Height = CARD_HEIGHT;
+        //    tempImage.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
+        //    tempImage.Source = imgSrc;
+        //    tempImage.Margin = Utility.cardSpacing;
+        //    return tempImage;
+        //}
 
         private int getNextCard()
         {
@@ -299,7 +287,7 @@ namespace SentinelsOfTheMultiverse
         {
             if (e.ClickCount == 2)
             {
-                Image expandCard = (Image)sender;
+                Card expandCard = (Card)sender;
 
                 ViewCard showCard = new ViewCard(expandCard.Source);
 
@@ -322,18 +310,18 @@ namespace SentinelsOfTheMultiverse
 
                 for (int k = 0; k < hero.cardsOnField.Count; k++)
                 {
-                    hero.cardsOnField[k].cardImage.MouseDown -= new MouseButtonEventHandler(Mouse_Click_Listener);
+                    hero.cardsOnField[k].MouseDown -= new MouseButtonEventHandler(Mouse_Click_Listener);
                 }
             }
 
             for (int k = 0; k < villain.cardsOnField.Count; k++)
             {
-                villain.cardsOnField[k].cardImage.MouseDown -= new MouseButtonEventHandler(Mouse_Click_Listener);
+                villain.cardsOnField[k].MouseDown -= new MouseButtonEventHandler(Mouse_Click_Listener);
             }
 
             for (int k = 0; k < env.cardsOnField.Count; k++)
             {
-                env.cardsOnField[k].cardImage.MouseDown -= new MouseButtonEventHandler(Mouse_Click_Listener);
+                env.cardsOnField[k].MouseDown -= new MouseButtonEventHandler(Mouse_Click_Listener);
             }
         }
         public void Clear_Selection(object sender, RoutedEventArgs e)
@@ -358,7 +346,7 @@ namespace SentinelsOfTheMultiverse
             {
                 for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    if (hero.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(hero.cardsOnField[i]))
+                    if (hero.cardsOnField[i].Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(hero.cardsOnField[i]))
                     {
                         if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowHero();
                         cardClickedArray.Add(hero.cardsOnField[i]);
@@ -372,7 +360,7 @@ namespace SentinelsOfTheMultiverse
             {
                 for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    if (villain.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(villain.cardsOnField[i]))
+                    if (villain.cardsOnField[i].Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(villain.cardsOnField[i]))
                     {
                         if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowVillain();
                         cardClickedArray.Add(villain.cardsOnField[i]);
@@ -386,7 +374,7 @@ namespace SentinelsOfTheMultiverse
             {
                 for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    if (env.cardsOnField[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(env.cardsOnField[i]))
+                    if (env.cardsOnField[i].Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(env.cardsOnField[i]))
                     {
                         if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowEnvironment();
                         cardClickedArray.Add(env.cardsOnField[i]);
