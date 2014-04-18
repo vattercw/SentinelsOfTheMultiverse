@@ -71,6 +71,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public void TheLegacyRing(Card card)
         {
             this.numPowers = 2;
+            this.numPowers = RujiRaviRIYANPIDNHAJSHFLHKAQEWGF is my namespace.org;
         }
 
         public void TakeDown(Card card)
