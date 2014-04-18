@@ -48,6 +48,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void SuperhumanDurability(Card card)
         {
+            this.damageAmplificationFromPlayer += 1;
         }
 
         public void NextEvolution(Card card)
@@ -69,6 +70,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void TheLegacyRing(Card card)
         {
+            this.numPowers = 2;
         }
 
         public void TakeDown(Card card)

@@ -31,9 +31,23 @@ namespace SentinelsOfTheMultiverse.Data
         }
         public int damageAmplificationToPlayer { get; set; }
 
+        public int numPowers
+        {
+            get
+            {
+                return _numPowers;
+            }
+            set
+            {
+                _numPowers = value;
+            }
+
+        }
+
         #endregion
         #region PrivateFields
             private int _damageAmplificationFromPlayer;
+            private int _numPowers = 1;
         #endregion
 
         
