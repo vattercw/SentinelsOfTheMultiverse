@@ -132,14 +132,9 @@ namespace SentinelsOfTheMultiverse
 
         private void Cancel_Action(object sender, RoutedEventArgs e)
         {
-            for(int k = 0; k < imageSelectedArray.Count; k++)
-            {
-                if (imageSelectedArray[k] != null)
-                {
-                    imageSelectedArray[k].Effect = null;
-                }
+            foreach(Card clearCard in cardClickedArray){
+                clearCard.Effect = null;
             }
-            imageSelectedArray.Clear();
             cardClickedArray.Clear();
         }
 
@@ -151,6 +146,7 @@ namespace SentinelsOfTheMultiverse
                 Grid.SetColumn(handShow[k], k);
                 handShow[k].AddHandler(UIElement.MouseDownEvent, new RoutedEventHandler(Card_Selection_Handler), true);
 
+                handShow[k].Height = 400;
                 handShow[k].Margin = Utility.cardSpacing;
 
                 cardLayout.Children.Add(handShow[k]);
@@ -171,13 +167,6 @@ namespace SentinelsOfTheMultiverse
                 cardClickedArray.Remove(cardClicked);
             }
         }
-
-        //public void selectDeselectCard(int handPosition, int boardPosition)
-        //{
-        //    if (imageSelectedArray[boardPosition].Effect == null) imageSelectedArray[boardPosition].Effect = Utility.selectionGlowHero();
-        //    if (!cardClickedArray.Contains(handShow[handPosition])) cardClickedArray.Add(handShow[handPosition]);
-        //    else { cardClickedArray.Remove(handShow[handPosition]); imageSelectedArray[boardPosition].Effect = null; imageSelectedArray.RemoveAt(boardPosition); }
-        //}
 
         public Grid initGrid(List<Card> handToShow)
         {
@@ -205,6 +194,7 @@ namespace SentinelsOfTheMultiverse
             if (cardClickedArray.Count == 1)
             {
                 this.Close();
+                cardClickedArray[0].Height = 200;
                 cardClickedArray[0].Effect = null;
                 gameBoard.drawCardSelected(cardClickedArray[0]);
                 GameEngine.getCurrentPlayer().CardMethod(cardClickedArray[0]);

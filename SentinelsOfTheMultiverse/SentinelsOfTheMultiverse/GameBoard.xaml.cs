@@ -226,7 +226,9 @@ namespace SentinelsOfTheMultiverse
         {
             string heroName = hero.getCharacterName();
             Card deckBack =new Card(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png", "deckback");
+            deckBack.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             Card characterCard = new Card(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png", "heroCard");
+            characterCard.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             
             Utility.addElementToGrid(characterCard, currentHeroRow, CHARACTER_COLUMN, gridLayout);
             Utility.addElementToGrid(deckBack, currentHeroRow, DECK_COLUMN, gridLayout);
@@ -243,30 +245,35 @@ namespace SentinelsOfTheMultiverse
             {
                 graveYardImg.Source = hero.graveyard[hero.graveyard.Count - 1].Source;
             }
+            graveYardImg.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             Utility.addElementToGrid(graveYardImg, currentHeroRow, GRAVEYARD_COLUMN, gridLayout);
         }
 
         private void drawNPCBoard(Villain villain, GameEnvironment env)
         {
             string villainName = villain.getCharacterName();
-            Card villainCard= new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png", villainName+"_initial");
+            Card villainCard = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png", villainName+"_initial");
+            villainCard.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             Card villainDeck = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png", villainName+"_back");
+            villainDeck.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             Card villainInst = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png", villainName+"_instr_front");
+            villainInst.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             Card envDeck = new Card("Images/Environment/" + env.characterName + "/NonPlayable/" + "insula_primus_back.png", "insula_primus_back");
+            envDeck.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
             Utility.addElementToGrid(villainCard, VILLAIN_ROW, CHARACTER_COLUMN, gridLayout);
             Utility.addElementToGrid(villainInst, VILLAIN_ROW, INSTRUCTION_COLUMN, gridLayout);
             Utility.addElementToGrid(villainDeck, VILLAIN_ROW, DECK_COLUMN, gridLayout);
+            Utility.addElementToGrid(envDeck, ENVIRONMENT_ROW, DECK_COLUMN, gridLayout);
 
             addHealthLabel(villain, VILLAIN_ROW);
 
-            Utility.addElementToGrid(envDeck, ENVIRONMENT_ROW, DECK_COLUMN, gridLayout);
-
-
             Card envGraveyard = new Card(GRAVEYARD_IMAGE_PATH, "Graveyard_Placeholder");
+            envGraveyard.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             Utility.addElementToGrid(envGraveyard, ENVIRONMENT_ROW, GRAVEYARD_COLUMN, gridLayout);
 
             Card villainGraveYard = new Card(GRAVEYARD_IMAGE_PATH, "Graveyard_Placeholder");
+            villainGraveYard.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             Utility.addElementToGrid(villainGraveYard, VILLAIN_ROW, GRAVEYARD_COLUMN, gridLayout);
         }
 
@@ -290,7 +297,7 @@ namespace SentinelsOfTheMultiverse
         {
             if (e.ClickCount == 2)
             {
-                Card expandCard = (Card)sender;
+                Image expandCard = (Image)sender;
 
                 ViewCard showCard = new ViewCard(expandCard.Source);
 
