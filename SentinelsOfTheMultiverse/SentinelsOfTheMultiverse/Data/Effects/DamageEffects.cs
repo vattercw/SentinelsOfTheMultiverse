@@ -78,6 +78,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
         {
             int totalMinionDamage = targetMinion.getDamageAmplification() + damageAmount; //TODO: + getGlobalDamageAmplification();
             targetMinion.health -= totalMinionDamage;
+            Console.WriteLine(GameEngine.getVillain().getMinions().ToString());
             if (targetMinion.health <= 0)
             {
                 //make sure that it is adding/removing minions correctly
@@ -85,11 +86,11 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                 if (GameEngine.getVillain().getMinions().Contains(targetMinion))
                 {
                     GameEngine.getVillain().removeMinion(targetMinion);
-                    Console.WriteLine(GameEngine.getVillain().getMinions().ToArray());
+                    Console.WriteLine(GameEngine.getVillain().getMinions().ToString());
                 } else if (GameEngine.getEnvironment().getMinions().Contains(targetMinion))
                 {
                     GameEngine.getEnvironment().removeMinion(targetMinion);
-                    Console.WriteLine(GameEngine.getEnvironment().getMinions().ToArray());
+                    Console.WriteLine(GameEngine.getEnvironment().getMinions().ToString());
                 }
             }
         }
