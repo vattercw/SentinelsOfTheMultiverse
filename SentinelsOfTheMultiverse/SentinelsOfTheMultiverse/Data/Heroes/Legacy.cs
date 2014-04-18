@@ -15,6 +15,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Fortitude()
         {
+            this.damageAmplificationToPlayer -= 1;
         }
 
         public void DangerSense()
