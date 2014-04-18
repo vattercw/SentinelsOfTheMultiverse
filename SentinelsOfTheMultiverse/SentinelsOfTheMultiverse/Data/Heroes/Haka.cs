@@ -21,8 +21,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             card.cardType = Card.CardType.OneShot;
             Villain villain = GameEngine.getVillain();
+            GameEnvironment environ = GameEngine.getEnvironment();
             DamageEffects.DealDamage(null, villain, villain.getMinions(), 5, DamageEffects.DamageType.Melee);
             DamageEffects.DealDamage(GameEngine.getHeroes(), null,null, 2, DamageEffects.DamageType.Melee);
+            //hit thews dern environment minionz tew
+            DamageEffects.DealDamage(null, null, environ.getMinions(), 5, DamageEffects.DamageType.Melee);
             card.SendToGraveyard(this, cardsOnField);
         }
 
