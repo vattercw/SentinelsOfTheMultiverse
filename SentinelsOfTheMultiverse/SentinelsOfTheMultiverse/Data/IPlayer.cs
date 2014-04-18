@@ -69,8 +69,8 @@ namespace SentinelsOfTheMultiverse.Data
 
         internal void CardMethod(Card card)
         {
-            //MethodInfo theMethod = GetType().GetMethod(card.getName());
-            //theMethod.Invoke(this, new object[]{card});
+            MethodInfo theMethod = GetType().GetMethod(card.getName());
+            theMethod.Invoke(this, new object[]{card});
         }
 
         private List<Ongoings> _ongoingEffects = new List<Ongoings>();

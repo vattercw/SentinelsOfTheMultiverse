@@ -29,17 +29,20 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                 foreach (Hero hero in heroes)
                 {
                     DealDamageToHero(hero, damageAmount, damageType);
+                    Console.WriteLine(hero.lifeTotal);
                 }
             }
             if (villain != null)
             {
                 DealDamageToVillain(villain, damageAmount, damageType);
+                Console.WriteLine(villain.lifeTotal);
             }
             if (minions != null)
             {
                 foreach (Minion minion in minions)
                 {
                     DealDamageToMinion(minion, damageAmount, damageType);
+                    Console.WriteLine(minion.health);
                 }
             }
         }
@@ -70,7 +73,21 @@ namespace SentinelsOfTheMultiverse.Data.Effects
         public static void DealDamageToMinion(Minion targetMinion, int damageAmount, DamageType damageType)
         {
             int totalMinionDamage = targetMinion.getDamageAmplification() + damageAmount; //TODO: + getGlobalDamageAmplification();
-            //TODO: deal damage to minion
+            targetMinion.health -= totalMinionDamage;
+            if (targetMinion.health <= 0)
+            {
+                //make sure that it is adding/removing minions correctly
+                Console.WriteLine(targetMinion.getMinionName() + " is dead.");
+                if (GameEngine.getVillain().getMinions().Contains(targetMinion))
+                {
+                    GameEngine.getVillain().removeMinion(targetMinion);
+                    Console.WriteLine(GameEngine.getVillain().getMinions().ToArray());
+                } else if (GameEngine.getEnvironment().getMinions().Contains(targetMinion))
+                {
+                    GameEngine.getEnvironment().removeMinion(targetMinion);
+                    Console.WriteLine(GameEngine.getEnvironment().getMinions().ToArray());
+                }
+            }
         }
     }
 }

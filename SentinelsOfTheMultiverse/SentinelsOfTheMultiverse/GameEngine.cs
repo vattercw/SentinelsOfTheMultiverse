@@ -28,6 +28,7 @@ namespace SentinelsOfTheMultiverse
         public static string ENVIRONMENT_NAMESPACE = "SentinelsOfTheMultiverse.Data.Environments.";
         public static Boolean playerPlayedCard;
         public static Boolean playerUsedPower;
+        public static int cardIDNum = 0;
 
 
         //private static bool getWinCon()
@@ -66,6 +67,20 @@ namespace SentinelsOfTheMultiverse
             }
             getCurrentPlayer().playerTurn(playerPlayedCard, playerUsedPower);
             playerPlayedCard = false;
+        }
+
+        public static Card getCardFromID(int cardID){
+
+            for (int i = 0; i < getPlayers().Count; i++)
+            {
+                for(int j = 0; j < getPlayers()[i].cardsOnField.Count; j++){
+                    if (getPlayers()[i].cardsOnField[j].getCardID() == cardID)
+                    {
+                        return getPlayers()[i].cardsOnField[j];
+                    }
+                }
+            }
+            throw new CardNotFoundException();
         }
 
         #region GET SET REGION

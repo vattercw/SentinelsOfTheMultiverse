@@ -27,10 +27,10 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             GameEngine.getVillain().lifeTotal += 10;
         }
 
-        //public static void DeviousDisruption(Card card)
-        //{
+        public static void DeviousDisruption(Card card)
+        {
 
-        //}
+        }
 
         public void SlashAndBurn(Card card)
         {
@@ -67,21 +67,21 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
         }
 
-        //public void ConsiderThePriceOfVictory(Card card)
-        //{
+        public void ConsiderThePriceOfVictory(Card card)
+        {
 
-        //}
+        }
 
-        ////Ongoing Cards
-        //public void LivingForceField(Card card)
-        //{
+        //Ongoing Cards
+        public void LivingForceField(Card card)
+        {
 
-        //}
+        }
 
-        //public void BacklashField(Card card)
-        //{
+        public void BacklashField(Card card)
+        {
 
-        //}
+        }
 
         //Devices and Minions
 
@@ -89,22 +89,30 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         {
             PoweredRemoteTurret turret = new PoweredRemoteTurret();
             GameEngine.getVillain().addMinion(turret);
+            Console.Write(turret.health);
         }
 
         public void MobileDefencePlatform(Card card)
         {
             MobileDefensePlatform platform = new MobileDefensePlatform();
             GameEngine.getVillain().addMinion(platform);
+            Console.Write("Mobile Defense Platform: " + platform.health);
         }
 
         public void ElementalRedistributor(Card card)
         {
-            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            ElementalRedistributor redist = new ElementalRedistributor();
+            GameEngine.getVillain().addMinion(redist);
+            Console.Write("Elemental Redistributor: "+redist.health);
+
         }
 
         public void BladeBattalion(Card card)
         {
+            BladeBattalion bbat = new BladeBattalion();
             GameEngine.getVillain().addMinion(new BladeBattalion());
+            Console.WriteLine("Blade Battalion: " + bbat.health);
+            
         }
     }
 }

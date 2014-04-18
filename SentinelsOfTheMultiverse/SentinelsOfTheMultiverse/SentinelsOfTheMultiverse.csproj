@@ -56,8 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CardNotFoundException.cs" />
     <Compile Include="Data\Effects\CardDrawingEffects.cs" />
     <Compile Include="Data\Effects\DamageEffects.cs" />
+    <Compile Include="Data\Handlers\DiscardListener.cs" />
     <Compile Include="Data\Minions\BaronBlade\BladeBattalion.cs" />
     <Compile Include="Data\Minions\BaronBlade\ElementalRedistributor.cs" />
     <Compile Include="Data\Minions\BaronBlade\MobileDefensePlatform.cs" />
@@ -188,13 +190,13 @@
     <Resource Include="Images\Icons\haka_cover.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Environment\InsulaPrimus\enraged_trex.png" />
-    <Resource Include="Images\Environment\InsulaPrimus\obsidian_field.png" />
-    <Resource Include="Images\Environment\InsulaPrimus\primordial_plant_life.png" />
-    <Resource Include="Images\Environment\InsulaPrimus\pterodactyl_thief.png" />
-    <Resource Include="Images\Environment\InsulaPrimus\river_of_lava.png" />
-    <Resource Include="Images\Environment\InsulaPrimus\velociraptor_pack.png" />
-    <Resource Include="Images\Environment\InsulaPrimus\volcanic_eruption.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\EnragedTRex.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\ObsidianField.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\PrimordialPlantLife.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\PterodactylThief.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\RiverOfLava.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\VelociraptorPack.png" />
+    <Resource Include="Images\Environment\InsulaPrimus\VolcanicEruption.png" />
     <Resource Include="Images\Environment\InsulaPrimus\NonPlayable\insula_primus_back.png" />
   </ItemGroup>
   <ItemGroup>

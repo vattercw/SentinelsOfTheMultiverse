@@ -18,6 +18,8 @@ namespace SentinelsOfTheMultiverse.Data
         public Image cardImage = new Image();
         public string cardImageStr = "";
         public CardType cardType { get; set; }
+        private int cardID;
+
 
         public Card(string cardPath, string name)
         {
@@ -25,10 +27,17 @@ namespace SentinelsOfTheMultiverse.Data
             cardName = name;
             cardImageStr = cardPath;
             effects = new List<IPlayer.Ongoings>();
+            cardID = GameEngine.cardIDNum;
+            GameEngine.cardIDNum +=1;
         }
         public string getName()
         {
             return cardName;
+        }
+
+        public int getCardID()
+        {
+            return cardID;
         }
 
         private ImageSource getImageSource(string path)
