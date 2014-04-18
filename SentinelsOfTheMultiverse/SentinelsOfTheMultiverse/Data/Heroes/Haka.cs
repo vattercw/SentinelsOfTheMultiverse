@@ -29,27 +29,25 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.SendToGraveyard(this, cardsOnField);
         }
 
-        /*
         public void ElbowSmash(Card card)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Dominion(Card card)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void EnduringIntercession(Card card)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void GroundPound(Card card)
         {
-            throw new NotImplementedException();
+            
         }
-        */
 
         public void HakaOfBattle(Card card)
         {
@@ -72,57 +70,52 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         
         public void TaMoko(Card card)
         {
-            //card.cardType = Card.CardType.Ongoing;
-            //cardsOnField.Add(card);
-            //card.effects.Add(TaMokoEffect);
-            //TaMokoEffect();//may or may not need this here
-            //ongoingEffects.Add(TaMokoEffect);
+            card.cardType = Card.CardType.Ongoing;
+            cardsOnField.Add(card);
+            card.effects.Add(TaMokoEffect);
+            TaMokoEffect();//may or may not need this here
+            ongoingEffects.Add(TaMokoEffect);
         }
 
         void TaMokoEffect()
         {
             damageAmplificationToPlayer -= 1;
         }
-/*
+
         public void HakaOfRestoration(Card card)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void HakaOfShielding(Card card)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Mere(Card card)
         {
- *          forcePlayersToDiscardCards(List<IPlayer> p, int cards);
-            throw new NotImplementedException();
+            
         }
-        public void forcePlayersToDiscardCards(){
- *          DiscardEventListener myListener = new DiscardEventHListener(Iplayer p);
- *          ongoingEffectEventHandlers.add("discard", mylistener);
- *      }
- * 
+
+ 
         public void PunishTheWeak(Card card)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void SavageMana(Card card)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Taiaha(Card card)
         {
-            throw new NotImplementedException();
+            
         }
- * 
+
         public void VitalitySurge(Card card)
         {
-            throw new NotImplementedException();
+            
         }
- * */
     }
 }

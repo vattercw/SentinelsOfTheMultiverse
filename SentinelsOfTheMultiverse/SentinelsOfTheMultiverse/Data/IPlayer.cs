@@ -85,46 +85,44 @@ namespace SentinelsOfTheMultiverse.Data
 
         internal void CardMethod(Card card)
         {
-            //MethodInfo theMethod = GetType().GetMethod(card.getName());
-            //theMethod.Invoke(this, new object[]{card});
+            MethodInfo theMethod = GetType().GetMethod(card.getName());
+            theMethod.Invoke(this, new object[] { card });
         }
 
-        public enum EventType{Attack, Discard, DrawCard};
-        private Dictionary<EventType, List<EventHandler>> _ongoingEventHandlers = new Dictionary<EventType, List<EventHandler>>();
-        internal Dictionary<EventType, List<EventHandler>> OngoingEventHandlers
+        //public enum EventType{Attack, Discard, DrawCard};
+        //private Dictionary<EventType, List<EventHandler>> _ongoingEventHandlers = new Dictionary<EventType, List<EventHandler>>();
+        //internal Dictionary<EventType, List<EventHandler>> OngoingEventHandlers
+        //{
+        //    get { return _ongoingEventHandlers; }
+        //    set
+        //    {
+        //        _ongoingEventHandlers = value;
+        //    }
+        //}
+
+
+        private List<Ongoings> _ongoingEffects = new List<Ongoings>();
+        internal List<Ongoings> ongoingEffects
         {
-            get { return _ongoingEventHandlers; }
+            get { return _ongoingEffects; }
             set
             {
-                _ongoingEventHandlers = value;
+                _ongoingEffects = value;
+                updateOngoingEffects();
+            }
+        }
+
+        public void updateOngoingEffects()
+        {
+            damageAmplificationFromPlayer = 0;
+            damageAmplificationToPlayer = 0;
+            foreach (Ongoings ongoingEffect in ongoingEffects)
+            {
+                ongoingEffect();
             }
         }
 
 
-        
-
-        //private List<Ongoings> _ongoingEffects = new List<Ongoings>();
-        //internal List<Ongoings> ongoingEffects
-        //{
-        //    get {return _ongoingEffects; }
-        //    set
-        //    {
-        //        _ongoingEffects = value;
-        //        updateOngoingEffects();
-        //    }
-        //}
-
-        //public void updateOngoingEffects()
-        //{
-        //    damageAmplificationFromPlayer = 0;
-        //    damageAmplificationToPlayer = 0;
-        //    foreach (Ongoings ongoingEffect in ongoingEffects)
-        //    {
-        //        ongoingEffect();
-        //    }
-        //}
-
-
-        //internal delegate void Ongoings();
+        internal delegate void Ongoings();
     }
 }

@@ -16,7 +16,7 @@ namespace SentinelsOfTheMultiverse.Data
         string cardName;
 
         private readonly double CARD_HEIGHT = 200;
-        //internal List<IPlayer.Ongoings> effects { get; set; }
+        internal List<IPlayer.Ongoings> effects { get; set; }
         public string cardImageStr = "";
         public CardType cardType { get; set; }
         private int cardID;
@@ -27,7 +27,7 @@ namespace SentinelsOfTheMultiverse.Data
             Source = getImageSource(cardPath);
             cardName = name;
             cardImageStr = cardPath;
-            //effects = new List<IPlayer.Ongoings>();
+            effects = new List<IPlayer.Ongoings>();
             cardID = GameEngine.cardIDNum;
             Height = CARD_HEIGHT;
             GameEngine.cardIDNum +=1;
@@ -56,9 +56,9 @@ namespace SentinelsOfTheMultiverse.Data
         {
             if (cardType == CardType.Ongoing)
             {
-                //foreach (var effect in effects)
-                //    player.ongoingEffects.Remove(effect);
-                //player.updateOngoingEffects();
+                foreach (var effect in effects)
+                    player.ongoingEffects.Remove(effect);
+                player.updateOngoingEffects();
             }
             currentList.Remove(this);
             player.graveyard.Add(this);
