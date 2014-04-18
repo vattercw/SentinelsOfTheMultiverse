@@ -72,11 +72,7 @@ namespace SentinelsOfTheMultiverse.Data
         internal void CardMethod(Card card)
         {
             MethodInfo theMethod = GetType().GetMethod(card.getName());
-<<<<<<< HEAD
             theMethod.Invoke(this, new object[]{card});
-=======
-            theMethod.Invoke(this, new object[] { card });
->>>>>>> ea141ce9a2332f646ab0d5b6772041d110015415
         }
 
         public enum EventType{Attack, Discard, DrawCard};

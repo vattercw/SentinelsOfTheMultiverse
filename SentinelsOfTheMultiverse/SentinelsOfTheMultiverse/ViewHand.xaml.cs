@@ -47,7 +47,7 @@ namespace SentinelsOfTheMultiverse
         public ViewHand(List<Card> hand, GameBoard game)
         {
             InitializeComponent();
-
+            
             gameBoard = game;
 
             updateHandView();
@@ -57,6 +57,7 @@ namespace SentinelsOfTheMultiverse
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            cardLayout.Children.RemoveRange(0, cardLayout.Children.Count+1);
             gameBoard.updateBoard();
         }
 
@@ -94,7 +95,7 @@ namespace SentinelsOfTheMultiverse
         }
 
         private void updateHandView(){
-            cardLayout.Children.RemoveRange(0, cardLayout.Children.Count);
+            cardLayout.Children.RemoveRange(0, cardLayout.Children.Count+1);
             cardLayout = initGrid(handShow);
             paintCards();
             addButtons();
@@ -147,10 +148,6 @@ namespace SentinelsOfTheMultiverse
             var numCards = handShow.Count;
             for (int k = 0; k < numCards; k++)
             {
-                
-                //Image temp = new Image();
-                //temp.Source = handShow[k].cardImage.Source;
-
                 Grid.SetColumn(handShow[k], k);
                 handShow[k].AddHandler(UIElement.MouseDownEvent, new RoutedEventHandler(Card_Selection_Handler), true);
 
@@ -222,7 +219,7 @@ namespace SentinelsOfTheMultiverse
                 return;
             }
         }
-
         
+
     }
 }

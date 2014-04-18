@@ -29,6 +29,7 @@ namespace SentinelsOfTheMultiverse.Data
             cardImageStr = cardPath;
             //effects = new List<IPlayer.Ongoings>();
             cardID = GameEngine.cardIDNum;
+            Height = CARD_HEIGHT;
             GameEngine.cardIDNum +=1;
         }
         public string getName()
