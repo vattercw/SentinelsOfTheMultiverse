@@ -20,7 +20,7 @@ namespace SentinelsOfTheMultiverse.Data
         public string cardImageStr = "";
         public CardType cardType { get; set; }
         private int cardID;
-
+        
 
         public Card(string cardPath, string name)
         {

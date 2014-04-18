@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SentinelsOfTheMultiverse.Data.Effects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,6 +60,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Thokk(Card card)
         {
+            if (GameBoard.selectedCards.Count==1)
+            {
+                
+            }
+            drawPhase(1);
         }
 
         public void TheLegacyRing(Card card)
