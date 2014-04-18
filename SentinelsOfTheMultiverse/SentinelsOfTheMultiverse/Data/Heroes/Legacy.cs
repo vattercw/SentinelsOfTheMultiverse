@@ -13,59 +13,59 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             lifeTotal = 32;
         }
 
-        public void Fortitude()
+        public void Fortitude(Card card)
         {
             this.damageAmplificationToPlayer -= 1;
         }
 
-        public void DangerSense()
+        public void DangerSense(Card card)
         {
         }
 
-        public void FlyingSmash()
+        public void FlyingSmash(Card card)
         {
         }
 
-        public void BackFistStrike(){
+        public void BackFistStrike(Card card){
         }
 
-        public void BolsterAllies()
+        public void BolsterAllies(Card card)
         {
         }
 
-        public void MotivationalCharge()
+        public void MotivationalCharge(Card card)
         {
         }
 
-        public void InspiringPresence()
+        public void InspiringPresence(Card card)
         {
         }
 
-        public void LeadFromTheFront()
+        public void LeadFromTheFront(Card card)
         {
         }
 
-        public void SuperhumanDurability()
+        public void SuperhumanDurability(Card card)
         {
         }
 
-        public void NextEvolution()
+        public void NextEvolution(Card card)
         {
         }
 
-        public void SurgeOfStrength()
+        public void SurgeOfStrength(Card card)
         {
         }
 
-        public void Thokk()
+        public void Thokk(Card card)
         {
         }
 
-        public void TheLegacyRing()
+        public void TheLegacyRing(Card card)
         {
         }
 
-        public void TakeDown()
+        public void TakeDown(Card card)
         {
         }
     }
