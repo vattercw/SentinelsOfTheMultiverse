@@ -10,8 +10,8 @@ namespace SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus
     {
         public PterodactylThief()
         {
-            maxHealth = 10;
-            health = 10;
+            maxHealth = 5;
+            health = 5;
             effectPhase = Minion.MinionType.OnAttack;
             //GameEngine.getVillain().addMinion(this, effectPhase);
         }

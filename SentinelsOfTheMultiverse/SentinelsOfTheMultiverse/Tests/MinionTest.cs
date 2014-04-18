@@ -74,7 +74,7 @@ namespace SentinelsOfTheMultiverse.Tests
         {
             Minion minionTest = new PterodactylThief();
             Assert.AreEqual("PterodactylThief", minionTest.getMinionName());
-            Assert.AreEqual(10, minionTest.getCurrentHealth());
+            Assert.AreEqual(5, minionTest.getCurrentHealth());
         }
 
         [Test, RequiresSTA]
