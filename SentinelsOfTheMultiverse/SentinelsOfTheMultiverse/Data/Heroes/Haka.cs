@@ -57,19 +57,23 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 //TODO: tell user they must discard at least one card
                 throw new NotImplementedException("user must discard at least one card");
             }
+
             //check that only happens once
             damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
             card.SendToGraveyard(this, cardsOnField);
+
+
+            //add event handler for attack from haka
         }
 
         
         public void TaMoko(Card card)
         {
-            card.cardType = Card.CardType.Ongoing;
-            cardsOnField.Add(card);
-            card.effects.Add(TaMokoEffect);
-            TaMokoEffect();//may or may not need this here
-            ongoingEffects.Add(TaMokoEffect);
+            //card.cardType = Card.CardType.Ongoing;
+            //cardsOnField.Add(card);
+            //card.effects.Add(TaMokoEffect);
+            //TaMokoEffect();//may or may not need this here
+            //ongoingEffects.Add(TaMokoEffect);
         }
 
         void TaMokoEffect()
@@ -89,9 +93,14 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Mere(Card card)
         {
+ *          forcePlayersToDiscardCards(List<IPlayer> p, int cards);
             throw new NotImplementedException();
         }
-
+        public void forcePlayersToDiscardCards(){
+ *          DiscardEventListener myListener = new DiscardEventHListener(Iplayer p);
+ *          ongoingEffectEventHandlers.add("discard", mylistener);
+ *      }
+ * 
         public void PunishTheWeak(Card card)
         {
             throw new NotImplementedException();

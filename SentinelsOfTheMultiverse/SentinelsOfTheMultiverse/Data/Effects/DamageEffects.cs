@@ -8,6 +8,9 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 {
     public static class DamageEffects
     {
+        event AttackEventHandler Attack;
+        internal delegate void AttackEventHandler(object sender, EventArgs e);
+
         public enum DamageType { Projectile, Fire, Ice, Melee, Toxic };
         private static int _globalDamageAmplification;
         static int GlobalDamageAmplification
@@ -24,6 +27,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 
         public static void DealDamage(List<Hero> heroes, Villain villain, List<Minion> minions, int damageAmount, DamageType damageType)
         {
+            
             if (heroes != null)
             {
                 foreach (Hero hero in heroes)
