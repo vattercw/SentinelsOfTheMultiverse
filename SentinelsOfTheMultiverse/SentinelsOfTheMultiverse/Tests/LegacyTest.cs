@@ -16,7 +16,13 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestFortitude()
         {
-            //not sure if works
+            Start testGame = new Start();
+            testGame.beginGame();
+            Legacy testLegacy = new Legacy();
+
+            Card testFortitude = new Card("Images\\Hero\\Legacy\\Fortitude.png", "Fortitude");
+            testLegacy.Fortitude(testFortitude);
+            Assert.AreEqual(testLegacy.damageAmplificationToPlayer, -1);
         }
 
         [Test, RequiresSTA]
