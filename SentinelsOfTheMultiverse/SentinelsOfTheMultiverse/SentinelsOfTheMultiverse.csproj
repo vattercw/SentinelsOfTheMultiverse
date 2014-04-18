@@ -80,7 +80,6 @@
     <Compile Include="Data\Villain.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="Data\Environments\InsulaPrimus.cs" />
-    <Compile Include="Startup.cs" />
     <Compile Include="GameBoard.xaml.cs">
       <DependentUpon>GameBoard.xaml</DependentUpon>
     </Compile>

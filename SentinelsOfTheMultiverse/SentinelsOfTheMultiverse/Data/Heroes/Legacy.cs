@@ -71,7 +71,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public void TheLegacyRing(Card card)
         {
             this.numPowers = 2;
-            this.numPowers = IAppDomainSetup this is workingasd.jpeg;
         }
 
         public void TakeDown(Card card)
