@@ -36,6 +36,8 @@ namespace SentinelsOfTheMultiverse.Data
             private int _damageAmplificationFromPlayer;
         #endregion
 
+        
+
         public abstract void playerTurn(bool playedCard, bool playedPower);
         public abstract void startPhase();
         public abstract Boolean playPhase();
@@ -70,31 +72,49 @@ namespace SentinelsOfTheMultiverse.Data
         internal void CardMethod(Card card)
         {
             MethodInfo theMethod = GetType().GetMethod(card.getName());
+<<<<<<< HEAD
             theMethod.Invoke(this, new object[]{card});
+=======
+            theMethod.Invoke(this, new object[] { card });
+>>>>>>> ea141ce9a2332f646ab0d5b6772041d110015415
         }
 
-        private List<Ongoings> _ongoingEffects = new List<Ongoings>();
-        internal List<Ongoings> ongoingEffects
+        public enum EventType{Attack, Discard, DrawCard};
+        private Dictionary<EventType, List<EventHandler>> _ongoingEventHandlers = new Dictionary<EventType, List<EventHandler>>();
+        internal Dictionary<EventType, List<EventHandler>> OngoingEventHandlers
         {
-            get {return _ongoingEffects; }
+            get { return _ongoingEventHandlers; }
             set
             {
-                _ongoingEffects = value;
-                updateOngoingEffects();
-            }
-        }
-
-        public void updateOngoingEffects()
-        {
-            damageAmplificationFromPlayer = 0;
-            damageAmplificationToPlayer = 0;
-            foreach (Ongoings ongoingEffect in ongoingEffects)
-            {
-                ongoingEffect();
+                _ongoingEventHandlers = value;
             }
         }
 
 
-        internal delegate void Ongoings();
+        
+
+        //private List<Ongoings> _ongoingEffects = new List<Ongoings>();
+        //internal List<Ongoings> ongoingEffects
+        //{
+        //    get {return _ongoingEffects; }
+        //    set
+        //    {
+        //        _ongoingEffects = value;
+        //        updateOngoingEffects();
+        //    }
+        //}
+
+        //public void updateOngoingEffects()
+        //{
+        //    damageAmplificationFromPlayer = 0;
+        //    damageAmplificationToPlayer = 0;
+        //    foreach (Ongoings ongoingEffect in ongoingEffects)
+        //    {
+        //        ongoingEffect();
+        //    }
+        //}
+
+
+        //internal delegate void Ongoings();
     }
 }

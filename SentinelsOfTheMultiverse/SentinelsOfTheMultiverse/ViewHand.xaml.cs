@@ -147,27 +147,28 @@ namespace SentinelsOfTheMultiverse
             var numCards = handShow.Count;
             for (int k = 0; k < numCards; k++)
             {
-                Image temp = new Image();
-                temp.Source = handShow[k].cardImage.Source;
                 
-                Grid.SetColumn(temp, k);
-                temp.AddHandler(UIElement.MouseDownEvent, new RoutedEventHandler(Card_Selection_Handler), true);
+                //Image temp = new Image();
+                //temp.Source = handShow[k].cardImage.Source;
 
-                temp.Margin = Utility.cardSpacing;
+                Grid.SetColumn(handShow[k], k);
+                handShow[k].AddHandler(UIElement.MouseDownEvent, new RoutedEventHandler(Card_Selection_Handler), true);
 
-                cardLayout.Children.Add(temp);
+                handShow[k].Margin = Utility.cardSpacing;
+
+                cardLayout.Children.Add(handShow[k]);
             }
         }
 
         public void Card_Selection_Handler(object sender, RoutedEventArgs e)
         {
-            if (!imageSelectedArray.Contains((Image)sender)) imageSelectedArray.Add((Image)sender);
+            if (!imageSelectedArray.Contains((Card)sender)) imageSelectedArray.Add((Card)sender);
 
             for (int i = 0; i < handShow.Count; i++)
             {
                 for (int k = 0; k < imageSelectedArray.Count; k++)
                 {
-                    if (handShow[i].cardImage.Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(handShow[i]))
+                    if (handShow[i].Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(handShow[i]))
                     {
                         if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowHero();
                         cardClickedArray.Add(handShow[i]);

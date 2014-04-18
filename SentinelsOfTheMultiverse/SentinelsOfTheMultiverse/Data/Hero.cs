@@ -17,7 +17,7 @@ namespace SentinelsOfTheMultiverse
 
         public Hero()
         {
-            ongoingEffects = new List<Ongoings>();
+            //ongoingEffects = new List<Ongoings>();
             characterName = this.GetType().Name;
             deck = new Deck(characterName, IPlayer.PlayerType.Hero);
             deck.shuffle();
