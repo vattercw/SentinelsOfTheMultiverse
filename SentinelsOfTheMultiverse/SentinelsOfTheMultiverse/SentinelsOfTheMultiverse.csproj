@@ -60,6 +60,7 @@
     <Compile Include="Data\Effects\CardDrawingEffects.cs" />
     <Compile Include="Data\Effects\DamageEffects.cs" />
     <Compile Include="Data\Handlers\DiscardListener.cs" />
+    <Compile Include="Data\Heroes\Legacy.cs" />
     <Compile Include="Data\Minions\BaronBlade\BladeBattalion.cs" />
     <Compile Include="Data\Minions\BaronBlade\ElementalRedistributor.cs" />
     <Compile Include="Data\Minions\BaronBlade\MobileDefensePlatform.cs" />

@@ -27,5 +27,45 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void BackFistStrike(){
         }
+
+        public void BolsterAllies()
+        {
+        }
+
+        public void MotivationalCharge()
+        {
+        }
+
+        public void InspiringPresence()
+        {
+        }
+
+        public void LeadFromTheFront()
+        {
+        }
+
+        public void SuperhumanDurability()
+        {
+        }
+
+        public void NextEvolution()
+        {
+        }
+
+        public void SurgeOfStrength()
+        {
+        }
+
+        public void Thokk()
+        {
+        }
+
+        public void TheLegacyRing()
+        {
+        }
+
+        public void TakeDown()
+        {
+        }
     }
 }

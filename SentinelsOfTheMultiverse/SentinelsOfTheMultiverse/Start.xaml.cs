@@ -51,7 +51,6 @@ namespace SentinelsOfTheMultiverse
             heroesStr.Add(GameEngine.HERO_NAMESPACE + "Haka");
 
             GameEngine.initPlayers(heroesStr, _villainStr, _envStr);
-
         }
     }
 }
