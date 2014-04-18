@@ -159,19 +159,16 @@ namespace SentinelsOfTheMultiverse
 
         public void Card_Selection_Handler(object sender, RoutedEventArgs e)
         {
-            if (!imageSelectedArray.Contains((Card)sender)) imageSelectedArray.Add((Card)sender);
-
-            for (int i = 0; i < handShow.Count; i++)
+            var cardClicked = (Card)sender;
+            if (!cardClickedArray.Contains(cardClicked))
             {
-                for (int k = 0; k < imageSelectedArray.Count; k++)
-                {
-                    if (handShow[i].Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(handShow[i]))
-                    {
-                        if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowHero();
-                        cardClickedArray.Add(handShow[i]);
-                        break;
-                    }
-                }
+                cardClicked.Effect = Utility.selectionGlowHero();
+                cardClickedArray.Add(cardClicked);
+            }
+            else
+            {
+                cardClicked.Effect = null;
+                cardClickedArray.Remove(cardClicked);
             }
         }
 
@@ -207,11 +204,13 @@ namespace SentinelsOfTheMultiverse
         public void Play_Card(object sender, RoutedEventArgs e) {
             if (cardClickedArray.Count == 1)
             {
+                this.Close();
+                cardClickedArray[0].Effect = null;
                 gameBoard.drawCardSelected(cardClickedArray[0]);
                 GameEngine.getCurrentPlayer().CardMethod(cardClickedArray[0]);
+                cardClickedArray.Clear();
                 GameEngine.playerPlayedCard = true;
                 gameBoard.updateBoard();
-                this.Close();
             }
             else
             {

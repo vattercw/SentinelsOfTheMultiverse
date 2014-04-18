@@ -133,6 +133,7 @@ namespace SentinelsOfTheMultiverse
 
 	            for(int k = 0; k < hero.cardsOnField.Count; k++){
 	                hero.cardsOnField[k].MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
+                    hero.cardsOnField[k].Margin = Utility.cardSpacing;
 
 	                Utility.addElementToGrid(hero.cardsOnField[k], HERO_ROW + i, k+4, gridLayout);
 	            }
@@ -140,6 +141,7 @@ namespace SentinelsOfTheMultiverse
 
             for (int k = 0; k < villain.cardsOnField.Count; k++)
             {
+                villain.cardsOnField[k].Margin = Utility.cardSpacing;
                 villain.cardsOnField[k].MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
                 Utility.addElementToGrid(villain.cardsOnField[k], VILLAIN_ROW, k + 4, gridLayout);
@@ -147,6 +149,7 @@ namespace SentinelsOfTheMultiverse
 
             for (int k = 0; k < env.cardsOnField.Count; k++)
             {
+                env.cardsOnField[k].Margin = Utility.cardSpacing;
                 env.cardsOnField[k].MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
                 Utility.addElementToGrid(env.cardsOnField[k], ENVIRONMENT_ROW, k + 4, gridLayout);
