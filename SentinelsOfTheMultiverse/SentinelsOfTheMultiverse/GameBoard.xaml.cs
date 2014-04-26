@@ -18,7 +18,6 @@ using SentinelsOfTheMultiverse.Data.Effects;
 
 namespace SentinelsOfTheMultiverse
 {
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public partial class GameBoard : Window
     {
         //private GameEngine game = new GameEngine();
