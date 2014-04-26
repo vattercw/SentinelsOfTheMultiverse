@@ -16,13 +16,13 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestFortitude()
         {
-            Start game = new Start();
-            game.beginGame();
-            Legacy legacy = new Legacy();
+            Start testGame = new Start();
+            testGame.beginGame();
+            Legacy testLegacy = new Legacy();
 
-            Card fortitude = new Card("Images\\Hero\\Legacy\\Fortitude.png", "Fortitude");
-            legacy.Fortitude(fortitude);
-            Assert.AreEqual(legacy.damageAmplificationToPlayer, -1);
+            Card testFortitude = new Card("Images\\Hero\\Legacy\\Fortitude.png", "Fortitude");
+            testLegacy.Fortitude(testFortitude);
+            Assert.AreEqual(testLegacy.damageAmplificationToPlayer, -1);
         }
 
         [Test, RequiresSTA]
@@ -64,13 +64,7 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestSuperhuman()
         {
-            Start game = new Start();
-            game.beginGame();
-            Legacy legacy = new Legacy();
-
-            Card superhuman = new Card("Images\\Hero\\Legacy\\SuperhumanDurability.png", "SuperhumanDurability");
-            legacy.SuperhumanDurability(superhuman);
-            Assert.AreEqual(legacy.damageAmplificationFromPlayer, 1);
+           
         }
 
         [Test, RequiresSTA]
@@ -93,13 +87,7 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestLegacyRing()
         {
-            Start game = new Start();
-            game.beginGame();
-            Legacy legacy = new Legacy();
-
-            Card ring = new Card("Images\\Hero\\Legacy\\TheLegacyRing.png", "TheLegacyRing");
-            legacy.TheLegacyRing(ring);
-            Assert.AreEqual(legacy.numPowers, 2);
+            
         }
 
         [Test, RequiresSTA]
