@@ -19,6 +19,7 @@ namespace SentinelsOfTheMultiverse
     /// </summary>
     public partial class Start : Window
     {
+        ComboBox localizationChoicesBox;
         public Start()
         {
             InitializeComponent();
@@ -26,18 +27,29 @@ namespace SentinelsOfTheMultiverse
             Button startButton = new Button();
             startButton.Content = "Start!";
             startButton.Click += new RoutedEventHandler(Start_Game);
-            Grid myGrid = new Grid();
-            Content = startButton;
+
+            List<String> langChoices = new List<string>(){"en-US", "ja-JP"};
+            
+            localizationChoicesBox = new ComboBox();
+            localizationChoicesBox.ItemsSource = langChoices;
+            localizationChoicesBox.SelectedIndex = 0;
+
+            StackPanel sp= new StackPanel();
+            sp.Children.Add(startButton);
+            sp.Children.Add(localizationChoicesBox);
+            Content = sp;
         }
 
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private void Start_Game(object sender, RoutedEventArgs e)
         {
-
             beginGame();
-            GameBoard game = new GameBoard();
-            game.Show();
-            this.Close();
+            string selectedValue= (string)localizationChoicesBox.SelectedValue;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(selectedValue);
+            
+            Console.Write("value: " + SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Rampage"));
+            //GameBoard game = new GameBoard();
+            //game.Show();
+            //this.Close();
         }
 
 
