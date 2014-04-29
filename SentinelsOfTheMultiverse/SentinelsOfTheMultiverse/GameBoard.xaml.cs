@@ -404,6 +404,16 @@ namespace SentinelsOfTheMultiverse
             updateBoard();
         }
 
+        public List<Card> getCardSelection()
+        {
+            return cardClickedArray;
+        }
+
+        public void clearCardSelection()
+        {
+            cardClickedArray.Clear();
+        }
+
         //public void selectDeselectCard(List<Card> fieldCards, int fieldPosition, int boardPosition, DropShadowEffect glowEffect)
         //{
         //    if (imageSelectedArray[boardPosition].Effect == null) imageSelectedArray[boardPosition].Effect = Utility.selectionGlowHero();

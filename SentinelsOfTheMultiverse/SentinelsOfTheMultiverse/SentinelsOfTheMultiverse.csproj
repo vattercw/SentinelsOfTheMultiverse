@@ -139,11 +139,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -152,14 +147,16 @@
     <EmbeddedResource Include="Properties\Resources.ja-JP.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.ja-JP.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.en-US.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -178,7 +175,7 @@
   <ItemGroup>
     <Content Include="Images\Hero\Haka\Dominion.png" />
     <Resource Include="Images\Hero\Legacy\BackfistStrike.png" />
-    <Resource Include="Images\Hero\Legacy\BolsterAllies.png" />
+    <Resource Include="Images\Hero\Legacy\100-BolsterAllies.png" />
     <Resource Include="Images\Hero\Legacy\DangerSense.png" />
     <Resource Include="Images\Hero\Legacy\FlyingSmash.png" />
     <Resource Include="Images\Hero\Legacy\Fortitude.png" />

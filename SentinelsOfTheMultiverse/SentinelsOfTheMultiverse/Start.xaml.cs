@@ -46,10 +46,10 @@ namespace SentinelsOfTheMultiverse
             string selectedValue= (string)localizationChoicesBox.SelectedValue;
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(selectedValue);
             
-            Console.Write("value: " + SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Rampage"));
-            //GameBoard game = new GameBoard();
-            //game.Show();
-            //this.Close();
+            //Console.Write("value: " + SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Rampage"));
+            GameBoard game = new GameBoard();
+            game.Show();
+            this.Close();
         }
 
 
@@ -61,6 +61,8 @@ namespace SentinelsOfTheMultiverse
 
             heroesStr.Add(GameEngine.HERO_NAMESPACE + "Legacy");
             heroesStr.Add(GameEngine.HERO_NAMESPACE + "Haka");
+
+            Console.WriteLine(heroesStr[1]);
 
             GameEngine.initPlayers(heroesStr, _villainStr, _envStr);
         }

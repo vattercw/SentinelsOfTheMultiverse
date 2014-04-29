@@ -14,13 +14,31 @@ namespace SentinelsOfTheMultiverse.Data
         public Deck(string characterName, IPlayer.PlayerType playerType)
         {
             var files = Directory.GetFiles(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\Images\\"+playerType+"\\" + characterName);
-
             cards = new List<Card>();
-            foreach (var filename in files)
+
+            foreach (var fileName in files)
             {
-                var cardName = Path.GetFileNameWithoutExtension(filename);
-                Card card = new Card(filename, cardName);
-                cards.Add(card);
+                var cardTitle = Path.GetFileNameWithoutExtension(fileName);
+
+                if (fileName.Contains(Utility.splitDelimeter))
+                {
+                    var number = Utility.getNumOfCards(cardTitle);
+                    var title = Utility.removeNumOfCards(cardTitle);
+
+                    Card card = new Card(fileName, title);
+
+                    Console.WriteLine("\n" + title);
+                    for (int k = 0; k < number; k++)
+                    {
+                        cards.Add(card);
+                    }
+
+                }
+                else
+                {
+                    Card card = new Card(fileName, cardTitle);
+                    cards.Add(card);
+                }
             }
         }
 

@@ -16,6 +16,7 @@ namespace SentinelsOfTheMultiverse
         public static Thickness cardSpacing = new Thickness(6, 4, 6, 4);
         public static System.Windows.Visibility SHOW = Visibility.Visible;
         public static System.Windows.Visibility HIDE = Visibility.Hidden;
+        public static char splitDelimeter = '-';
 
         public static ImageSource getImageSource(string path)
         {
@@ -86,6 +87,16 @@ namespace SentinelsOfTheMultiverse
             glowEffect.Color = cardGlowColor;
 
             return glowEffect;
+        }
+
+        public static string removeNumOfCards(string name)
+        {
+            return name.Split(splitDelimeter)[1];
+        }
+
+        public static int getNumOfCards(string name)
+        {
+            return Convert.ToInt16(name.Split(splitDelimeter)[0]);
         }
     }
 }

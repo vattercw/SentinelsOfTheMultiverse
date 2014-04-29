@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SentinelsOfTheMultiverse.Data.Heroes
 {
@@ -31,7 +32,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void ElbowSmash(Card card)
         {
-            
+            card.cardType = Card.CardType.OneShot;
         }
 
         public void Dominion(Card card)
@@ -55,14 +56,13 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             CardDrawingEffects.DrawCards(2);
             if (GameBoard.discardedCardsThisTurn.Count < 1)
             {
-                //TODO: tell user they must discard at least one card
-                throw new NotImplementedException("user must discard at least one card");
+                MessageBox.Show("You must discard are atleast one card to use this One-Shot.", "Discard Problem");
             }
-
-            //check that only happens once
-            damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
-            card.SendToGraveyard(this, cardsOnField);
-
+            else
+            {
+                damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
+                card.SendToGraveyard(this, cardsOnField);
+            }
 
             //add event handler for attack from haka
         }
