@@ -163,7 +163,9 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void VitalitySurge(Card card)
         {
-            
+            HealEffects.healHero(this, 2);
+            card.SendToGraveyard(this, cardsOnField);
+            CardDrawingEffects.DrawCards(1);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse.Data.Effects
 {
-    public static class healEffects
+    public static class HealEffects
     {
 
         public static void Heal(List<Hero> heroes, Villain villain, List<Minion> minions, int healAmount)
