@@ -38,9 +38,10 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             var target = GameBoard.cardClickedArray;
             if (target.Count > 1)
             {
-                MessageBox.Show("Select only one target to perform Elbow Smash.");
+                MessageBox.Show("Select only one target to perform Elbow Smash. \n No select target default's to the Villain.");
                 Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
                 currentPlayer.hand.Add(card);
+                currentPlayer.graveyard.Remove(card);
             }
             else if (target.Count == 1)
             {
@@ -102,14 +103,16 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             card.cardType = Card.CardType.OneShot;
             CardDrawingEffects.DrawCards(2);
+            //Don't forget to include something that doesn't allow them to go to the next turn until they discard.
+            //also, reset the discard count
             if (GameBoard.discardedCardsThisTurn.Count < 1)
             {
                 MessageBox.Show("You must discard are atleast one card to use this One-Shot.", "Discard Problem");
             }
             else
             {
-                damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
-                card.SendToGraveyard(this, cardsOnField);
+                //damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
+                //card.SendToGraveyard(this, cardsOnField);
             }
 
             //add event handler for attack from haka
@@ -132,7 +135,19 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void HakaOfRestoration(Card card)
         {
-            
+            card.cardType = Card.CardType.OneShot;
+            CardDrawingEffects.DrawCards(2);
+            //Don't forget to include something that doesn't allow them to go to the next turn until they discard.
+            if (GameBoard.discardedCardsThisTurn.Count == 0)
+            {
+                MessageBox.Show("You must discard are atleast one card to use this One-Shot.", "Discard Problem");
+
+            }
+            else
+            {
+                damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
+                card.SendToGraveyard(this, cardsOnField);
+            }
         }
 
         public void HakaOfShielding(Card card)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SentinelsOfTheMultiverse.Data.Heroes
 {
@@ -28,6 +29,55 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         }
 
         public void BackFistStrike(Card card){
+            card.cardType = Card.CardType.OneShot;
+
+            var target = GameBoard.cardClickedArray;
+            if (target.Count > 1)
+            {
+                MessageBox.Show("Select only one target to perform Back-Fist Strike. \n No select target default's to the Villain.");
+                Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
+                currentPlayer.hand.Add(card);
+                currentPlayer.graveyard.Remove(card);
+            }
+            else if (target.Count == 1)
+            {
+                var villainMinions = GameEngine.getVillain().getMinions();
+                var environMinions = GameEngine.getEnvironment().getMinions();
+
+                Boolean minBool = false;
+
+                List<Minion> minionAttack = null;
+
+                foreach (Minion min in villainMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                foreach (Minion min in environMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                if (minBool)
+                {
+                    DamageEffects.DealDamage(null, null, minionAttack, 4, DamageEffects.DamageType.Melee);
+                    card.SendToGraveyard(this, cardsOnField);
+                }
+                else MessageBox.Show("Please select an appropriate card.");
+            }
+            else
+            {
+                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 4, DamageEffects.DamageType.Melee);
+                card.SendToGraveyard(this, cardsOnField);
+            }
         }
 
         public void BolsterAllies(Card card)
@@ -61,9 +111,54 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Thokk(Card card)
         {
-            if (GameBoard.cardClickedArray.Count==1)
+            card.cardType = Card.CardType.OneShot;
+
+            var target = GameBoard.cardClickedArray;
+            if (target.Count > 1)
             {
-                
+                MessageBox.Show("Select only one target to perform Thokk \n No select target default's to the Villain.");
+                Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
+                currentPlayer.hand.Add(card);
+                currentPlayer.graveyard.Remove(card);
+            }
+            else if (target.Count == 1)
+            {
+                var villainMinions = GameEngine.getVillain().getMinions();
+                var environMinions = GameEngine.getEnvironment().getMinions();
+
+                Boolean minBool = false;
+
+                List<Minion> minionAttack = null;
+
+                foreach (Minion min in villainMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                foreach (Minion min in environMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                if (minBool)
+                {
+                    DamageEffects.DealDamage(null, null, minionAttack, 4, DamageEffects.DamageType.Melee);
+                    card.SendToGraveyard(this, cardsOnField);
+                }
+                else MessageBox.Show("Please select an appropriate card.");
+            }
+            else
+            {
+                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 4, DamageEffects.DamageType.Melee);
+                card.SendToGraveyard(this, cardsOnField);
             }
             drawPhase(1);
         }
