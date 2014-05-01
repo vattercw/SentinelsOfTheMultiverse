@@ -119,6 +119,12 @@ namespace SentinelsOfTheMultiverse
             //    GameEngine.getCurrentPlayer().playerTurn(GameEngine.playerPlayedCard, GameEngine.playerUsedPower);
             //    GameEngine.isFirstTurn = false;
             //}
+            foreach (Card clearCard in cardClickedArray)
+            {
+                clearCard.Effect = null;
+            }
+            cardClickedArray.Clear();
+
             gameBoard.Clear_Selection(sender, e);
             GameEngine.nextTurn();
             gameBoard.updateBoard();

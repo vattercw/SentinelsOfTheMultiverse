@@ -28,7 +28,6 @@ namespace SentinelsOfTheMultiverse
         public static List<Card> selectedCards= new List<Card>();
         public static List<Card> discardedCardsThisTurn = new List<Card>();
         public static List<Card> cardClickedArray = new List<Card>();
-        public static List<Image> imageSelectedArray = new List<Image>();
 
         private int NEXT_CARD = 3;
 
@@ -335,60 +334,43 @@ namespace SentinelsOfTheMultiverse
         }
         public void Clear_Selection(object sender, RoutedEventArgs e)
         {
-            for (int k = 0; k < imageSelectedArray.Count; k++)
+            foreach (Card clearCard in cardClickedArray)
             {
-                if (imageSelectedArray[k] != null)
-                {
-                    imageSelectedArray[k].Effect = null;
-                }
+                clearCard.Effect = null;
             }
-            imageSelectedArray.Clear();
             cardClickedArray.Clear();
         }
 
         public void Card_Selection_Handler(object sender, RoutedEventArgs e)
         {
-            if (!imageSelectedArray.Contains((Image)sender)) imageSelectedArray.Add((Image)sender);
-
-            Hero hero = GameEngine.getHeroes()[GameEngine.getPlayerTurn()];
-            for (int i = 0; i < hero.cardsOnField.Count; i++)
-            {
-                for (int k = 0; k < imageSelectedArray.Count; k++)
-                {
-                    if (hero.cardsOnField[i].Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(hero.cardsOnField[i]))
-                    {
-                        if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowHero();
-                        cardClickedArray.Add(hero.cardsOnField[i]);
-                        return;
-                    }
-                }
-            }
-
             Villain villain = GameEngine.getVillain();
-            for (int i = 0; i < villain.cardsOnField.Count; i++)
-            {
-                for (int k = 0; k < imageSelectedArray.Count; k++)
-                {
-                    if (villain.cardsOnField[i].Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(villain.cardsOnField[i]))
-                    {
-                        if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowVillain();
-                        cardClickedArray.Add(villain.cardsOnField[i]);
-                        return;
-                    }
-                }
-            }
-
             GameEnvironment env = GameEngine.getEnvironment();
-            for (int i = 0; i < env.cardsOnField.Count; i++)
+            Boolean canSelectHero = false;
+            Boolean canSelectVillain = false;
+            Boolean canSelectEnv = false;
+
+            var cardClicked = (Card)sender;
+
+            foreach (Hero hero in GameEngine.getHeroes())
             {
-                for (int k = 0; k < imageSelectedArray.Count; k++)
+                if(hero.cardsOnField.Contains(cardClicked)) canSelectHero = true;
+            }
+            if (env.cardsOnField.Contains(cardClicked)) canSelectEnv = true;
+            if (villain.cardsOnField.Contains(cardClicked)) canSelectVillain = true;
+
+            if (canSelectHero || canSelectEnv || canSelectVillain)
+            {
+                if (!cardClickedArray.Contains(cardClicked))
                 {
-                    if (env.cardsOnField[i].Source == imageSelectedArray[k].Source && !cardClickedArray.Contains(env.cardsOnField[i]))
-                    {
-                        if (imageSelectedArray[k].Effect == null) imageSelectedArray[k].Effect = Utility.selectionGlowEnvironment();
-                        cardClickedArray.Add(env.cardsOnField[i]);
-                        return;
-                    }
+                    if (env.cardsOnField.Contains(cardClicked)) cardClicked.Effect = Utility.selectionGlowEnvironment();
+                    else if (villain.cardsOnField.Contains(cardClicked)) cardClicked.Effect = Utility.selectionGlowVillain();
+                    else cardClicked.Effect = Utility.selectionGlowHero();
+                    cardClickedArray.Add(cardClicked);
+                }
+                else
+                {
+                    cardClicked.Effect = null;
+                    cardClickedArray.Remove(cardClicked);
                 }
             }
         }
@@ -413,13 +395,6 @@ namespace SentinelsOfTheMultiverse
         {
             cardClickedArray.Clear();
         }
-
-        //public void selectDeselectCard(List<Card> fieldCards, int fieldPosition, int boardPosition, DropShadowEffect glowEffect)
-        //{
-        //    if (imageSelectedArray[boardPosition].Effect == null) imageSelectedArray[boardPosition].Effect = Utility.selectionGlowHero();
-        //    if (!cardClickedArray.Contains(fieldCards[fieldPosition])) cardClickedArray.Add(fieldCards[fieldPosition]);
-        //    else { cardClickedArray.Remove(fieldCards[fieldPosition]); imageSelectedArray[boardPosition].Effect = null; imageSelectedArray.RemoveAt(boardPosition); }
-        //}
         #endregion
     }
 }

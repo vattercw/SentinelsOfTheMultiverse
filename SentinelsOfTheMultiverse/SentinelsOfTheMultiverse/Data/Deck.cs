@@ -25,11 +25,10 @@ namespace SentinelsOfTheMultiverse.Data
                     var number = Utility.getNumOfCards(cardTitle);
                     var title = Utility.removeNumOfCards(cardTitle);
 
-                    Card card = new Card(fileName, title);
-
                     Console.WriteLine("\n" + title);
                     for (int k = 0; k < number; k++)
                     {
+                        Card card = new Card(fileName, title);
                         cards.Add(card);
                     }
 
