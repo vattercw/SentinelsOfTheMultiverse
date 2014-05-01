@@ -82,6 +82,13 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void BolsterAllies(Card card)
         {
+            card.cardType = Card.CardType.OneShot;
+
+            foreach (Hero player in GameEngine.getHeroes())
+            {
+                player.drawPhase(1);
+            }
+            card.SendToGraveyard(this, cardsOnField);
         }
 
         public void MotivationalCharge(Card card)
