@@ -25,7 +25,6 @@ namespace SentinelsOfTheMultiverse
         private ViewHand handViewer;
 
         private Card drawThisCard;
-        public static List<Card> selectedCards= new List<Card>();
         public static List<Card> discardedCardsThisTurn = new List<Card>();
         public static List<Card> cardClickedArray = new List<Card>();
 

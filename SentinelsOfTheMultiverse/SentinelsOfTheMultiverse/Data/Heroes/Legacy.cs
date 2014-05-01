@@ -61,7 +61,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Thokk(Card card)
         {
-            if (GameBoard.selectedCards.Count==1)
+            if (GameBoard.cardClickedArray.Count==1)
             {
                 
             }

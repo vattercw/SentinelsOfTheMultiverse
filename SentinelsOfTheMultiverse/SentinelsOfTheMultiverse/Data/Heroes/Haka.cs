@@ -33,6 +33,53 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public void ElbowSmash(Card card)
         {
             card.cardType = Card.CardType.OneShot;
+
+            var target = GameBoard.cardClickedArray;
+            if (target.Count > 1)
+            {
+                MessageBox.Show("Select only one target to perform Elbow Smash.");
+                Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
+                currentPlayer.hand.Add(card);
+            }
+            else if (target.Count == 1)
+            {
+                var villainMinions = GameEngine.getVillain().getMinions();
+                var environMinions = GameEngine.getEnvironment().getMinions();
+
+                Boolean minBool = false;
+
+                List<Minion> minionAttack = null;
+
+                foreach (Minion min in villainMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                foreach (Minion min in environMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                if (minBool)
+                {
+                    DamageEffects.DealDamage(null, null, minionAttack, 3, DamageEffects.DamageType.Melee);
+                    card.SendToGraveyard(this, cardsOnField);
+                }
+                else MessageBox.Show("Please select an appropriate card.");
+            }
+            else
+            {
+                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 3, DamageEffects.DamageType.Melee);
+                card.SendToGraveyard(this, cardsOnField);
+            }
         }
 
         public void Dominion(Card card)
