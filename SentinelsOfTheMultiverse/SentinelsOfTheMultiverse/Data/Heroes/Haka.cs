@@ -15,6 +15,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public Haka()
         {
             lifeTotal = 34;
+            maxHealth = 34;
         }
 
 

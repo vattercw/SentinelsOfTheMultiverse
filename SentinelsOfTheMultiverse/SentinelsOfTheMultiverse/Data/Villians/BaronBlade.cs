@@ -12,6 +12,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         public BaronBlade()
         {
             lifeTotal = 40;
+            maxHealth = 40;
         }
 
         //One Shot Cards

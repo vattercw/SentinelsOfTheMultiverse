@@ -14,6 +14,7 @@ namespace SentinelsOfTheMultiverse.Data
         public Deck deck { get;  set; }
         public string characterName {get; set;}
         public int lifeTotal { get; set; } //get rid of?
+        public int maxHealth { get; set; } 
         public List<Card> cardsOnField { get; set; }
         public List<String> immunities = new List<String>();
         public List<Card> graveyard { get; set; }
