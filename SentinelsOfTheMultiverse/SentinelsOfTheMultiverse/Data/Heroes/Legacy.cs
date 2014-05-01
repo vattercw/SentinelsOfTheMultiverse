@@ -38,6 +38,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
                 currentPlayer.hand.Add(card);
                 currentPlayer.graveyard.Remove(card);
+                GameEngine.playerPlayedCard = false;
             }
             else if (target.Count == 1)
             {
@@ -127,6 +128,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
                 currentPlayer.hand.Add(card);
                 currentPlayer.graveyard.Remove(card);
+                GameEngine.playerPlayedCard = false;
             }
             else if (target.Count == 1)
             {

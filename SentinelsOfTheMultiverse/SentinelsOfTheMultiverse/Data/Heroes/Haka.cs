@@ -42,6 +42,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
                 currentPlayer.hand.Add(card);
                 currentPlayer.graveyard.Remove(card);
+                GameEngine.playerPlayedCard = false;
             }
             else if (target.Count == 1)
             {
@@ -137,11 +138,16 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             card.cardType = Card.CardType.OneShot;
             CardDrawingEffects.DrawCards(2);
+
+            Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
             //Don't forget to include something that doesn't allow them to go to the next turn until they discard.
+
             if (GameBoard.discardedCardsThisTurn.Count == 0)
             {
                 MessageBox.Show("You must discard are atleast one card to use this One-Shot.", "Discard Problem");
-
+                currentPlayer.hand.Add(card);
+                currentPlayer.graveyard.Remove(card);
+                GameEngine.playerPlayedCard = false;
             }
             else
             {
