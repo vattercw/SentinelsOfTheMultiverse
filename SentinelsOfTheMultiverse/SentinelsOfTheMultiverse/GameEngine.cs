@@ -20,6 +20,11 @@ namespace SentinelsOfTheMultiverse
         static public int playerTurn = 0;
         public static bool isFirstTurn = true;
 
+        //variables for specific card states
+        public static bool volcanoInPlay = false;
+        public static bool obsidianInPlay = false;
+        public static bool lavaInPlay = false;
+
         public static int MAXPLAYER = 6;
         public static int VILLIANNUM = 0;
         public static int EVIRONMENTNUM = 7;
@@ -128,5 +133,7 @@ namespace SentinelsOfTheMultiverse
         }
         #endregion
 
+
+        
     }
 }

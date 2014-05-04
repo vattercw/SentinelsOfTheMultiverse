@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SentinelsOfTheMultiverse.Data;
+using SentinelsOfTheMultiverse.Data.Effects;
+using SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -30,6 +32,66 @@ namespace SentinelsOfTheMultiverse.Tests
             GameEnvironment env = ObjectMother.TestEnvironment();
             Assert.NotNull(env.cardsOnField);
             Assert.NotNull(env.deck);
+        }
+
+         [Test, RequiresSTA]
+        public void testObsidian()
+        {
+            Start testGame = new Start();
+            testGame.beginGame();
+            InsulaPrimus testEnvo = new InsulaPrimus();
+            Card testObsidian = new Card("Images\\Environment\\InsulaPrimus\\3-ObsidianField.png", "ObsidianField");
+
+            testEnvo.ObsidianField(testObsidian);
+
+            Assert.True(GameEngine.obsidianInPlay);
+            Assert.AreEqual(DamageEffects.GlobalDamageAmplification, 1);
+
+        }
+
+        [Test, RequiresSTA]
+        public void testVelo()
+        {
+            Start testGame = new Start();
+            testGame.beginGame();
+            InsulaPrimus testEnvo = new InsulaPrimus();
+            Card testVelo = new Card("Images\\Environment\\InsulaPrimus\\3-VelociraptorPack.png", "VelociraptorPack");
+            Assert.NotNull(testVelo);
+            testEnvo.VelociraptorPack(testVelo);
+            testEnvo.addMinion(new VelociraptorPack());
+
+            Assert.AreEqual(GameEngine.getEnvironment().getMinions().ToString(), testEnvo.getMinions().ToString());
+
+        }
+
+        [Test, RequiresSTA]
+        public void testTRex()
+        {
+            Start testGame = new Start();
+            testGame.beginGame();
+            InsulaPrimus testEnvo = new InsulaPrimus();
+            Card testRex = new Card("Images\\Environment\\InsulaPrimus\\2-EnragedTRex.png", "EnragedTRex");
+            Assert.NotNull(testRex);
+            testEnvo.EnragedTRex(testRex);
+            testEnvo.addMinion(new EnragedTRex());
+
+            Assert.AreEqual(GameEngine.getEnvironment().getMinions().ToString(), testEnvo.getMinions().ToString());
+
+        }
+
+        [Test, RequiresSTA]
+        public void testPtero()
+        {
+            Start testGame = new Start();
+            testGame.beginGame();
+            InsulaPrimus testEnvo = new InsulaPrimus();
+            Card testPtero = new Card("Images\\Environment\\InsulaPrimus\\2-PterodactylThief.png", "PterodactylThief");
+            Assert.NotNull(testPtero);
+            testEnvo.PterodactylThief(testPtero);
+            testEnvo.addMinion(new PterodactylThief());
+
+            Assert.AreEqual(GameEngine.getEnvironment().getMinions().ToString(), testEnvo.getMinions().ToString());
+
         }
     }
 }

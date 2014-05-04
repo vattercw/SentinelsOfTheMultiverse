@@ -13,6 +13,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public Legacy()
         {
             lifeTotal = 32;
+            maxHealth = 32;
         }
 
         public void Fortitude(Card card)
@@ -22,6 +23,8 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void DangerSense(Card card)
         {
+            card.cardType = Card.CardType.Ongoing;
+            this.immuneToEnvironment = true;
         }
 
         public void FlyingSmash(Card card)

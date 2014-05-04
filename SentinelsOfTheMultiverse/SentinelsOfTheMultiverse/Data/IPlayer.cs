@@ -19,6 +19,8 @@ namespace SentinelsOfTheMultiverse.Data
         public List<String> immunities = new List<String>();
         public List<Card> graveyard { get; set; }
 
+        public bool immuneToEnvironment = false;
+
         public int damageAmplificationFromPlayer
         {
             get

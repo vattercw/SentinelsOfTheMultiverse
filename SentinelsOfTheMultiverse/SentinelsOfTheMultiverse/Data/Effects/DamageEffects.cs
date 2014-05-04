@@ -13,7 +13,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 
         public enum DamageType { Projectile, Fire, Ice, Melee, Toxic };
         private static int _globalDamageAmplification;
-        static int GlobalDamageAmplification
+        public static int GlobalDamageAmplification
         {
             get
             {

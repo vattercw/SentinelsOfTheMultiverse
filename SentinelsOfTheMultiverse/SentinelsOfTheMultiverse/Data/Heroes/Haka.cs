@@ -158,7 +158,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void HakaOfShielding(Card card)
         {
-            
+            int damageReduction = 3;
         }
 
         public void Mere(Card card)
