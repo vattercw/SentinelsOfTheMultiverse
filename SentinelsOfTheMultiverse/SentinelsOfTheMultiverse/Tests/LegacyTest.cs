@@ -44,9 +44,34 @@ namespace SentinelsOfTheMultiverse.Tests
         }
 
         [Test, RequiresSTA]
+        public void TestBolsterAllies()
+        {
+            //GameEngine.TearDownGameEngine();
+
+            Start testGame = new Start();
+            testGame.beginGame();
+
+            List<int> playerHandStartSizes= new List<int>();
+            foreach (Hero h in GameEngine.getHeroes())
+            {
+                playerHandStartSizes.Add(h.getPlayerHand().Count);
+            }
+
+            
+            
+            Card testCard = new Card("Images\\Hero\\Legacy\\BolsterAllies.png", "BolsterAllies");
+            ((Legacy)GameEngine.getHeroes().Find(hero => hero.characterName == "Legacy")).BolsterAllies(testCard);
+
+            for(int i=0;i<GameEngine.getHeroes().Count; i++)
+            {
+                Assert.AreEqual(GameEngine.getHeroes()[i].getPlayerHand().Count, playerHandStartSizes[i] + 1);
+            }
+            
+        }
+
+        [Test, RequiresSTA]
         public void TestMotivationalCharge()
         {
-
         }
 
         [Test, RequiresSTA]

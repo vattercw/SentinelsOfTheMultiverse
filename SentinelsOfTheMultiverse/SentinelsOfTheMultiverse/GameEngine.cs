@@ -83,6 +83,15 @@ namespace SentinelsOfTheMultiverse
             throw new CardNotFoundException();
         }
 
+        public static void TearDownGameEngine()
+        {
+            playerTurn = 0;
+            isFirstTurn = true;
+            villain = null;
+            heroes = null;
+            environment = null;
+        }
+
         #region GET SET REGION
         public static int getPlayerTurn()
         {

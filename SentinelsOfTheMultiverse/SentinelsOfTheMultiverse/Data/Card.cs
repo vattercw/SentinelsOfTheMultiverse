@@ -32,7 +32,23 @@ namespace SentinelsOfTheMultiverse.Data
             cardID = GameEngine.cardIDNum;
             Height = CARD_HEIGHT;
             GameEngine.cardIDNum +=1;
+            SetLocalizedTooltip();
         }
+
+
+        private void SetLocalizedTooltip()
+        {
+            string localizedName = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString(cardName);
+            if (!String.IsNullOrEmpty(localizedName))
+            {
+                ToolTip tooltip = new ToolTip();
+                tooltip.DataContext = this;
+                string localizedEffect = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString(cardName + "Effect");
+                tooltip.Content = localizedName + " | " + localizedEffect;
+                ToolTipService.SetToolTip(this, tooltip);
+            }
+        }
+
         public string getName()
         {
             return cardName;
