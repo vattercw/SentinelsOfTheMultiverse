@@ -42,11 +42,12 @@ namespace SentinelsOfTheMultiverse
 
         private void Start_Game(object sender, RoutedEventArgs e)
         {
-            beginGame();
+            
             string selectedValue= (string)localizationChoicesBox.SelectedValue;
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(selectedValue);
             
             //Console.Write("value: " + SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Rampage"));
+            beginGame();
             GameBoard game = new GameBoard();
             game.Show();
             this.Close();
