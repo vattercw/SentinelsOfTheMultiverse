@@ -274,16 +274,7 @@ namespace SentinelsOfTheMultiverse
             Utility.addElementToGrid(villainGraveYard, VILLAIN_ROW, GRAVEYARD_COLUMN, gridLayout);
         }
 
-        //private Image CardImageFromImageSource(ImageSource imgSrc)
-        //{
-        //    Image tempImage = new Image();
-        //    tempImage.Height = CARD_HEIGHT;
-        //    tempImage.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
-        //    tempImage.Source = imgSrc;
-        //    tempImage.Margin = Utility.cardSpacing;
-        //    return tempImage;
-        //}
-
+  
         private int getNextCard()
         {
             NEXT_CARD++;
@@ -304,6 +295,15 @@ namespace SentinelsOfTheMultiverse
             {
                 Card_Selection_Handler(sender, e);
             }
+        }
+
+        public void BreakDown()
+        {
+            drawThisCard = null;
+            discardedCardsThisTurn = null;
+            cardClickedArray = null;
+            gridLayout = null;
+            handViewer = null;
         }
         #region Handlers
         public void removeHandlers()
