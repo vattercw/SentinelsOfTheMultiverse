@@ -81,12 +81,15 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         //Ongoing Cards
         public void LivingForceField(Card card)
         {
+            card.cardType = Card.CardType.Ongoing;
 
+            GameEngine.getVillain().damageAmplificationToPlayer--;
         }
 
         public void BacklashField(Card card)
         {
-
+            card.cardType = Card.CardType.Ongoing;
+            DamageEffects.inPlayBacklash = true;
         }
 
         //Devices and Minions
