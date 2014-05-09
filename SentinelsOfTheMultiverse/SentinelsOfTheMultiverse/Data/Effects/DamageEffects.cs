@@ -74,6 +74,10 @@ namespace SentinelsOfTheMultiverse.Data.Effects
             {
                 int totalVillainDamage = vil.damageAmplificationToPlayer + damageAmount;
                 vil.lifeTotal -= totalVillainDamage;
+                if (vil.lifeTotal <= 0)
+                {
+                    GameBoard.WinCondition();
+                }
             }
         }
 

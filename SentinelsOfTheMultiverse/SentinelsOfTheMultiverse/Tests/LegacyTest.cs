@@ -96,7 +96,6 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TesSurgeOfStrength()
         {
-
         }
 
         [Test, RequiresSTA]
@@ -121,6 +120,23 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestTakeDown()
         {
 
+        }
+
+        [Test, RequiresSTA]
+        public void TestPower()
+        {
+            Start game = new Start();
+            game.beginGame();
+            Legacy legacy = new Legacy();
+
+            legacy.Power();
+
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                Assert.AreEqual(1, hero.damageAmplificationFromPlayer);
+            }
+
+            Assert.NotNull(GameEngine.getHeroes());
         }
 
     }
