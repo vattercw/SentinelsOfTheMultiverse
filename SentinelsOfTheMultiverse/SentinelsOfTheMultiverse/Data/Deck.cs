@@ -28,14 +28,14 @@ namespace SentinelsOfTheMultiverse.Data
                     Console.WriteLine("\n" + title);
                     for (int k = 0; k < number; k++)
                     {
-                        Card card = new Card(fileName, title);
+                        Card card = new Card(fileName);
                         cards.Add(card);
                     }
 
                 }
                 else
                 {
-                    Card card = new Card(fileName, cardTitle);
+                    Card card = new Card(fileName);
                     cards.Add(card);
                 }
             }

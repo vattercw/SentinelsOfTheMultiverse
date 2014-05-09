@@ -222,9 +222,9 @@ namespace SentinelsOfTheMultiverse
         private void drawHeroTemplate(Hero hero, int currentHeroRow)
         {
             string heroName = hero.getCharacterName();
-            Card deckBack =new Card(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png", "deckback");
+            Card deckBack =new Card(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_back.png");
             deckBack.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
-            Card characterCard = new Card(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png", "heroCard");
+            Card characterCard = new Card(HERO_IMAGE_PATH + heroName + "/NonPlayable/" + heroName.ToLower() + "_hero.png");
             characterCard.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             
             Utility.addElementToGrid(characterCard, currentHeroRow, CHARACTER_COLUMN, gridLayout);
@@ -233,7 +233,7 @@ namespace SentinelsOfTheMultiverse
             addHealthLabel(hero, currentHeroRow);
 
             //TODO: Graveyard not sure if this hsould be the card or the image changed.
-            Card graveYardImg = new Card(GRAVEYARD_IMAGE_PATH, "Graveyard_Placeholder");
+            Card graveYardImg = new Card(GRAVEYARD_IMAGE_PATH);
             if (hero.graveyard.Count == 0)
             {
                 graveYardImg.Source = Utility.getImageSource(GRAVEYARD_IMAGE_PATH);
@@ -249,13 +249,13 @@ namespace SentinelsOfTheMultiverse
         private void drawNPCBoard(Villain villain, GameEnvironment env)
         {
             string villainName = villain.getCharacterName();
-            Card villainCard = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png", villainName+"_initial");
+            Card villainCard = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png");
             villainCard.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
-            Card villainDeck = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png", villainName+"_back");
+            Card villainDeck = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
             villainDeck.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
-            Card villainInst = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png", villainName+"_instr_front");
+            Card villainInst = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
             villainInst.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
-            Card envDeck = new Card("Images/Environment/" + env.characterName + "/NonPlayable/" + "insula_primus_back.png", "insula_primus_back");
+            Card envDeck = new Card("Images/Environment/" + env.characterName + "/NonPlayable/" + "insula_primus_back.png");
             envDeck.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
             Utility.addElementToGrid(villainCard, VILLAIN_ROW, CHARACTER_COLUMN, gridLayout);
@@ -265,11 +265,11 @@ namespace SentinelsOfTheMultiverse
 
             addHealthLabel(villain, VILLAIN_ROW);
 
-            Card envGraveyard = new Card(GRAVEYARD_IMAGE_PATH, "Graveyard_Placeholder");
+            Card envGraveyard = new Card(GRAVEYARD_IMAGE_PATH);
             envGraveyard.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             Utility.addElementToGrid(envGraveyard, ENVIRONMENT_ROW, GRAVEYARD_COLUMN, gridLayout);
 
-            Card villainGraveYard = new Card(GRAVEYARD_IMAGE_PATH, "Graveyard_Placeholder");
+            Card villainGraveYard = new Card(GRAVEYARD_IMAGE_PATH);
             villainGraveYard.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             Utility.addElementToGrid(villainGraveYard, VILLAIN_ROW, GRAVEYARD_COLUMN, gridLayout);
         }
@@ -288,7 +288,6 @@ namespace SentinelsOfTheMultiverse
                 Image expandCard = (Image)sender;
 
                 ViewCard showCard = new ViewCard(expandCard.Source);
-
                 showCard.Show();
             }
             else if (e.ClickCount == 1)

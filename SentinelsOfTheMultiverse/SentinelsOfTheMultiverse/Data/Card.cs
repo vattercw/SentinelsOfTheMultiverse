@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +24,14 @@ namespace SentinelsOfTheMultiverse.Data
         private int numOfCard;
         
 
-        public Card(string cardPath, string name)
+        public Card(string cardPath)
         {
             Source = getImageSource(cardPath);
-            cardName = name;
+            cardName = Path.GetFileNameWithoutExtension(cardPath);
+            if (cardName.Contains(Utility.splitDelimeter))
+            {
+                cardName = cardName.Split(Utility.splitDelimeter)[1];
+            }
             cardImageStr = cardPath;
             effects = new List<IPlayer.Ongoings>();
             cardID = GameEngine.cardIDNum;
@@ -87,6 +92,8 @@ namespace SentinelsOfTheMultiverse.Data
                     player.ongoingEffects.Remove(effect);
                 player.updateOngoingEffects();
             }
+
+            
             currentList.Remove(this);
             player.graveyard.Add(this);
         }

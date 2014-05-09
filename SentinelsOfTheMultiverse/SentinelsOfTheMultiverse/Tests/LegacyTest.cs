@@ -20,7 +20,7 @@ namespace SentinelsOfTheMultiverse.Tests
             testGame.beginGame();
             Legacy testLegacy = new Legacy();
 
-            Card testFortitude = new Card("Images\\Hero\\Legacy\\Fortitude.png", "Fortitude");
+            Card testFortitude = new Card("Images\\Hero\\Legacy\\Fortitude.png");
             testLegacy.Fortitude(testFortitude);
             Assert.AreEqual(testLegacy.damageAmplificationToPlayer, -1);
         }
@@ -32,7 +32,7 @@ namespace SentinelsOfTheMultiverse.Tests
             testGame.beginGame();
             Legacy testLegacy = new Legacy();
 
-            Card testDanger = new Card("Images\\Hero\\Legacy\\DangerSense.png", "DangerSense");
+            Card testDanger = new Card("Images\\Hero\\Legacy\\DangerSense.png");
             testLegacy.DangerSense(testDanger);
             Assert.True(testLegacy.immuneToEnvironment);
         }
@@ -51,7 +51,7 @@ namespace SentinelsOfTheMultiverse.Tests
             testGame.beginGame();
             Legacy testLegacy = new Legacy();
 
-            Card testStrike = new Card("Images\\Hero\\Legacy\\BackFistStrike.png", "BackFistStrike");
+            Card testStrike = new Card("Images\\Hero\\Legacy\\BackFistStrike.png");
             testLegacy.BackFistStrike(testStrike);
             Assert.AreEqual(GameEngine.getVillain().lifeTotal, 35); //change to 36 when done individually, 35 with all are executed, change when static problem fixed...
         }
@@ -81,7 +81,7 @@ namespace SentinelsOfTheMultiverse.Tests
             game.beginGame();
             Legacy legacy = new Legacy();
 
-            Card superhuman = new Card("Images\\Hero\\Legacy\\SuperhumanDurability.png", "SuperhumanDurability");
+            Card superhuman = new Card("Images\\Hero\\Legacy\\SuperhumanDurability.png");
             legacy.SuperhumanDurability(superhuman);
             Assert.AreEqual(legacy.damageAmplificationFromPlayer, 1);
 
@@ -111,7 +111,7 @@ namespace SentinelsOfTheMultiverse.Tests
             game.beginGame();
             Legacy legacy = new Legacy();
 
-            Card ring = new Card("Images\\Hero\\Legacy\\TheLegacyRing.png", "TheLegacyRing");
+            Card ring = new Card("Images\\Hero\\Legacy\\TheLegacyRing.png");
             legacy.TheLegacyRing(ring);
             Assert.AreEqual(legacy.numPowers, 2);
 

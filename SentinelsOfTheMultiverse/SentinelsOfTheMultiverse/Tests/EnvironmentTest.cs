@@ -40,7 +40,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Start testGame = new Start();
             testGame.beginGame();
             InsulaPrimus testEnvo = new InsulaPrimus();
-            Card testObsidian = new Card("Images\\Environment\\InsulaPrimus\\3-ObsidianField.png", "ObsidianField");
+            Card testObsidian = new Card("Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
 
             testEnvo.ObsidianField(testObsidian);
 
@@ -55,7 +55,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Start testGame = new Start();
             testGame.beginGame();
             InsulaPrimus testEnvo = new InsulaPrimus();
-            Card testVelo = new Card("Images\\Environment\\InsulaPrimus\\3-VelociraptorPack.png", "VelociraptorPack");
+            Card testVelo = new Card("Images\\Environment\\InsulaPrimus\\3-VelociraptorPack.png");
             Assert.NotNull(testVelo);
             testEnvo.VelociraptorPack(testVelo);
             testEnvo.addMinion(new VelociraptorPack());
@@ -70,7 +70,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Start testGame = new Start();
             testGame.beginGame();
             InsulaPrimus testEnvo = new InsulaPrimus();
-            Card testRex = new Card("Images\\Environment\\InsulaPrimus\\2-EnragedTRex.png", "EnragedTRex");
+            Card testRex = new Card("Images\\Environment\\InsulaPrimus\\2-EnragedTRex.png");
             Assert.NotNull(testRex);
             testEnvo.EnragedTRex(testRex);
             testEnvo.addMinion(new EnragedTRex());
@@ -85,7 +85,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Start testGame = new Start();
             testGame.beginGame();
             InsulaPrimus testEnvo = new InsulaPrimus();
-            Card testPtero = new Card("Images\\Environment\\InsulaPrimus\\2-PterodactylThief.png", "PterodactylThief");
+            Card testPtero = new Card("Images\\Environment\\InsulaPrimus\\2-PterodactylThief.png");
             Assert.NotNull(testPtero);
             testEnvo.PterodactylThief(testPtero);
             testEnvo.addMinion(new PterodactylThief());

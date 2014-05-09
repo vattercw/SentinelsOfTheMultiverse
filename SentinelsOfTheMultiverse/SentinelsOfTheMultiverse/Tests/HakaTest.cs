@@ -23,7 +23,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Minion min1 = ObjectMother.TestMinion();
             GameEngine.getVillain().addMinion(min1);
 
-            Card rampageCard = new Card("Images\\Hero\\Haka\\Rampage.png", "Rampage");
+            Card rampageCard = new Card("Images\\Hero\\Haka\\Rampage.png");
             haka.Rampage(rampageCard);
             Assert.AreEqual(GameEngine.getVillain().lifeTotal, 35);
         }
@@ -42,7 +42,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Haka haka = (Haka) ObjectMother.TestHero();
             int startingLifeTotal = haka.lifeTotal;
 
-            Card tamokoCard = new Card("Images\\Hero\\Haka\\TaMoko.png", "TaMoko");
+            Card tamokoCard = new Card("Images\\Hero\\Haka\\TaMoko.png");
             haka.TaMoko(tamokoCard);
 
             DamageEffects.DealDamageToHero(haka, 2, DamageEffects.DamageType.Melee);
@@ -60,7 +60,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Start game = new Start();
             game.beginGame();
             Haka haka = (Haka)ObjectMother.TestHero();
-            Card hakaOfBattleCard = new Card("Images\\Hero\\Haka\\HakaOfBattle.png", "HakaOfBattle");
+            Card hakaOfBattleCard = new Card("Images\\Hero\\Haka\\HakaOfBattle.png");
             int startLifeTotal = GameEngine.getVillain().lifeTotal;
             int startHandCount = haka.hand.Count;
 

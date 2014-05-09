@@ -18,7 +18,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Start game = new Start();
             game.beginGame();
             BaronBlade test = new BaronBlade();
-            Card hastenCard = new Card("Images\\Villain\\BaronBlade\\HastenDoom.png", "HastenDoom");
+            Card hastenCard = new Card("Images\\Villain\\BaronBlade\\HastenDoom.png");
             test.HastenDoom(hastenCard);
 
             for(int i=0; i < GameEngine.getHeroes().Count; i++){
@@ -40,7 +40,7 @@ namespace SentinelsOfTheMultiverse.Tests
             game.beginGame();
 
             BaronBlade test = new BaronBlade();
-            Card nanoCard = new Card("Images\\Villain\\BaronBlade\\FleshRepairNanites.png", "FleshRepairNanites");
+            Card nanoCard = new Card("Images\\Villain\\BaronBlade\\FleshRepairNanites.png");
             test.FleshRepairNanites(nanoCard);
 
             Assert.AreEqual(GameEngine.getVillain().lifeTotal, 50);
@@ -53,7 +53,7 @@ namespace SentinelsOfTheMultiverse.Tests
             game.beginGame();
 
             BaronBlade test = new BaronBlade();
-            Card slashCard = new Card("Images\\Villain\\BaronBlade\\SlashAndBurn.png", "SlashAndBurn");
+            Card slashCard = new Card("Images\\Villain\\BaronBlade\\SlashAndBurn.png");
             test.SlashAndBurn(slashCard);
 
             for (int i = 0; i < GameEngine.getHeroes().Count; i++)
@@ -80,7 +80,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Start game = new Start();
             game.beginGame();
             BaronBlade test = new BaronBlade();
-            Card turretCard = new Card("Images\\Villain\\BaronBlade\\PoweredRemoteTurret.png", "PoweredRemoteTurret");
+            Card turretCard = new Card("Images\\Villain\\BaronBlade\\PoweredRemoteTurret.png");
             test.PoweredRemoteTurret(turretCard);
 
             Assert.AreEqual(GameEngine.getVillain().getMinions()[0].ToString(), (new PoweredRemoteTurret()).ToString());
@@ -92,7 +92,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Start game = new Start();
             game.beginGame();
             BaronBlade test = new BaronBlade();
-            Card platCard = new Card("Images\\Villain\\BaronBlade\\MobileDefencePlatform.png", "MobileDefencePlatform");
+            Card platCard = new Card("Images\\Villain\\BaronBlade\\MobileDefencePlatform.png");
             test.MobileDefencePlatform(platCard);
 
             Assert.AreEqual(GameEngine.getVillain().getMinions()[0].ToString(), (new MobileDefensePlatform()).ToString());
@@ -104,7 +104,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Start game = new Start();
             game.beginGame();
             BaronBlade test = new BaronBlade();
-            Card redistCard = new Card("Images\\Villain\\BaronBlade\\ElementalRedistributor.png", "ElementalRedistributor");
+            Card redistCard = new Card("Images\\Villain\\BaronBlade\\ElementalRedistributor.png");
             test.ElementalRedistributor(redistCard);
 
             Assert.AreEqual(GameEngine.getVillain().getMinions()[0].ToString(), (new ElementalRedistributor()).ToString());
@@ -116,7 +116,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Start game = new Start();
             game.beginGame();
             BaronBlade test = new BaronBlade();
-            Card battleCard = new Card("Images\\Villain\\BaronBlade\\BladeBattalion.png", "BladeBattalion");
+            Card battleCard = new Card("Images\\Villain\\BaronBlade\\BladeBattalion.png");
             test.BladeBattalion(battleCard);
 
             Assert.AreEqual(GameEngine.getVillain().getMinions()[0].ToString(), (new BladeBattalion()).ToString());
