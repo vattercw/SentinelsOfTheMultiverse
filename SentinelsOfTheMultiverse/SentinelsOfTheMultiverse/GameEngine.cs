@@ -72,6 +72,7 @@ namespace SentinelsOfTheMultiverse
             }
             getCurrentPlayer().playerTurn(playerPlayedCard, playerUsedPower);
             playerPlayedCard = false;
+            playerUsedPower = false;
         }
 
         public static Card getCardFromID(int cardID){

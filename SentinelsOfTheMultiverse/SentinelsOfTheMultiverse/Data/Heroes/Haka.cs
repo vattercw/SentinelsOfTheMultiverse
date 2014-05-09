@@ -156,6 +156,54 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             }
         }
 
+        override public void Power()
+        {
+            var target = GameBoard.cardClickedArray;
+            if (target.Count > 1)
+            {
+                MessageBox.Show("Select only one target. \n No select target default's to the Villain.");
+            }
+            else if (target.Count == 1)
+            {
+                var villainMinions = GameEngine.getVillain().getMinions();
+                var environMinions = GameEngine.getEnvironment().getMinions();
+
+                Boolean minBool = false;
+
+                List<Minion> minionAttack = null;
+
+                foreach (Minion min in villainMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                foreach (Minion min in environMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                if (minBool)
+                {
+                    DamageEffects.DealDamage(null, null, minionAttack, 2, DamageEffects.DamageType.Melee);
+                
+                }
+                else MessageBox.Show("Please select an appropriate card.");
+            }
+            else
+            {
+                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 2, DamageEffects.DamageType.Melee);
+              
+            }
+        }
+
         public void HakaOfShielding(Card card)
         {
             int damageReduction = 3;
@@ -163,7 +211,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Mere(Card card)
         {
-            
+            //card.power = alskdjf;
         }
 
  
