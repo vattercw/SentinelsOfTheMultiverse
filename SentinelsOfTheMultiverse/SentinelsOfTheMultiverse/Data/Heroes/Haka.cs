@@ -87,7 +87,25 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Dominion(Card card)
         {
+            //add card destroyed event handler
+            //foreach(IPlayer p in GameEngine.getPlayers()){
+            List<Card> allEnvCards = new List<Card>();
+
+            allEnvCards.AddRange(GameEngine.getEnvironment().deck.cards);
+            allEnvCards.AddRange(GameEngine.getEnvironment().cardsOnField);
+            foreach (Card c in allEnvCards)
+            {
+                if (c.cardType == Card.CardType.Environment)
+                {
+                    c.CardDestroyed += new Card.CardDestroyedHandler(DominionEffect);
+                }
+            }
+            //}
             
+        }
+        void DominionEffect(Card c, EventArgs e)
+        {
+            CardDrawingEffects.DrawCards(15, this);
         }
 
         public void EnduringIntercession(Card card)
@@ -103,7 +121,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public void HakaOfBattle(Card card)
         {
             card.cardType = Card.CardType.OneShot;
-            CardDrawingEffects.DrawCards(2);
+            CardDrawingEffects.DrawCards(2, this);
             //Don't forget to include something that doesn't allow them to go to the next turn until they discard.
             //also, reset the discard count
             if (GameBoard.discardedCardsThisTurn.Count < 1)
@@ -137,7 +155,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public void HakaOfRestoration(Card card)
         {
             card.cardType = Card.CardType.OneShot;
-            CardDrawingEffects.DrawCards(2);
+            CardDrawingEffects.DrawCards(2, this);
 
             Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
             //Don't forget to include something that doesn't allow them to go to the next turn until they discard.
@@ -163,13 +181,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Mere(Card card)
         {
-            
         }
 
  
         public void PunishTheWeak(Card card)
         {
-            
         }
 
         public void SavageMana(Card card)
@@ -186,7 +202,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             HealEffects.healHero(this, 2);
             card.SendToGraveyard(this, cardsOnField);
-            CardDrawingEffects.DrawCards(1);
+            CardDrawingEffects.DrawCards(1, this);
         }
     }
 }

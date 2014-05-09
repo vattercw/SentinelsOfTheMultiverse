@@ -43,10 +43,16 @@ namespace SentinelsOfTheMultiverse
 
         public static void initPlayers(List<string> heroesStr, string villainStr, string envStr)
         {
-            
             for (int i = 0; i < heroesStr.Count; i++)
             {
                 Hero newHero = (Hero)getClassFromString(heroesStr[i]);
+                if (newHero.GetType().Equals(typeof(Haka)))
+                {
+                    newHero.hand.RemoveRange(0, 4);
+                    newHero.hand.Add(new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\3-Dominion.png"));
+                    newHero.hand.Add(new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\3-Mere.png"));
+                    newHero.hand.Add(new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\3-PunishTheWeak.png"));
+                }
                 heroes.Add(newHero);
             }
             
@@ -93,7 +99,7 @@ namespace SentinelsOfTheMultiverse
             playerTurn = 0;
             isFirstTurn = true;
             villain = null;
-            heroes = null;
+            heroes = new List<Hero>();
             environment = null;
         }
 

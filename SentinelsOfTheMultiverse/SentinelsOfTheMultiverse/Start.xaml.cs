@@ -60,9 +60,9 @@ namespace SentinelsOfTheMultiverse
             string _villainStr = GameEngine.VILLAIN_NAMESPACE + "BaronBlade";
             string _envStr = GameEngine.ENVIRONMENT_NAMESPACE + "InsulaPrimus";
 
-            heroesStr.Add(GameEngine.HERO_NAMESPACE + "Legacy");
             heroesStr.Add(GameEngine.HERO_NAMESPACE + "Haka");
-
+            heroesStr.Add(GameEngine.HERO_NAMESPACE + "Legacy");
+            
             Console.WriteLine(heroesStr[1]);
 
             GameEngine.initPlayers(heroesStr, _villainStr, _envStr);
