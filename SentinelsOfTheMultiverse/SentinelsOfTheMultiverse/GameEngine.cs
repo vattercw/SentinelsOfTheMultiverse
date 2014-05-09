@@ -34,6 +34,7 @@ namespace SentinelsOfTheMultiverse
         public static Boolean playerPlayedCard;
         public static Boolean playerUsedPower;
         public static int cardIDNum = 0;
+        public static bool resumePlay;
 
 
         //private static bool getWinCon()
