@@ -68,7 +68,8 @@ namespace SentinelsOfTheMultiverse.Tests
             haka.DiscardCard(haka.hand[0]);
 
             haka.HakaOfBattle(hakaOfBattleCard);
-            int damageAmount = 2 + haka.damageAmplificationFromPlayer;
+
+            int damageAmount= 2 + haka.damageAmplificationFromPlayer;
             DamageEffects.DealDamageToVillain(GameEngine.getVillain(), damageAmount, DamageEffects.DamageType.Melee);
             Assert.AreEqual(GameEngine.getVillain().lifeTotal, startLifeTotal - 3);
 
@@ -97,6 +98,19 @@ namespace SentinelsOfTheMultiverse.Tests
             haka.Dominion(dominion);
 
             GameEngine.getEnvironment().cardsOnField.Find(x=> x.cardType== Card.CardType.Environment).SendToGraveyard(GameEngine.getEnvironment(), GameEngine.getEnvironment().cardsOnField);
+        }
+
+        [Test, RequiresSTA]
+        public void TestPower()
+        {
+            Start game = new Start();
+            game.beginGame();
+            Haka haka = new Haka();
+
+            haka.Power();
+
+            Assert.AreEqual(38, GameEngine.getVillain().lifeTotal);
+
         }
     }
 }

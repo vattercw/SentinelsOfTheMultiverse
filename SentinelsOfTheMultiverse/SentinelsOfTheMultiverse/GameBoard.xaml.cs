@@ -394,5 +394,19 @@ namespace SentinelsOfTheMultiverse
             cardClickedArray.Clear();
         }
         #endregion
+
+        public static void WinCondition()
+        {
+            Window win = new Window();
+            win.Title = "You win!";
+            win.Activate();
+        }
+
+        internal static void LoseCondition()
+        {
+            Window lose = new Window();
+            lose.Title = "You lose!";
+            lose.Activate();
+        }
     }
 }

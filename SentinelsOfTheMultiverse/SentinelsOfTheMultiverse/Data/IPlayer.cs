@@ -18,8 +18,17 @@ namespace SentinelsOfTheMultiverse.Data
         public List<Card> cardsOnField { get; set; }
         public List<String> immunities = new List<String>();
         public List<Card> graveyard { get; set; }
+        public List<Card> discards { get; set; }
 
         public bool immuneToEnvironment = false;
+
+        abstract public void Power();
+
+        abstract public void DeathPower1();
+
+        abstract public void DeathPower2();
+
+        abstract public void DeathPower3();
 
         public int damageAmplificationFromPlayer
         {
@@ -127,5 +136,6 @@ namespace SentinelsOfTheMultiverse.Data
 
 
         internal delegate void Ongoings();
+
     }
 }

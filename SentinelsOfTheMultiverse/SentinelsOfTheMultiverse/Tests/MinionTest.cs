@@ -26,7 +26,7 @@ namespace SentinelsOfTheMultiverse.Tests
         {
             Minion minionTest = new PterodactylThief();
             Assert.AreEqual("PterodactylThief", minionTest.getMinionName());
-            Assert.AreEqual(10, minionTest.getCurrentHealth());
+            Assert.AreEqual(5, minionTest.getCurrentHealth());
         }
 
         [Test, RequiresSTA]
@@ -102,7 +102,7 @@ namespace SentinelsOfTheMultiverse.Tests
         {
             Minion minionTest = new PoweredRemoteTurret();
             Assert.AreEqual("PoweredRemoteTurret", minionTest.getMinionName());
-            Assert.AreEqual(10, minionTest.getCurrentHealth());
+            Assert.AreEqual(7, minionTest.getCurrentHealth());
         }
     }
 }

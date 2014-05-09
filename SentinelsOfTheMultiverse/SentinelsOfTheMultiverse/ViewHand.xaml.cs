@@ -64,34 +64,93 @@ namespace SentinelsOfTheMultiverse
         private void addButtons()
         {
             sideBar.Children.RemoveRange(0, sideBar.Children.Count);
-            Button discardButton = new Button();
-            discardButton.Content = "Discard";
-            discardButton.Click += new RoutedEventHandler(Discard_Action);
 
-            Button cancelButton = new Button();
-            cancelButton.Content = "Cancel Action";
-            cancelButton.Click += new RoutedEventHandler(Cancel_Action);
-
-            Button closeButton = new Button();
-            closeButton.Content = "Close";
-            closeButton.Click += new RoutedEventHandler(Close_Action);
-
-            Button endTurnButton = new Button();
-            endTurnButton.Content = "End Turn!";
-            endTurnButton.Click += new RoutedEventHandler(End_Turn);
-            
-            if (!GameEngine.playerPlayedCard)
+            if (GameEngine.getCurrentPlayer().lifeTotal <= 0)
             {
-                Button playButton = new Button();
-                playButton.Content = "Play Card";
-                playButton.Click += new RoutedEventHandler(Play_Card);
-                sideBar.Children.Add(playButton);
-            }
 
-            sideBar.Children.Add(cancelButton);
-            sideBar.Children.Add(closeButton);
-            sideBar.Children.Add(endTurnButton);
-            sideBar.Children.Add(discardButton);
+                Card death = new Card("Images\\Hero\\"+GameEngine.getCurrentPlayer().characterName+"\\"+GameEngine.getCurrentPlayer().characterName.ToLower() + "_death.jpg");
+                Grid.SetColumn(death, 1);
+                List<Card> deadHand = new List<Card>();
+                deadHand.Add(death);
+                initGrid(deadHand);
+
+                Button power1Button = new Button();
+                power1Button.Content = "Power 1";
+                power1Button.Click += new RoutedEventHandler(Power1_Action);
+
+                Button power2Button = new Button();
+                power2Button.Content = "Power 2";
+                power2Button.Click += new RoutedEventHandler(Power2_Action);
+
+                Button power3Button = new Button();
+                power3Button.Content = "Power 3";
+                power3Button.Click += new RoutedEventHandler(Power3_Action);
+            }
+            else
+            {
+                
+                Button discardButton = new Button();
+                discardButton.Content = "Discard";
+                discardButton.Click += new RoutedEventHandler(Discard_Action);
+
+                Button cancelButton = new Button();
+                cancelButton.Content = "Cancel Action";
+                cancelButton.Click += new RoutedEventHandler(Cancel_Action);
+
+                Button closeButton = new Button();
+                closeButton.Content = "Close";
+                closeButton.Click += new RoutedEventHandler(Close_Action);
+
+                Button endTurnButton = new Button();
+                endTurnButton.Content = "End Turn!";
+                endTurnButton.Click += new RoutedEventHandler(End_Turn);
+
+                if (!GameEngine.playerPlayedCard)
+                {
+                    Button playButton = new Button();
+                    playButton.Content = "Play Card";
+                    playButton.Click += new RoutedEventHandler(Play_Card);
+                    sideBar.Children.Add(playButton);
+                }
+
+                if (!GameEngine.playerUsedPower)
+                {
+                    Button powerButton = new Button();
+                    powerButton.Content = "Player Power";
+                    powerButton.Click += new RoutedEventHandler(Power_Action);
+                    sideBar.Children.Add(powerButton);
+                }
+
+                sideBar.Children.Add(cancelButton);
+                sideBar.Children.Add(closeButton);
+                sideBar.Children.Add(endTurnButton);
+                sideBar.Children.Add(discardButton);
+            }
+           
+        }
+
+        private void Power3_Action(object sender, RoutedEventArgs e)
+        {
+            GameEngine.getCurrentPlayer().DeathPower1();
+        }
+
+        private void Power2_Action(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Power1_Action(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Power_Action(object sender, RoutedEventArgs e)
+        {
+            if (GameEngine.playerUsedPower == false)
+            {
+                GameEngine.getCurrentPlayer().Power();
+                GameEngine.playerUsedPower = true;
+            }
         }
 
         private void updateHandView(){

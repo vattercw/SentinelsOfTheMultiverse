@@ -26,7 +26,6 @@ namespace SentinelsOfTheMultiverse.Data
         public event CardDestroyedHandler CardDestroyed;
         public delegate void CardDestroyedHandler(Card m, EventArgs e);
 
-
         public Card(string cardPath)
         {
             Source = getImageSource(cardPath);

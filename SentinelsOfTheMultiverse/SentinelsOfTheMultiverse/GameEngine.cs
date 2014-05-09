@@ -34,6 +34,7 @@ namespace SentinelsOfTheMultiverse
         public static Boolean playerPlayedCard;
         public static Boolean playerUsedPower;
         public static int cardIDNum = 0;
+        public static bool resumePlay;
 
 
         //private static bool getWinCon()
@@ -78,6 +79,25 @@ namespace SentinelsOfTheMultiverse
             }
             getCurrentPlayer().playerTurn(playerPlayedCard, playerUsedPower);
             playerPlayedCard = false;
+            playerUsedPower = false;
+
+            int numDead = 0;
+
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                if (hero.deck.cards.Count <= 0)
+                {
+                    GameBoard.LoseCondition();
+                }
+                if (hero.lifeTotal <= 0)
+                {
+                    numDead++;
+                }
+            }
+            if (numDead >= GameEngine.getHeroes().Count)
+            {
+                GameBoard.LoseCondition();
+            }
         }
 
         public static Card getCardFromID(int cardID){

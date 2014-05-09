@@ -18,6 +18,54 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             maxHealth = 34;
         }
 
+        override public void Power()
+        {
+            var target = GameBoard.cardClickedArray;
+            if (target.Count > 1)
+            {
+                MessageBox.Show("Select only one target. \n No select target default's to the Villain.");
+            }
+            else if (target.Count == 1)
+            {
+                var villainMinions = GameEngine.getVillain().getMinions();
+                var environMinions = GameEngine.getEnvironment().getMinions();
+
+                Boolean minBool = false;
+
+                List<Minion> minionAttack = null;
+
+                foreach (Minion min in villainMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                foreach (Minion min in environMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                if (minBool)
+                {
+                    DamageEffects.DealDamage(null, null, minionAttack, 2, DamageEffects.DamageType.Melee);
+
+                }
+                else MessageBox.Show("Please select an appropriate card.");
+            }
+            else
+            {
+                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 2, DamageEffects.DamageType.Melee);
+
+            }
+        }
+
 
         public void Rampage(Card card)
         {
@@ -174,6 +222,8 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             }
         }
 
+       
+
         public void HakaOfShielding(Card card)
         {
             int damageReduction = 3;
@@ -203,6 +253,33 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             HealEffects.healHero(this, 2);
             card.SendToGraveyard(this, cardsOnField);
             CardDrawingEffects.DrawCards(1, this);
+        }
+
+        public override void DeathPower1()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DeathPower2()
+        {
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                if (hero.lifeTotal > 0)
+                {
+                    hero.damageAmplificationToPlayer -= 2;
+                }
+            }
+        }
+
+        public override void DeathPower3()
+        {
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                if (hero.lifeTotal > 0)
+                {
+                    hero.drawPhase(1);
+                }
+            }
         }
     }
 }
