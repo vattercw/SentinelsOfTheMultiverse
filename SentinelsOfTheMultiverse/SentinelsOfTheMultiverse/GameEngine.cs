@@ -45,10 +45,17 @@ namespace SentinelsOfTheMultiverse
 
         public static void initPlayers(List<string> heroesStr, string villainStr, string envStr)
         {
-            
             for (int i = 0; i < heroesStr.Count; i++)
             {
                 Hero newHero = (Hero)getClassFromString(heroesStr[i]);
+                //TODO
+                //newHero.hand.RemoveRange(0, 4);
+                //if (newHero.GetType().Equals(typeof(Haka)))
+                //{
+                //    newHero.hand.Add(new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\3-Dominion.png"));
+                //    newHero.hand.Add(new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\3-Mere.png"));
+                //    newHero.hand.Add(new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\3-EnduringIntercession.png"));
+                //}
                 heroes.Add(newHero);
             }
             
@@ -75,6 +82,24 @@ namespace SentinelsOfTheMultiverse
             getCurrentPlayer().playerTurn(playerPlayedCard, playerUsedPower);
             playerPlayedCard = false;
             playerUsedPower = false;
+
+            int numDead = 0;
+
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                if (hero.deck.cards.Count <= 0)
+                {
+                    GameBoard.LoseCondition();
+                }
+                if (hero.lifeTotal <= 0)
+                {
+                    numDead++;
+                }
+            }
+            if (numDead >= GameEngine.getHeroes().Count)
+            {
+                GameBoard.LoseCondition();
+            }
         }
 
         public static Card getCardFromID(int cardID){
@@ -96,7 +121,7 @@ namespace SentinelsOfTheMultiverse
             playerTurn = 0;
             isFirstTurn = true;
             villain = null;
-            heroes = null;
+            heroes = new List<Hero>();
             environment = null;
         }
 

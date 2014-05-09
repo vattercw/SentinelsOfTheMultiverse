@@ -12,6 +12,9 @@ namespace SentinelsOfTheMultiverse.Data.Effects
         //internal delegate void AttackEventHandler(object sender, EventArgs e);
 
         public enum DamageType { Projectile, Fire, Ice, Melee, Toxic };
+
+        public static bool inPlayBacklash { get; set; }
+
         private static int _globalDamageAmplification;
         public static int GlobalDamageAmplification
         {
@@ -63,6 +66,10 @@ namespace SentinelsOfTheMultiverse.Data.Effects
             }
             int totalDamage = hero.damageAmplificationToPlayer + damageAmount;
             hero.lifeTotal -= totalDamage;
+            if (hero.lifeTotal <= 0)
+            {
+                //make him dead
+            }
         }
 
         public static void DealDamageToVillain(Villain vil, int damageAmount, DamageType damageType)
@@ -71,6 +78,10 @@ namespace SentinelsOfTheMultiverse.Data.Effects
             {
                 int totalVillainDamage = vil.damageAmplificationToPlayer + damageAmount;
                 vil.lifeTotal -= totalVillainDamage;
+                if (vil.lifeTotal <= 0)
+                {
+                    GameBoard.WinCondition();
+                }
             }
         }
 
@@ -94,5 +105,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                 }
             }
         }
+
+        
     }
 }

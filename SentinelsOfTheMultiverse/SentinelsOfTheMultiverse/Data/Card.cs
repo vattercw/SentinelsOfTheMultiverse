@@ -13,7 +13,7 @@ namespace SentinelsOfTheMultiverse.Data
     public class Card: Image
     {
         public enum CardLocation { Hand, Deck, Graveyard };
-        public enum CardType {OneShot, Ongoing, Equipment};
+        public enum CardType { OneShot, Ongoing, Equipment, Environment };
         string cardName;
 
         private readonly double CARD_HEIGHT = 200;
@@ -22,7 +22,12 @@ namespace SentinelsOfTheMultiverse.Data
         public CardType cardType { get; set; }
         private int cardID;
         private int numOfCard;
-        
+
+        public event CardDestroyedHandler CardDestroyed;
+        public delegate void CardDestroyedHandler(Card m, EventArgs e);
+
+        public Power cardPower;
+        public delegate void Power(Card sender, object[] arguments);
 
         public Card(string cardPath)
         {
@@ -30,7 +35,7 @@ namespace SentinelsOfTheMultiverse.Data
             cardName = Path.GetFileNameWithoutExtension(cardPath);
             if (cardName.Contains(Utility.splitDelimeter))
             {
-                cardName = cardName.Split(Utility.splitDelimeter)[1];
+                cardName= cardName.Split(Utility.splitDelimeter)[1];
             }
             cardImageStr = cardPath;
             effects = new List<IPlayer.Ongoings>();
@@ -38,6 +43,7 @@ namespace SentinelsOfTheMultiverse.Data
             Height = CARD_HEIGHT;
             GameEngine.cardIDNum +=1;
             SetLocalizedTooltip();
+
         }
 
 
@@ -92,7 +98,8 @@ namespace SentinelsOfTheMultiverse.Data
                     player.ongoingEffects.Remove(effect);
                 player.updateOngoingEffects();
             }
-
+            if(CardDestroyed != null)
+                CardDestroyed(this, null);
             
             currentList.Remove(this);
             player.graveyard.Add(this);

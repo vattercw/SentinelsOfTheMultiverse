@@ -194,5 +194,20 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public void TakeDown(Card card)
         {
         }
+
+        public override void DeathPower1()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DeathPower2()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DeathPower3()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

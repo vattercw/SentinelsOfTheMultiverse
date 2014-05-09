@@ -8,9 +8,9 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 {
     public static class CardDrawingEffects
     {
-        public static void DrawCards(int numCards)
+        public static void DrawCards(int numCards, IPlayer player)
         {
-            GameEngine.getCurrentPlayer().drawPhase(numCards);
+            player.drawPhase(numCards);
         }
 
         public static void DiscardCardFromHand(List<Card> cardsToDiscard)
@@ -20,6 +20,8 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                 ((Hero)GameEngine.getCurrentPlayer()).DiscardCard(card);
             }
         }
+
+        
 
     }
 }

@@ -17,6 +17,7 @@ namespace SentinelsOfTheMultiverse.Data.Environments
 
             DamageEffects.GlobalDamageAmplification++;
 
+            //card.SendToGraveyard(this, cardsOnField);
             //TODO: player discard 2 cards to get rid of
         }
 
@@ -56,6 +57,7 @@ namespace SentinelsOfTheMultiverse.Data.Environments
         ////Minions
         public void PterodactylThief(Card card)
         {
+            card.cardType = Card.CardType.Environment;
             PterodactylThief ptero = new PterodactylThief();
             GameEngine.getEnvironment().addMinion(ptero);
             Console.WriteLine("Pterodactyl Thief: " + ptero.health);
@@ -89,5 +91,20 @@ namespace SentinelsOfTheMultiverse.Data.Environments
             return targets;
         }
 
+
+        public override void DeathPower1()
+        {
+            return;
+        }
+
+        public override void DeathPower2()
+        {
+            return;
+        }
+
+        public override void DeathPower3()
+        {
+            return;
+        }
     }
 }

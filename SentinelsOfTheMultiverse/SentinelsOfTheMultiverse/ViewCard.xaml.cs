@@ -19,7 +19,9 @@ namespace SentinelsOfTheMultiverse
     public partial class ViewCard : Window
     {
         public Image magnifiedCard = new Image();
-        public ViewCard(ImageSource cardImage)
+        private GameBoard gameBoard;
+
+        public ViewCard(ImageSource cardImage, GameBoard board)
         {
             InitializeComponent();
             
@@ -38,6 +40,7 @@ namespace SentinelsOfTheMultiverse
 
             sp.MouseDown += new MouseButtonEventHandler(CloseWindow);
 
+            gameBoard = board;
             Content = sp;
         }
 
@@ -48,12 +51,19 @@ namespace SentinelsOfTheMultiverse
                 Card card;
                 for (int i = 0; i < GameEngine.getCurrentPlayer().cardsOnField.Count; i++)
                 {
-                    if (GameEngine.getCurrentPlayer().cardsOnField[i].Source.Equals(magnifiedCard))
+                    if (GameEngine.getCurrentPlayer().cardsOnField[i].Source.Equals(magnifiedCard.Source))
                     {
                         card = GameEngine.getCurrentPlayer().cardsOnField[i];
                         //if card.haspower = true....
-                        GameEngine.getCurrentPlayer().CardMethod(card);
-                        GameEngine.playerUsedPower = true;
+                        if (card.cardPower != null)
+                        {
+                            card.cardPower(card,null);
+                            GameEngine.playerUsedPower = true;
+                            gameBoard.updateBoard();
+                            Close();
+                        }
+                        //GameEngine.getCurrentPlayer().CardMethod(card);
+                        
                     }
                     else
                     {

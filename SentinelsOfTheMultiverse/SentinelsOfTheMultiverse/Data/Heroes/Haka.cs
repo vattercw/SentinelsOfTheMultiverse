@@ -18,6 +18,54 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             maxHealth = 34;
         }
 
+        override public void Power()
+        {
+            var target = GameBoard.cardClickedArray;
+            if (target.Count > 1)
+            {
+                MessageBox.Show("Select only one target. \n No select target default's to the Villain.");
+            }
+            else if (target.Count == 1)
+            {
+                var villainMinions = GameEngine.getVillain().getMinions();
+                var environMinions = GameEngine.getEnvironment().getMinions();
+
+                Boolean minBool = false;
+
+                List<Minion> minionAttack = null;
+
+                foreach (Minion min in villainMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                foreach (Minion min in environMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                if (minBool)
+                {
+                    DamageEffects.DealDamage(null, null, minionAttack, 2, DamageEffects.DamageType.Melee);
+
+                }
+                else MessageBox.Show("Please select an appropriate card.");
+            }
+            else
+            {
+                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 2, DamageEffects.DamageType.Melee);
+
+            }
+        }
+
 
         public void Rampage(Card card)
         {
@@ -38,10 +86,10 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             var target = GameBoard.cardClickedArray;
             if (target.Count > 1)
             {
-                MessageBox.Show("Select only one target to perform Elbow Smash. \n No select target default's to the Villain.");
+                MessageBox.Show("Select only one target to deal damage to. \n No select target default's to the Villain.");
                 Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
+                cardsOnField.Remove(card);
                 currentPlayer.hand.Add(card);
-                currentPlayer.graveyard.Remove(card);
                 GameEngine.playerPlayedCard = false;
             }
             else if (target.Count == 1)
@@ -87,12 +135,34 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Dominion(Card card)
         {
+            //add card destroyed event handler
+            //foreach(IPlayer p in GameEngine.getPlayers()){
+            List<Card> allEnvCards = new List<Card>();
+
+            allEnvCards.AddRange(GameEngine.getEnvironment().deck.cards);
+            allEnvCards.AddRange(GameEngine.getEnvironment().cardsOnField);
+            foreach (Card c in allEnvCards)
+            {
+                if (c.cardType == Card.CardType.Environment)
+                {
+                    c.CardDestroyed += new Card.CardDestroyedHandler(DominionEffect);
+                }
+            }
+            //}
             
+        }
+        void DominionEffect(Card c, EventArgs e)
+        {
+            CardDrawingEffects.DrawCards(15, this);
         }
 
         public void EnduringIntercession(Card card)
         {
-            
+            card.cardPower += new Card.Power(EnduringIntercessionPower);
+        }
+        void EnduringIntercessionPower(Card sender, object[] args)
+        {
+            sender.SendToGraveyard(this, cardsOnField);
         }
 
         public void GroundPound(Card card)
@@ -103,11 +173,14 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public void HakaOfBattle(Card card)
         {
             card.cardType = Card.CardType.OneShot;
-            CardDrawingEffects.DrawCards(2);
+            CardDrawingEffects.DrawCards(2, this);
             //Don't forget to include something that doesn't allow them to go to the next turn until they discard.
             //also, reset the discard count
             if (GameBoard.discardedCardsThisTurn.Count < 1)
             {
+                cardsOnField.Remove(card);
+                hand.Add(card);
+                GameEngine.playerPlayedCard = false;
                 MessageBox.Show("You must discard are atleast one card to use this One-Shot.", "Discard Problem");
             }
             else
@@ -137,7 +210,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public void HakaOfRestoration(Card card)
         {
             card.cardType = Card.CardType.OneShot;
-            CardDrawingEffects.DrawCards(2);
+            CardDrawingEffects.DrawCards(2, this);
 
             Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
             //Don't forget to include something that doesn't allow them to go to the next turn until they discard.
@@ -155,13 +228,29 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 card.SendToGraveyard(this, cardsOnField);
             }
         }
+        
+       
 
-        override public void Power()
+        public void HakaOfShielding(Card card)
+        {
+            int damageReduction = 3;
+        }
+
+        public void Mere(Card card)
+        {
+            card.cardPower = new Card.Power(MerePower);
+        }
+
+        public void MerePower(Card card, object[] args)
         {
             var target = GameBoard.cardClickedArray;
             if (target.Count > 1)
             {
-                MessageBox.Show("Select only one target. \n No select target default's to the Villain.");
+                MessageBox.Show("Select only one target to deal damage to. \n No select target default's to the Villain.");
+                Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
+                cardsOnField.Remove(card);
+                currentPlayer.hand.Add(card);
+                GameEngine.playerPlayedCard = false;
             }
             else if (target.Count == 1)
             {
@@ -192,32 +281,34 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 if (minBool)
                 {
-                    DamageEffects.DealDamage(null, null, minionAttack, 2, DamageEffects.DamageType.Melee);
-                
+                    DamageEffects.DealDamage(null, null, minionAttack, 3, DamageEffects.DamageType.Melee);
                 }
                 else MessageBox.Show("Please select an appropriate card.");
             }
             else
             {
-                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 2, DamageEffects.DamageType.Melee);
-              
+                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 3, DamageEffects.DamageType.Melee);
             }
+            card.SendToGraveyard(this, cardsOnField);
+            CardDrawingEffects.DrawCards(1, this);
         }
-
-        public void HakaOfShielding(Card card)
-        {
-            int damageReduction = 3;
-        }
-
-        public void Mere(Card card)
-        {
-            //card.power = alskdjf;
-        }
-
  
         public void PunishTheWeak(Card card)
         {
-            
+            List<Minion> minions= GameEngine.getEnvironment().getMinions();
+            minions.AddRange(GameEngine.getVillain().getMinions());
+            Villain villain = GameEngine.getVillain();
+
+            //TODO: get lowest nonhero
+            //add event for damage on that minion/villain
+            //if not lowestnonhero, event to decrease damage
+
+            card.cardPower = new Card.Power(PunishTheWeakPower);
+        }
+
+        void PunishTheWeakPower(Card card, object[] args)
+        {
+            card.SendToGraveyard(this, cardsOnField);
         }
 
         public void SavageMana(Card card)
@@ -234,7 +325,34 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             HealEffects.healHero(this, 2);
             card.SendToGraveyard(this, cardsOnField);
-            CardDrawingEffects.DrawCards(1);
+            CardDrawingEffects.DrawCards(1, this);
+        }
+
+        public override void DeathPower1()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DeathPower2()
+        {
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                if (hero.lifeTotal > 0)
+                {
+                    hero.damageAmplificationToPlayer -= 2;
+                }
+            }
+        }
+
+        public override void DeathPower3()
+        {
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                if (hero.lifeTotal > 0)
+                {
+                    hero.drawPhase(1);
+                }
+            }
         }
     }
 }

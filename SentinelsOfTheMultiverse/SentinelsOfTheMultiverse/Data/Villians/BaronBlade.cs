@@ -41,25 +41,12 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         public void SlashAndBurn(Card card)
         {
             int damage = GameEngine.getHeroes().Count;
-            Hero lowestHP = GameEngine.getHeroes()[0];
-
-            for (int i = 0; i < GameEngine.getHeroes().Count; i++)
-            {
-                if (lowestHP.lifeTotal > GameEngine.getHeroes()[i].lifeTotal)
-                {
-                    lowestHP = GameEngine.getHeroes()[i];
-                }
-            }
+            Hero lowestHP = Utility.GetHeroLowestHP();
 
             Hero highestHP = GameEngine.getHeroes()[0];
 
-            for (int i = 0; i < GameEngine.getHeroes().Count; i++)
-            {
-                if (highestHP.lifeTotal < GameEngine.getHeroes()[i].lifeTotal)
-                {
-                    highestHP = GameEngine.getHeroes()[i];
-                }
-            }
+            highestHP = Utility.GetHeroHighestHP(highestHP);
+
             int fireDamage = 2;
             if (lowestHP.Equals(highestHP))
             {
@@ -73,6 +60,9 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
         }
 
+
+
+
         public void ConsiderThePriceOfVictory(Card card)
         {
 
@@ -81,12 +71,15 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         //Ongoing Cards
         public void LivingForceField(Card card)
         {
+            card.cardType = Card.CardType.Ongoing;
 
+            GameEngine.getVillain().damageAmplificationToPlayer--;
         }
 
         public void BacklashField(Card card)
         {
-
+            card.cardType = Card.CardType.Ongoing;
+            DamageEffects.inPlayBacklash = true;
         }
 
         //Devices and Minions
@@ -119,6 +112,21 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             GameEngine.getVillain().addMinion(new BladeBattalion());
             Console.WriteLine("Blade Battalion: " + bbat.health);
             
+        }
+
+        public override void DeathPower1()
+        {
+            return;
+        }
+
+        public override void DeathPower2()
+        {
+            return;
+        }
+
+        public override void DeathPower3()
+        {
+            return;
         }
     }
 }
