@@ -31,7 +31,20 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestElbowSmash()
         {
-            //test smash
+            Start game = new Start();
+            game.beginGame();
+            Haka haka = (Haka)ObjectMother.TestHero();
+            BaronBlade baron = (BaronBlade)ObjectMother.TestVillain();
+            GameEnvironment env = (GameEnvironment)ObjectMother.TestEnvironment();
+
+            Minion min1 = ObjectMother.TestMinion();
+            GameEngine.getVillain().addMinion(min1);
+
+            Minion min2 = ObjectMother.TestMinion();
+            GameEngine.getEnvironment().addMinion(min2);
+
+            Card elbowSmash = new Card("Images\\Hero\\Haka\\ElbowSmash.png");
+
         }
 
         [Test(), RequiresSTA]

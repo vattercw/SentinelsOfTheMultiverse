@@ -52,7 +52,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 Boolean minBool = false;
 
                 List<Minion> minionAttack = null;
-
+                
                 foreach (Minion min in villainMinions)
                 {
                     if (min.minionName == target[0].Name)

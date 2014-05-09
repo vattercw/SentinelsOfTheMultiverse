@@ -124,6 +124,9 @@
     <Compile Include="Start.xaml.cs">
       <DependentUpon>Start.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DiscardFromHand.xaml.cs">
+      <DependentUpon>DiscardFromHand.xaml</DependentUpon>
+    </Compile>
     <Page Include="GameBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Start.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DiscardFromHand.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
