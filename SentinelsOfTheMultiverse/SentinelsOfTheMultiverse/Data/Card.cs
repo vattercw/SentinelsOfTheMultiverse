@@ -22,7 +22,7 @@ namespace SentinelsOfTheMultiverse.Data
         public CardType cardType { get; set; }
         private int cardID;
         private int numOfCard;
-        
+
 
         public Card(string cardPath)
         {

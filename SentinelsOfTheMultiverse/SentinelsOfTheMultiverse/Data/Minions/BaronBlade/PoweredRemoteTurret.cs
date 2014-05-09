@@ -12,27 +12,27 @@ namespace SentinelsOfTheMultiverse.Data.Minions
 
         public PoweredRemoteTurret()
         {
-            maxHealth = 10;
-            health = 10;
+            maxHealth = 7;
+            health = 7;
             effectPhase = Minion.MinionType.End;
         }
 
         public override void executeEffect()
         {
-            int numTurret = 0;
+            int numPlat = 0;
             for (int i = 0; i < GameEngine.getVillain().getEndPhaseMinions().Count; i++)
             {
-                if (GameEngine.getVillain().getEndPhaseMinions()[i] is PoweredRemoteTurret)
+                if (GameEngine.getVillain().getMinions()[i] is MobileDefensePlatform)
                 {
-                    numTurret++;
+                    numPlat++;
                 }
             }
 
-            int extraDamage = numTurret - 1;
+            int extraDamage = numPlat;
 
             for (int i = 0; i < GameEngine.getHeroes().Count; i++)
             {
-                DamageEffects.DealDamage(GameEngine.getHeroes(), null, null, 2, DamageEffects.DamageType.Projectile);
+                DamageEffects.DealDamage(GameEngine.getHeroes(), null, null, 2 + extraDamage, DamageEffects.DamageType.Projectile);
             }
         }
     }
