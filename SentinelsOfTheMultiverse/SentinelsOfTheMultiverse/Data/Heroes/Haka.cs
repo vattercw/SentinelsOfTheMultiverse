@@ -238,5 +238,32 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.SendToGraveyard(this, cardsOnField);
             CardDrawingEffects.DrawCards(1);
         }
+
+        public override void DeathPower1()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DeathPower2()
+        {
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                if (hero.lifeTotal > 0)
+                {
+                    hero.damageAmplificationToPlayer -= 2;
+                }
+            }
+        }
+
+        public override void DeathPower3()
+        {
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                if (hero.lifeTotal > 0)
+                {
+                    hero.drawPhase(1);
+                }
+            }
+        }
     }
 }

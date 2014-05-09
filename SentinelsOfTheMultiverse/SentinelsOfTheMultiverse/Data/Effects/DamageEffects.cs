@@ -66,6 +66,10 @@ namespace SentinelsOfTheMultiverse.Data.Effects
             }
             int totalDamage = hero.damageAmplificationToPlayer + damageAmount;
             hero.lifeTotal -= totalDamage;
+            if (hero.lifeTotal <= 0)
+            {
+                //make him dead
+            }
         }
 
         public static void DealDamageToVillain(Villain vil, int damageAmount, DamageType damageType)

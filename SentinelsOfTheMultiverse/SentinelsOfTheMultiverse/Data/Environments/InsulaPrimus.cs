@@ -89,5 +89,20 @@ namespace SentinelsOfTheMultiverse.Data.Environments
             return targets;
         }
 
+
+        public override void DeathPower1()
+        {
+            return;
+        }
+
+        public override void DeathPower2()
+        {
+            return;
+        }
+
+        public override void DeathPower3()
+        {
+            return;
+        }
     }
 }

@@ -24,6 +24,12 @@ namespace SentinelsOfTheMultiverse.Data
 
         abstract public void Power();
 
+        abstract public void DeathPower1();
+
+        abstract public void DeathPower2();
+
+        abstract public void DeathPower3();
+
         public int damageAmplificationFromPlayer
         {
             get
@@ -130,5 +136,6 @@ namespace SentinelsOfTheMultiverse.Data
 
 
         internal delegate void Ongoings();
+
     }
 }

@@ -123,5 +123,20 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             Console.WriteLine("Blade Battalion: " + bbat.health);
             
         }
+
+        public override void DeathPower1()
+        {
+            return;
+        }
+
+        public override void DeathPower2()
+        {
+            return;
+        }
+
+        public override void DeathPower3()
+        {
+            return;
+        }
     }
 }
