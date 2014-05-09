@@ -88,10 +88,28 @@ namespace SentinelsOfTheMultiverse
                 sideBar.Children.Add(playButton);
             }
 
+            if (!GameEngine.playerUsedPower)
+            {
+                Button powerButton = new Button();
+                powerButton.Content = "Player Power";
+                powerButton.Click += new RoutedEventHandler(Power_Action);
+                sideBar.Children.Add(powerButton);
+            }
+
             sideBar.Children.Add(cancelButton);
             sideBar.Children.Add(closeButton);
             sideBar.Children.Add(endTurnButton);
             sideBar.Children.Add(discardButton);
+           
+        }
+
+        private void Power_Action(object sender, RoutedEventArgs e)
+        {
+            if (GameEngine.playerUsedPower == false)
+            {
+                GameEngine.getCurrentPlayer().Power();
+                GameEngine.playerUsedPower = true;
+            }
         }
 
         private void updateHandView(){

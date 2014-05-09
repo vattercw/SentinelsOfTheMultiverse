@@ -15,6 +15,11 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             maxHealth = 40;
         }
 
+        public override void Power()
+        {
+            return;
+        }
+
         //One Shot Cards
         public void HastenDoom(Card card)
         {

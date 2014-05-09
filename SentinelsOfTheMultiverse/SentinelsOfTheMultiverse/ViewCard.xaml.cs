@@ -11,25 +11,56 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SentinelsOfTheMultiverse.Data;
 
 namespace SentinelsOfTheMultiverse
 {
     //[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public partial class ViewCard : Window
     {
+        public Image magnifiedCard = new Image();
         public ViewCard(ImageSource cardImage)
         {
             InitializeComponent();
-
-            Image magnifiedCard = new Image();
+            
             magnifiedCard.Source = cardImage;
 
+            Button powerButton = new Button();
+            powerButton.Content = "Play Power";
+            powerButton.Click += new RoutedEventHandler(Power_Action);
+
             StackPanel sp = new StackPanel();
+            sp.Children.Add(powerButton);
             sp.Children.Add(magnifiedCard);
+            
+
+            sp.CanVerticallyScroll = true;
 
             sp.MouseDown += new MouseButtonEventHandler(CloseWindow);
 
             Content = sp;
+        }
+
+        private void Power_Action(object sender, RoutedEventArgs e)
+        {
+            if (GameEngine.playerUsedPower == false)
+            {
+                Card card;
+                for (int i = 0; i < GameEngine.getCurrentPlayer().cardsOnField.Count; i++)
+                {
+                    if (GameEngine.getCurrentPlayer().cardsOnField[i].Source.Equals(magnifiedCard))
+                    {
+                        card = GameEngine.getCurrentPlayer().cardsOnField[i];
+                        //if card.haspower = true....
+                        GameEngine.getCurrentPlayer().CardMethod(card);
+                        GameEngine.playerUsedPower = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
         }
 
         public void CloseWindow(object sender, MouseButtonEventArgs e)

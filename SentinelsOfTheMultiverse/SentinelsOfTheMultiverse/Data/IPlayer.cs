@@ -22,6 +22,8 @@ namespace SentinelsOfTheMultiverse.Data
 
         public bool immuneToEnvironment = false;
 
+        abstract public void Power();
+
         public int damageAmplificationFromPlayer
         {
             get

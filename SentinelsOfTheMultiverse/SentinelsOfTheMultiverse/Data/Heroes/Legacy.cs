@@ -16,6 +16,17 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             maxHealth = 32;
         }
 
+
+        public override void Power()
+        {
+            //until next turn heros do one more damage
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                hero.damageAmplificationFromPlayer++;
+            }
+        }
+
+
         public void Fortitude(Card card)
         {
             this.damageAmplificationToPlayer -= 1;

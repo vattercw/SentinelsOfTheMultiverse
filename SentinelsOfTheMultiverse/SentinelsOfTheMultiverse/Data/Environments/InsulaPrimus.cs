@@ -20,6 +20,13 @@ namespace SentinelsOfTheMultiverse.Data.Environments
             //TODO: player discard 2 cards to get rid of
         }
 
+
+        public override void Power()
+        {
+            return;
+        }
+
+
         public void RiverOfLava(Card card)
         {
             List<Hero> targets = getTargets(GameEngine.getHeroes());
