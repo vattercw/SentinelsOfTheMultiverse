@@ -158,7 +158,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void EnduringIntercession(Card card)
         {
-            
+            card.cardPower += new Card.Power(EnduringIntercessionPower);
+        }
+        void EnduringIntercessionPower(object sender, object[] args)
+        {
+            ((Card)sender).SendToGraveyard(this, cardsOnField);
         }
 
         public void GroundPound(Card card)
@@ -174,6 +178,9 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             //also, reset the discard count
             if (GameBoard.discardedCardsThisTurn.Count < 1)
             {
+                cardsOnField.Remove(card);
+                hand.Add(card);
+                GameEngine.playerPlayedCard = false;
                 MessageBox.Show("You must discard are atleast one card to use this One-Shot.", "Discard Problem");
             }
             else

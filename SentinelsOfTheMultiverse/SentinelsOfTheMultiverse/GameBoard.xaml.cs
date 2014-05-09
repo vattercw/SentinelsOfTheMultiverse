@@ -287,7 +287,7 @@ namespace SentinelsOfTheMultiverse
             {
                 Image expandCard = (Image)sender;
 
-                ViewCard showCard = new ViewCard(expandCard.Source);
+                ViewCard showCard = new ViewCard(expandCard.Source, this);
                 showCard.Show();
             }
             else if (e.ClickCount == 1)
