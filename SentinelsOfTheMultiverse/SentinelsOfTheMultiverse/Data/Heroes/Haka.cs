@@ -86,10 +86,10 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             var target = GameBoard.cardClickedArray;
             if (target.Count > 1)
             {
-                MessageBox.Show("Select only one target to perform Elbow Smash. \n No select target default's to the Villain.");
+                MessageBox.Show("Select only one target to deal damage to. \n No select target default's to the Villain.");
                 Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
+                cardsOnField.Remove(card);
                 currentPlayer.hand.Add(card);
-                currentPlayer.graveyard.Remove(card);
                 GameEngine.playerPlayedCard = false;
             }
             else if (target.Count == 1)
@@ -160,9 +160,9 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             card.cardPower += new Card.Power(EnduringIntercessionPower);
         }
-        void EnduringIntercessionPower(object sender, object[] args)
+        void EnduringIntercessionPower(Card sender, object[] args)
         {
-            ((Card)sender).SendToGraveyard(this, cardsOnField);
+            sender.SendToGraveyard(this, cardsOnField);
         }
 
         public void GroundPound(Card card)
@@ -228,7 +228,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 card.SendToGraveyard(this, cardsOnField);
             }
         }
-
+        
        
 
         public void HakaOfShielding(Card card)
@@ -238,11 +238,77 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Mere(Card card)
         {
+            card.cardPower = new Card.Power(MerePower);
         }
 
+        public void MerePower(Card card, object[] args)
+        {
+            var target = GameBoard.cardClickedArray;
+            if (target.Count > 1)
+            {
+                MessageBox.Show("Select only one target to deal damage to. \n No select target default's to the Villain.");
+                Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
+                cardsOnField.Remove(card);
+                currentPlayer.hand.Add(card);
+                GameEngine.playerPlayedCard = false;
+            }
+            else if (target.Count == 1)
+            {
+                var villainMinions = GameEngine.getVillain().getMinions();
+                var environMinions = GameEngine.getEnvironment().getMinions();
+
+                Boolean minBool = false;
+
+                List<Minion> minionAttack = null;
+
+                foreach (Minion min in villainMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                foreach (Minion min in environMinions)
+                {
+                    if (min.minionName == target[0].Name)
+                    {
+                        minionAttack.Add(min);
+                        minBool = true;
+                    }
+                }
+
+                if (minBool)
+                {
+                    DamageEffects.DealDamage(null, null, minionAttack, 3, DamageEffects.DamageType.Melee);
+                }
+                else MessageBox.Show("Please select an appropriate card.");
+            }
+            else
+            {
+                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 3, DamageEffects.DamageType.Melee);
+            }
+            card.SendToGraveyard(this, cardsOnField);
+            CardDrawingEffects.DrawCards(1, this);
+        }
  
         public void PunishTheWeak(Card card)
         {
+            List<Minion> minions= GameEngine.getEnvironment().getMinions();
+            minions.AddRange(GameEngine.getVillain().getMinions());
+            Villain villain = GameEngine.getVillain();
+
+            //TODO: get lowest nonhero
+            //add event for damage on that minion/villain
+            //if not lowestnonhero, event to decrease damage
+
+            card.cardPower = new Card.Power(PunishTheWeakPower);
+        }
+
+        void PunishTheWeakPower(Card card, object[] args)
+        {
+            card.SendToGraveyard(this, cardsOnField);
         }
 
         public void SavageMana(Card card)

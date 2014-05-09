@@ -27,7 +27,7 @@ namespace SentinelsOfTheMultiverse.Data
         public delegate void CardDestroyedHandler(Card m, EventArgs e);
 
         public Power cardPower;
-        public delegate void Power(object sender, object[] arguments);
+        public delegate void Power(Card sender, object[] arguments);
 
         public Card(string cardPath)
         {

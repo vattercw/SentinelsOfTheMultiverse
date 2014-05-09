@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SentinelsOfTheMultiverse.Data.Villains;
 using SentinelsOfTheMultiverse.Data.Effects;
+using System.Reflection;
+using SentinelsOfTheMultiverse.Data.Environments;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -89,6 +91,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Start game = new Start();
             
             game.beginGame();
+
             Haka haka= (Haka)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Haka));
             Card envCard = new Card("Images\\Environment\\InsulaPrimus\\2-PterodactylThief.png");
             envCard.cardType = Card.CardType.Environment;
@@ -100,6 +103,28 @@ namespace SentinelsOfTheMultiverse.Tests
             GameEngine.getEnvironment().cardsOnField.Find(x=> x.cardType== Card.CardType.Environment).SendToGraveyard(GameEngine.getEnvironment(), GameEngine.getEnvironment().cardsOnField);
         }
 
+        [Test(), RequiresSTA]
+        public void TestMere()
+        {
+            GameEngine.TearDownGameEngine();
+            Haka testHaka= new Haka();
+            BaronBlade testVil = new BaronBlade();
+            InsulaPrimus env = new InsulaPrimus();
+            List<Hero> myHeroes = new List<Hero>() { testHaka };
+            typeof(GameEngine).GetField("heroes", BindingFlags.Static| BindingFlags.NonPublic).SetValue(null, myHeroes);
+            typeof(GameEngine).GetField("villain", BindingFlags.Static | BindingFlags.NonPublic).SetValue(null, testVil);
+            typeof(GameEngine).GetField("environment", BindingFlags.Static | BindingFlags.NonPublic).SetValue(null, env);
+            Card mere= new Card("Images\\Hero\\Haka\\3-Mere.png");
+
+            //deals damage to villain because cardClickedArray is empty
+            GameBoard.cardClickedArray = new List<Card>();
+            testHaka.MerePower(mere, null);
+
+            Assert.AreEqual(5, testHaka.hand.Count);
+            Assert.AreNotEqual(GameEngine.getVillain().maxHealth, GameEngine.getVillain().lifeTotal);
+        }
+
+
         [Test, RequiresSTA]
         public void TestPower()
         {
@@ -110,7 +135,7 @@ namespace SentinelsOfTheMultiverse.Tests
             haka.Power();
 
             Assert.AreEqual(38, GameEngine.getVillain().lifeTotal);
-
+            
         }
     }
 }
