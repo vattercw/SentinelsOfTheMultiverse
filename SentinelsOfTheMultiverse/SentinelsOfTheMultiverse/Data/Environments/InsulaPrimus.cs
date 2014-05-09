@@ -17,7 +17,7 @@ namespace SentinelsOfTheMultiverse.Data.Environments
 
             DamageEffects.GlobalDamageAmplification++;
 
-            card.SendToGraveyard(this, cardsOnField);
+            //card.SendToGraveyard(this, cardsOnField);
             //TODO: player discard 2 cards to get rid of
         }
 
