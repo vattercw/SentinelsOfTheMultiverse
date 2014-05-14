@@ -159,7 +159,7 @@ namespace SentinelsOfTheMultiverse
         {
             initHandViewer((Hero)GameEngine.getCurrentPlayer());
             handViewer.Visibility = Utility.SHOW;
-            Button handVisibleButton = (Button)sender;
+            //Button handVisibleButton = (Button)sender;
         }
 
         public void initHandViewer(Hero currentPlayer)

@@ -3,6 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="View Player Hand!" Height="400" Width="1200">
     <Grid>
-        
     </Grid>
+    <Window.Resources>
+        <RoutedUICommand x:Key="DiscardCards" Text="Text" />
+        <RoutedUICommand x:Key="PlayCard" Text="Text" />
+        <RoutedUICommand x:Key="EndTurn" Text="Text" />
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource DiscardCards}" Executed="Discard_Action" />
+        <CommandBinding Command="{StaticResource PlayCard}" Executed="Play_Card" />
+        <CommandBinding Command="{StaticResource EndTurn}" Executed="End_Turn" />
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding Key="D" Modifiers="Ctrl" Command="{StaticResource DiscardCards}" />
+        <KeyBinding Key="P" Modifiers="Ctrl" Command="{StaticResource PlayCard}" />
+        <KeyBinding Key="E" Modifiers="Ctrl" Command="{StaticResource EndTurn}" />
+    </Window.InputBindings>
 </Window>
