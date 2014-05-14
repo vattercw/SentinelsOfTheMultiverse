@@ -265,29 +265,57 @@ namespace SentinelsOfTheMultiverse
                 cardClickedArray[0].Effect = null;
                 gameBoard.drawCardSelected(cardClickedArray[0]);
                 object[] res = GameEngine.getCurrentPlayer().CardMethod(cardClickedArray[0]);
+
                 if (res != null)
                 {
-                    //this needs to do different things based on what the action should be. 
-                    foreach (Hero hero in GameEngine.getHeroes())
-                    {
-                        if (hero.GetType().Equals(typeof(Legacy)))
+
+                switch ((GameEngine.ForcedEffect)res[1])
+                {
+                    case GameEngine.ForcedEffect.ConsiderThePrice:
+                         foreach (Hero hero in GameEngine.getHeroes())
                         {
-                            //here is where it will prompt the user with the discard window
-                            GameBoard.discardedCardsThisTurn = new List<Card>();
-                            ViewHand viewHand = new ViewHand(hero.getPlayerHand(), gameBoard);
-                            viewHand.Visibility = System.Windows.Visibility.Visible;
-                            viewHand.ShowDialog();//use this to make it wait for the window to close before resuming
+                            if (hero.GetType().Equals(typeof(Legacy)))
+                            {
+                                //here is where it will prompt the user with the discard window
+                                GameBoard.discardedCardsThisTurn = new List<Card>();
+                                ViewHand viewHand = new ViewHand(hero.getPlayerHand(), gameBoard);
+                                viewHand.Visibility = System.Windows.Visibility.Visible;
+                                viewHand.ShowDialog();//use this to make it wait for the window to close before resuming
 
-                            //have it check that they actually discarded cards if they need to
-                            Haka.DiscardedAction discardAction = (Haka.DiscardedAction)res[0];
-                            discardAction(GameBoard.discardedCardsThisTurn.Count); //returns to the method that was passed as the first parameter of the result
+                                //have it check that they actually discarded cards if they need to
+                                Haka.DiscardedAction discardAction = (Haka.DiscardedAction)res[0];
+                                discardAction(GameBoard.discardedCardsThisTurn.Count); //returns to the method that was passed as the first parameter of the result
 
+                            }
                         }
-                    }
+                
+                        cardClickedArray.Clear();
+                        GameEngine.playerPlayedCard = true;
+                        gameBoard.updateBoard();
+
+                        break;
+                    case GameEngine.ForcedEffect.DeviousDisruption:
+
+
+
+
+
+                    case GameEngine.ForcedEffect.PrimordialPlant:
+
+
+
+
+
+
+                    case GameEngine.ForcedEffect.RiverOfLava:
+
+
+
+
                 }
-                cardClickedArray.Clear();
-                GameEngine.playerPlayedCard = true;
-                gameBoard.updateBoard();
+
+                                
+
             }
             else
             {
