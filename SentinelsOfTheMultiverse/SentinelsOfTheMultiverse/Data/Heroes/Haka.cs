@@ -311,9 +311,17 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.SendToGraveyard(this, cardsOnField);
         }
 
-        public void SavageMana(Card card)
+        public object[] SavageMana(Card card)
         {
-            
+            DiscardedAction act = ConsiderThePriceOfVictoryDiscardAction;
+            return new object[] { act, GameEngine.getPlayers() };
+        }
+        public delegate void DiscardedAction(int discardedCards);
+
+        void ConsiderThePriceOfVictoryDiscardAction(int discardedCards)
+        {
+            //finish doing the things for the discard method
+            Console.WriteLine("number of discarded cards: " + discardedCards);
         }
 
         public void Taiaha(Card card)

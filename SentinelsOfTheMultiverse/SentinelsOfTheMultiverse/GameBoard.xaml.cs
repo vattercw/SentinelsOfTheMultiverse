@@ -157,14 +157,13 @@ namespace SentinelsOfTheMultiverse
         #region HandViewer
         private void View_Hand(object sender, RoutedEventArgs e)
         {
-            initHandViewer();
+            initHandViewer((Hero)GameEngine.getCurrentPlayer());
             handViewer.Visibility = Utility.SHOW;
             Button handVisibleButton = (Button)sender;
         }
 
-        public void initHandViewer()
+        public void initHandViewer(Hero currentPlayer)
         {
-            Hero currentPlayer= (Hero)GameEngine.getCurrentPlayer();
             if (currentPlayer != null)
             {
                 handViewer = new ViewHand(currentPlayer.getPlayerHand(), this);

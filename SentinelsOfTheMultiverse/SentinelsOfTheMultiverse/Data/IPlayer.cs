@@ -95,10 +95,11 @@ namespace SentinelsOfTheMultiverse.Data
 
         public enum PlayerType { Hero, Villain, Minion, Environment };
 
-        internal void CardMethod(Card card)
+        internal object[] CardMethod(Card card)
         {
             MethodInfo theMethod = GetType().GetMethod(card.getName());
-            theMethod.Invoke(this, new object[] { card });
+            object[] result = (object[])theMethod.Invoke(this, new object[] { card });
+            return result;
         }
 
         //public enum EventType{Attack, Discard, DrawCard};

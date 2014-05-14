@@ -65,8 +65,15 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
         public void ConsiderThePriceOfVictory(Card card)
         {
-
+            //DiscardedAction act = ConsiderThePriceOfVictoryDiscardAction;
+            //return new object[]{act, GameEngine.getPlayers()};
         }
+        //delegate void DiscardedAction(int discardedCards);
+
+        //void ConsiderThePriceOfVictoryDiscardAction(int discardedCards)
+        //{
+        //    Console.WriteLine("number of discarded cards: " + discardedCards);
+        //}
 
         //Ongoing Cards
         public void LivingForceField(Card card)
