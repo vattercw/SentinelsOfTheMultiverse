@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse.Data
 {
-    public abstract class Minion
+    public abstract class Minion: Targetable
     {
-        public int maxHealth;
-        public int lifeTotal;
+        public int maxHealth { get; set; }
+        public int lifeTotal { get; set; }
         public String  minionName;
         public Enum effectPhase;
 

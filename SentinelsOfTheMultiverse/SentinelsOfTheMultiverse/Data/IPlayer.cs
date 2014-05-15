@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace SentinelsOfTheMultiverse.Data
 {
-    public abstract class IPlayer
+    public abstract class IPlayer: Targetable
     {
 
         #region Properties
         public Deck deck { get;  set; }
         public string characterName {get; set;}
-        public int lifeTotal { get; set; } //get rid of?
+        public int lifeTotal { get; set; }
         public int maxHealth { get; set; } 
         public List<Card> cardsOnField { get; set; }
         public List<String> immunities = new List<String>();

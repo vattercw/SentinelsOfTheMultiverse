@@ -69,7 +69,7 @@ namespace SentinelsOfTheMultiverse
         {
             sideBar.Children.RemoveRange(0, sideBar.Children.Count);
 
-            if (GameEngine.getCurrentPlayer().lifeTotal <= 0)
+            if (((Targetable)GameEngine.getCurrentPlayer()).lifeTotal <= 0)
             {
 
                 Card death = new Card("Images\\Hero\\" + GameEngine.getCurrentPlayer().characterName + "\\" + GameEngine.getCurrentPlayer().characterName.ToLower() + "_death.jpg");

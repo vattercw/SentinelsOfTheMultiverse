@@ -197,7 +197,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             DamageEffects.damageDealtHandlers.Add(HakaOfBattleDamageHandler);
         }
 
-        int HakaOfBattleDamageHandler(object sender, object receiver, int damageAmount, DamageEffects.DamageType damageType)
+        int HakaOfBattleDamageHandler(object sender, Targetable receiver, int damageAmount, DamageEffects.DamageType damageType)
         {
             if (sender.Equals(this))
             {
@@ -265,6 +265,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             card.cardPower = new Card.Power(MerePower);
         }
+
         public void MerePower(Card card, object[] args)
         {
             var target = GameBoard.cardClickedArray;
@@ -319,21 +320,35 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
  
         public void PunishTheWeak(Card card)
         {
-            List<Minion> minions= GameEngine.getEnvironment().getMinions();
-            minions.AddRange(GameEngine.getVillain().getMinions());
-            Villain villain = GameEngine.getVillain();
-
-            //TODO: get lowest nonhero
-            //add event for damage on that minion/villain
-            //if not lowestnonhero, event to decrease damage
-
+            DamageEffects.damageDealtHandlers.Add(PunishTheWeak_Damage_Handler);
             card.cardPower = new Card.Power(PunishTheWeakPower);
+        }
+
+        private int PunishTheWeak_Damage_Handler(Targetable sender, Targetable receiver, int damageAmount, DamageEffects.DamageType damageType) {
+            List<Targetable> sortedNonHeroes = getSortedNonHeroes();
+
+            if (receiver.Equals(sortedNonHeroes[0]))
+                return 1;
+            else
+                return -1;
+        }
+
+        private static List<Targetable> getSortedNonHeroes() {
+            List<Targetable> nonHeroes = new List<Targetable>();
+            nonHeroes.AddRange(GameEngine.getEnvironment().getMinions());
+            nonHeroes.AddRange(GameEngine.getVillain().getMinions());
+            nonHeroes.Add(GameEngine.getVillain());
+
+            List<Targetable> sortedNonHeroes = nonHeroes.OrderBy(o => o.lifeTotal).ToList();
+            return sortedNonHeroes;
         }
 
         void PunishTheWeakPower(Card card, object[] args)
         {
+            DamageEffects.damageDealtHandlers.Remove(PunishTheWeak_Damage_Handler);
             card.SendToGraveyard(this, cardsOnField);
         }
+
 
         public object[] SavageMana(Card card)
         {
