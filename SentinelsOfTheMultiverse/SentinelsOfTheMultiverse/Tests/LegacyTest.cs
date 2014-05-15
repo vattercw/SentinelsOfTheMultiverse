@@ -76,6 +76,34 @@ namespace SentinelsOfTheMultiverse.Tests
         }
 
         [Test, RequiresSTA]
+        public void TestBolsterAllies()
+        {
+            Start game = new Start();
+            game.beginGame();
+            Legacy legacy = new Legacy();
+
+            List<int> firstList = new List<int>();
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                firstList.Add(hero.hand.Count());
+            }
+
+            Card bolster = new Card("Images\\Hero\\Legacy\\BolsterAllies.png");
+            legacy.BolsterAllies(bolster);
+
+            List<int> secondList = new List<int>();
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                secondList.Add(hero.hand.Count());
+            }
+
+            for(int i = 0; i < secondList.Count(); i++)
+            {
+                Assert.AreEqual(secondList[i], firstList[i] + 1);
+            }
+        }
+
+        [Test, RequiresSTA]
         public void TestSuperhuman()
         {
             Start game = new Start();

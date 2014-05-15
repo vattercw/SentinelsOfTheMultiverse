@@ -18,6 +18,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SentinelsOfTheMultiverse.Data.Environments;
+using SentinelsOfTheMultiverse.Data.Villains;
 
 namespace SentinelsOfTheMultiverse
 {
@@ -303,7 +304,7 @@ namespace SentinelsOfTheMultiverse
                                     viewHand.ShowDialog();//use this to make it wait for the window to close before resuming
 
                                     //have it check that they actually discarded cards if they need to
-                                    Haka.DiscardedAction discardAction = (Haka.DiscardedAction)res[0];
+                                    BaronBlade.DiscardedAction discardAction = (BaronBlade.DiscardedAction)res[0];
                                     discardAction(GameBoard.discardedCardsThisTurn.Count); //returns to the method that was passed as the first parameter of the result
 
                                 }
@@ -312,6 +313,17 @@ namespace SentinelsOfTheMultiverse
                             break;
 
                         case GameEngine.ForcedEffect.DeviousDisruption:
+                            foreach (Hero hero in GameEngine.getHeroes())
+                            {
+                                GameBoard.discardedCardsThisTurn = new List<Card>();
+                                DiscardFromBoard viewHand = new DiscardFromBoard(gameBoard);
+
+                                viewHand.Visibility = System.Windows.Visibility.Visible;
+                                viewHand.ShowDialog();
+                                BaronBlade.DisruptDiscardedAction discardAction = (BaronBlade.DisruptDiscardedAction)res[0];
+                                discardAction(GameBoard.discardedCardsThisTurn.Count, hero);
+                            }
+
                             break;
 
 
@@ -320,9 +332,9 @@ namespace SentinelsOfTheMultiverse
                             foreach (Hero hero in GameEngine.getHeroes())
                             {
                                 GameBoard.discardedCardsThisTurn = new List<Card>();
-                                DiscardFromHand viewHand = new DiscardFromHand(hero.getPlayerHand(), gameBoard);
-                                viewHand.Visibility = System.Windows.Visibility.Visible;
-                                viewHand.ShowDialog();
+                                DiscardFromBoard boardView = new DiscardFromBoard(gameBoard);
+                                boardView.Visibility = System.Windows.Visibility.Visible;
+                                boardView.ShowDialog();
 
                                 InsulaPrimus.DiscardedAction discardAction = (InsulaPrimus.DiscardedAction)res[0];
                                 discardAction(GameBoard.discardedCardsThisTurn.Count, hero);

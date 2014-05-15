@@ -33,8 +33,25 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             GameEngine.getVillain().lifeTotal += 10;
         }
 
-        public static void DeviousDisruption(Card card)
+        public object[] DeviousDisruption(Card card)
         {
+            DisruptDiscardedAction act = DeviousDisruptionDiscardAction;
+            return new object[] { act, GameEngine.ForcedEffect.DeviousDisruption, GameEngine.getPlayers() };
+        }
+        public delegate void DisruptDiscardedAction(int discardedCards, Hero target);
+
+        void DeviousDisruptionDiscardAction(int discardedCards, Hero target)
+        {
+            int cardDamage = 0;
+
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                cardDamage = hero.cardsOnField.Count + cardDamage;
+            }
+
+            cardDamage = cardDamage + 3;
+
+            DamageEffects.DealDamage(this, new List<Hero>(){target},null,null, cardDamage, DamageEffects.DamageType.Lightning);
 
         }
 
@@ -63,17 +80,17 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
 
 
-        public void ConsiderThePriceOfVictory(Card card)
+        public object[] ConsiderThePriceOfVictory(Card card)
         {
-            //DiscardedAction act = ConsiderThePriceOfVictoryDiscardAction;
-            //return new object[]{act, GameEngine.getPlayers()};
+            DiscardedAction act = ConsiderThePriceOfVictoryDiscardAction;
+            return new object[]{act, GameEngine.getPlayers()};
         }
-        //delegate void DiscardedAction(int discardedCards);
+        public delegate void DiscardedAction(int discardedCards);
 
-        //void ConsiderThePriceOfVictoryDiscardAction(int discardedCards)
-        //{
-        //    Console.WriteLine("number of discarded cards: " + discardedCards);
-        //}
+        void ConsiderThePriceOfVictoryDiscardAction(int discardedCards)
+        {
+            Console.WriteLine("number of discarded cards: " + discardedCards);
+        }
 
 
 
