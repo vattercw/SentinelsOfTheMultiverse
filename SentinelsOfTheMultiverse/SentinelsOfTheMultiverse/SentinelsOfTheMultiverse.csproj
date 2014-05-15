@@ -57,6 +57,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CardNotFoundException.cs" />
+    <Compile Include="DiscardFromBoard.xaml.cs">
+      <DependentUpon>DiscardFromBoard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Data\Effects\CardDrawingEffects.cs" />
     <Compile Include="Data\Effects\HealEffects.cs" />
     <Compile Include="Data\Effects\DamageEffects.cs" />
@@ -127,6 +130,10 @@
     <Compile Include="DiscardFromHand.xaml.cs">
       <DependentUpon>DiscardFromHand.xaml</DependentUpon>
     </Compile>
+    <Page Include="DiscardFromBoard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="GameBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

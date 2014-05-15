@@ -240,7 +240,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             card.cardPower = new Card.Power(MerePower);
         }
-
         public void MerePower(Card card, object[] args)
         {
             var target = GameBoard.cardClickedArray;
@@ -316,6 +315,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             DiscardedAction act = ConsiderThePriceOfVictoryDiscardAction;
             return new object[] { act, GameEngine.ForcedEffect.ConsiderThePrice, GameEngine.getPlayers() };
         }
+
         public delegate void DiscardedAction(int discardedCards);
 
         void ConsiderThePriceOfVictoryDiscardAction(int discardedCards)

@@ -169,9 +169,13 @@ namespace SentinelsOfTheMultiverse
 
         private void Discard_Action(object sender, RoutedEventArgs e)
         {
-            CardDrawingEffects.DiscardCardFromHand(cardClickedArray);
-            updateHandView();
-            gameBoard.updateBoard();
+            if (cardClickedArray.Count != 0)
+            {
+                CardDrawingEffects.DiscardCardFromHand(cardClickedArray);
+                updateHandView();
+                gameBoard.updateBoard();
+            }
+            else MessageBox.Show("Discard something...");
         }
 
         private void End_Turn(object sender, RoutedEventArgs e)
@@ -283,6 +287,7 @@ namespace SentinelsOfTheMultiverse
                                     //here is where it will prompt the user with the discard window
                                     GameBoard.discardedCardsThisTurn = new List<Card>();
                                     DiscardFromHand viewHand = new DiscardFromHand(hero.getPlayerHand(), gameBoard);
+
                                     viewHand.Visibility = System.Windows.Visibility.Visible;
                                     viewHand.ShowDialog();//use this to make it wait for the window to close before resuming
 
@@ -293,41 +298,33 @@ namespace SentinelsOfTheMultiverse
                                 }
                             }
 
-
-
                             break;
+
                         case GameEngine.ForcedEffect.DeviousDisruption:
-
-
                             break;
+
 
 
                         case GameEngine.ForcedEffect.PrimordialPlant:
                             foreach (Hero hero in GameEngine.getHeroes())
                             {
                                 GameBoard.discardedCardsThisTurn = new List<Card>();
-                                DiscardFromHand viewHand = new ViewHand(hero.getPlayerHand(), gameBoard);
+                                DiscardFromHand viewHand = new DiscardFromHand(hero.getPlayerHand(), gameBoard);
                                 viewHand.Visibility = System.Windows.Visibility.Visible;
                                 viewHand.ShowDialog();
 
                                 InsulaPrimus.DiscardedAction discardAction = (InsulaPrimus.DiscardedAction)res[0];
                                 discardAction(GameBoard.discardedCardsThisTurn.Count, hero);
                             }
-
                             break;
 
 
 
                         case GameEngine.ForcedEffect.RiverOfLava:
-
-
                             break;
 
+
                     }
-
-
-
-
 
                 }
                 else
@@ -344,7 +341,6 @@ namespace SentinelsOfTheMultiverse
                 gameBoard.updateBoard();
 
             }
-
         }
 
     }    
