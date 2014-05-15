@@ -92,15 +92,8 @@ namespace SentinelsOfTheMultiverse.Data
 
         public void SendToGraveyard(IPlayer player, List<Card> currentList)
         {
-            if (cardType == CardType.Ongoing)
-            {
-                foreach (var effect in effects)
-                    player.ongoingEffects.Remove(effect);
-                player.updateOngoingEffects();
-            }
             if(CardDestroyed != null)
                 CardDestroyed(this, null);
-            
             currentList.Remove(this);
             player.graveyard.Add(this);
         }

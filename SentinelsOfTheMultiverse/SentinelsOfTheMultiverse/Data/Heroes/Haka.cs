@@ -198,18 +198,23 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         
         public void TaMoko(Card card)
         {
+            
             //TODO: fix this
-            //card.cardType = Card.CardType.Ongoing;
-            //cardsOnField.Add(card);
-            //card.effects.Add(TaMokoEffect);
-            //TaMokoEffect();//may or may not need this here
-            //ongoingEffects.Add(TaMokoEffect);
+            card.cardType = Card.CardType.Ongoing;
+            card.CardDestroyed += TaMoko_Destroyed_Handler;
+            DamageEffects.damageDealtHandlers.Add(TaMoko_Damage_Handler);
+        }
+        void TaMoko_Destroyed_Handler(Card card, EventArgs e)
+        {
+            DamageEffects.damageDealtHandlers.Remove(TaMoko_Damage_Handler);
         }
 
-        //int TaMokoEffect()
-        //{
-        //    return 1;
-        //}
+        int TaMoko_Damage_Handler(object sender, object receiver, int damageAmount, DamageEffects.DamageType damageType)
+        {
+            if (receiver.Equals(this))
+                return -1;
+            return 0;
+        }
 
         public void HakaOfRestoration(Card card)
         {
@@ -238,7 +243,8 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void HakaOfShielding(Card card)
         {
-            int damageReduction = 3;
+            //todo
+            //int damageReduction = 3;
         }
 
         public void Mere(Card card)

@@ -10,26 +10,11 @@ namespace SentinelsOfTheMultiverse.Data.Effects
     {
         public static List<DamageHandler> damageDealtHandlers = new List<DamageEffects.DamageHandler>();
         public delegate int DamageHandler(object sender, object receivers, int damageAmount, DamageType damageType);
-        //event AttackEventHandler Attack;
-        //internal delegate void AttackEventHandler(object sender, EventArgs e);
 
         public enum DamageType { Projectile, Fire, Ice, Melee, Toxic, Lightning, All };
 
 
         public static bool inPlayBacklash { get; set; }
-
-        //private static int _globalDamageAmplification;
-        //public static int GlobalDamageAmplification
-        //{
-        //    get
-        //    {
-        //        return _globalDamageAmplification;
-        //    }
-        //    set
-        //    {
-        //        _globalDamageAmplification = value;
-        //    }
-        //}
 
         public static void DealDamage(object sender, List<Hero> heroes, Villain villain, List<Minion> minions, int damageAmount, DamageType damageType)
         {
