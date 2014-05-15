@@ -32,7 +32,9 @@ namespace SentinelsOfTheMultiverse.Data.Minions
 
             for (int i = 0; i < GameEngine.getHeroes().Count; i++)
             {
-                DamageEffects.DealDamage(this, GameEngine.getHeroes(), null, null, 2 + extraDamage, DamageEffects.DamageType.Projectile);
+                var targets = new List<Targetable>();
+                targets.AddRange(GameEngine.getHeroes());
+                DamageEffects.DealDamage(this,targets, 2 + extraDamage, DamageEffects.DamageType.Projectile);
             }
         }
     }

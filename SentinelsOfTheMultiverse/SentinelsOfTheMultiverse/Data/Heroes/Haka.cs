@@ -33,13 +33,13 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 Boolean minBool = false;
 
-                List<Minion> minionAttack = null;
+                List<Minion> minionsToAttack = null;
 
                 foreach (Minion min in villainMinions)
                 {
                     if (min.minionName == target[0].Name)
                     {
-                        minionAttack.Add(min);
+                        minionsToAttack.Add(min);
                         minBool = true;
                     }
                 }
@@ -48,21 +48,22 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 {
                     if (min.minionName == target[0].Name)
                     {
-                        minionAttack.Add(min);
+                        minionsToAttack.Add(min);
                         minBool = true;
                     }
                 }
 
                 if (minBool)
                 {
-                    DamageEffects.DealDamage(this, null, null, minionAttack, 2, DamageEffects.DamageType.Melee);
-
+                    var targets = new List<Targetable>();
+                    targets.AddRange(minionsToAttack);
+                    DamageEffects.DealDamage(this,targets , 2, DamageEffects.DamageType.Melee);
                 }
                 else MessageBox.Show("Please select an appropriate card.");
             }
             else
             {
-                DamageEffects.DealDamage(this, null, GameEngine.getVillain(), null, 2, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamage(this, new List<Targetable>(){ GameEngine.getVillain()}, 2, DamageEffects.DamageType.Melee);
 
             }
         }
@@ -73,10 +74,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardType = Card.CardType.OneShot;
             Villain villain = GameEngine.getVillain();
             GameEnvironment environ = GameEngine.getEnvironment();
-            DamageEffects.DealDamage(this, GameEngine.getHeroes(), null, null, 2, DamageEffects.DamageType.Melee);
-            DamageEffects.DealDamage(this, null, villain, villain.getMinions(), 5, DamageEffects.DamageType.Melee);
-            //hit thews dern environment minionz tew
-            DamageEffects.DealDamage(this, null, null, environ.getMinions(), 5, DamageEffects.DamageType.Melee);
+            var heroes = new List<Targetable>();
+            heroes.AddRange(GameEngine.getHeroes());
+
+            DamageEffects.DealDamage(this, heroes, 2, DamageEffects.DamageType.Melee);
+            DamageEffects.DealDamage(this, GameEngine.getNonHeroTargets(), 5, DamageEffects.DamageType.Melee);
             card.SendToGraveyard(this, cardsOnField);
         }
 
@@ -101,13 +103,13 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 Boolean minBool = false;
 
-                List<Minion> minionAttack = null;
+                List<Minion> minionsToAttack = null;
                 
                 foreach (Minion min in villainMinions)
                 {
                     if (min.minionName == target[0].Name)
                     {
-                        minionAttack.Add(min);
+                        minionsToAttack.Add(min);
                         minBool = true;
                     }
                 }
@@ -116,21 +118,23 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 {
                     if (min.minionName == target[0].Name)
                     {
-                        minionAttack.Add(min);
+                        minionsToAttack.Add(min);
                         minBool = true;
                     }
                 }
 
                 if (minBool)
                 {
-                    DamageEffects.DealDamage(this, null, null, minionAttack, 3, DamageEffects.DamageType.Melee);
+                    var targets= new List<Targetable>();
+                    targets.AddRange(minionsToAttack);
+                    DamageEffects.DealDamage(this, targets, 3, DamageEffects.DamageType.Melee);
                     card.SendToGraveyard(this, cardsOnField);
                 }
                 else MessageBox.Show("Please select an appropriate card.");
             }
             else
             {
-                DamageEffects.DealDamage(this, null, GameEngine.getVillain(), null, 3, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamage(this, new List<Targetable>() { GameEngine.getVillain() }, 3, DamageEffects.DamageType.Melee);
                 card.SendToGraveyard(this, cardsOnField);
             }
         }
@@ -306,13 +310,15 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 if (minBool)
                 {
-                    DamageEffects.DealDamage(this, null, null, minionAttack, 3, DamageEffects.DamageType.Melee);
+                    var targets = new List<Targetable>();
+                    targets.AddRange(minionAttack);
+                    DamageEffects.DealDamage(this, targets, 3, DamageEffects.DamageType.Melee);
                 }
                 else MessageBox.Show("Please select an appropriate card.");
             }
             else
             {
-                DamageEffects.DealDamage(this, null, GameEngine.getVillain(), null, 3, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamage(this, new List<Targetable>() { GameEngine.getVillain() }, 3, DamageEffects.DamageType.Melee);
             }
             card.SendToGraveyard(this, cardsOnField);
             CardDrawingEffects.DrawCards(1, this);
@@ -366,7 +372,16 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Taiaha(Card card)
         {
-            
+            card.cardPower = new Card.Power(TaiahaPower);   
+        }
+        
+        void TaiahaPower(Card sender, object[] args) {
+            //TODO: open window for player to choose targets
+            //if (targets.Count <= 2) {
+            //    foreach (Targetable target in targets) {
+            //        DamageEffects.DealDamage(this, target, 3, DamageEffects.DamageType.Melee);
+            //    }
+            //}
         }
 
         public void VitalitySurge(Card card)

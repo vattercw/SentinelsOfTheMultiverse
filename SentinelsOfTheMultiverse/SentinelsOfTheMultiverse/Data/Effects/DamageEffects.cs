@@ -16,17 +16,8 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 
         public static bool inPlayBacklash { get; set; }
 
-        public static void DealDamage(Targetable sender, List<Hero> heroes, Villain villain, List<Minion> minions, int damageAmount, DamageType damageType)
+        public static void DealDamage(Targetable sender, List<Targetable> receivers, int damageAmount, DamageType damageType)
         {
-            List<object> receivers = new List<object>();
-            if (heroes != null)
-                receivers.AddRange(heroes);
-            if (minions != null)
-                receivers.AddRange(minions);
-            if (villain != null)
-                receivers.Add(villain);
-            
-            
             foreach (Targetable receiver in receivers)
             {
                 int damageModifiers = 0;

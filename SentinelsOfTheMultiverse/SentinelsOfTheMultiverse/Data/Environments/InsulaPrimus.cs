@@ -60,13 +60,9 @@ namespace SentinelsOfTheMultiverse.Data.Environments
 
         void PrimordialPlantLifeDiscardAction(int discardedCards, Hero target)
         {
-            if (discardedCards > 0)
+            if (discardedCards == 0)
             {
-                DamageEffects.DealDamage(this,null, null, null, 2, DamageEffects.DamageType.Toxic);
-            }
-            else
-            {
-                DamageEffects.DealDamage(this,new List<Hero>(){target},null,null, 4, DamageEffects.DamageType.Toxic);
+                DamageEffects.DealDamage(this,new List<Targetable>(){target}, 4, DamageEffects.DamageType.Toxic);
             }
 
         }

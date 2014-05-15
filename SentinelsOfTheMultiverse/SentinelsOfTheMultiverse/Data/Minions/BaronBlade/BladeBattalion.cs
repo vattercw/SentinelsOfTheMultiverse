@@ -29,7 +29,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
                     highestHP = GameEngine.getHeroes()[i];
                 }
             }
-            DamageEffects.DealDamage(this, new List<Hero>(){highestHP},null,null, damage, DamageEffects.DamageType.Melee);
+            DamageEffects.DealDamage(this, new List<Targetable>(){highestHP}, damage, DamageEffects.DamageType.Melee);
         }
     }
 }

@@ -167,9 +167,24 @@ namespace SentinelsOfTheMultiverse
         {
             return environment;
         }
+
+        internal static List<Targetable> getTargets() {
+            List<Targetable> targets = new List<Targetable>();
+            targets.AddRange(getHeroes());
+            targets.AddRange(villain.getMinions());
+            targets.AddRange(environment.getMinions());
+            return targets;
+        }
         #endregion
 
 
-        
+
+
+        internal static List<Targetable> getNonHeroTargets() {
+            List<Targetable> targets = new List<Targetable>();
+            targets.AddRange(villain.getMinions());
+            targets.AddRange(environment.getMinions());
+            return targets;
+        }
     }
 }
