@@ -29,10 +29,11 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                     {
                         damageModifiers += dmgHand(sender, receiver, damageAmount, damageType);
                     }
-                    if (damageModifiers < 0)
-                        damageModifiers = 0;
                 }
-                receiver.lifeTotal -= damageModifiers + damageAmount;
+                if (damageModifiers + damageAmount > receiver.maxHealth)
+                    receiver.lifeTotal = receiver.maxHealth;
+                else
+                    receiver.lifeTotal -= damageModifiers + damageAmount;
             }
             
             

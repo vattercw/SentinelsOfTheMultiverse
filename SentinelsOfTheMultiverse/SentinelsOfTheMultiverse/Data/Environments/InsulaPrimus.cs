@@ -58,7 +58,7 @@ namespace SentinelsOfTheMultiverse.Data.Environments
 
         public delegate void DiscardedAction(int discardedCards, Hero target);
 
-        void PrimordialPlantLifeDiscardAction(int discardedCards, Hero target)
+        public void PrimordialPlantLifeDiscardAction(int discardedCards, Hero target)
         {
             if (discardedCards == 0)
             {

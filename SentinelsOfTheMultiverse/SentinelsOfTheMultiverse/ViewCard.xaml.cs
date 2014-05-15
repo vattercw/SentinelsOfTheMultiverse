@@ -58,6 +58,7 @@ namespace SentinelsOfTheMultiverse
                         if (card.cardPower != null)
                         {
                             card.cardPower(card,null);
+                            
                             GameEngine.playerUsedPower = true;
                             gameBoard.updateBoard();
                             Close();

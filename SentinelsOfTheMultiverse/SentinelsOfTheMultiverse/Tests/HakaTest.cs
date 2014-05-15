@@ -120,6 +120,24 @@ namespace SentinelsOfTheMultiverse.Tests
         }
 
         [Test(), RequiresSTA]
+        public void TestEnduringIntercession() {
+            GameEngine.TearDownGameEngine();
+            Start game = new Start();
+            game.beginGame();
+
+            Haka haka = (Haka)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Haka));
+            Legacy legacy= (Legacy)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Legacy));
+            InsulaPrimus env = (InsulaPrimus)GameEngine.getEnvironment();
+            Card enduringIntercessionCard = new Card("Images\\Hero\\Haka\\3-EnduringIntercession.png");
+
+            haka.EnduringIntercession(enduringIntercessionCard);
+
+            DamageEffects.DealDamage(env, new List<Targetable>(){legacy, haka},4, DamageEffects.DamageType.Melee); 
+            Assert.AreEqual(legacy.maxHealth, legacy.lifeTotal);
+            Assert.AreEqual(haka.maxHealth - 8, haka.lifeTotal); //haka takes his own and legacy's damage
+        }
+
+        [Test(), RequiresSTA]
         public void TestMere()
         {
             GameEngine.TearDownGameEngine();

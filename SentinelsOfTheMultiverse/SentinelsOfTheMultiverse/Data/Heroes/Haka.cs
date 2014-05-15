@@ -174,8 +174,21 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void EnduringIntercession(Card card)
         {
+            DamageEffects.damageDealtHandlers.Add(EnduringIntercession_Damage_Handler);
             card.cardPower += new Card.Power(EnduringIntercessionPower);
         }
+
+        private int EnduringIntercession_Damage_Handler(Targetable sender, Targetable receiver, int damageAmount, DamageEffects.DamageType damageType) {
+            bool receiverIsNotHaka= !receiver.GetType().Equals(typeof(Haka));
+            if (receiverIsNotHaka) {
+                if (typeof(GameEnvironment).IsAssignableFrom(sender.GetType()) || GameEngine.getEnvironment().getMinions().Contains(sender)) {
+                    DamageEffects.DealDamage(sender, new List<Targetable>() { this }, damageAmount, damageType);
+                    return (-1) * damageAmount;//balances out the amount that it deals to player that isn't haka
+                }
+            }
+            return 0;
+        }
+
         void EnduringIntercessionPower(Card sender, object[] args)
         {
             sender.SendToGraveyard(this, cardsOnField);
@@ -377,6 +390,8 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         
         void TaiahaPower(Card sender, object[] args) {
             //TODO: open window for player to choose targets
+            //not sure how to do this one
+
             //if (targets.Count <= 2) {
             //    foreach (Targetable target in targets) {
             //        DamageEffects.DealDamage(this, target, 3, DamageEffects.DamageType.Melee);
@@ -386,6 +401,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void VitalitySurge(Card card)
         {
+            card.cardType = Card.CardType.OneShot;
             HealEffects.healHero(this, 2);
             card.SendToGraveyard(this, cardsOnField);
             CardDrawingEffects.DrawCards(1, this);
