@@ -41,6 +41,69 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void FlyingSmash(Card card)
         {
+            card.cardType = Card.CardType.OneShot;
+
+            var target = GameBoard.cardClickedArray;
+            if (target.Count > 3)
+            {
+                MessageBox.Show("Please select 3 or fewer targets. \n No select target default's to the Villain.");
+                Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
+                currentPlayer.hand.Add(card);
+                currentPlayer.graveyard.Remove(card);
+                GameEngine.playerPlayedCard = false;
+            }
+            else if (target.Count >= 1 && target.Count <= 3)
+            {
+                var villainMinions = GameEngine.getVillain().getMinions();
+                var environMinions = GameEngine.getEnvironment().getMinions();
+
+                Boolean minBool = false;
+
+                List<Minion> minionsToAttack = new List<Minion>();
+            
+                foreach (Minion min in villainMinions)
+                {
+                    for (int k = 0; k < target.Count; k++)
+                    {
+                        if (min.minionName.Equals(((Card)target[k]).getName()))
+                        {
+                            minionsToAttack.Add(min);
+                            minBool = true;
+                        }
+                    }
+                }
+
+                foreach (Minion min in environMinions)
+                {
+                    for (int k = 0; k < target.Count; k++)
+                    {
+                        if (min.minionName.Equals(((Card)target[k]).getName()))
+                        {
+                            minionsToAttack.Add(min);
+                            minBool = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (minBool)
+                {
+                    var targets = new List<Targetable>();
+                    targets.AddRange(minionsToAttack);
+                    DamageEffects.DealDamage(this, targets, 3, DamageEffects.DamageType.Melee);
+                    if (targets.Count < 3)
+                    {
+                        DamageEffects.DealDamage(this, new List<Targetable>() { GameEngine.getVillain() }, 3, DamageEffects.DamageType.Melee);
+                    }
+                    card.SendToGraveyard(this, cardsOnField);
+                }
+                else MessageBox.Show("Please select an appropriate card.");
+            }
+            else
+            {
+                DamageEffects.DealDamage(this, new List<Targetable>() { GameEngine.getVillain() }, 3, DamageEffects.DamageType.Melee);
+                card.SendToGraveyard(this, cardsOnField);
+            }
         }
 
         public void BackFistStrike(Card card){
@@ -62,11 +125,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 Boolean minBool = false;
 
-                List<Minion> minionsToAttack = null;
+                List<Minion> minionsToAttack = new List<Minion>();
 
                 foreach (Minion min in villainMinions)
                 {
-                    if (min.minionName == target[0].Name)
+                    if (min.minionName.Equals(((Card)target[0]).getName()))
                     {
                         minionsToAttack.Add(min);
                         minBool = true;
@@ -75,7 +138,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 foreach (Minion min in environMinions)
                 {
-                    if (min.minionName == target[0].Name)
+                    if (min.minionName.Equals(((Card)target[0]).getName()))
                     {
                         minionsToAttack.Add(min);
                         minBool = true;
@@ -132,7 +195,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 
                 foreach (Minion min in villainMinions)
                 {
-                    if (min.minionName == target[0].Name)
+                    if (min.minionName.Equals(((Card)target[0]).getName()))
                     {
                         DamageEffects.DealDamage(this, new List<Targetable>(){min}, 2, DamageEffects.DamageType.Melee);
                         break;
@@ -141,7 +204,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 foreach (Minion min in environMinions)
                 {
-                    if (min.minionName == target[0].Name)
+                    if (min.minionName.Equals(((Card)target[0]).getName()))
                     {
                         DamageEffects.DealDamage(this, new List<Targetable>() { min }, 2, DamageEffects.DamageType.Melee);
                         break;
@@ -201,22 +264,22 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 Boolean minBool = false;
 
-                List<Minion> minionAttack = null;
+                List<Minion> minionsToAttack = new List<Minion>();
 
                 foreach (Minion min in villainMinions)
                 {
-                    if (min.minionName == target[0].Name)
+                    if (min.minionName.Equals(((Card)target[0]).getName()))
                     {
-                        minionAttack.Add(min);
+                        minionsToAttack.Add(min);
                         minBool = true;
                     }
                 }
 
                 foreach (Minion min in environMinions)
                 {
-                    if (min.minionName == target[0].Name)
+                    if (min.minionName.Equals(((Card)target[0]).getName()))
                     {
-                        minionAttack.Add(min);
+                        minionsToAttack.Add(min);
                         minBool = true;
                     }
                 }
@@ -224,7 +287,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 if (minBool)
                 {
                     var targets = new List<Targetable>();
-                    targets.AddRange(minionAttack);
+                    targets.AddRange(minionsToAttack);
                     DamageEffects.DealDamage(this, targets, 4, DamageEffects.DamageType.Melee);
                     card.SendToGraveyard(this, cardsOnField);
                 }
