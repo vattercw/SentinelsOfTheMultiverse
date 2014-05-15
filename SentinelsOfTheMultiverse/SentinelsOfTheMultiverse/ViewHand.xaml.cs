@@ -321,9 +321,9 @@ namespace SentinelsOfTheMultiverse
                             foreach (Hero hero in GameEngine.getHeroes())
                             {
                                 GameBoard.discardedCardsThisTurn = new List<Card>();
-                                DiscardFromBoard boardView = new DiscardFromBoard(gameBoard);
-                                boardView.Visibility = System.Windows.Visibility.Visible;
-                                boardView.ShowDialog();
+                                DiscardFromBoard handView = new DiscardFromBoard(gameBoard);
+                                handView.Visibility = System.Windows.Visibility.Visible;
+                                handView.ShowDialog();
 
                                 InsulaPrimus.DiscardedAction discardAction = (InsulaPrimus.DiscardedAction)res[0];
                                 discardAction(GameBoard.discardedCardsThisTurn.Count, hero);
