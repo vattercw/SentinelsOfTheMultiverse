@@ -72,10 +72,9 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public void Rampage(Card card)
         {
             card.cardType = Card.CardType.OneShot;
-            Villain villain = GameEngine.getVillain();
-            GameEnvironment environ = GameEngine.getEnvironment();
             var heroes = new List<Targetable>();
             heroes.AddRange(GameEngine.getHeroes());
+            heroes.Add(GameEngine.getVillain());
 
             DamageEffects.DealDamage(this, heroes, 2, DamageEffects.DamageType.Melee);
             DamageEffects.DealDamage(this, GameEngine.getNonHeroTargets(), 5, DamageEffects.DamageType.Melee);
