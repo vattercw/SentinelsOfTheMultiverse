@@ -37,6 +37,7 @@ namespace SentinelsOfTheMultiverse
         public static bool resumePlay = false;
         public static bool primordial = false;
 
+        public enum ForcedEffect { ConsiderThePrice, PrimordialPlant, DeviousDisruption, RiverOfLava, DiscardCurrentPlayer };
 
         //private static bool getWinCon()
         //{
@@ -55,6 +56,7 @@ namespace SentinelsOfTheMultiverse
                     newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-SavageMana.png"));
                     newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-Rampage.png"));
                     newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-HakaOfBattle.png"));
+
                     //newHero.hand.Add(new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\3-EnduringIntercession.png"));
                 }
                 heroes.Add(newHero);

@@ -75,6 +75,8 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         //    Console.WriteLine("number of discarded cards: " + discardedCards);
         //}
 
+
+
         //Ongoing Cards
         public void LivingForceField(Card card)
         {
@@ -120,6 +122,12 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             Console.WriteLine("Blade Battalion: " + bbat.lifeTotal);
             
         }
+
+
+
+        /// <summary>
+        /// These death powers do not exist for the villain
+        /// </summary>
 
         public override void DeathPower1()
         {

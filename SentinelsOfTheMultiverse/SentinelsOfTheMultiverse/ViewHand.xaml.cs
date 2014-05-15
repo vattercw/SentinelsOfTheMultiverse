@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SentinelsOfTheMultiverse.Data.Environments;
 
 namespace SentinelsOfTheMultiverse
 {
@@ -37,7 +38,7 @@ namespace SentinelsOfTheMultiverse
             }
             set
             {
-                handShow= value;
+                handShow = value;
             }
         }
 
@@ -49,7 +50,7 @@ namespace SentinelsOfTheMultiverse
         public ViewHand(List<Card> hand, GameBoard game)
         {
             InitializeComponent();
-            
+
             gameBoard = game;
 
             updateHandView();
@@ -59,7 +60,7 @@ namespace SentinelsOfTheMultiverse
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            cardLayout.Children.RemoveRange(0, cardLayout.Children.Count+1);
+            cardLayout.Children.RemoveRange(0, cardLayout.Children.Count + 1);
             gameBoard.updateBoard();
         }
 
@@ -70,7 +71,7 @@ namespace SentinelsOfTheMultiverse
             if (GameEngine.getCurrentPlayer().lifeTotal <= 0)
             {
 
-                Card death = new Card("Images\\Hero\\"+GameEngine.getCurrentPlayer().characterName+"\\"+GameEngine.getCurrentPlayer().characterName.ToLower() + "_death.jpg");
+                Card death = new Card("Images\\Hero\\" + GameEngine.getCurrentPlayer().characterName + "\\" + GameEngine.getCurrentPlayer().characterName.ToLower() + "_death.jpg");
                 Grid.SetColumn(death, 1);
                 List<Card> deadHand = new List<Card>();
                 deadHand.Add(death);
@@ -90,7 +91,7 @@ namespace SentinelsOfTheMultiverse
             }
             else
             {
-                
+
                 Button discardButton = new Button();
                 discardButton.Content = "Discard";
                 discardButton.Click += new RoutedEventHandler(Discard_Action);
@@ -128,7 +129,7 @@ namespace SentinelsOfTheMultiverse
                 sideBar.Children.Add(endTurnButton);
                 sideBar.Children.Add(discardButton);
             }
-           
+
         }
 
         private void Power3_Action(object sender, RoutedEventArgs e)
@@ -155,8 +156,9 @@ namespace SentinelsOfTheMultiverse
             }
         }
 
-        private void updateHandView(){
-            cardLayout.Children.RemoveRange(0, cardLayout.Children.Count+1);
+        private void updateHandView()
+        {
+            cardLayout.Children.RemoveRange(0, cardLayout.Children.Count + 1);
             cardLayout = initGrid(handShow);
             paintCards();
             addButtons();
@@ -167,11 +169,15 @@ namespace SentinelsOfTheMultiverse
 
         private void Discard_Action(object sender, RoutedEventArgs e)
         {
-            CardDrawingEffects.DiscardCardFromHand(cardClickedArray);
-            updateHandView();
-            gameBoard.updateBoard();
+            if (cardClickedArray.Count != 0)
+            {
+                CardDrawingEffects.DiscardCardFromHand(cardClickedArray);
+                updateHandView();
+                gameBoard.updateBoard();
+            }
+            else MessageBox.Show("Discard something...");
         }
-        
+
         private void End_Turn(object sender, RoutedEventArgs e)
         {
             //TODO attempting to fix bug # 2
@@ -199,7 +205,8 @@ namespace SentinelsOfTheMultiverse
 
         private void Cancel_Action(object sender, RoutedEventArgs e)
         {
-            foreach(Card clearCard in cardClickedArray){
+            foreach (Card clearCard in cardClickedArray)
+            {
                 clearCard.Effect = null;
             }
             cardClickedArray.Clear();
@@ -257,7 +264,8 @@ namespace SentinelsOfTheMultiverse
             return myGrid;
         }
 
-        public void Play_Card(object sender, RoutedEventArgs e) {
+        public void Play_Card(object sender, RoutedEventArgs e)
+        {
             if (cardClickedArray.Count == 1)
             {
                 this.Close();
@@ -265,37 +273,93 @@ namespace SentinelsOfTheMultiverse
                 cardClickedArray[0].Effect = null;
                 gameBoard.drawCardSelected(cardClickedArray[0]);
                 object[] res = GameEngine.getCurrentPlayer().CardMethod(cardClickedArray[0]);
+
                 if (res != null)
                 {
-                    //this needs to do different things based on what the action should be. 
-                    foreach (Hero hero in GameEngine.getHeroes())
+                    switch ((GameEngine.ForcedEffect)res[1])
                     {
-                        if (hero.GetType().Equals(typeof(Legacy)))
-                        {
-                            //here is where it will prompt the user with the discard window
-                            GameBoard.discardedCardsThisTurn = new List<Card>();
-                            DiscardFromHand viewHand = new DiscardFromHand(hero.getPlayerHand(), gameBoard);
-                            viewHand.Visibility = System.Windows.Visibility.Visible;
-                            viewHand.ShowDialog();//use this to make it wait for the window to close before resuming
+                        //if (hero.GetType().Equals(typeof(Legacy)))
+                        //{
+                        //    //here is where it will prompt the user with the discard window
+                        //    GameBoard.discardedCardsThisTurn = new List<Card>();
+                        //    DiscardFromHand viewHand = new DiscardFromHand(hero.getPlayerHand(), gameBoard);
+                        //    viewHand.Visibility = System.Windows.Visibility.Visible;
+                        //    viewHand.ShowDialog();//use this to make it wait for the window to close before resuming
 
-                            //have it check that they actually discarded cards if they need to
-                            Haka.DiscardedAction discardAction = (Haka.DiscardedAction)res[0];
-                            discardAction(GameBoard.discardedCardsThisTurn.Count); //returns to the method that was passed as the first parameter of the result
-                        }
+                        //    //have it check that they actually discarded cards if they need to
+                        //    Haka.DiscardedAction discardAction = (Haka.DiscardedAction)res[0];
+                        //    discardAction(GameBoard.discardedCardsThisTurn.Count); //returns to the method that was passed as the first parameter of the result
+                        //}
+                        case GameEngine.ForcedEffect.ConsiderThePrice:
+                            foreach (Hero hero in GameEngine.getHeroes())
+                            {
+                                if (hero.GetType().Equals(typeof(Legacy)))
+                                {
+                                    //here is where it will prompt the user with the discard window
+                                    GameBoard.discardedCardsThisTurn = new List<Card>();
+                                    DiscardFromHand viewHand = new DiscardFromHand(hero.getPlayerHand(), gameBoard);
+
+                                    viewHand.Visibility = System.Windows.Visibility.Visible;
+                                    viewHand.ShowDialog();//use this to make it wait for the window to close before resuming
+
+                                    //have it check that they actually discarded cards if they need to
+                                    Haka.DiscardedAction discardAction = (Haka.DiscardedAction)res[0];
+                                    discardAction(GameBoard.discardedCardsThisTurn.Count); //returns to the method that was passed as the first parameter of the result
+
+                                }
+                            }
+
+                            break;
+
+                        case GameEngine.ForcedEffect.DeviousDisruption:
+                            break;
+
+
+
+                        case GameEngine.ForcedEffect.PrimordialPlant:
+                            foreach (Hero hero in GameEngine.getHeroes())
+                            {
+                                GameBoard.discardedCardsThisTurn = new List<Card>();
+                                DiscardFromHand viewHand = new DiscardFromHand(hero.getPlayerHand(), gameBoard);
+                                viewHand.Visibility = System.Windows.Visibility.Visible;
+                                viewHand.ShowDialog();
+
+                                InsulaPrimus.DiscardedAction discardAction = (InsulaPrimus.DiscardedAction)res[0];
+                                discardAction(GameBoard.discardedCardsThisTurn.Count, hero);
+                            }
+                            break;
+
+
+
+                        case GameEngine.ForcedEffect.RiverOfLava:
+                            break;
+                        case GameEngine.ForcedEffect.DiscardCurrentPlayer:
+                            GameBoard.discardedCardsThisTurn = new List<Card>();
+                            DiscardFromHand discardedHand = new DiscardFromHand(((Hero)GameEngine.getCurrentPlayer()).getPlayerHand(), gameBoard);
+                            discardedHand.Visibility = System.Windows.Visibility.Visible;
+                            discardedHand.ShowDialog();
+
+                            Haka.DiscardedAction discardedAction = (Haka.DiscardedAction)res[0];
+                            discardedAction(GameBoard.discardedCardsThisTurn.Count);
+                            break;
                     }
+
                 }
+                else
+                {
+                    cardClickedArray.Clear();
+                    GameEngine.playerPlayedCard = true;
+                    gameBoard.updateBoard();
+                    Cancel_Action(sender, e);
+                    return;
+                }
+
                 cardClickedArray.Clear();
                 GameEngine.playerPlayedCard = true;
                 gameBoard.updateBoard();
-            }
-            else
-            {
-                Cancel_Action(sender, e);
-                return;
+
             }
         }
 
-        
-
-    }
+    }    
 }

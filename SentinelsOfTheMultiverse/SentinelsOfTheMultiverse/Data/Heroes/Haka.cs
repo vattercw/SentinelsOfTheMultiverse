@@ -178,8 +178,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             
 
             DiscardedAction act = HakaOfBattleContinued;
-            return new object[] { act, GameEngine.getPlayers() };
-
+            return new object[] { act,GameEngine.ForcedEffect.DiscardCurrentPlayer, GameEngine.getPlayers() };
         }
 
         private void HakaOfBattleContinued(int numDiscardedCards)
@@ -246,7 +245,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             card.cardPower = new Card.Power(MerePower);
         }
-
         public void MerePower(Card card, object[] args)
         {
             var target = GameBoard.cardClickedArray;
@@ -320,8 +318,9 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public object[] SavageMana(Card card)
         {
             DiscardedAction act = ConsiderThePriceOfVictoryDiscardAction;
-            return new object[] { act, GameEngine.getPlayers() };
+            return new object[] { act, GameEngine.ForcedEffect.ConsiderThePrice, GameEngine.getPlayers() };
         }
+
         public delegate void DiscardedAction(int discardedCards);
 
         void ConsiderThePriceOfVictoryDiscardAction(int discardedCards)

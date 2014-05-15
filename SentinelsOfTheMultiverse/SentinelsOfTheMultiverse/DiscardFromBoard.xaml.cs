@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,8 +19,7 @@ using System.Windows.Shapes;
 namespace SentinelsOfTheMultiverse
 {
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-
-    public partial class DiscardFromHand : Window
+    public partial class DiscardFromBoard : Window
     {
         Grid cardLayout = new Grid();
 
@@ -29,49 +27,22 @@ namespace SentinelsOfTheMultiverse
 
         List<Image> imageSelectedArray = new List<Image>();
 
-        List<Card> handShow
-        {
-            get
-            {
-                return ((Hero)GameEngine.getCurrentPlayer()).getPlayerHand();
-            }
-            set
-            {
-                handShow= value;
-            }
-        }
-
-        [DllImport("user32.dll")]
-        static extern uint GetWindowLong(IntPtr hWnd, int nIndex);
-
-        [DllImport("user32.dll")]
-        static extern int SetWindowLong(IntPtr hWnd, int nIndex, uint dwNewLong);
-
-        private const int GWL_STYLE = -16;
-
-        private const uint WS_SYSMENU = 0x80000;
-
-        protected override void OnSourceInitialized(EventArgs e)
-        {
-            IntPtr hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
-            SetWindowLong(hwnd, GWL_STYLE,
-                GetWindowLong(hwnd, GWL_STYLE) & (0xFFFFFFFF ^ WS_SYSMENU));
-
-            base.OnSourceInitialized(e);
-        }
+        List<Card> boardShow = new List<Card>();
 
         List<Card> cardClickedArray = new List<Card>();
 
         GameBoard gameBoard;
 
 
-        public DiscardFromHand(List<Card> hand, GameBoard game)
+        public DiscardFromBoard(GameBoard game)
         {
             InitializeComponent();
             
             gameBoard = game;
 
-            updateHandView();
+            updateBoardView();
+
+            boardShow = GameEngine.getCurrentPlayer().cardsOnField;
 
             Closing += Window_Closed;
         }
@@ -98,9 +69,9 @@ namespace SentinelsOfTheMultiverse
 
         }
 
-        private void updateHandView(){
+        private void updateBoardView(){
             cardLayout.Children.RemoveRange(0, cardLayout.Children.Count+1);
-            cardLayout = initGrid(handShow);
+            cardLayout = initGrid(boardShow);
             paintCards();
             addButtons();
             cardLayout.Children.Add(sideBar);
@@ -110,13 +81,17 @@ namespace SentinelsOfTheMultiverse
 
         private void Discard_Action(object sender, RoutedEventArgs e)
         {
-            if (cardClickedArray.Count != 0)
+            var currentPlayer = GameEngine.getCurrentPlayer();
+
+            if (cardClickedArray.Count > 0)
             {
-                CardDrawingEffects.DiscardCardFromHand(cardClickedArray);
-                updateHandView();
-                gameBoard.updateBoard();
+                foreach (Card toDiscard in cardClickedArray)
+                {
+                    if (currentPlayer.cardsOnField.Contains(toDiscard)) toDiscard.SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
+                }
             }
-            else MessageBox.Show("Discard something...");
+            updateBoardView();
+            gameBoard.updateBoard();
         }
         
 
@@ -128,26 +103,18 @@ namespace SentinelsOfTheMultiverse
             }
         }
 
-        private void Cancel_Action(object sender, RoutedEventArgs e)
-        {
-            foreach(Card clearCard in cardClickedArray){
-                clearCard.Effect = null;
-            }
-            cardClickedArray.Clear();
-        }
-
         public void paintCards()
         {
-            var numCards = handShow.Count;
+            var numCards = boardShow.Count;
             for (int k = 0; k < numCards; k++)
             {
-                Grid.SetColumn(handShow[k], k);
-                handShow[k].AddHandler(UIElement.MouseDownEvent, new RoutedEventHandler(Card_Selection_Handler), true);
+                Grid.SetColumn(boardShow[k], k);
+                boardShow[k].AddHandler(UIElement.MouseDownEvent, new RoutedEventHandler(Card_Selection_Handler), true);
 
-                handShow[k].Height = 400;
-                handShow[k].Margin = Utility.cardSpacing;
+                boardShow[k].Height = 400;
+                boardShow[k].Margin = Utility.cardSpacing;
 
-                cardLayout.Children.Add(handShow[k]);
+                cardLayout.Children.Add(boardShow[k]);
             }
         }
 
@@ -166,7 +133,7 @@ namespace SentinelsOfTheMultiverse
             }
         }
 
-        public Grid initGrid(List<Card> handToShow)
+        public Grid initGrid(List<Card> BoardToShow)
         {
             Grid myGrid = new Grid();
 
@@ -174,7 +141,7 @@ namespace SentinelsOfTheMultiverse
             row.Height = GridLength.Auto;
             myGrid.RowDefinitions.Add(row);
 
-            for (int kk = 0; kk < handToShow.Count + 1; kk++)
+            for (int kk = 0; kk < BoardToShow.Count + 1; kk++)
             {
                 ColumnDefinition col = new ColumnDefinition();
                 col.Width = GridLength.Auto;
@@ -183,7 +150,7 @@ namespace SentinelsOfTheMultiverse
             ColumnDefinition colm = new ColumnDefinition();
             colm.Width = GridLength.Auto;
             myGrid.ColumnDefinitions.Add(colm);
-            Grid.SetColumn(sideBar, handToShow.Count + 2);
+            Grid.SetColumn(sideBar, BoardToShow.Count + 2);
 
             return myGrid;
         }
