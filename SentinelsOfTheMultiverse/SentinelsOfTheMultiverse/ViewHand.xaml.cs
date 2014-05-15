@@ -345,6 +345,7 @@ namespace SentinelsOfTheMultiverse
 
                         case GameEngine.ForcedEffect.RiverOfLava:
                             break;
+
                         case GameEngine.ForcedEffect.DiscardCurrentPlayer:
                             GameBoard.discardedCardsThisTurn = new List<Card>();
                             DiscardFromHand discardedHand = new DiscardFromHand(((Hero)GameEngine.getCurrentPlayer()).getPlayerHand(), gameBoard);
