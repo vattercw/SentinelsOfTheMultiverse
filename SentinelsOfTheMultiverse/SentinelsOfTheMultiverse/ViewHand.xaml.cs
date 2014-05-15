@@ -198,6 +198,7 @@ namespace SentinelsOfTheMultiverse
             gameBoard.updateBoard();
             this.Close();
         }
+        
 
         private void Close_Action(object sender, RoutedEventArgs e)
         {
@@ -331,13 +332,14 @@ namespace SentinelsOfTheMultiverse
                         case GameEngine.ForcedEffect.PrimordialPlant:
                             foreach (Hero hero in GameEngine.getHeroes())
                             {
+                                //TODO this doesn't work. won't ever get called
                                 GameBoard.discardedCardsThisTurn = new List<Card>();
                                 DiscardFromBoard boardView = new DiscardFromBoard(gameBoard);
                                 boardView.Visibility = System.Windows.Visibility.Visible;
                                 boardView.ShowDialog();
 
                                 InsulaPrimus.DiscardedAction discardAction = (InsulaPrimus.DiscardedAction)res[0];
-                                discardAction(GameBoard.discardedCardsThisTurn.Count, hero);
+                                discardAction(GameBoard.discardedCardsThisTurn.Count, hero, (Card)res[2]);
                             }
                             break;
 

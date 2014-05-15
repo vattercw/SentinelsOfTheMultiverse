@@ -86,6 +86,9 @@ namespace SentinelsOfTheMultiverse
         {
             //conditionals need to be added for end turn effects
         }
+        public event EndPhaseHandler EndPhaseCompleted;
+        public delegate void EndPhaseHandler();
+
         public List<Card> getPlayerHand()
         {
             return hand;

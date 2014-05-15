@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus;
 using SentinelsOfTheMultiverse.Data.Effects;
+using System.Windows.Forms;
 
 namespace SentinelsOfTheMultiverse.Data.Environments
 {
@@ -14,15 +15,25 @@ namespace SentinelsOfTheMultiverse.Data.Environments
         {
             card.cardType = Card.CardType.Ongoing;
             GameEngine.obsidianInPlay = true;
+            foreach (Hero hero in GameEngine.getHeroes()) {
 
-            //DamageEffects.damageDealtHandlers new DamageEffects.DamageHandler(ObsidianFieldHandler) ;
-
-            //card.SendToGraveyard(this, cardsOnField);
-            //TODO: player discard 2 cards to get rid of
+            }
+            DamageEffects.damageDealtHandlers.Add(ObsidianFieldHandler);
         }
+
         public int ObsidianFieldHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType)
         {
             return 1;
+        }
+
+        void ObsidianField_EndPhaseCompletedHandler() {
+            DialogResult dialogResult = MessageBox.Show("Do you want to discard 2 cards to remove Obsidian Field?", "Dominion Effect", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes) {
+                //TODO somehow prompt the user for 2 cards to discard
+                
+                Card card = cardsOnField.Find(x => x.getName().Equals("ObsidianField"));
+                card.SendToGraveyard(this, cardsOnField);
+            }
         }
 
         public override void Power()
@@ -50,21 +61,20 @@ namespace SentinelsOfTheMultiverse.Data.Environments
             card.cardType = Card.CardType.OneShot;
 
             List<Hero> targets = getTargets(GameEngine.getHeroes());
-            DiscardedAction act = PrimordialPlantLifeDiscardAction;
+            DiscardedAction act = PrimordialPlantLife_Continuation;
 
-            return new object[] { act, GameEngine.ForcedEffect.PrimordialPlant, GameEngine.getHeroes() };
-
+            return new object[] { act, GameEngine.ForcedEffect.PrimordialPlant, GameEngine.getHeroes(), card };
         }
 
-        public delegate void DiscardedAction(int discardedCards, Hero target);
+        public delegate void DiscardedAction(int discardedCards, Hero target, Card card);
 
-        public void PrimordialPlantLifeDiscardAction(int discardedCards, Hero target)
+        public void PrimordialPlantLife_Continuation(int discardedCards, Hero target, Card card)
         {
             if (discardedCards == 0)
             {
                 DamageEffects.DealDamage(this,new List<Targetable>(){target}, 4, DamageEffects.DamageType.Toxic);
             }
-
+            card.SendToGraveyard(this, cardsOnField);
         }
 
         ////Minions
