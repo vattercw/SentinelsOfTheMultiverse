@@ -109,10 +109,10 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void MotivationalCharge(Card card)
         {
-            card.cardPower = new Card.Power(PunishTheWeakPower);
+            card.cardPower = new Card.Power(MotivationalChargePower);
         }
 
-        void PunishTheWeakPower(Card card, object[] args)
+        void MotivationalChargePower(Card card, object[] args)
         {
             var target = GameBoard.cardClickedArray;
             if (target.Count > 1)
