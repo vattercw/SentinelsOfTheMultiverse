@@ -23,8 +23,9 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         //One Shot Cards
         public void HastenDoom(Card card)
         {
-
-            DamageEffects.DealDamage(this, GameEngine.getHeroes(), null, null, 2, DamageEffects.DamageType.Toxic);
+            var targets = new List<Targetable>();
+            targets.AddRange(GameEngine.getHeroes());
+            DamageEffects.DealDamage(this, targets, 2, DamageEffects.DamageType.Toxic);
             GameEngine.getVillain().drawPhase(1);
         }
 
@@ -51,7 +52,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
             cardDamage = cardDamage + 3;
 
-            DamageEffects.DealDamage(this, new List<Hero>(){target},null,null, cardDamage, DamageEffects.DamageType.Lightning);
+            DamageEffects.DealDamage(this, new List<Targetable>(){target}, cardDamage, DamageEffects.DamageType.Lightning);
 
         }
 
@@ -67,12 +68,12 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             int fireDamage = 2;
             if (lowestHP.Equals(highestHP))
             {
-                DamageEffects.DealDamage(this, new List<Hero>(){highestHP},null,null, damage + fireDamage, DamageEffects.DamageType.Fire);
+                DamageEffects.DealDamage(this, new List<Targetable>(){highestHP}, damage + fireDamage, DamageEffects.DamageType.Fire);
             }
             else
             {
-                DamageEffects.DealDamage(this, new List<Hero>(){lowestHP},null,null, damage, DamageEffects.DamageType.Melee);
-                DamageEffects.DealDamage(this, new List<Hero>(){highestHP},null,null, damage + fireDamage, DamageEffects.DamageType.Fire);
+                DamageEffects.DealDamage(this, new List<Targetable>(){lowestHP}, damage, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamage(this, new List<Targetable>(){highestHP}, damage + fireDamage, DamageEffects.DamageType.Fire);
             }
 
         }

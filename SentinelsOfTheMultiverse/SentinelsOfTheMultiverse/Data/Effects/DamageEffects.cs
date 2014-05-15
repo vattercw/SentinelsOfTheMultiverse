@@ -9,40 +9,16 @@ namespace SentinelsOfTheMultiverse.Data.Effects
     public static class DamageEffects
     {
         public static List<DamageHandler> damageDealtHandlers = new List<DamageEffects.DamageHandler>();
-        public delegate int DamageHandler(object sender, object receivers, int damageAmount, DamageType damageType);
-        //event AttackEventHandler Attack;
-        //internal delegate void AttackEventHandler(object sender, EventArgs e);
+        public delegate int DamageHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageType damageType);
 
         public enum DamageType { Projectile, Fire, Ice, Melee, Toxic, Lightning, All };
 
 
         public static bool inPlayBacklash { get; set; }
 
-        //private static int _globalDamageAmplification;
-        //public static int GlobalDamageAmplification
-        //{
-        //    get
-        //    {
-        //        return _globalDamageAmplification;
-        //    }
-        //    set
-        //    {
-        //        _globalDamageAmplification = value;
-        //    }
-        //}
-
-        public static void DealDamage(object sender, List<Hero> heroes, Villain villain, List<Minion> minions, int damageAmount, DamageType damageType)
+        public static void DealDamage(Targetable sender, List<Targetable> receivers, int damageAmount, DamageType damageType)
         {
-            List<object> receivers = new List<object>();
-            if (heroes != null)
-                receivers.AddRange(heroes);
-            if (minions != null)
-                receivers.AddRange(minions);
-            if (villain != null)
-                receivers.Add(villain);
-            
-            
-            foreach (object receiver in receivers)
+            foreach (Targetable receiver in receivers)
             {
                 int damageModifiers = 0;
                 if (damageDealtHandlers.Count != 0)
@@ -51,12 +27,18 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                     damageDealtHandlers.CopyTo(dummyDamageHandlers);
                     foreach (DamageHandler dmgHand in dummyDamageHandlers)
                     {
-                        damageModifiers += dmgHand(sender, receiver, damageAmount, damageType);
+                        damageModifiers += dmgHand(sender, receiver, ref damageAmount, damageType);
+                        
+                        if (damageAmount == 0){ //meaning the user is immune
+                            damageModifiers = 0; //could add another pointer param for invincible in dmgHand 
+                            break;
+                        }
                     }
-                    if (damageModifiers < 0)
-                        damageModifiers = 0;
                 }
-                ((IPlayer)receiver).lifeTotal -= damageModifiers + damageAmount;
+                if (damageModifiers + damageAmount > receiver.maxHealth)
+                    receiver.lifeTotal = receiver.maxHealth;
+                else
+                    receiver.lifeTotal -= damageModifiers + damageAmount;
             }
             
             

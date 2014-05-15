@@ -69,7 +69,7 @@ namespace SentinelsOfTheMultiverse
         {
             sideBar.Children.RemoveRange(0, sideBar.Children.Count);
 
-            if (GameEngine.getCurrentPlayer().lifeTotal <= 0)
+            if (((Targetable)GameEngine.getCurrentPlayer()).lifeTotal <= 0)
             {
 
                 Card death = new Card("Images\\Hero\\" + GameEngine.getCurrentPlayer().characterName + "\\" + GameEngine.getCurrentPlayer().characterName.ToLower() + "_death.jpg");
@@ -198,6 +198,7 @@ namespace SentinelsOfTheMultiverse
             gameBoard.updateBoard();
             this.Close();
         }
+        
 
         private void Close_Action(object sender, RoutedEventArgs e)
         {
@@ -331,13 +332,14 @@ namespace SentinelsOfTheMultiverse
                         case GameEngine.ForcedEffect.PrimordialPlant:
                             foreach (Hero hero in GameEngine.getHeroes())
                             {
+                                //TODO this doesn't work. won't ever get called
                                 GameBoard.discardedCardsThisTurn = new List<Card>();
                                 DiscardFromBoard handView = new DiscardFromBoard(gameBoard);
                                 handView.Visibility = System.Windows.Visibility.Visible;
                                 handView.ShowDialog();
 
                                 InsulaPrimus.DiscardedAction discardAction = (InsulaPrimus.DiscardedAction)res[0];
-                                discardAction(GameBoard.discardedCardsThisTurn.Count, hero);
+                                discardAction(GameBoard.discardedCardsThisTurn.Count, hero, (Card)res[2]);
                             }
                             break;
 
@@ -353,7 +355,7 @@ namespace SentinelsOfTheMultiverse
                             discardedHand.ShowDialog();
 
                             Haka.DiscardedAction discardedAction = (Haka.DiscardedAction)res[0];
-                            discardedAction(GameBoard.discardedCardsThisTurn.Count);
+                            discardedAction(GameBoard.discardedCardsThisTurn.Count, (Card)res[3]);
                             break;
                     }
 

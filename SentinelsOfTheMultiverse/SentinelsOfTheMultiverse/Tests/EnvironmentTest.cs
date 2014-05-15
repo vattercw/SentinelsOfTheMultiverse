@@ -34,7 +34,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Assert.NotNull(env.deck);
         }
 
-         [Test, RequiresSTA]
+        [Test, RequiresSTA]
         public void testObsidian()
         {
             Start testGame = new Start();

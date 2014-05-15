@@ -59,7 +59,7 @@ namespace SentinelsOfTheMultiverse.Data
             cardsOnField.AddRange(drawnCards);
             for (int i = 0; i < drawnCards.Count; i++)
             {
-                this.CardMethod(drawnCards[i]);
+                CardMethod(drawnCards[i]);
             }
 
         }

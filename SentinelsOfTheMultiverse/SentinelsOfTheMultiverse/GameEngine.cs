@@ -53,9 +53,11 @@ namespace SentinelsOfTheMultiverse
                 newHero.hand.RemoveRange(0, 2);
                 if (newHero.GetType().Equals(typeof(Haka)))
                 {
-                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-SavageMana.png"));
+                    //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-SavageMana.png"));
                     newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-Rampage.png"));
+                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-GroundPound.png"));
                     newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-HakaOfBattle.png"));
+                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-TaMoko.png"));
 
                     //newHero.hand.Add(new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\3-EnduringIntercession.png"));
                 }
@@ -165,9 +167,24 @@ namespace SentinelsOfTheMultiverse
         {
             return environment;
         }
+
+        internal static List<Targetable> getTargets() {
+            List<Targetable> targets = new List<Targetable>();
+            targets.AddRange(getHeroes());
+            targets.AddRange(villain.getMinions());
+            targets.AddRange(environment.getMinions());
+            return targets;
+        }
         #endregion
 
 
-        
+
+
+        internal static List<Targetable> getNonHeroTargets() {
+            List<Targetable> targets = new List<Targetable>();
+            targets.AddRange(villain.getMinions());
+            targets.AddRange(environment.getMinions());
+            return targets;
+        }
     }
 }

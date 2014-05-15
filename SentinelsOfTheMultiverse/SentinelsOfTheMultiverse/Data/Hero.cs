@@ -56,8 +56,12 @@ namespace SentinelsOfTheMultiverse
         public override void startPhase()
         {
             //conditionals for start turn effects
+            if (StartPhaseStarted != null) {
+                StartPhaseStarted();
+            }
         }
-
+        public event StartPhaseHandler StartPhaseStarted;
+        public delegate void StartPhaseHandler();
 
         public override Boolean playPhase()
         {
@@ -82,6 +86,9 @@ namespace SentinelsOfTheMultiverse
         {
             //conditionals need to be added for end turn effects
         }
+        public event EndPhaseHandler EndPhaseCompleted;
+        public delegate void EndPhaseHandler();
+
         public List<Card> getPlayerHand()
         {
             return hand;

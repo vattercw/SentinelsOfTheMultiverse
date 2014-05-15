@@ -99,6 +99,48 @@ namespace SentinelsOfTheMultiverse.Tests
             //also need to test that it doesn't use the bonus damage until he is dealing it for the first time
 
         }
+        [Test(), RequiresSTA]
+        public void TestGroundPound() {
+            GameEngine.TearDownGameEngine();
+            Start game = new Start();
+
+            game.beginGame();
+
+            Haka haka = (Haka)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Haka));
+            Card groundPoundCard = new Card("Images\\Hero\\Haka\\2-GroundPound.png");
+
+            haka.GroundPound_Continuation(0, groundPoundCard);
+
+            int damageAmount = 20;
+            //tests damage from nonhero
+            DamageEffects.DealDamage(GameEngine.getEnvironment(), new List<Targetable>() { haka }, damageAmount, DamageEffects.DamageType.Melee);
+            Assert.AreEqual(haka.maxHealth, haka.lifeTotal);
+
+            //tests damage from hero
+            DamageEffects.DealDamage(haka, new List<Targetable>() { haka }, damageAmount, DamageEffects.DamageType.Melee);
+            Assert.AreEqual(haka.maxHealth-damageAmount, haka.lifeTotal);
+        }
+
+        [Test(), RequiresSTA]
+        public void TestGroundPoundWithExistingDamageHandler() {
+            GameEngine.TearDownGameEngine();
+            Start game = new Start();
+
+            game.beginGame();
+
+            Haka haka = (Haka)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Haka));
+            Card groundPoundCard = new Card("Images\\Hero\\Haka\\2-GroundPound.png");
+            var  insulaPrimus =(InsulaPrimus)GameEngine.getEnvironment();
+            
+            DamageEffects.damageDealtHandlers.Add(insulaPrimus.ObsidianFieldHandler);
+
+            haka.GroundPound_Continuation(0, groundPoundCard);
+
+            int damageAmount = 20;
+            DamageEffects.DealDamage(insulaPrimus, new List<Targetable>() { haka }, damageAmount, DamageEffects.DamageType.Melee);
+            Assert.AreEqual(haka.maxHealth, haka.lifeTotal);
+
+        }
 
         [Test(), RequiresSTA]
         public void TestDominion()
@@ -117,6 +159,31 @@ namespace SentinelsOfTheMultiverse.Tests
             haka.Dominion(dominion);
 
             GameEngine.getEnvironment().cardsOnField.Find(x=> x.cardType== Card.CardType.Environment).SendToGraveyard(GameEngine.getEnvironment(), GameEngine.getEnvironment().cardsOnField);
+        }
+
+        [Test(), RequiresSTA]
+        public void TestEnduringIntercession() {
+            GameEngine.TearDownGameEngine();
+            Start game = new Start();
+            game.beginGame();
+
+            Haka haka = (Haka)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Haka));
+            Legacy legacy= (Legacy)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Legacy));
+            InsulaPrimus env = (InsulaPrimus)GameEngine.getEnvironment();
+            Card enduringIntercessionCard = new Card("Images\\Hero\\Haka\\3-EnduringIntercession.png");
+
+            haka.EnduringIntercession(enduringIntercessionCard);
+
+            DamageEffects.DealDamage(env, new List<Targetable>(){legacy, haka},4, DamageEffects.DamageType.Melee); 
+            Assert.AreEqual(legacy.maxHealth, legacy.lifeTotal);
+            Assert.AreEqual(haka.maxHealth - 8, haka.lifeTotal); //haka takes his own and legacy's damage
+
+
+            //test that damage wasn't absorbed for damage not from environment
+            var hakaTotal = haka.lifeTotal;
+            DamageEffects.DealDamage(legacy, new List<Targetable>() { legacy, haka }, 4, DamageEffects.DamageType.Melee);
+            Assert.AreEqual(legacy.maxHealth -4, legacy.lifeTotal); //legacy did take 4 damage
+            Assert.AreEqual(hakaTotal - 4, haka.lifeTotal); //haka takes ONLY his own damage
         }
 
         [Test(), RequiresSTA]
