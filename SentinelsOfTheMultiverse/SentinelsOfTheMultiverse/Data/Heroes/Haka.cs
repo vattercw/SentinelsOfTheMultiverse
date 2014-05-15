@@ -313,7 +313,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public object[] SavageMana(Card card)
         {
             DiscardedAction act = ConsiderThePriceOfVictoryDiscardAction;
-            return new object[] { act, GameEngine.getPlayers() };
+            return new object[] { act, GameEngine.ForcedEffect.ConsiderThePrice, GameEngine.getPlayers() };
         }
 
         public delegate void DiscardedAction(int discardedCards);
