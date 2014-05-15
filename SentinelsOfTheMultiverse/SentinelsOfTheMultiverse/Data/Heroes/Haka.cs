@@ -33,11 +33,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 Boolean minBool = false;
 
-                List<Minion> minionsToAttack = null;
+                List<Minion> minionsToAttack = new List<Minion>();
 
                 foreach (Minion min in villainMinions)
                 {
-                    if (min.minionName == target[0].Name)
+                    if (min.minionName.Equals(((Card)target[0]).getName()))
                     {
                         minionsToAttack.Add(min);
                         minBool = true;
@@ -46,7 +46,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 foreach (Minion min in environMinions)
                 {
-                    if (min.minionName == target[0].Name)
+                    if (min.minionName.Equals(((Card)target[0]).getName()))
                     {
                         minionsToAttack.Add(min);
                         minBool = true;
@@ -57,7 +57,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 {
                     var targets = new List<Targetable>();
                     targets.AddRange(minionsToAttack);
-                    DamageEffects.DealDamage(this,targets , 2, DamageEffects.DamageType.Melee);
+                    DamageEffects.DealDamage(this, targets , 2, DamageEffects.DamageType.Melee);
                 }
                 else MessageBox.Show("Please select an appropriate card.");
             }
@@ -107,7 +107,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 
                 foreach (Minion min in villainMinions)
                 {
-                    if (min.minionName == target[0].Name)
+                    if (min.minionName.Equals(((Card)target[0]).getName()))
                     {
                         minionsToAttack.Add(min);
                         minBool = true;
@@ -116,7 +116,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 foreach (Minion min in environMinions)
                 {
-                    if (min.minionName == target[0].Name)
+                    if (min.minionName.Equals(((Card)target[0]).getName()))
                     {
                         minionsToAttack.Add(min);
                         minBool = true;
@@ -330,7 +330,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 foreach (Minion min in villainMinions)
                 {
-                    if (min.minionName == target[0].Name)
+                    if (min.minionName.Equals(((Card)target[0]).getName()))
                     {
                         minionAttack.Add(min);
                         minBool = true;
@@ -339,7 +339,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 foreach (Minion min in environMinions)
                 {
-                    if (min.minionName == target[0].Name)
+                    if (min.minionName.Equals(((Card)target[0]).getName()))
                     {
                         minionAttack.Add(min);
                         minBool = true;
