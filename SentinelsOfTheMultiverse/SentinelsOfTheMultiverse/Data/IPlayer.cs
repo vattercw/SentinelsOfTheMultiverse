@@ -30,18 +30,7 @@ namespace SentinelsOfTheMultiverse.Data
 
         abstract public void DeathPower3();
 
-        public int damageAmplificationFromPlayer
-        {
-            get
-            {
-                return _damageAmplificationFromPlayer;
-            }
-            set
-            {
-                _damageAmplificationFromPlayer = value;
-            }
-        }
-        public int damageAmplificationToPlayer { get; set; }
+
 
         public int numPowers
         {
@@ -58,7 +47,6 @@ namespace SentinelsOfTheMultiverse.Data
 
         #endregion
         #region PrivateFields
-            private int _damageAmplificationFromPlayer;
             private int _numPowers = 1;
         #endregion
 
@@ -127,8 +115,6 @@ namespace SentinelsOfTheMultiverse.Data
 
         public void updateOngoingEffects()
         {
-            damageAmplificationFromPlayer = 0;
-            damageAmplificationToPlayer = 0;
             foreach (Ongoings ongoingEffect in ongoingEffects)
             {
                 ongoingEffect();

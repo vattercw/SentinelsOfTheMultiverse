@@ -11,7 +11,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus
         public EnragedTRex()
         {
             maxHealth = 15;
-            health = 15;
+            lifeTotal = 15;
             effectPhase = Minion.MinionType.OnAttack;
         }
 

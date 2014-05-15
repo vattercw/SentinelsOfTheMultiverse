@@ -9,7 +9,7 @@ namespace SentinelsOfTheMultiverse.Data
     public abstract class Minion
     {
         public int maxHealth;
-        public int health;
+        public int lifeTotal;
         public String  minionName;
         public Enum effectPhase;
 
@@ -28,7 +28,7 @@ namespace SentinelsOfTheMultiverse.Data
 
         public int getCurrentHealth()
         {
-            return health;
+            return lifeTotal;
         }
 
 

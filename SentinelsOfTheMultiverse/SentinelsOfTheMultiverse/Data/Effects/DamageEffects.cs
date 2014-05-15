@@ -8,52 +8,83 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 {
     public static class DamageEffects
     {
+        public static List<DamageHandler> damageDealtHandlers = new List<DamageEffects.DamageHandler>();
+        public delegate int DamageHandler(object sender, object receivers, int damageAmount, DamageType damageType);
         //event AttackEventHandler Attack;
         //internal delegate void AttackEventHandler(object sender, EventArgs e);
 
-        public enum DamageType { Projectile, Fire, Ice, Melee, Toxic, Lightning };
+        public enum DamageType { Projectile, Fire, Ice, Melee, Toxic, Lightning, All };
+
 
         public static bool inPlayBacklash { get; set; }
 
-        private static int _globalDamageAmplification;
-        public static int GlobalDamageAmplification
-        {
-            get
-            {
-                return _globalDamageAmplification;
-            }
-            set
-            {
-                _globalDamageAmplification = value;
-            }
-        }
+        //private static int _globalDamageAmplification;
+        //public static int GlobalDamageAmplification
+        //{
+        //    get
+        //    {
+        //        return _globalDamageAmplification;
+        //    }
+        //    set
+        //    {
+        //        _globalDamageAmplification = value;
+        //    }
+        //}
 
-        public static void DealDamage(List<Hero> heroes, Villain villain, List<Minion> minions, int damageAmount, DamageType damageType)
+        public static void DealDamage(object sender, List<Hero> heroes, Villain villain, List<Minion> minions, int damageAmount, DamageType damageType)
         {
+            List<object> receivers = new List<object>();
+            if (heroes != null)
+                receivers.AddRange(heroes);
+            if (minions != null)
+                receivers.AddRange(minions);
+            if (villain != null)
+                receivers.Add(villain);
             
+            
+            foreach (object receiver in receivers)
+            {
+                int damageModifiers = 0;
+                if (damageDealtHandlers.Count != 0)
+                {
+                    DamageHandler[] dummyDamageHandlers = new DamageHandler[damageDealtHandlers.Count];
+                    damageDealtHandlers.CopyTo(dummyDamageHandlers);
+                    foreach (DamageHandler dmgHand in dummyDamageHandlers)
+                    {
+                        damageModifiers += dmgHand(sender, receiver, damageAmount, damageType);
+                    }
+                    if (damageModifiers < 0)
+                        damageModifiers = 0;
+                }
+                ((IPlayer)receiver).lifeTotal -= damageModifiers + damageAmount;
+            }
+            
+            
+            /*
             if (heroes != null)
             {
                 foreach (Hero hero in heroes)
                 {
-                    DealDamageToHero(hero, damageAmount, damageType);
+                    hero.lifeTotal -= damageModifiers + damageAmount;
                     Console.WriteLine(hero.lifeTotal);
                 }
             }
             if (villain != null)
             {
-                DealDamageToVillain(villain, damageAmount, damageType);
+                villain.lifeTotal -= damageModifiers + damageAmount;
                 Console.WriteLine(villain.lifeTotal);
             }
             if (minions != null)
             {
                 foreach (Minion minion in minions)
                 {
-                    DealDamageToMinion(minion, damageAmount, damageType);
-                    Console.WriteLine(minion.health);
+                    minion.lifeTotal -= damageModifiers + damageAmount;
+                    Console.WriteLine(minion.lifeTotal);
                 }
             }
+            */
         }
-
+/*
         public static void DealDamageToHero(Hero hero, int damageAmount, DamageType damageType)
         {
             for (int i = 0; i < hero.getImmunities().Count; i++)
@@ -71,7 +102,6 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                 //make him dead
             }
         }
-
         public static void DealDamageToVillain(Villain vil, int damageAmount, DamageType damageType)
         {
             if (vil != null)
@@ -106,6 +136,6 @@ namespace SentinelsOfTheMultiverse.Data.Effects
             }
         }
 
-        
+        */
     }
 }

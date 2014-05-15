@@ -24,7 +24,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         public void HastenDoom(Card card)
         {
 
-            DamageEffects.DealDamage(GameEngine.getHeroes(), null, null, 2, DamageEffects.DamageType.Toxic);
+            DamageEffects.DealDamage(this, GameEngine.getHeroes(), null, null, 2, DamageEffects.DamageType.Toxic);
             GameEngine.getVillain().drawPhase(1);
         }
 
@@ -51,7 +51,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
             cardDamage = cardDamage + 3;
 
-            DamageEffects.DealDamageToHero(target, cardDamage, DamageEffects.DamageType.Lightning);
+            DamageEffects.DealDamage(this, new List<Hero>(){target},null,null, cardDamage, DamageEffects.DamageType.Lightning);
 
         }
 
@@ -67,12 +67,12 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             int fireDamage = 2;
             if (lowestHP.Equals(highestHP))
             {
-                DamageEffects.DealDamageToHero(highestHP, damage + fireDamage, DamageEffects.DamageType.Fire);
+                DamageEffects.DealDamage(this, new List<Hero>(){highestHP},null,null, damage + fireDamage, DamageEffects.DamageType.Fire);
             }
             else
             {
-                DamageEffects.DealDamageToHero(lowestHP, damage, DamageEffects.DamageType.Melee);
-                DamageEffects.DealDamageToHero(highestHP, damage + fireDamage, DamageEffects.DamageType.Fire);
+                DamageEffects.DealDamage(this, new List<Hero>(){lowestHP},null,null, damage, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamage(this, new List<Hero>(){highestHP},null,null, damage + fireDamage, DamageEffects.DamageType.Fire);
             }
 
         }
@@ -99,7 +99,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         {
             card.cardType = Card.CardType.Ongoing;
 
-            GameEngine.getVillain().damageAmplificationToPlayer--;
+            //GameEngine.getVillain().damageAmplificationToPlayer--;
         }
 
         public void BacklashField(Card card)
@@ -114,21 +114,21 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         {
             PoweredRemoteTurret turret = new PoweredRemoteTurret();
             GameEngine.getVillain().addMinion(turret);
-            Console.Write(turret.health);
+            Console.Write(turret.lifeTotal);
         }
 
         public void MobileDefencePlatform(Card card)
         {
             MobileDefensePlatform platform = new MobileDefensePlatform();
             GameEngine.getVillain().addMinion(platform);
-            Console.Write("Mobile Defense Platform: " + platform.health);
+            Console.Write("Mobile Defense Platform: " + platform.lifeTotal);
         }
 
         public void ElementalRedistributor(Card card)
         {
             ElementalRedistributor redist = new ElementalRedistributor();
             GameEngine.getVillain().addMinion(redist);
-            Console.Write("Elemental Redistributor: "+redist.health);
+            Console.Write("Elemental Redistributor: "+redist.lifeTotal);
 
         }
 
@@ -136,7 +136,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         {
             BladeBattalion bbat = new BladeBattalion();
             GameEngine.getVillain().addMinion(new BladeBattalion());
-            Console.WriteLine("Blade Battalion: " + bbat.health);
+            Console.WriteLine("Blade Battalion: " + bbat.lifeTotal);
             
         }
 

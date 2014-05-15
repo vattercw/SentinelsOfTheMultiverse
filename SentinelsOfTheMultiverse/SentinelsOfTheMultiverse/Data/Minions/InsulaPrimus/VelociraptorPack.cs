@@ -11,7 +11,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus
         public VelociraptorPack()
         {
             maxHealth = 5;
-            health = 5;
+            lifeTotal = 5;
             effectPhase = Minion.MinionType.End;
             //GameEngine.getVillain().addMinion(this, effectPhase);
         }

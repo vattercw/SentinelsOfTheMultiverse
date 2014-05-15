@@ -22,14 +22,14 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             //until next turn heros do one more damage
             foreach (Hero hero in GameEngine.getHeroes())
             {
-                hero.damageAmplificationFromPlayer++;
+                //hero.damageAmplificationFromPlayer++;
             }
         }
 
 
         public void Fortitude(Card card)
         {
-            this.damageAmplificationToPlayer -= 1;
+            //this.damageAmplificationToPlayer -= 1;
         }
 
         public void DangerSense(Card card)
@@ -84,14 +84,14 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 if (minBool)
                 {
-                    DamageEffects.DealDamage(null, null, minionAttack, 4, DamageEffects.DamageType.Melee);
+                    DamageEffects.DealDamage(this, null, null, minionAttack, 4, DamageEffects.DamageType.Melee);
                     card.SendToGraveyard(this, cardsOnField);
                 }
                 else MessageBox.Show("Please select an appropriate card.");
             }
             else
             {
-                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 4, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamage(this, null, GameEngine.getVillain(), null, 4, DamageEffects.DamageType.Melee);
                 card.SendToGraveyard(this, cardsOnField);
             }
         }
@@ -134,7 +134,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                     {
                         List<Minion> mins = new List<Minion>();
                         mins.Add(min);
-                        DamageEffects.DealDamage(null, null, mins, 2, DamageEffects.DamageType.Melee);
+                        DamageEffects.DealDamage(this, null, null, mins, 2, DamageEffects.DamageType.Melee);
                         break;
                     }
                 }
@@ -145,14 +145,14 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                     {
                         List<Minion> mins = new List<Minion>();
                         mins.Add(min);
-                        DamageEffects.DealDamage(null, null, mins, 2, DamageEffects.DamageType.Melee);
+                        DamageEffects.DealDamage(this, null, null, mins, 2, DamageEffects.DamageType.Melee);
                         break;
                     }
                 }
             }
             else
             {
-                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 2, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamage(this, null, GameEngine.getVillain(), null, 2, DamageEffects.DamageType.Melee);
             }
 
             foreach (Hero hero in GameEngine.getHeroes())
@@ -171,7 +171,8 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void SuperhumanDurability(Card card)
         {
-            this.damageAmplificationFromPlayer += 1;
+            //this.damageAmplificationFromPlayer += 1;
+            //TODO fix this card
         }
 
         public void NextEvolution(Card card)
@@ -224,14 +225,14 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 if (minBool)
                 {
-                    DamageEffects.DealDamage(null, null, minionAttack, 4, DamageEffects.DamageType.Melee);
+                    DamageEffects.DealDamage(this, null, null, minionAttack, 4, DamageEffects.DamageType.Melee);
                     card.SendToGraveyard(this, cardsOnField);
                 }
                 else MessageBox.Show("Please select an appropriate card.");
             }
             else
             {
-                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 4, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamage(this, null, GameEngine.getVillain(), null, 4, DamageEffects.DamageType.Melee);
                 card.SendToGraveyard(this, cardsOnField);
             }
             drawPhase(1);
