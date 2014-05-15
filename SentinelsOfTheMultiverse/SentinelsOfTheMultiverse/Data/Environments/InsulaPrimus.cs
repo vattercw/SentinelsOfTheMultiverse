@@ -42,16 +42,30 @@ namespace SentinelsOfTheMultiverse.Data.Environments
 
        
 
-        public void PrimordialPlantLife(Card card)
+        public object[] PrimordialPlantLife(Card card)
         {
             card.cardType = Card.CardType.OneShot;
 
             List<Hero> targets = getTargets(GameEngine.getHeroes());
 
-            //TODO: remove ongoing card to reduce damage of certain heros to 2
-            DamageEffects.DealDamage(null, null, null, 2, DamageEffects.DamageType.Toxic);
+            DiscardedAction act = PrimordialPlantLifeDiscardAction;
 
-            DamageEffects.DealDamage(targets, null, null, 4, DamageEffects.DamageType.Toxic);
+            return new object[] { act, GameEngine.ForcedEffect.PrimordialPlant, GameEngine.getHeroes() };
+
+        }
+
+        public delegate void DiscardedAction(int discardedCards, Hero target);
+
+        void PrimordialPlantLifeDiscardAction(int discardedCards, Hero target)
+        {
+            if (discardedCards > 0)
+            {
+                DamageEffects.DealDamage(null, null, null, 2, DamageEffects.DamageType.Toxic);
+            }
+            else
+            {
+                DamageEffects.DealDamageToHero(target, 4, DamageEffects.DamageType.Toxic);
+            }
         }
 
         ////Minions

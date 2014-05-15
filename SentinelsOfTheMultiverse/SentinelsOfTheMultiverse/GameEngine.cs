@@ -37,7 +37,7 @@ namespace SentinelsOfTheMultiverse
         public static bool resumePlay = false;
         public static bool primordial = false;
 
-        public static enum ForcedEffect { ConsiderThePrice, PrimordialPlant, DeviousDisruption, RiverOfLava };
+        public enum ForcedEffect { ConsiderThePrice, PrimordialPlant, DeviousDisruption, RiverOfLava };
 
         //private static bool getWinCon()
         //{
