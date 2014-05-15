@@ -57,7 +57,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 {
                     var targets = new List<Targetable>();
                     targets.AddRange(minionsToAttack);
-                    DamageEffects.DealDamage(this,targets , 2, DamageEffects.DamageType.Melee);
+                    DamageEffects.DealDamage(this, targets , 2, DamageEffects.DamageType.Melee);
                 }
                 else MessageBox.Show("Please select an appropriate card.");
             }
