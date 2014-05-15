@@ -85,6 +85,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardType = Card.CardType.OneShot;
 
             var target = GameBoard.cardClickedArray;
+            
             if (target.Count > 1)
             {
                 MessageBox.Show("Select only one target to deal damage to. \n No select target default's to the Villain.");
@@ -198,7 +199,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         int HakaOfBattleDamageHandler(object sender, object receiver, int damageAmount, DamageEffects.DamageType damageType)
         {
-            if (receiver.Equals(this))
+            if (sender.Equals(this))
             {
                 DamageEffects.damageDealtHandlers.Remove(HakaOfBattleDamageHandler);
                 return GameBoard.discardedCardsThisTurn.Count;    
@@ -229,8 +230,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardType = Card.CardType.OneShot;
             CardDrawingEffects.DrawCards(2, this);
 
-            Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
-            //Don't forget to include something that doesn't allow them to go to the next turn until they discard.
             DiscardedAction act = HakaOfRestorationContinuation;
             return new object[] { act, GameEngine.ForcedEffect.DiscardCurrentPlayer, 1, card};
         }
@@ -241,10 +240,25 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         }
         
 
-        public void HakaOfShielding(Card card)
+        public object[] HakaOfShielding(Card card)
         {
-            //todo
-            //int damageReduction = 3;
+            card.cardType = Card.CardType.OneShot;
+            CardDrawingEffects.DrawCards(2, this);
+
+            DiscardedAction act = HakaOfShielding_Continuation;
+            return new object[] { act, GameEngine.ForcedEffect.DiscardCurrentPlayer, 1, card };
+        }
+
+        private void HakaOfShielding_Continuation(int numDiscardedCards, Card card) {
+            DamageEffects.damageDealtHandlers.Add(HakaOfShielding_DamageHandler);
+        }
+
+        int HakaOfShielding_DamageHandler(object sender, object receiver, int damageAmount, DamageEffects.DamageType damageType) {
+            if (receiver.Equals(this)) {
+                DamageEffects.damageDealtHandlers.Remove(HakaOfShielding_DamageHandler);
+                return  GameBoard.discardedCardsThisTurn.Count * (-2);
+            }
+            return 0;
         }
 
         public void Mere(Card card)
