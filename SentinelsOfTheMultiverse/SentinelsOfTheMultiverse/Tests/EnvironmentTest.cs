@@ -45,7 +45,9 @@ namespace SentinelsOfTheMultiverse.Tests
             testEnvo.ObsidianField(testObsidian);
 
             Assert.True(GameEngine.obsidianInPlay);
-            Assert.AreEqual(DamageEffects.GlobalDamageAmplification, 1);
+            //fix this test
+            Assert.True(false);
+             //Assert.AreEqual(DamageEffects.GlobalDamageAmplification, 1);
 
         }
 

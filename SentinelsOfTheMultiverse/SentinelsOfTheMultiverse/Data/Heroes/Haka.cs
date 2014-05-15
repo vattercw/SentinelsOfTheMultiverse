@@ -54,14 +54,14 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 if (minBool)
                 {
-                    DamageEffects.DealDamage(null, null, minionAttack, 2, DamageEffects.DamageType.Melee);
+                    DamageEffects.DealDamage(this, null, null, minionAttack, 2, DamageEffects.DamageType.Melee);
 
                 }
                 else MessageBox.Show("Please select an appropriate card.");
             }
             else
             {
-                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 2, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamage(this, null, GameEngine.getVillain(), null, 2, DamageEffects.DamageType.Melee);
 
             }
         }
@@ -72,10 +72,10 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardType = Card.CardType.OneShot;
             Villain villain = GameEngine.getVillain();
             GameEnvironment environ = GameEngine.getEnvironment();
-            DamageEffects.DealDamage(null, villain, villain.getMinions(), 5, DamageEffects.DamageType.Melee);
-            DamageEffects.DealDamage(GameEngine.getHeroes(), null,null, 2, DamageEffects.DamageType.Melee);
+            DamageEffects.DealDamage(this, GameEngine.getHeroes(), null, null, 2, DamageEffects.DamageType.Melee);
+            DamageEffects.DealDamage(this, null, villain, villain.getMinions(), 5, DamageEffects.DamageType.Melee);
             //hit thews dern environment minionz tew
-            DamageEffects.DealDamage(null, null, environ.getMinions(), 5, DamageEffects.DamageType.Melee);
+            DamageEffects.DealDamage(this, null, null, environ.getMinions(), 5, DamageEffects.DamageType.Melee);
             card.SendToGraveyard(this, cardsOnField);
         }
 
@@ -121,14 +121,14 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 if (minBool)
                 {
-                    DamageEffects.DealDamage(null, null, minionAttack, 3, DamageEffects.DamageType.Melee);
+                    DamageEffects.DealDamage(this, null, null, minionAttack, 3, DamageEffects.DamageType.Melee);
                     card.SendToGraveyard(this, cardsOnField);
                 }
                 else MessageBox.Show("Please select an appropriate card.");
             }
             else
             {
-                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 3, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamage(this, null, GameEngine.getVillain(), null, 3, DamageEffects.DamageType.Melee);
                 card.SendToGraveyard(this, cardsOnField);
             }
         }
@@ -154,6 +154,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         void DominionEffect(Card c, EventArgs e)
         {
             CardDrawingEffects.DrawCards(15, this);
+            c.CardDestroyed += null;
         }
 
         public void EnduringIntercession(Card card)
@@ -170,42 +171,46 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             
         }
 
-        public void HakaOfBattle(Card card)
+        public object[] HakaOfBattle(Card card)
         {
             card.cardType = Card.CardType.OneShot;
             CardDrawingEffects.DrawCards(2, this);
-            //Don't forget to include something that doesn't allow them to go to the next turn until they discard.
-            //also, reset the discard count
-            if (GameBoard.discardedCardsThisTurn.Count < 1)
-            {
-                cardsOnField.Remove(card);
-                hand.Add(card);
-                GameEngine.playerPlayedCard = false;
-                MessageBox.Show("You must discard are atleast one card to use this One-Shot.", "Discard Problem");
-            }
-            else
-            {
-                //damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
-                //card.SendToGraveyard(this, cardsOnField);
-            }
+            
 
-            //add event handler for attack from haka
+            DiscardedAction act = HakaOfBattleContinued;
+            return new object[] { act, GameEngine.getPlayers() };
+
         }
 
+        private void HakaOfBattleContinued(int numDiscardedCards)
+        {
+            DamageEffects.damageDealtHandlers.Add(HakaOfBattleDamageHandler);
+        }
+
+        int HakaOfBattleDamageHandler(object sender, object receiver, int damageAmount, DamageEffects.DamageType damageType)
+        {
+            if (receiver.Equals(this))
+            {
+                DamageEffects.damageDealtHandlers.Remove(HakaOfBattleDamageHandler);
+                return GameBoard.discardedCardsThisTurn.Count;    
+            }
+            return 0;
+        }
         
         public void TaMoko(Card card)
         {
-            card.cardType = Card.CardType.Ongoing;
-            cardsOnField.Add(card);
-            card.effects.Add(TaMokoEffect);
-            TaMokoEffect();//may or may not need this here
-            ongoingEffects.Add(TaMokoEffect);
+            //TODO: fix this
+            //card.cardType = Card.CardType.Ongoing;
+            //cardsOnField.Add(card);
+            //card.effects.Add(TaMokoEffect);
+            //TaMokoEffect();//may or may not need this here
+            //ongoingEffects.Add(TaMokoEffect);
         }
 
-        void TaMokoEffect()
-        {
-            damageAmplificationToPlayer -= 1;
-        }
+        //int TaMokoEffect()
+        //{
+        //    return 1;
+        //}
 
         public void HakaOfRestoration(Card card)
         {
@@ -224,12 +229,13 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             }
             else
             {
-                damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
+                //TODO fix
+                //DamageEffects.damageDealtHandlers.Add();
+                //damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
                 card.SendToGraveyard(this, cardsOnField);
             }
         }
         
-       
 
         public void HakaOfShielding(Card card)
         {
@@ -281,13 +287,13 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
                 if (minBool)
                 {
-                    DamageEffects.DealDamage(null, null, minionAttack, 3, DamageEffects.DamageType.Melee);
+                    DamageEffects.DealDamage(this, null, null, minionAttack, 3, DamageEffects.DamageType.Melee);
                 }
                 else MessageBox.Show("Please select an appropriate card.");
             }
             else
             {
-                DamageEffects.DealDamage(null, GameEngine.getVillain(), null, 3, DamageEffects.DamageType.Melee);
+                DamageEffects.DealDamage(this, null, GameEngine.getVillain(), null, 3, DamageEffects.DamageType.Melee);
             }
             card.SendToGraveyard(this, cardsOnField);
             CardDrawingEffects.DrawCards(1, this);
@@ -347,7 +353,8 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             {
                 if (hero.lifeTotal > 0)
                 {
-                    hero.damageAmplificationToPlayer -= 2;
+                    //TODO fix this
+                    //hero.damageAmplificationToPlayer -= 2;
                 }
             }
         }

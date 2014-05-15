@@ -15,12 +15,15 @@ namespace SentinelsOfTheMultiverse.Data.Environments
             card.cardType = Card.CardType.Ongoing;
             GameEngine.obsidianInPlay = true;
 
-            DamageEffects.GlobalDamageAmplification++;
+            //DamageEffects.damageDealtHandlers new DamageEffects.DamageHandler(ObsidianFieldHandler) ;
 
             //card.SendToGraveyard(this, cardsOnField);
             //TODO: player discard 2 cards to get rid of
         }
-
+        public int ObsidianFieldHandler(object sender, object[] receivers, int damageAmount, DamageEffects.DamageType damageType)
+        {
+            return 1;
+        }
 
         public override void Power()
         {
@@ -49,9 +52,9 @@ namespace SentinelsOfTheMultiverse.Data.Environments
             List<Hero> targets = getTargets(GameEngine.getHeroes());
 
             //TODO: remove ongoing card to reduce damage of certain heros to 2
-            DamageEffects.DealDamage(null, null, null, 2, DamageEffects.DamageType.Toxic);
+            DamageEffects.DealDamage(this, null, null, null, 2, DamageEffects.DamageType.Toxic);
 
-            DamageEffects.DealDamage(targets, null, null, 4, DamageEffects.DamageType.Toxic);
+            DamageEffects.DealDamage(this, targets, null, null, 4, DamageEffects.DamageType.Toxic);
         }
 
         ////Minions
@@ -60,21 +63,21 @@ namespace SentinelsOfTheMultiverse.Data.Environments
             card.cardType = Card.CardType.Environment;
             PterodactylThief ptero = new PterodactylThief();
             GameEngine.getEnvironment().addMinion(ptero);
-            Console.WriteLine("Pterodactyl Thief: " + ptero.health);
+            Console.WriteLine("Pterodactyl Thief: " + ptero.lifeTotal);
         }
 
         public void VelociraptorPack(Card card)
         {
             VelociraptorPack velo = new VelociraptorPack();
             GameEngine.getEnvironment().addMinion(velo);
-            Console.WriteLine("Velociraptor Pack: " + velo.health);
+            Console.WriteLine("Velociraptor Pack: " + velo.lifeTotal);
         }
 
         public void EnragedTRex(Card card)
         {
             EnragedTRex rex = new EnragedTRex();
             GameEngine.getEnvironment().addMinion(rex);
-            Console.WriteLine("Enraged T-Rex: " + rex.health);
+            Console.WriteLine("Enraged T-Rex: " + rex.lifeTotal);
         }
 
         //used to determin heroes not immune to environment

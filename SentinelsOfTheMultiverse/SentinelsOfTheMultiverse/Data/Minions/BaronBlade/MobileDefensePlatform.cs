@@ -12,7 +12,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
         public MobileDefensePlatform()
         {
             maxHealth = 10;
-            health = 10;
+            lifeTotal = 10;
             effectPhase = Minion.MinionType.Ongoing;
         }
 

@@ -274,14 +274,13 @@ namespace SentinelsOfTheMultiverse
                         {
                             //here is where it will prompt the user with the discard window
                             GameBoard.discardedCardsThisTurn = new List<Card>();
-                            ViewHand viewHand = new ViewHand(hero.getPlayerHand(), gameBoard);
+                            DiscardFromHand viewHand = new DiscardFromHand(hero.getPlayerHand(), gameBoard);
                             viewHand.Visibility = System.Windows.Visibility.Visible;
                             viewHand.ShowDialog();//use this to make it wait for the window to close before resuming
 
                             //have it check that they actually discarded cards if they need to
                             Haka.DiscardedAction discardAction = (Haka.DiscardedAction)res[0];
                             discardAction(GameBoard.discardedCardsThisTurn.Count); //returns to the method that was passed as the first parameter of the result
-
                         }
                     }
                 }

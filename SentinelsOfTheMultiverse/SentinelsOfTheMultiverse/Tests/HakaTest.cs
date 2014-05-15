@@ -61,13 +61,15 @@ namespace SentinelsOfTheMultiverse.Tests
             Card tamokoCard = new Card("Images\\Hero\\Haka\\TaMoko.png");
             haka.TaMoko(tamokoCard);
 
-            DamageEffects.DealDamageToHero(haka, 2, DamageEffects.DamageType.Melee);
-            Assert.AreEqual(startingLifeTotal - 1, haka.lifeTotal);
+            Assert.True(false);
+            //DamageEffects.DealDamgae(haka, 2, DamageEffects.DamageType.Melee);
+            //Assert.AreEqual(startingLifeTotal - 1, haka.lifeTotal);
 
             tamokoCard.SendToGraveyard(haka, haka.cardsOnField);
 
-            DamageEffects.DealDamageToHero(haka, 2, DamageEffects.DamageType.Melee);
-            Assert.AreEqual(startingLifeTotal - 3, haka.lifeTotal);
+            
+            //DamageEffects.DealDamageToHero(haka, 2, DamageEffects.DamageType.Melee);
+            //Assert.AreEqual(startingLifeTotal - 3, haka.lifeTotal);
         }
 
         [Test(), RequiresSTA]
@@ -84,14 +86,15 @@ namespace SentinelsOfTheMultiverse.Tests
 
             haka.HakaOfBattle(hakaOfBattleCard);
 
-            int damageAmount= 2 + haka.damageAmplificationFromPlayer;
-            DamageEffects.DealDamageToVillain(GameEngine.getVillain(), damageAmount, DamageEffects.DamageType.Melee);
-            Assert.AreEqual(GameEngine.getVillain().lifeTotal, startLifeTotal - 3);
+            Assert.True(false);
+            //int damageAmount= 2 + haka.damageAmplificationFromPlayer;
+            //DamageEffects.DealDamageToVillain(GameEngine.getVillain(), damageAmount, DamageEffects.DamageType.Melee);
+            //Assert.AreEqual(GameEngine.getVillain().lifeTotal, startLifeTotal - 3);
 
-            //needs to reset haka's damage amp after first damage has been used
-            int damageAmount2 = 2 + haka.damageAmplificationFromPlayer;
-            DamageEffects.DealDamageToVillain(GameEngine.getVillain(), damageAmount, DamageEffects.DamageType.Melee);
-            Assert.AreEqual(GameEngine.getVillain().lifeTotal, startLifeTotal - 5);
+            ////needs to reset haka's damage amp after first damage has been used
+            //int damageAmount2 = 2 + haka.damageAmplificationFromPlayer;
+            //DamageEffects.DealDamageToVillain(GameEngine.getVillain(), damageAmount, DamageEffects.DamageType.Melee);
+            //Assert.AreEqual(GameEngine.getVillain().lifeTotal, startLifeTotal - 5);
 
             //also need to test that it doesn't use the bonus damage until he is dealing it for the first time
 

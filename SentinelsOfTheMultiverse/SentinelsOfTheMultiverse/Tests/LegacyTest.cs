@@ -22,7 +22,8 @@ namespace SentinelsOfTheMultiverse.Tests
 
             Card testFortitude = new Card("Images\\Hero\\Legacy\\Fortitude.png");
             testLegacy.Fortitude(testFortitude);
-            Assert.AreEqual(testLegacy.damageAmplificationToPlayer, -1);
+            //Assert.AreEqual(testLegacy.damageAmplificationToPlayer, -1);
+            Assert.True(false);
         }
 
         [Test, RequiresSTA]
@@ -81,10 +82,11 @@ namespace SentinelsOfTheMultiverse.Tests
             game.beginGame();
             Legacy legacy = new Legacy();
 
+            
             Card superhuman = new Card("Images\\Hero\\Legacy\\SuperhumanDurability.png");
             legacy.SuperhumanDurability(superhuman);
-            Assert.AreEqual(legacy.damageAmplificationFromPlayer, 1);
-
+            //Assert.AreEqual(legacy.damageAmplificationFromPlayer, 1);
+            Assert.True(false);
         }
 
         [Test, RequiresSTA]
@@ -133,7 +135,8 @@ namespace SentinelsOfTheMultiverse.Tests
 
             foreach (Hero hero in GameEngine.getHeroes())
             {
-                Assert.AreEqual(1, hero.damageAmplificationFromPlayer);
+                //Assert.AreEqual(1, hero.damageAmplificationFromPlayer);
+                Assert.True(false);
             }
 
             Assert.NotNull(GameEngine.getHeroes());

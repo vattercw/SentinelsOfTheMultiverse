@@ -13,7 +13,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
         public PoweredRemoteTurret()
         {
             maxHealth = 7;
-            health = 7;
+            lifeTotal = 7;
             effectPhase = Minion.MinionType.End;
         }
 
@@ -32,7 +32,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
 
             for (int i = 0; i < GameEngine.getHeroes().Count; i++)
             {
-                DamageEffects.DealDamage(GameEngine.getHeroes(), null, null, 2 + extraDamage, DamageEffects.DamageType.Projectile);
+                DamageEffects.DealDamage(this, GameEngine.getHeroes(), null, null, 2 + extraDamage, DamageEffects.DamageType.Projectile);
             }
         }
     }

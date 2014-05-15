@@ -12,13 +12,13 @@ namespace SentinelsOfTheMultiverse.Data.Minions
         public BladeBattalion()
         {
             maxHealth = 5;
-            health = 5;
+            lifeTotal = 5;
             effectPhase = Minion.MinionType.End;
         }
 
         public override void executeEffect()
         {
-            int damage = health;
+            int damage = lifeTotal;
 
             Hero highestHP = GameEngine.getHeroes()[0];
 
@@ -29,7 +29,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
                     highestHP = GameEngine.getHeroes()[i];
                 }
             }
-            DamageEffects.DealDamageToHero(highestHP, damage, DamageEffects.DamageType.Melee);
+            DamageEffects.DealDamage(this, new List<Hero>(){highestHP},null,null, damage, DamageEffects.DamageType.Melee);
         }
     }
 }

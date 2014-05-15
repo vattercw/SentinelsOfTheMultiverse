@@ -12,7 +12,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
         public ElementalRedistributor()
         {
             maxHealth = 10;
-            health = 10;
+            lifeTotal = 10;
             effectPhase = Minion.MinionType.OnAttack;
         }
         public override void executeEffect()
