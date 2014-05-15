@@ -352,7 +352,7 @@ namespace SentinelsOfTheMultiverse
                             discardedHand.ShowDialog();
 
                             Haka.DiscardedAction discardedAction = (Haka.DiscardedAction)res[0];
-                            discardedAction(GameBoard.discardedCardsThisTurn.Count);
+                            discardedAction(GameBoard.discardedCardsThisTurn.Count, (Card)res[3]);
                             break;
                     }
 

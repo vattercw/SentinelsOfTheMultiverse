@@ -12,6 +12,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 {
     public class Haka: Hero
     {
+        public delegate void DiscardedAction(int discardedCards, Card card);
         public Haka()
         {
             lifeTotal = 34;
@@ -133,28 +134,37 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             }
         }
 
-        public void Dominion(Card card)
+        public void Dominion(Card dominionCard)
         {
-            //add card destroyed event handler
-            //foreach(IPlayer p in GameEngine.getPlayers()){
-            List<Card> allEnvCards = new List<Card>();
-
-            allEnvCards.AddRange(GameEngine.getEnvironment().deck.cards);
-            allEnvCards.AddRange(GameEngine.getEnvironment().cardsOnField);
-            foreach (Card c in allEnvCards)
-            {
-                if (c.cardType == Card.CardType.Environment)
-                {
+            List<Card> allEnvCards = getAllEnvironmentCards();
+            
+            foreach (Card c in allEnvCards) {
+                if (c.cardType == Card.CardType.Environment) {
                     c.CardDestroyed += new Card.CardDestroyedHandler(DominionEffect);
                 }
             }
-            //}
-            
+            dominionCard.CardDestroyed += Dominion_CardDestroyed;
         }
+
+        private List<Card> getAllEnvironmentCards() {
+            List<Card> allEnvCards = new List<Card>();
+            allEnvCards.AddRange(GameEngine.getEnvironment().deck.cards);
+            allEnvCards.AddRange(GameEngine.getEnvironment().cardsOnField);
+            return allEnvCards;
+        }
+
+        private void Dominion_CardDestroyed(Card m, EventArgs e) {
+            List<Card> envCards= getAllEnvironmentCards();
+            foreach (Card card in envCards) {
+                card.CardDestroyed += null;
+            }
+        }
+
         void DominionEffect(Card c, EventArgs e)
         {
-            CardDrawingEffects.DrawCards(15, this);
-            c.CardDestroyed += null;
+            DialogResult dialogResult = MessageBox.Show("Do you want to draw a card from Dominions Effect?", "Dominion Effect", MessageBoxButtons.YesNo);
+            if(dialogResult == DialogResult.Yes)
+                CardDrawingEffects.DrawCards(1, this);
         }
 
         public void EnduringIntercession(Card card)
@@ -177,11 +187,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             CardDrawingEffects.DrawCards(2, this);
             
 
-            DiscardedAction act = HakaOfBattleContinued;
+            DiscardedAction act = HakaOfBattleContinuation;
             return new object[] { act,GameEngine.ForcedEffect.DiscardCurrentPlayer, GameEngine.getPlayers() };
         }
 
-        private void HakaOfBattleContinued(int numDiscardedCards)
+        private void HakaOfBattleContinuation(int numDiscardedCards, Card card)
         {
             DamageEffects.damageDealtHandlers.Add(HakaOfBattleDamageHandler);
         }
@@ -198,8 +208,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         
         public void TaMoko(Card card)
         {
-            
-            //TODO: fix this
             card.cardType = Card.CardType.Ongoing;
             card.CardDestroyed += TaMoko_Destroyed_Handler;
             DamageEffects.damageDealtHandlers.Add(TaMoko_Damage_Handler);
@@ -216,28 +224,20 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             return 0;
         }
 
-        public void HakaOfRestoration(Card card)
+        public object[] HakaOfRestoration(Card card)
         {
             card.cardType = Card.CardType.OneShot;
             CardDrawingEffects.DrawCards(2, this);
 
             Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
             //Don't forget to include something that doesn't allow them to go to the next turn until they discard.
+            DiscardedAction act = HakaOfRestorationContinuation;
+            return new object[] { act, GameEngine.ForcedEffect.DiscardCurrentPlayer, 1, card};
+        }
 
-            if (GameBoard.discardedCardsThisTurn.Count == 0)
-            {
-                MessageBox.Show("You must discard are atleast one card to use this One-Shot.", "Discard Problem");
-                currentPlayer.hand.Add(card);
-                currentPlayer.graveyard.Remove(card);
-                GameEngine.playerPlayedCard = false;
-            }
-            else
-            {
-                //TODO fix
-                //DamageEffects.damageDealtHandlers.Add();
-                //damageAmplificationFromPlayer += GameBoard.discardedCardsThisTurn.Count;
-                card.SendToGraveyard(this, cardsOnField);
-            }
+        void HakaOfRestorationContinuation(int numDiscardedCards, Card card) {
+            lifeTotal += numDiscardedCards;
+            card.SendToGraveyard(this, cardsOnField);
         }
         
 
@@ -324,12 +324,12 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public object[] SavageMana(Card card)
         {
             DiscardedAction act = ConsiderThePriceOfVictoryDiscardAction;
-            return new object[] { act, GameEngine.ForcedEffect.ConsiderThePrice, GameEngine.getPlayers() };
+            return new object[] { act, GameEngine.ForcedEffect.ConsiderThePrice};
         }
 
-        public delegate void DiscardedAction(int discardedCards);
+        
 
-        void ConsiderThePriceOfVictoryDiscardAction(int discardedCards)
+        void ConsiderThePriceOfVictoryDiscardAction(int discardedCards, Card card)
         {
             //finish doing the things for the discard method
             Console.WriteLine("number of discarded cards: " + discardedCards);
