@@ -84,7 +84,10 @@ namespace SentinelsOfTheMultiverse
             playerUsedPower = false;
 
             int numDead = 0;
-
+            if (GameEngine.getVillain().graveyard.Count >= 15)
+            {
+                GameBoard.LoseCondition();
+            }
             foreach (Hero hero in GameEngine.getHeroes())
             {
                 if (hero.deck.cards.Count <= 0)

@@ -11,7 +11,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
         //event AttackEventHandler Attack;
         //internal delegate void AttackEventHandler(object sender, EventArgs e);
 
-        public enum DamageType { Projectile, Fire, Ice, Melee, Toxic };
+        public enum DamageType { Projectile, Fire, Ice, Melee, Toxic, Lightning };
 
         public static bool inPlayBacklash { get; set; }
 

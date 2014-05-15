@@ -60,7 +60,7 @@ namespace SentinelsOfTheMultiverse.Data.Environments
         {
             if (discardedCards > 0)
             {
-                DamageEffects.DealDamage(null, null, null, 2, DamageEffects.DamageType.Toxic);
+                DamageEffects.DealDamageToHero(target, 2, DamageEffects.DamageType.Toxic);
             }
             else
             {
