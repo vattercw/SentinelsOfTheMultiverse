@@ -178,7 +178,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardPower += new Card.Power(EnduringIntercessionPower);
         }
 
-        private int EnduringIntercession_Damage_Handler(Targetable sender, Targetable receiver, int damageAmount, DamageEffects.DamageType damageType) {
+        private int EnduringIntercession_Damage_Handler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
             bool receiverIsNotHaka= !receiver.GetType().Equals(typeof(Haka));
             if (receiverIsNotHaka) {
                 if (typeof(GameEnvironment).IsAssignableFrom(sender.GetType()) || GameEngine.getEnvironment().getMinions().Contains(sender)) {
@@ -194,9 +194,34 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             sender.SendToGraveyard(this, cardsOnField);
         }
 
-        public void GroundPound(Card card)
+        public object[] GroundPound(Card card)
         {
-            
+            DialogResult result = MessageBox.Show("Click OK to destroy this card. Click Cancel to discard 2 cards", "Ground Pound", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK) {
+                card.SendToGraveyard(this, hand);//might be cards on field instead of hand
+                return null;
+            } else {
+                DiscardedAction discardContinuation= GroundPound_Continuation;
+                StartPhaseStarted+= GroundPound_StartPhaseStarted;
+                return new object[] { discardContinuation, GameEngine.ForcedEffect.DiscardCurrentPlayer, 2, card };
+            }
+        }
+
+        private void GroundPound_StartPhaseStarted() {
+            var groundPoundCard = cardsOnField.Find(x => x.getName().Equals("GroundPound"));
+            groundPoundCard.SendToGraveyard(this, cardsOnField);
+        }
+        
+
+        public void GroundPound_Continuation(int numDiscardedCards, Card card) {
+            DamageEffects.damageDealtHandlers.Add(GroundPound_DamageHandler);
+        }
+
+        public int GroundPound_DamageHandler(object sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
+            bool senderIsNotHero= !typeof(Hero).IsAssignableFrom(sender.GetType());
+            if(senderIsNotHero)
+                damageAmount = 0;
+            return 0;
         }
 
         public object[] HakaOfBattle(Card card)
@@ -214,7 +239,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             DamageEffects.damageDealtHandlers.Add(HakaOfBattleDamageHandler);
         }
 
-        int HakaOfBattleDamageHandler(object sender, Targetable receiver, int damageAmount, DamageEffects.DamageType damageType)
+        int HakaOfBattleDamageHandler(object sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType)
         {
             if (sender.Equals(this))
             {
@@ -235,7 +260,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             DamageEffects.damageDealtHandlers.Remove(TaMoko_Damage_Handler);
         }
 
-        int TaMoko_Damage_Handler(object sender, object receiver, int damageAmount, DamageEffects.DamageType damageType)
+        int TaMoko_Damage_Handler(object sender, object receiver, ref int damageAmount, DamageEffects.DamageType damageType)
         {
             if (receiver.Equals(this))
                 return -1;
@@ -247,11 +272,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardType = Card.CardType.OneShot;
             CardDrawingEffects.DrawCards(2, this);
 
-            DiscardedAction act = HakaOfRestorationContinuation;
+            DiscardedAction act = HakaOfRestoration_Continuation;
             return new object[] { act, GameEngine.ForcedEffect.DiscardCurrentPlayer, 1, card};
         }
 
-        void HakaOfRestorationContinuation(int numDiscardedCards, Card card) {
+        void HakaOfRestoration_Continuation(int numDiscardedCards, Card card) {
             lifeTotal += numDiscardedCards;
             card.SendToGraveyard(this, cardsOnField);
         }
@@ -270,7 +295,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             DamageEffects.damageDealtHandlers.Add(HakaOfShielding_DamageHandler);
         }
 
-        int HakaOfShielding_DamageHandler(object sender, object receiver, int damageAmount, DamageEffects.DamageType damageType) {
+        int HakaOfShielding_DamageHandler(object sender, object receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
             if (receiver.Equals(this)) {
                 DamageEffects.damageDealtHandlers.Remove(HakaOfShielding_DamageHandler);
                 return  GameBoard.discardedCardsThisTurn.Count * (-2);
@@ -343,7 +368,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardPower = new Card.Power(PunishTheWeakPower);
         }
 
-        private int PunishTheWeak_Damage_Handler(Targetable sender, Targetable receiver, int damageAmount, DamageEffects.DamageType damageType) {
+        private int PunishTheWeak_Damage_Handler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
             List<Targetable> sortedNonHeroes = getSortedNonHeroes();
 
             if (receiver.Equals(sortedNonHeroes[0]))

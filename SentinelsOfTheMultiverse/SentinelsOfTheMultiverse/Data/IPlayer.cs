@@ -30,6 +30,7 @@ namespace SentinelsOfTheMultiverse.Data
 
         abstract public void DeathPower3();
 
+  
 
 
         public int numPowers

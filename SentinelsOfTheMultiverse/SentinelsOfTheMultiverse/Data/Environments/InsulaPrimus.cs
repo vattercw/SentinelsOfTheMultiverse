@@ -20,7 +20,7 @@ namespace SentinelsOfTheMultiverse.Data.Environments
             //card.SendToGraveyard(this, cardsOnField);
             //TODO: player discard 2 cards to get rid of
         }
-        public int ObsidianFieldHandler(object sender, object[] receivers, int damageAmount, DamageEffects.DamageType damageType)
+        public int ObsidianFieldHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType)
         {
             return 1;
         }

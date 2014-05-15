@@ -9,7 +9,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
     public static class DamageEffects
     {
         public static List<DamageHandler> damageDealtHandlers = new List<DamageEffects.DamageHandler>();
-        public delegate int DamageHandler(Targetable sender, Targetable receiver, int damageAmount, DamageType damageType);
+        public delegate int DamageHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageType damageType);
 
         public enum DamageType { Projectile, Fire, Ice, Melee, Toxic, Lightning, All };
 
@@ -27,7 +27,12 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                     damageDealtHandlers.CopyTo(dummyDamageHandlers);
                     foreach (DamageHandler dmgHand in dummyDamageHandlers)
                     {
-                        damageModifiers += dmgHand(sender, receiver, damageAmount, damageType);
+                        damageModifiers += dmgHand(sender, receiver, ref damageAmount, damageType);
+                        
+                        if (damageAmount == 0){ //meaning the user is immune
+                            damageModifiers = 0; //could add another pointer param for invincible in dmgHand 
+                            break;
+                        }
                     }
                 }
                 if (damageModifiers + damageAmount > receiver.maxHealth)

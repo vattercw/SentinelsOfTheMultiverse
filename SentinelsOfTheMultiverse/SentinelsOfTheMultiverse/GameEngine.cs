@@ -55,7 +55,7 @@ namespace SentinelsOfTheMultiverse
                 {
                     //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-SavageMana.png"));
                     newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-Rampage.png"));
-                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-HakaOfRestoration.png"));
+                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-GroundPound.png"));
                     newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-HakaOfBattle.png"));
                     newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-TaMoko.png"));
 

@@ -56,8 +56,12 @@ namespace SentinelsOfTheMultiverse
         public override void startPhase()
         {
             //conditionals for start turn effects
+            if (StartPhaseStarted != null) {
+                StartPhaseStarted();
+            }
         }
-
+        public event StartPhaseHandler StartPhaseStarted;
+        public delegate void StartPhaseHandler();
 
         public override Boolean playPhase()
         {
