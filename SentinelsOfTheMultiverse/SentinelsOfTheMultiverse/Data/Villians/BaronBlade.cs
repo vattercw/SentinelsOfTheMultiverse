@@ -31,7 +31,11 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
         public void FleshRepairNanites(Card card)
         {
-            HealEffects.healVillain(GameEngine.getVillain(), 10);
+ 
+            card.cardType = Card.CardType.OneShot;
+            HealEffects.healVillain(this, 10);
+           card.SendToGraveyard(this, cardsOnField);
+
         }
 
         public object[] DeviousDisruption(Card card)
