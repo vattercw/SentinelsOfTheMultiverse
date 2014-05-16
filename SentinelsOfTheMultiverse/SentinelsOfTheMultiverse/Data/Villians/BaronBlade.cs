@@ -34,7 +34,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
  
             card.cardType = Card.CardType.OneShot;
             HealEffects.healVillain(this, 10);
-           card.SendToGraveyard(this, cardsOnField);
+            card.SendToGraveyard(this, cardsOnField);
 
         }
 

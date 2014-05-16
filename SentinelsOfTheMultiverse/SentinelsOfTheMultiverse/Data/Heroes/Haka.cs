@@ -74,6 +74,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardType = Card.CardType.OneShot;
             var heroes = new List<Targetable>();
             heroes.AddRange(GameEngine.getHeroes());
+            heroes.Remove(GameEngine.getVillain());
             var nonHeroes = GameEngine.getNonHeroTargets();
             nonHeroes.Add(GameEngine.getVillain());
 
@@ -229,7 +230,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardType = Card.CardType.OneShot;
             CardDrawingEffects.DrawCards(2, this);
             
-
             DiscardedAction act = HakaOfBattleContinuation;
             return new object[] { act,GameEngine.ForcedEffect.DiscardCurrentPlayer, GameEngine.getPlayers(), card };
         }

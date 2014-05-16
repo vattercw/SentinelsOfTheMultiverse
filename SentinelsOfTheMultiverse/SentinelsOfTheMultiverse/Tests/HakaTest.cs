@@ -56,20 +56,15 @@ namespace SentinelsOfTheMultiverse.Tests
             Start game = new Start();
             game.beginGame();
             Haka haka = (Haka)ObjectMother.TestHero();
+            BaronBlade baron = (BaronBlade)ObjectMother.TestVillain();
             int startingLifeTotal = haka.lifeTotal;
 
             Card tamokoCard = new Card("Images\\Hero\\Haka\\TaMoko.png");
             haka.TaMoko(tamokoCard);
 
-            Assert.True(false);
-            //DamageEffects.DealDamgae(haka, 2, DamageEffects.DamageType.Melee);
-            //Assert.AreEqual(startingLifeTotal - 1, haka.lifeTotal);
+            DamageEffects.DealDamage(baron, new List<Targetable>() { haka }, 4, DamageEffects.DamageType.Melee);
 
-            tamokoCard.SendToGraveyard(haka, haka.cardsOnField);
-
-            
-            //DamageEffects.DealDamageToHero(haka, 2, DamageEffects.DamageType.Melee);
-            //Assert.AreEqual(startingLifeTotal - 3, haka.lifeTotal);
+            Assert.AreEqual(31, haka.lifeTotal);
         }
 
         [Test(), RequiresSTA]
@@ -78,15 +73,19 @@ namespace SentinelsOfTheMultiverse.Tests
             Start game = new Start();
             game.beginGame();
             Haka haka = (Haka)ObjectMother.TestHero();
-            Card hakaOfBattleCard = new Card("Images\\Hero\\Haka\\HakaOfBattle.png");
+            Card hakaOfBattleCard = new Card("Images\\Heroes\\Haka\\3-HakaOfBattle.png");
+            Card elbowCard = new Card("Images\\Heroes\\Haka\\3-ElbowSmash.png");
+
             int startLifeTotal = GameEngine.getVillain().lifeTotal;
             int startHandCount = haka.hand.Count;
 
+            haka.HakaOfBattle(hakaOfBattleCard);
             haka.DiscardCard(haka.hand[0]);
 
-            haka.HakaOfBattle(hakaOfBattleCard);
+            haka.ElbowSmash(elbowCard);
 
-            Assert.True(false);
+            Assert.AreEqual(startHandCount + 1, haka.hand.Count);
+            Assert.AreEqual(36, GameEngine.getVillain().lifeTotal);
             //int damageAmount= 2 + haka.damageAmplificationFromPlayer;
             //DamageEffects.DealDamageToVillain(GameEngine.getVillain(), damageAmount, DamageEffects.DamageType.Melee);
             //Assert.AreEqual(GameEngine.getVillain().lifeTotal, startLifeTotal - 3);
@@ -107,6 +106,7 @@ namespace SentinelsOfTheMultiverse.Tests
             game.beginGame();
 
             Haka haka = (Haka)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Haka));
+            Legacy legacy = (Legacy)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Legacy));
             Card groundPoundCard = new Card("Images\\Hero\\Haka\\2-GroundPound.png");
 
             haka.GroundPound_Continuation(0, groundPoundCard);
@@ -117,7 +117,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Assert.AreEqual(haka.maxHealth, haka.lifeTotal);
 
             //tests damage from hero
-            DamageEffects.DealDamage(haka, new List<Targetable>() { haka }, damageAmount, DamageEffects.DamageType.Melee);
+            DamageEffects.DealDamage(legacy, new List<Targetable>() { haka }, damageAmount, DamageEffects.DamageType.Melee);
             Assert.AreEqual(haka.maxHealth-damageAmount, haka.lifeTotal);
         }
 

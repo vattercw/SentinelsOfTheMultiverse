@@ -58,32 +58,32 @@ namespace SentinelsOfTheMultiverse.Data
         {
             List<Card> drawnCards = deck.draw(numCards);
             cardsOnField.AddRange(drawnCards);
-            for (int i = 0; i < drawnCards.Count; i++)
-            {
-                object[] res = CardMethod(drawnCards[i]);
+            //for (int i = 0; i < drawnCards.Count; i++)
+            //{
+            //    object[] res = CardMethod(drawnCards[i]);
 
-                switch ((GameEngine.ForcedEffect)res[1])
-                {
-                    case GameEngine.ForcedEffect.PrimordialPlant:
-                        foreach (Hero hero in GameEngine.getHeroes())
-                        {
-                            //TODO get the forced discards to work with the GUI
-                            //GameBoard.discardedCardsThisTurn = new List<Card>();
-                            //DiscardFromBoard handView = new DiscardFromBoard();
-                            //handView.Visibility = System.Windows.Visibility.Visible;
-                            //handView.ShowDialog();
+            //    switch ((GameEngine.ForcedEffect)res[1])
+            //    {
+            //        case GameEngine.ForcedEffect.PrimordialPlant:
+            //            foreach (Hero hero in GameEngine.getHeroes())
+            //            {
+            //                //TODO get the forced discards to work with the GUI
+            //                //GameBoard.discardedCardsThisTurn = new List<Card>();
+            //                //DiscardFromBoard handView = new DiscardFromBoard();
+            //                //handView.Visibility = System.Windows.Visibility.Visible;
+            //                //handView.ShowDialog();
 
-                            InsulaPrimus.DiscardedAction discardAction = (InsulaPrimus.DiscardedAction)res[0];
-                            discardAction(GameBoard.discardedCardsThisTurn.Count, hero, (Card)res[2]);
-                        }
-                        break;
+            //                InsulaPrimus.DiscardedAction discardAction = (InsulaPrimus.DiscardedAction)res[0];
+            //                discardAction(GameBoard.discardedCardsThisTurn.Count, hero, (Card)res[2]);
+            //            }
+            //            break;
 
 
 
-                    case GameEngine.ForcedEffect.RiverOfLava:
-                        break;
-                }
-            }
+            //        case GameEngine.ForcedEffect.RiverOfLava:
+            //            break;
+            //    }
+            //}
 
         }
         internal List<Minion> getStartPhaseMinions()

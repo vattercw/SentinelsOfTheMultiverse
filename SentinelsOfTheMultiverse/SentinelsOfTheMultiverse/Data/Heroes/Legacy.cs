@@ -229,10 +229,9 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             {
                 HealEffects.healHero(hero, 1);
                 //change attack
-                 card.cardType = Card.CardType.Ongoing;
+                card.cardType = Card.CardType.Ongoing;
                 DamageEffects.damageDealtHandlers.Add(InspiringHandler);
             }
-            
         }
        
         public int InspiringHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType)
@@ -411,8 +410,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             //TODO implement this method
             throw new NotImplementedException();
-        }
-
-        
+        }   
     }
 }

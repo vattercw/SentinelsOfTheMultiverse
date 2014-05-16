@@ -21,9 +21,8 @@ namespace SentinelsOfTheMultiverse.Tests
             Card hastenCard = new Card("Images\\Villain\\BaronBlade\\HastenDoom.png");
             test.HastenDoom(hastenCard);
 
-            for(int i=0; i < GameEngine.getHeroes().Count; i++){
-            Assert.AreEqual(GameEngine.getHeroes()[i].lifeTotal, 32);
-            }
+            Assert.AreEqual(GameEngine.getHeroes()[0].lifeTotal, 32);
+            Assert.AreEqual(GameEngine.getHeroes()[1].lifeTotal, 30);
 
         }
 
@@ -43,7 +42,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Card nanoCard = new Card("Images\\Villain\\BaronBlade\\FleshRepairNanites.png");
             test.FleshRepairNanites(nanoCard);
 
-            Assert.AreEqual(GameEngine.getVillain().lifeTotal, 50);
+            Assert.AreEqual(GameEngine.getVillain().lifeTotal, 40);
         }
 
         [Test(), RequiresSTA]
@@ -58,7 +57,7 @@ namespace SentinelsOfTheMultiverse.Tests
 
             for (int i = 0; i < GameEngine.getHeroes().Count; i++)
             {
-                Assert.AreEqual(GameEngine.getHeroes()[i].lifeTotal, 31);
+                Assert.AreEqual(GameEngine.getHeroes()[i].lifeTotal, 30);
             }
         }
 

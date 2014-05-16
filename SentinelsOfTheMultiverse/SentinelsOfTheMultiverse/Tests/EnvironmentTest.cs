@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using SentinelsOfTheMultiverse.Data;
 using SentinelsOfTheMultiverse.Data.Effects;
 using SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus;
+using SentinelsOfTheMultiverse.Data.Heroes;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -40,13 +41,15 @@ namespace SentinelsOfTheMultiverse.Tests
             Start testGame = new Start();
             testGame.beginGame();
             InsulaPrimus testEnvo = new InsulaPrimus();
+            Haka testHaka = new Haka();
+            Card elbowCard = new Card("Images\\Heroes\\Haka\\3-ElbowSmash.png");
             Card testObsidian = new Card("Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
 
             testEnvo.ObsidianField(testObsidian);
-            
-            //TODO: fix this test, it doesn't do anything
-            Assert.True(false);
-             //Assert.AreEqual(DamageEffects.GlobalDamageAmplification, 1);
+
+            testHaka.ElbowSmash(elbowCard);
+
+            Assert.AreEqual(36, GameEngine.getVillain().lifeTotal);            
 
         }
 
