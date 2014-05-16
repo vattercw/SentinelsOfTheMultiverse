@@ -50,14 +50,14 @@ namespace SentinelsOfTheMultiverse
             {
                 Hero newHero = (Hero)getClassFromString(heroesStr[i]);
                 //TODO testing code to initialize certain cards in a players hand
-                newHero.hand.RemoveRange(0, 2);
+                //newHero.hand.RemoveRange(0, 2);
                 if (newHero.GetType().Equals(typeof(Haka)))
                 {
                     //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-SavageMana.png"));
-                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-Rampage.png"));
-                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-GroundPound.png"));
+                    //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-Rampage.png"));
+                    //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-GroundPound.png"));
                     newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-HakaOfBattle.png"));
-                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-TaMoko.png"));
+                    //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-TaMoko.png"));
 
                     //newHero.hand.Add(new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\3-EnduringIntercession.png"));
                 }

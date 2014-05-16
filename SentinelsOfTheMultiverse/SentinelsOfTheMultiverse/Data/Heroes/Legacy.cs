@@ -29,6 +29,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Fortitude(Card card)
         {
+            //TODO implement this method
             //this.damageAmplificationToPlayer -= 1;
         }
 
@@ -41,6 +42,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void FlyingSmash(Card card)
         {
+            //TODO implement this method
         }
 
         public void BackFistStrike(Card card){
@@ -161,24 +163,41 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void InspiringPresence(Card card)
         {
+            //TODO implement this method
         }
 
         public void LeadFromTheFront(Card card)
         {
+            //TODO implement this method
         }
 
         public void SuperhumanDurability(Card card)
         {
-            //this.damageAmplificationFromPlayer += 1;
-            //TODO fix this card
+            DamageEffects.damageDealtHandlers.Add(SuperhumanDurability_DamageHandler);
+            card.CardDestroyed += card_CardDestroyed;
+        }
+
+        private void card_CardDestroyed(Card m, EventArgs e) {
+            m.SendToGraveyard(this, cardsOnField);
+        }
+
+        private int SuperhumanDurability_DamageHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
+            if(receiver.Equals(this)){
+                if (damageAmount >= 5) {
+                    return -3;
+                }
+            }
+            return 0;
         }
 
         public void NextEvolution(Card card)
         {
+            //TODO implement this method
         }
 
         public void SurgeOfStrength(Card card)
         {
+            //TODO implement this method
         }
 
         public void Thokk(Card card)
@@ -245,20 +264,24 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void TakeDown(Card card)
         {
+            //TODO implement this method
         }
 
         public override void DeathPower1()
         {
+            //TODO implement this method
             throw new NotImplementedException();
         }
 
         public override void DeathPower2()
         {
+            //TODO implement this method
             throw new NotImplementedException();
         }
 
         public override void DeathPower3()
         {
+            //TODO implement this method
             throw new NotImplementedException();
         }
 
