@@ -38,6 +38,8 @@ namespace SentinelsOfTheMultiverse.Data.Effects
         {
             if (hero != null)
             {
+                hero.lifeTotal += healAmount;
+
                 if (hero.lifeTotal >= hero.maxHealth)
                 {
                     //make sure target doesn't go over maxHealth
@@ -51,6 +53,8 @@ namespace SentinelsOfTheMultiverse.Data.Effects
         {
             if (vil != null)
             {
+                vil.lifeTotal += healAmount;
+
                 if (vil.lifeTotal >= vil.maxHealth)
                 {
                     //make sure target doesn't go over maxHealth

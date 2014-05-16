@@ -20,11 +20,6 @@ namespace SentinelsOfTheMultiverse
         static public int playerTurn = 0;
         public static bool isFirstTurn = true;
 
-        //variables for specific card states
-        public static bool volcanoInPlay = false;
-        public static bool obsidianInPlay = false;
-        public static bool lavaInPlay = false;
-
         public static int MAXPLAYER = 6;
         public static int VILLIANNUM = 0;
         public static int EVIRONMENTNUM = 7;
@@ -36,6 +31,7 @@ namespace SentinelsOfTheMultiverse
         public static int cardIDNum = 0;
         public static bool resumePlay = false;
         public static bool primordial = false;
+        public static bool playerUsedSecondPower = false;
 
         public enum ForcedEffect { ConsiderThePrice, PrimordialPlant, DeviousDisruption, RiverOfLava, DiscardCurrentPlayer };
 
@@ -50,14 +46,14 @@ namespace SentinelsOfTheMultiverse
             {
                 Hero newHero = (Hero)getClassFromString(heroesStr[i]);
                 //TODO testing code to initialize certain cards in a players hand
-                newHero.hand.RemoveRange(0, 2);
+                //newHero.hand.RemoveRange(0, 2);
                 if (newHero.GetType().Equals(typeof(Haka)))
                 {
                     //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-SavageMana.png"));
-                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-Rampage.png"));
-                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-GroundPound.png"));
+                    //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-Rampage.png"));
+                    //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-GroundPound.png"));
                     newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-HakaOfBattle.png"));
-                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-TaMoko.png"));
+                    //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-TaMoko.png"));
 
                     //newHero.hand.Add(new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\3-EnduringIntercession.png"));
                 }
@@ -84,9 +80,11 @@ namespace SentinelsOfTheMultiverse
             {
                 playerTurn = 0;
             }
+
             getCurrentPlayer().playerTurn(playerPlayedCard, playerUsedPower);
             playerPlayedCard = false;
             playerUsedPower = false;
+            playerUsedSecondPower = false;
 
             int numDead = 0;
             if (GameEngine.getVillain().graveyard.Count >= 15)

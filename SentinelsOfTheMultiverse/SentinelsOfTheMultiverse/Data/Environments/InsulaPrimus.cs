@@ -14,9 +14,8 @@ namespace SentinelsOfTheMultiverse.Data.Environments
         public void ObsidianField(Card card)
         {
             card.cardType = Card.CardType.Ongoing;
-            GameEngine.obsidianInPlay = true;
             foreach (Hero hero in GameEngine.getHeroes()) {
-
+                //TODO add EndPhaseCompletedHandler somehow
             }
             DamageEffects.damageDealtHandlers.Add(ObsidianFieldHandler);
         }
@@ -44,14 +43,14 @@ namespace SentinelsOfTheMultiverse.Data.Environments
 
         public void RiverOfLava(Card card)
         {
+            //TODO complete this method
             List<Hero> targets = getTargets(GameEngine.getHeroes());
-            GameEngine.lavaInPlay = true;
         }
 
         public void VolcanicEruption(Card card)
         {
+            //TODO complete this method
             List<Hero> targets = getTargets(GameEngine.getHeroes());
-            GameEngine.volcanoInPlay = true;
         }
 
        
