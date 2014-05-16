@@ -5,4 +5,17 @@
     <Grid>
         
     </Grid>
+    <Window.Resources>
+        <RoutedUICommand x:Key="DiscardCards" Text="Text" />
+        <RoutedUICommand x:Key="EndTurn" Text="Text" />
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource DiscardCards}" Executed="Discard_Action" />
+        <CommandBinding Command="{StaticResource EndTurn}" Executed="Close_Action" />
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding Key="D" Modifiers="Ctrl" Command="{StaticResource DiscardCards}" />
+        <KeyBinding Key="E" Modifiers="Ctrl" Command="{StaticResource EndTurn}" />
+    </Window.InputBindings>
 </Window>

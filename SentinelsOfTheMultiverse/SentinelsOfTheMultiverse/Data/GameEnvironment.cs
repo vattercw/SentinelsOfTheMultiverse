@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SentinelsOfTheMultiverse.Data.Environments;
 
 namespace SentinelsOfTheMultiverse.Data
 {
@@ -59,7 +60,29 @@ namespace SentinelsOfTheMultiverse.Data
             cardsOnField.AddRange(drawnCards);
             for (int i = 0; i < drawnCards.Count; i++)
             {
-                CardMethod(drawnCards[i]);
+                object[] res = CardMethod(drawnCards[i]);
+
+                switch ((GameEngine.ForcedEffect)res[1])
+                {
+                    case GameEngine.ForcedEffect.PrimordialPlant:
+                        foreach (Hero hero in GameEngine.getHeroes())
+                        {
+                            //TODO get the forced discards to work with the GUI
+                            //GameBoard.discardedCardsThisTurn = new List<Card>();
+                            //DiscardFromBoard handView = new DiscardFromBoard();
+                            //handView.Visibility = System.Windows.Visibility.Visible;
+                            //handView.ShowDialog();
+
+                            InsulaPrimus.DiscardedAction discardAction = (InsulaPrimus.DiscardedAction)res[0];
+                            discardAction(GameBoard.discardedCardsThisTurn.Count, hero, (Card)res[2]);
+                        }
+                        break;
+
+
+
+                    case GameEngine.ForcedEffect.RiverOfLava:
+                        break;
+                }
             }
 
         }

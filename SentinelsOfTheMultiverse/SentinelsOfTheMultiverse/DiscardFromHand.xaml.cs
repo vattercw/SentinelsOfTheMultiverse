@@ -122,10 +122,7 @@ namespace SentinelsOfTheMultiverse
 
         private void Close_Action(object sender, RoutedEventArgs e)
         {
-            if (cardClickedArray.Count > 0)
-            {
-                this.Close();
-            }
+            this.Close();
         }
 
         private void Cancel_Action(object sender, RoutedEventArgs e)

@@ -8,7 +8,6 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 {
     public static class HealEffects
     {
-
         public static void Heal(List<Hero> heroes, Villain villain, List<Minion> minions, int healAmount)
         {
             
@@ -39,11 +38,14 @@ namespace SentinelsOfTheMultiverse.Data.Effects
         {
             if (hero != null)
             {
+                hero.lifeTotal += healAmount;
+
                 if (hero.lifeTotal >= hero.maxHealth)
                 {
                     //make sure target doesn't go over maxHealth
                     hero.lifeTotal = hero.maxHealth;
                 }
+                else hero.lifeTotal += healAmount;
             }
         }
 
@@ -51,11 +53,14 @@ namespace SentinelsOfTheMultiverse.Data.Effects
         {
             if (vil != null)
             {
+                vil.lifeTotal += healAmount;
+
                 if (vil.lifeTotal >= vil.maxHealth)
                 {
                     //make sure target doesn't go over maxHealth
                     vil.lifeTotal = vil.maxHealth;
                 }
+                else vil.lifeTotal += healAmount;
             }
         }
 

@@ -57,7 +57,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CardNotFoundException.cs" />
-    <Compile Include="Data\DiscardedActionDataObject.cs" />
     <Compile Include="Data\Targetable.cs" />
     <Compile Include="DiscardFromBoard.xaml.cs">
       <DependentUpon>DiscardFromBoard.xaml</DependentUpon>
@@ -222,7 +221,7 @@
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_hero.png" />
     <Resource Include="Images\Hero\Haka\3-Mere.png" />
     <Resource Include="Images\Hero\Haka\3-Rampage.png" />
-    <Resource Include="Images\Hero\Haka\3-Taiaha.png" />
+    <Resource Include="Images\Hero\Haka\100-Taiaha.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\bb_cover.png" />

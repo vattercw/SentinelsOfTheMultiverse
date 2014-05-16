@@ -323,9 +323,9 @@ namespace SentinelsOfTheMultiverse
                             {
                                 //TODO this doesn't work. won't ever get called
                                 GameBoard.discardedCardsThisTurn = new List<Card>();
-                                DiscardFromBoard boardView = new DiscardFromBoard(gameBoard);
-                                boardView.Visibility = System.Windows.Visibility.Visible;
-                                boardView.ShowDialog();
+                                DiscardFromBoard handView = new DiscardFromBoard(gameBoard);
+                                handView.Visibility = System.Windows.Visibility.Visible;
+                                handView.ShowDialog();
 
                                 InsulaPrimus.DiscardedAction discardAction = (InsulaPrimus.DiscardedAction)res[0];
                                 discardAction(GameBoard.discardedCardsThisTurn.Count, hero, (Card)res[2]);
@@ -336,6 +336,7 @@ namespace SentinelsOfTheMultiverse
 
                         case GameEngine.ForcedEffect.RiverOfLava:
                             break;
+
                         case GameEngine.ForcedEffect.DiscardCurrentPlayer:
                             GameBoard.discardedCardsThisTurn = new List<Card>();
                             DiscardFromHand discardedHand = new DiscardFromHand(((Hero)GameEngine.getCurrentPlayer()).getPlayerHand(), gameBoard);
