@@ -43,9 +43,8 @@ namespace SentinelsOfTheMultiverse.Tests
             Card testObsidian = new Card("Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
 
             testEnvo.ObsidianField(testObsidian);
-
-            Assert.True(GameEngine.obsidianInPlay);
-            //fix this test
+            
+            //TODO: fix this test, it doesn't do anything
             Assert.True(false);
              //Assert.AreEqual(DamageEffects.GlobalDamageAmplification, 1);
 

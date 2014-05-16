@@ -230,7 +230,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             
 
             DiscardedAction act = HakaOfBattleContinuation;
-            return new object[] { act,GameEngine.ForcedEffect.DiscardCurrentPlayer, GameEngine.getPlayers() };
+            return new object[] { act,GameEngine.ForcedEffect.DiscardCurrentPlayer, GameEngine.getPlayers(), card };
         }
 
         private void HakaOfBattleContinuation(int numDiscardedCards, Card card)

@@ -29,6 +29,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void Fortitude(Card card)
         {
+            //TODO implement this method
             //this.damageAmplificationToPlayer -= 1;
         }
 
@@ -227,8 +228,8 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             foreach (Hero hero in GameEngine.getHeroes())
             {
                 HealEffects.healHero(hero, 1);
-                card.cardType = Card.CardType.Ongoing;
-                GameEngine.obsidianInPlay = true;
+                //change attack
+                 card.cardType = Card.CardType.Ongoing;
                 DamageEffects.damageDealtHandlers.Add(InspiringHandler);
             }
             
@@ -236,7 +237,9 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
        
         public int InspiringHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType)
         {
-            return 1;
+            if(typeof(Hero).IsAssignableFrom(sender.GetType()))
+                return 1;
+            return 0;
         }
         
         public void LeadFromTheFront(Card card)
@@ -271,25 +274,32 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void SuperhumanDurability(Card card)
         {
-            DamageEffects.damageDealtHandlers.Add(SuperhumanDurability_Damage_Handler);
+            DamageEffects.damageDealtHandlers.Add(SuperhumanDurability_DamageHandler);
             card.cardType = Card.CardType.Ongoing;
             card.CardDestroyed += SuperhumanDurability_Destroyed_Handler;
         }
 
         private void SuperhumanDurability_Destroyed_Handler(Card m, EventArgs e)
         {
-            DamageEffects.damageDealtHandlers.Remove(SuperhumanDurability_Damage_Handler);
+            DamageEffects.damageDealtHandlers.Remove(SuperhumanDurability_DamageHandler);
         }
 
-        private int SuperhumanDurability_Damage_Handler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType)
-        {
-            if (receiver.Equals(this))
-                return -1;
+        private void card_CardDestroyed(Card m, EventArgs e) {
+            m.SendToGraveyard(this, cardsOnField);
+        }
+
+        private int SuperhumanDurability_DamageHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
+            if(receiver.Equals(this)){
+                if (damageAmount >= 5) {
+                    return -3;
+                }
+            }
             return 0;
         }
 
         public void NextEvolution(Card card)
         {
+            //TODO implement this method
         }
 
         public void SurgeOfStrength(Card card)
@@ -382,20 +392,24 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void TakeDown(Card card)
         {
+            //TODO implement this method
         }
 
         public override void DeathPower1()
         {
+            //TODO implement this method
             throw new NotImplementedException();
         }
 
         public override void DeathPower2()
         {
+            //TODO implement this method
             throw new NotImplementedException();
         }
 
         public override void DeathPower3()
         {
+            //TODO implement this method
             throw new NotImplementedException();
         }
 
