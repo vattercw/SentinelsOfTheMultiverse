@@ -74,10 +74,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardType = Card.CardType.OneShot;
             var heroes = new List<Targetable>();
             heroes.AddRange(GameEngine.getHeroes());
-            heroes.Add(GameEngine.getVillain());
+            var nonHeroes = GameEngine.getNonHeroTargets();
+            nonHeroes.Add(GameEngine.getVillain());
 
             DamageEffects.DealDamage(this, heroes, 2, DamageEffects.DamageType.Melee);
-            DamageEffects.DealDamage(this, GameEngine.getNonHeroTargets(), 5, DamageEffects.DamageType.Melee);
+            DamageEffects.DealDamage(this, nonHeroes, 5, DamageEffects.DamageType.Melee);
             card.SendToGraveyard(this, cardsOnField);
         }
 
@@ -390,21 +391,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             DamageEffects.damageDealtHandlers.Remove(PunishTheWeak_Damage_Handler);
             card.SendToGraveyard(this, cardsOnField);
-        }
-
-
-        public object[] SavageMana(Card card)
-        {
-            DiscardedAction act = ConsiderThePriceOfVictoryDiscardAction;
-            return new object[] { act, GameEngine.ForcedEffect.ConsiderThePrice};
-        }
-
-        
-
-        void ConsiderThePriceOfVictoryDiscardAction(int discardedCards, Card card)
-        {
-            //finish doing the things for the discard method
-            Console.WriteLine("number of discarded cards: " + discardedCards);
         }
 
         public void Taiaha(Card card)
