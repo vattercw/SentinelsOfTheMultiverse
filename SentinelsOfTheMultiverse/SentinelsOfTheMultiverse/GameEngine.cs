@@ -36,6 +36,7 @@ namespace SentinelsOfTheMultiverse
         public static int cardIDNum = 0;
         public static bool resumePlay = false;
         public static bool primordial = false;
+        public static bool playerUsedSecondPower = false;
 
         public enum ForcedEffect { ConsiderThePrice, PrimordialPlant, DeviousDisruption, RiverOfLava, DiscardCurrentPlayer };
 
@@ -84,9 +85,11 @@ namespace SentinelsOfTheMultiverse
             {
                 playerTurn = 0;
             }
+
             getCurrentPlayer().playerTurn(playerPlayedCard, playerUsedPower);
             playerPlayedCard = false;
             playerUsedPower = false;
+            playerUsedSecondPower = false;
 
             int numDead = 0;
             if (GameEngine.getVillain().graveyard.Count >= 15)

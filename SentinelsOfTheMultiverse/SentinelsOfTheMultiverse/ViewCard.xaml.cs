@@ -46,7 +46,7 @@ namespace SentinelsOfTheMultiverse
 
         private void Power_Action(object sender, RoutedEventArgs e)
         {
-            if (GameEngine.playerUsedPower == false)
+            if (GameEngine.playerUsedPower == false || (GameEngine.getCurrentPlayer().numPowers == 2 && GameEngine.playerUsedSecondPower == false))
             {
                 Card card;
                 for (int i = 0; i < GameEngine.getCurrentPlayer().cardsOnField.Count; i++)
@@ -55,11 +55,19 @@ namespace SentinelsOfTheMultiverse
                     {
                         card = GameEngine.getCurrentPlayer().cardsOnField[i];
                         //if card.haspower = true....
+                        if (GameEngine.getCurrentPlayer().numPowers == 2)
+                        {
+                            GameEngine.getCurrentPlayer().numPowers = 1;
+                        }
                         if (card.cardPower != null)
                         {
                             card.cardPower(card,null);
-                            
+                            if (GameEngine.getCurrentPlayer().numPowers == 2 && GameEngine.playerUsedPower == true)
+                            {
+                                GameEngine.playerUsedSecondPower = true;
+                            }
                             GameEngine.playerUsedPower = true;
+                            
                             gameBoard.updateBoard();
                             Close();
                         }

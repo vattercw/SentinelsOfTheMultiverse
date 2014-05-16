@@ -227,10 +227,9 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             foreach (Hero hero in GameEngine.getHeroes())
             {
                 HealEffects.healHero(hero, 1);
-                //change attack
-                 card.cardType = Card.CardType.Ongoing;
-            GameEngine.obsidianInPlay = true;
-            DamageEffects.damageDealtHandlers.Add(InspiringHandler);
+                card.cardType = Card.CardType.Ongoing;
+                GameEngine.obsidianInPlay = true;
+                DamageEffects.damageDealtHandlers.Add(InspiringHandler);
             }
             
         }
@@ -242,12 +241,51 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         
         public void LeadFromTheFront(Card card)
         {
+            DamageEffects.damageDealtHandlers.Add(LeadFromTheFront_Damage_Handler);
+            card.CardDestroyed += LeadFromTheFront_Destroyed_Handler;
+
+        }
+
+        private void LeadFromTheFront_Destroyed_Handler(Card m, EventArgs e)
+        {
+            DamageEffects.damageDealtHandlers.Remove(LeadFromTheFront_Damage_Handler);
+        }
+
+        public int LeadFromTheFront_Damage_Handler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType)
+        {
+            bool receiverIsNotLegacy = !receiver.GetType().Equals(typeof(Legacy));
+            if (receiverIsNotLegacy)
+            {
+                if (typeof(Villain).IsAssignableFrom(sender.GetType()) || GameEngine.getVillain().getMinions().Contains(sender))
+                {
+                    DialogResult dialogResult = MessageBox.Show("Do you want to have Legacy take the damage?", "Lead From The Front Effect", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        DamageEffects.DealDamage(sender, new List<Targetable>() { this }, damageAmount, damageType);
+                        return (-1) * damageAmount;//balances out the amount that it deals to player that isn't haka
+                    }
+                }
+            }
+            return 0;
         }
 
         public void SuperhumanDurability(Card card)
         {
-            //this.damageAmplificationFromPlayer += 1;
-            //TODO fix this card
+            DamageEffects.damageDealtHandlers.Add(SuperhumanDurability_Damage_Handler);
+            card.cardType = Card.CardType.Ongoing;
+            card.CardDestroyed += SuperhumanDurability_Destroyed_Handler;
+        }
+
+        private void SuperhumanDurability_Destroyed_Handler(Card m, EventArgs e)
+        {
+            DamageEffects.damageDealtHandlers.Remove(SuperhumanDurability_Damage_Handler);
+        }
+
+        private int SuperhumanDurability_Damage_Handler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType)
+        {
+            if (receiver.Equals(this))
+                return -1;
+            return 0;
         }
 
         public void NextEvolution(Card card)
@@ -256,6 +294,21 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void SurgeOfStrength(Card card)
         {
+            DamageEffects.damageDealtHandlers.Add(SurgeOfStrength_Damage_Handler);
+            card.cardType = Card.CardType.Ongoing;
+            card.CardDestroyed += SurgeOfStrength_Destroyed_Handler;
+        }
+
+        private void SurgeOfStrength_Destroyed_Handler(Card m, EventArgs e)
+        {
+            DamageEffects.damageDealtHandlers.Remove(SurgeOfStrength_Damage_Handler);
+        }
+
+        private int SurgeOfStrength_Damage_Handler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType)
+        {
+            if (sender.Equals(this))
+                return 1;
+            return 0;
         }
 
         public void Thokk(Card card)
@@ -317,7 +370,14 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void TheLegacyRing(Card card)
         {
+            //TODO fix how this works
             this.numPowers = 2;
+            card.CardDestroyed += TheLegacyRing_Destroyed_Handler;
+        }
+
+        private void TheLegacyRing_Destroyed_Handler(Card m, EventArgs e)
+        {
+            this.numPowers = 1;
         }
 
         public void TakeDown(Card card)
