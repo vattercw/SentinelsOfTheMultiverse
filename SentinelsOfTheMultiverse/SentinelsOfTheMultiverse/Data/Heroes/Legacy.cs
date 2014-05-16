@@ -42,9 +42,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void FlyingSmash(Card card)
         {
-<<<<<<< HEAD
-            //TODO implement this method
-=======
             card.cardType = Card.CardType.OneShot;
 
             var target = GameBoard.cardClickedArray;
@@ -108,7 +105,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 DamageEffects.DealDamage(this, new List<Targetable>() { GameEngine.getVillain() }, 3, DamageEffects.DamageType.Melee);
                 card.SendToGraveyard(this, cardsOnField);
             }
->>>>>>> 5342e9ed4fac35d93e1c058ca0d345a064f412f5
         }
 
         public void BackFistStrike(Card card){
@@ -229,24 +225,21 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void InspiringPresence(Card card)
         {
-<<<<<<< HEAD
-            //TODO implement this method
-=======
             foreach (Hero hero in GameEngine.getHeroes())
             {
                 HealEffects.healHero(hero, 1);
                 //change attack
                  card.cardType = Card.CardType.Ongoing;
-            GameEngine.obsidianInPlay = true;
-            DamageEffects.damageDealtHandlers.Add(InspiringHandler);
+                DamageEffects.damageDealtHandlers.Add(InspiringHandler);
             }
             
->>>>>>> 5342e9ed4fac35d93e1c058ca0d345a064f412f5
         }
        
         public int InspiringHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType)
         {
-            return 1;
+            if(typeof(Hero).IsAssignableFrom(sender.GetType()))
+                return 1;
+            return 0;
         }
         
         public void LeadFromTheFront(Card card)
