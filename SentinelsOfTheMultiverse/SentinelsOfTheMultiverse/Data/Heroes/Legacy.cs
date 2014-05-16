@@ -224,8 +224,22 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void InspiringPresence(Card card)
         {
+            foreach (Hero hero in GameEngine.getHeroes())
+            {
+                HealEffects.healHero(hero, 1);
+                //change attack
+                 card.cardType = Card.CardType.Ongoing;
+            GameEngine.obsidianInPlay = true;
+            DamageEffects.damageDealtHandlers.Add(InspiringHandler);
+            }
+            
         }
-
+       
+        public int InspiringHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType)
+        {
+            return 1;
+        }
+        
         public void LeadFromTheFront(Card card)
         {
         }

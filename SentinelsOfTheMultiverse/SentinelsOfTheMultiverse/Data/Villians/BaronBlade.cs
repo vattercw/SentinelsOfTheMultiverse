@@ -31,7 +31,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
         public void FleshRepairNanites(Card card)
         {
-            GameEngine.getVillain().lifeTotal += 10;
+            HealEffects.healVillain(GameEngine.getVillain(), 10);
         }
 
         public object[] DeviousDisruption(Card card)
