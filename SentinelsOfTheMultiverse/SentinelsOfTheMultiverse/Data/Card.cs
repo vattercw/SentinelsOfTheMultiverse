@@ -23,6 +23,8 @@ namespace SentinelsOfTheMultiverse.Data
         private int cardID;
         private int numOfCard;
 
+        public Minion Minion { get; set; }
+
         public event CardDestroyedHandler CardDestroyed;
         public delegate void CardDestroyedHandler(Card m, EventArgs e);
 
@@ -92,8 +94,9 @@ namespace SentinelsOfTheMultiverse.Data
 
         public void SendToGraveyard(IPlayer player, List<Card> currentList)
         {
-            if(CardDestroyed != null)
+            if(CardDestroyed != null){
                 CardDestroyed(this, null);
+            }
             currentList.Remove(this);
             player.graveyard.Add(this);
         }

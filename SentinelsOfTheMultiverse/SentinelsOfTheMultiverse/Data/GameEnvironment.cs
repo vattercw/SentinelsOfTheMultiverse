@@ -58,9 +58,9 @@ namespace SentinelsOfTheMultiverse.Data
         {
             List<Card> drawnCards = deck.draw(numCards);
             cardsOnField.AddRange(drawnCards);
-            //for (int i = 0; i < drawnCards.Count; i++)
-            //{
-            //    object[] res = CardMethod(drawnCards[i]);
+            for (int i = 0; i < drawnCards.Count; i++)
+            {
+                object[] res = CardMethod(drawnCards[i]);
 
             //    switch ((GameEngine.ForcedEffect)res[1])
             //    {
@@ -83,7 +83,7 @@ namespace SentinelsOfTheMultiverse.Data
             //        case GameEngine.ForcedEffect.RiverOfLava:
             //            break;
             //    }
-            //}
+            }
 
         }
         internal List<Minion> getStartPhaseMinions()

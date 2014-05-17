@@ -62,6 +62,7 @@ namespace SentinelsOfTheMultiverse
             
 
             villain = (Villain)getClassFromString(villainStr);
+            villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\4-BladeBattalion.png");
             environment = (GameEnvironment)getClassFromString(envStr);
         }
 

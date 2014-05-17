@@ -23,19 +23,19 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         //One Shot Cards
         public void HastenDoom(Card card)
         {
+            card.cardType = Card.CardType.OneShot;
             var targets = new List<Targetable>();
             targets.AddRange(GameEngine.getHeroes());
             DamageEffects.DealDamage(this, targets, 2, DamageEffects.DamageType.Toxic);
-            GameEngine.getVillain().drawPhase(1);
+            drawPhase(1);
+            card.SendToGraveyard(this, cardsOnField);
         }
 
         public void FleshRepairNanites(Card card)
         {
- 
             card.cardType = Card.CardType.OneShot;
             HealEffects.healVillain(this, 10);
             card.SendToGraveyard(this, cardsOnField);
-
         }
 
         public object[] DeviousDisruption(Card card)
@@ -64,22 +64,13 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         {
             int damage = GameEngine.getHeroes().Count;
             Hero lowestHP = Utility.GetHeroLowestHP();
-
-            Hero highestHP = GameEngine.getHeroes()[0];
-
-            highestHP = Utility.GetHeroHighestHP(highestHP);
+            Hero highestHP = Utility.GetHeroHighestHP();
 
             int fireDamage = 2;
-            if (lowestHP.Equals(highestHP))
-            {
-                DamageEffects.DealDamage(this, new List<Targetable>(){highestHP}, damage + fireDamage, DamageEffects.DamageType.Fire);
-            }
-            else
-            {
-                DamageEffects.DealDamage(this, new List<Targetable>(){lowestHP}, damage, DamageEffects.DamageType.Melee);
-                DamageEffects.DealDamage(this, new List<Targetable>(){highestHP}, damage + fireDamage, DamageEffects.DamageType.Fire);
-            }
-
+            DamageEffects.DealDamage(this, new List<Targetable>(){lowestHP}, damage, DamageEffects.DamageType.Melee);
+            DamageEffects.DealDamage(this, new List<Targetable>(){highestHP}, damage + fireDamage, DamageEffects.DamageType.Fire);
+            
+            card.SendToGraveyard(this, cardsOnField);
         }
 
 
@@ -118,34 +109,39 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         public void PoweredRemoteTurret(Card card)
         {
             PoweredRemoteTurret turret = new PoweredRemoteTurret();
-            GameEngine.getVillain().addMinion(turret);
+            addMinion(turret);
             Console.Write(turret.lifeTotal);
         }
 
         public void MobileDefencePlatform(Card card)
         {
             MobileDefensePlatform platform = new MobileDefensePlatform();
-            GameEngine.getVillain().addMinion(platform);
+            addMinion(platform);
             Console.Write("Mobile Defense Platform: " + platform.lifeTotal);
+            //TODO: this isn't done
         }
 
         public void ElementalRedistributor(Card card)
         {
             ElementalRedistributor redist = new ElementalRedistributor();
-            GameEngine.getVillain().addMinion(redist);
+            addMinion(redist);
             Console.Write("Elemental Redistributor: "+redist.lifeTotal);
-
+            //TODO this isnt done
         }
 
         public void BladeBattalion(Card card)
         {
             BladeBattalion bbat = new BladeBattalion();
-            GameEngine.getVillain().addMinion(new BladeBattalion());
+            card.Minion = bbat;
+            card.CardDestroyed += BladeBattalionDestroyed;
+            EndPhase += bbat.executeEffect;
+            addMinion(bbat);
             Console.WriteLine("Blade Battalion: " + bbat.lifeTotal);
-            
         }
 
-
+        void BladeBattalionDestroyed(Card c, EventArgs e) {
+            removeMinion(c.Minion);
+        }
 
         /// <summary>
         /// These death powers do not exist for the villain

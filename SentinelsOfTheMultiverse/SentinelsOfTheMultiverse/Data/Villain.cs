@@ -8,14 +8,8 @@ namespace SentinelsOfTheMultiverse.Data
 {
     public abstract class Villain : IPlayer
     {
-        List<Minion> minions { get; set; }
-
-        List<Minion> endTurnMinion = new List<Minion>();
-        List<Minion> startTurnMinion = new List<Minion>();
-        List<Minion> onAttackMinion = new List<Minion>();
-        List<Minion> ongoingMinion = new List<Minion>();
-
-        
+        private List<Minion> minions = new List<Minion>();
+              
 
         public Villain()
         {
@@ -52,10 +46,15 @@ namespace SentinelsOfTheMultiverse.Data
 
         public override void endPhase()
         {
-            //conditionals for end turn effects
-            //plays card from deck.
-            drawPhase(1);
+            if (EndPhase != null) {
+                EndPhase();
+            }
+            drawPhase(1);//plays card from deck
         }
+        
+        internal event EndPhaseHandler EndPhase;
+        internal delegate void EndPhaseHandler();
+    
 
         public override void drawPhase(int numCards)
         {
@@ -67,97 +66,20 @@ namespace SentinelsOfTheMultiverse.Data
             }
         }
 
-        internal List<Minion> getStartPhaseMinions()
-        {
-            return startTurnMinion;
-        }
-
-        internal List<Minion> getEndPhaseMinions()
-        {
-            return endTurnMinion;
-        }
-
-        internal List<Minion> getOnAttackMinions()
-        {
-            return onAttackMinion;
-        }
-
-        internal List<Minion> getOngoingEffectMinions()
-        {
-            return ongoingMinion;
-        }
-
         public List<Minion> getMinions()
         {
-            List<Minion> allMinions = new List<Minion>();
-            allMinions.AddRange(getStartPhaseMinions());
-            allMinions.AddRange(getEndPhaseMinions());
-            allMinions.AddRange(getOnAttackMinions());
-            allMinions.AddRange(getOngoingEffectMinions());
-            return allMinions;
+            return minions;
         }
 
         public void addMinion(Minion minion)
         {
-            if (minion.effectPhase.Equals(Minion.MinionType.Start))
-            {
-                startTurnMinion.Add(minion);
-                return;
-            }
-
-            if (minion.effectPhase.Equals(Minion.MinionType.End))
-            {
-                endTurnMinion.Add(minion);
-                return;
-            }
-
-            if (minion.effectPhase.Equals(Minion.MinionType.OnAttack))
-            {
-                onAttackMinion.Add(minion);
-                return;
-            }
-
-            if (minion.effectPhase.Equals(Minion.MinionType.Ongoing))
-            {
-                ongoingMinion.Add(minion);
-                return;
-            }
-            else
-            {
-                return;
-            }
+            minions.Add(minion);
         }
 
 
         internal void removeMinion(Minion minion)
         {
-            if (minion.effectPhase.Equals(Minion.MinionType.Start))
-            {
-                startTurnMinion.Remove(minion);
-                return;
-            }
-
-            if (minion.effectPhase.Equals(Minion.MinionType.End))
-            {
-                endTurnMinion.Remove(minion);
-                return;
-            }
-
-            if (minion.effectPhase.Equals(Minion.MinionType.OnAttack))
-            {
-                onAttackMinion.Remove(minion);
-                return;
-            }
-
-            if (minion.effectPhase.Equals(Minion.MinionType.Ongoing))
-            {
-                ongoingMinion.Remove(minion);
-                return;
-            }
-            else
-            {
-                return;
-            }
+            minions.Remove(minion);
         }
     }
 }

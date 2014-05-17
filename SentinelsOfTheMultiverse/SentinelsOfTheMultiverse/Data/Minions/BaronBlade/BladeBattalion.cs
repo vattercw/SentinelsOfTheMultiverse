@@ -18,18 +18,8 @@ namespace SentinelsOfTheMultiverse.Data.Minions
 
         public override void executeEffect()
         {
-            int damage = lifeTotal;
-
-            Hero highestHP = GameEngine.getHeroes()[0];
-
-            for (int i = 0; i < GameEngine.getHeroes().Count; i++)
-            {
-                if (highestHP.lifeTotal < GameEngine.getHeroes()[i].lifeTotal)
-                {
-                    highestHP = GameEngine.getHeroes()[i];
-                }
-            }
-            DamageEffects.DealDamage(this, new List<Targetable>(){highestHP}, damage, DamageEffects.DamageType.Melee);
+            List<Targetable> targets = new List<Targetable>() { Utility.GetHeroHighestHP() };
+            DamageEffects.DealDamage(this, targets, lifeTotal, DamageEffects.DamageType.Melee);
         }
     }
 }

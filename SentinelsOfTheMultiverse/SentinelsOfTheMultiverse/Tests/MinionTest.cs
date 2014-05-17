@@ -84,7 +84,7 @@ namespace SentinelsOfTheMultiverse.Tests
             game.beginGame();
             Minion minionTest = new PoweredRemoteTurret();
             GameEngine.getVillain().addMinion(minionTest);
-            List<Minion> minions = GameEngine.getVillain().getEndPhaseMinions();
+            List<Minion> minions = GameEngine.getVillain().getMinions();
             for (int i = 0; i < minions.Count; i++)
             {
                 minions[i].executeEffect();

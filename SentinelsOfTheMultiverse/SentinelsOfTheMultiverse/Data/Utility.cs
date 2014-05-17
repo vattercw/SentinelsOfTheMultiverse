@@ -98,16 +98,12 @@ namespace SentinelsOfTheMultiverse
         {
             return Convert.ToInt16(name.Split(splitDelimeter)[0]);
         }
-        public static Hero GetHeroHighestHP(Hero highestHP)
+        public static Hero GetHeroHighestHP()
         {
-            for (int i = 0; i < GameEngine.getHeroes().Count; i++)
-            {
-                if (highestHP.lifeTotal < GameEngine.getHeroes()[i].lifeTotal)
-                {
-                    highestHP = GameEngine.getHeroes()[i];
-                }
-            }
-            return highestHP;
+            var heroes = GameEngine.getHeroes();
+            heroes= heroes.OrderBy(o => o.lifeTotal).ToList();
+
+            return heroes[heroes.Count -1];
         }
 
         public static Hero GetHeroLowestHP()
