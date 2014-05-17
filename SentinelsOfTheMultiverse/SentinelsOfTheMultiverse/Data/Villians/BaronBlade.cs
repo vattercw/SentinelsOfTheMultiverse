@@ -113,12 +113,24 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             Console.Write(turret.lifeTotal);
         }
 
-        public void MobileDefencePlatform(Card card)
+        public void MobileDefensePlatform(Card card)
         {
             MobileDefensePlatform platform = new MobileDefensePlatform();
             addMinion(platform);
-            Console.Write("Mobile Defense Platform: " + platform.lifeTotal);
-            //TODO: this isn't done
+            DamageEffects.damageDealtHandlers.Add(MobileDefensePlatform_Effect);
+            card.CardDestroyed += MobileDefensePlatform_CardDestroyed;
+            platform.MinionDied += () => card.SendToGraveyard(this, cardsOnField); 
+        }
+
+        private void MobileDefensePlatform_CardDestroyed(Card m, EventArgs e) {
+            removeMinion(m.Minion);
+            DamageEffects.damageDealtHandlers.Remove(MobileDefensePlatform_Effect);
+        }
+
+        int MobileDefensePlatform_Effect(object sender, object receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
+            if (receiver.Equals(this))
+                damageAmount = 0;
+            return 0;
         }
 
         public void ElementalRedistributor(Card card)
@@ -135,12 +147,14 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             card.Minion = bbat;
             card.CardDestroyed += BladeBattalionDestroyed;
             EndPhase += bbat.executeEffect;
+            bbat.MinionDied += () => card.SendToGraveyard(this, cardsOnField); 
             addMinion(bbat);
             Console.WriteLine("Blade Battalion: " + bbat.lifeTotal);
         }
 
         void BladeBattalionDestroyed(Card c, EventArgs e) {
             removeMinion(c.Minion);
+            EndPhase -= c.Minion.executeEffect;
         }
 
         /// <summary>

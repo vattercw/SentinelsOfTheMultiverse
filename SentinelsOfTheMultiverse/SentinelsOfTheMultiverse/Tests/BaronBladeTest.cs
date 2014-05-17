@@ -92,7 +92,7 @@ namespace SentinelsOfTheMultiverse.Tests
             game.beginGame();
             BaronBlade test = new BaronBlade();
             Card platCard = new Card("Images\\Villain\\BaronBlade\\MobileDefencePlatform.png");
-            test.MobileDefencePlatform(platCard);
+            test.MobileDefensePlatform(platCard);
 
             Assert.AreEqual(GameEngine.getVillain().getMinions()[0].ToString(), (new MobileDefensePlatform()).ToString());
         }

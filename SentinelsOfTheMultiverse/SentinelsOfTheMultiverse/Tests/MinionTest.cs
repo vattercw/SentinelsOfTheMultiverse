@@ -7,12 +7,20 @@ using NUnit.Framework;
 using SentinelsOfTheMultiverse.Data;
 using SentinelsOfTheMultiverse.Data.Minions;
 using SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus;
+using SentinelsOfTheMultiverse.Data.Villains;
+using SentinelsOfTheMultiverse.Data.Effects;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
     [TestFixture]
     class MinionTest
     {
+        [SetUp, RequiresSTA]
+        private void Setup() {
+            Start st = new Start();
+            st.beginGame();
+        }
+
         [Test, RequiresSTA]
         public void TestTRexInitalization()
         {
@@ -80,8 +88,6 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestMobileDefenseExecute()
         {
-            Start game = new Start();
-            game.beginGame();
             Minion minionTest = new PoweredRemoteTurret();
             GameEngine.getVillain().addMinion(minionTest);
             List<Minion> minions = GameEngine.getVillain().getMinions();
@@ -103,6 +109,26 @@ namespace SentinelsOfTheMultiverse.Tests
             Minion minionTest = new PoweredRemoteTurret();
             Assert.AreEqual("PoweredRemoteTurret", minionTest.getMinionName());
             Assert.AreEqual(7, minionTest.getCurrentHealth());
+        }
+
+        [Test, RequiresSTA]
+        public void TestMinionDeath() {
+            Card c = new Card("Images\\Villain\\BaronBlade\\4-BladeBattalion.png");
+            BaronBlade villain = (BaronBlade)GameEngine.getVillain();
+            
+            villain.cardsOnField.Add(c);
+            villain.BladeBattalion(c);
+            Assert.AreEqual(1, villain.getMinions().Count);
+            Minion bladeBat= villain.getMinions()[0];
+
+            DamageEffects.DealDamage(villain, new List<Targetable>() { bladeBat }, bladeBat.maxHealth, DamageEffects.DamageType.Melee);
+
+            Assert.AreEqual(0, villain.getMinions().Count);
+        }
+
+        [TearDown]
+        public void TearDown() {
+            GameEngine.TearDownGameEngine();
         }
     }
 }

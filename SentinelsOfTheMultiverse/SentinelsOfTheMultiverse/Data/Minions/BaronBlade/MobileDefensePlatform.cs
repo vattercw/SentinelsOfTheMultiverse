@@ -18,7 +18,6 @@ namespace SentinelsOfTheMultiverse.Data.Minions
 
         public override void executeEffect()
         {
-            GameEngine.getVillain().addImmunity("all");
         }
     }
 }

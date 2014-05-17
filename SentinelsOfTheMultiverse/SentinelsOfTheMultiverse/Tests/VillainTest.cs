@@ -38,17 +38,6 @@ namespace SentinelsOfTheMultiverse.Tests
         }
 
         [Test, RequiresSTA]
-        public void TestVillainImmunization()
-        {
-            Villain villain = ObjectMother.TestVillain();
-            Assert.AreEqual(villain.getImmunities(), new List<String>());
-            villain.addImmunity("Projectile");
-            List<String> testImmunities = new List<String>();
-            testImmunities.Add("Projectile");
-            Assert.AreEqual(villain.getImmunities(), testImmunities);
-        }
-
-        [Test, RequiresSTA]
         public void TestGetMinionEmpty()
         {
             Villain test = ObjectMother.TestVillain();

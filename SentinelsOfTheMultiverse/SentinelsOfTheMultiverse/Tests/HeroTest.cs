@@ -74,16 +74,5 @@ namespace SentinelsOfTheMultiverse.Tests
             Assert.AreEqual(hero.lifeTotal, 34);
         }
 
-        [Test, RequiresSTA]
-        public void TestPlayerImmunization()
-        {
-            Hero hero = ObjectMother.TestHero();
-            Assert.AreEqual(hero.getImmunities(), new List<String>());
-            hero.addImmunity("Projectile");
-            List<String> testImmunities = new List<String>();
-            testImmunities.Add("Projectile");
-            Assert.AreEqual(hero.getImmunities(), testImmunities);
-        }
-
     }
 }

@@ -59,28 +59,6 @@ namespace SentinelsOfTheMultiverse.Data
         public abstract void endPhase();
         public abstract void drawPhase(int numCards);
 
-        public List<string> getImmunities()
-        {
-            return immunities;
-        }
-
-        public void addImmunity(String immunityName)
-        {
-            if (!immunities.Contains(immunityName))
-            {
-                immunities.Add(immunityName);
-            }
-        }
-
-        public void removeImmunity(String immunityName)
-        {
-            if (immunities.Contains(immunityName))
-            {
-                immunities.Remove(immunityName);
-            }
-        }
-
-
 
         public enum PlayerType { Hero, Villain, Minion, Environment };
 
