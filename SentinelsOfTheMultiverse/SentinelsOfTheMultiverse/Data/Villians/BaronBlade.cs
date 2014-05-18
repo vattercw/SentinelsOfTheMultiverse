@@ -117,6 +117,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         {
             MobileDefensePlatform platform = new MobileDefensePlatform();
             addMinion(platform);
+            card.Minion = platform;
             DamageEffects.damageDealtHandlers.Add(MobileDefensePlatform_Effect);
             card.CardDestroyed += MobileDefensePlatform_CardDestroyed;
             platform.MinionDied += () => card.SendToGraveyard(this, cardsOnField); 
@@ -138,7 +139,6 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             ElementalRedistributor redist = new ElementalRedistributor();
             addMinion(redist);
             Console.Write("Elemental Redistributor: "+redist.lifeTotal);
-            //TODO this isnt done
         }
 
         public void BladeBattalion(Card card)
@@ -149,7 +149,6 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             EndPhase += bbat.executeEffect;
             bbat.MinionDied += () => card.SendToGraveyard(this, cardsOnField); 
             addMinion(bbat);
-            Console.WriteLine("Blade Battalion: " + bbat.lifeTotal);
         }
 
         void BladeBattalionDestroyed(Card c, EventArgs e) {

@@ -88,19 +88,13 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestMobileDefenseExecute()
         {
-            Minion minionTest = new PoweredRemoteTurret();
-            GameEngine.getVillain().addMinion(minionTest);
-            List<Minion> minions = GameEngine.getVillain().getMinions();
-            for (int i = 0; i < minions.Count; i++)
-            {
-                minions[i].executeEffect();
-            }
-            for (int i = 0; i < GameEngine.getHeroes().Count; i++)
-            {
-                //Assert.AreEqual(GameEngine.getHeroes()[i].lifeTotal, 32);
-                //fix static for test methods
-                Assert.True(true);
-            }
+            Card c = new Card("Images\\Villain\\BaronBlade\\3-MobileDefensePlatform.png");
+            BaronBlade villain = (BaronBlade)GameEngine.getVillain();
+            villain.cardsOnField.Add(c);
+            villain.MobileDefensePlatform(c);
+
+            DamageEffects.DealDamage(null, new List<Targetable>() { villain }, 10, DamageEffects.DamageType.Fire);
+            Assert.AreEqual(villain.maxHealth, villain.lifeTotal);
         }
 
         [Test, RequiresSTA]
@@ -122,7 +116,18 @@ namespace SentinelsOfTheMultiverse.Tests
             Minion bladeBat= villain.getMinions()[0];
 
             DamageEffects.DealDamage(villain, new List<Targetable>() { bladeBat }, bladeBat.maxHealth, DamageEffects.DamageType.Melee);
+            Assert.AreEqual(0, villain.getMinions().Count);
+        }
 
+        [Test, RequiresSTA]
+        public void TestMinionsCardDestroyed() {
+            Card c = new Card("Images\\Villain\\BaronBlade\\4-BladeBattalion.png");
+            BaronBlade villain = (BaronBlade)GameEngine.getVillain();
+            villain.cardsOnField.Add(c);
+            villain.BladeBattalion(c);
+         
+            c.SendToGraveyard(villain, villain.cardsOnField);
+            Assert.AreEqual(0, villain.cardsOnField.Count);
             Assert.AreEqual(0, villain.getMinions().Count);
         }
 
