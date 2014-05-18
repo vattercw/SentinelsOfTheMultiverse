@@ -107,12 +107,18 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         }
 
         //Devices and Minions
-
-        public void PoweredRemoteTurret(Card card)
-        {
+        public void PoweredRemoteTurret(Card card) {
             PoweredRemoteTurret turret = new PoweredRemoteTurret();
+            card.Minion = turret;
+            card.CardDestroyed += PoweredRemoteTurret_Destroyed;
+            EndPhase += turret.executeEffect;
+            turret.MinionDied += () => card.SendToGraveyard(this, cardsOnField);
             addMinion(turret);
-            Console.Write(turret.lifeTotal);
+        }
+
+        void PoweredRemoteTurret_Destroyed(Card c, EventArgs e) {
+            removeMinion(c.Minion);
+            EndPhase -= c.Minion.executeEffect;
         }
 
         public void MobileDefensePlatform(Card card)

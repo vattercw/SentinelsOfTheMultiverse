@@ -19,14 +19,11 @@ namespace SentinelsOfTheMultiverse.Data.Minions
 
         public override void executeEffect()
         {
-            var mobileDefensePlatforms =GameEngine.getVillain().getMinions().FindAll(x => x is MobileDefensePlatform);
+            var mobileDefensePlatforms =GameEngine.getVillain().getMinions().FindAll(x => x is PoweredRemoteTurret);
 
-            for (int i = 0; i < GameEngine.getHeroes().Count; i++)
-            {
-                var targets = new List<Targetable>();
-                targets.AddRange(GameEngine.getHeroes());
-                DamageEffects.DealDamage(this, targets, 2 + mobileDefensePlatforms.Count, DamageEffects.DamageType.Projectile);
-            }
+            var targets = new List<Targetable>();
+            targets.AddRange(GameEngine.getHeroes());
+            DamageEffects.DealDamage(this, targets, 2 + mobileDefensePlatforms.Count, DamageEffects.DamageType.Projectile);
         }
     }
 }

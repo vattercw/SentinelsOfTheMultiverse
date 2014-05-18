@@ -39,7 +39,7 @@ namespace SentinelsOfTheMultiverse.Data
 
         public override Boolean playPhase()
         {
-            
+            drawPhase(1);//plays card from deck   
             return true;
         }
 
@@ -49,7 +49,6 @@ namespace SentinelsOfTheMultiverse.Data
             if (EndPhase != null) {
                 EndPhase();
             }
-            drawPhase(1);//plays card from deck
         }
         
         internal event EndPhaseHandler EndPhase;
