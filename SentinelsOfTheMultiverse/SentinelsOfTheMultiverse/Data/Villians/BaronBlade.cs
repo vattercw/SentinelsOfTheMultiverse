@@ -85,7 +85,15 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
         void ConsiderThePriceOfVictoryDiscardAction(int discardedCards)
         {
-            Console.WriteLine("number of discarded cards: " + discardedCards);
+            Card ctpovCard = cardsOnField.Find(x => x.getName().Equals("ConsiderThePriceOfVictory"));
+            ctpovCard.SendToGraveyard(this, cardsOnField);
+            var numheroes = GameEngine.getHeroes().Count;
+            var cardsToRemove = deck.cards.GetRange(deck.cards.Count - numheroes -1, discardedCards);
+            Card[] dummyCardsToRemove = new Card[cardsToRemove.Count];
+            cardsToRemove.CopyTo(dummyCardsToRemove);
+            foreach(Card c in dummyCardsToRemove){
+                c.SendToGraveyard(this, deck.cards);
+            }
         }
 
         public void LivingForceField(Card card) {
@@ -103,7 +111,6 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         public void BacklashField(Card card)
         {
             card.cardType = Card.CardType.Ongoing;
-            DamageEffects.inPlayBacklash = true;
         }
 
         //Devices and Minions

@@ -13,9 +13,6 @@ namespace SentinelsOfTheMultiverse.Data.Effects
 
         public enum DamageType { Projectile, Fire, Ice, Melee, Toxic, Lightning, All, Cold };
 
-
-        public static bool inPlayBacklash { get; set; }
-
         public static void DealDamage(Targetable sender, List<Targetable> receivers, int damageAmount, DamageType damageType)
         {
             foreach (Targetable receiver in receivers)

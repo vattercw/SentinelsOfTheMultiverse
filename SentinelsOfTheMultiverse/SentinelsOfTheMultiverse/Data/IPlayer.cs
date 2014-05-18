@@ -20,8 +20,6 @@ namespace SentinelsOfTheMultiverse.Data
         public List<Card> graveyard { get; set; }
         public List<Card> discards { get; set; }
 
-        public bool immuneToEnvironment = false;
-
         abstract public void Power();
 
         abstract public void DeathPower1();

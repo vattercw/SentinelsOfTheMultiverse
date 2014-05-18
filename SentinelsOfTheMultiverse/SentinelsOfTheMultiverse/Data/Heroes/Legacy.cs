@@ -26,17 +26,31 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             }
         }
 
-
-        public void Fortitude(Card card)
-        {
-            //TODO implement this method
-            //this.damageAmplificationToPlayer -= 1;
+        public void Fortitude(Card card) {
+            card.cardType = Card.CardType.Ongoing;
+            card.CardDestroyed += (sender, args) => DamageEffects.damageDealtHandlers.Remove(Fortitude_Damage_Handler);
+            DamageEffects.damageDealtHandlers.Add(Fortitude_Damage_Handler);
         }
+
+        int Fortitude_Damage_Handler(object sender, object receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
+            if (receiver.Equals(this))
+                return -1;
+            return 0;
+        }
+
 
         public void DangerSense(Card card)
         {
             card.cardType = Card.CardType.Ongoing;
-            this.immuneToEnvironment = true;
+            DamageEffects.damageDealtHandlers.Add(DangerSense_DamageHandler);
+            card.CardDestroyed += (sender, args) => DamageEffects.damageDealtHandlers.Remove(DangerSense_DamageHandler);
+        }
+
+        private int DangerSense_DamageHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
+            if (typeof(GameEnvironment).IsAssignableFrom(sender.GetType()) || GameEngine.getEnvironment().getMinions().Contains(sender)) {
+                damageAmount = 0;
+            }
+            return 0;
         }
 
 
