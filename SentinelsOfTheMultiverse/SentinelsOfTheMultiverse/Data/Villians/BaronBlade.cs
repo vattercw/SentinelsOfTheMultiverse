@@ -137,8 +137,22 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         public void ElementalRedistributor(Card card)
         {
             ElementalRedistributor redist = new ElementalRedistributor();
+            card.Minion = redist;
+            DamageEffects.damageDealtHandlers.Add(ElementalRedistributor_DamageHandler);
+            card.CardDestroyed += (sender, args)=> DamageEffects.damageDealtHandlers.Remove(ElementalRedistributor_DamageHandler);
+            redist.MinionDied += () => card.SendToGraveyard(this, cardsOnField);
             addMinion(redist);
-            Console.Write("Elemental Redistributor: "+redist.lifeTotal);
+        }
+
+        private int ElementalRedistributor_DamageHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
+            if (receiver.Equals(this)) {
+                if (damageType.Equals(DamageEffects.DamageType.Fire) || damageType.Equals(DamageEffects.DamageType.Cold) || damageType.Equals(DamageEffects.DamageType.Lightning)) {
+                    Hero lowest= Utility.GetHeroLowestHP();
+                    DamageEffects.DealDamage(sender, new List<Targetable>() { lowest }, damageAmount, damageType);
+                    return (-1) * damageAmount; //negate the damage
+                }
+            }
+            return 0;
         }
 
         public void BladeBattalion(Card card)

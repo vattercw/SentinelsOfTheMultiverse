@@ -98,6 +98,27 @@ namespace SentinelsOfTheMultiverse.Tests
         }
 
         [Test, RequiresSTA]
+        public void TestElementalRedistributor() {
+            Card c = new Card("Images\\Villain\\BaronBlade\\2-ElementalRedistributor.png");
+            BaronBlade villain = (BaronBlade)GameEngine.getVillain();
+            
+            var lowestHero = Utility.GetHeroLowestHP();
+            
+            villain.cardsOnField.Add(c);
+            villain.ElementalRedistributor(c);
+
+            //should redirect the damage
+            DamageEffects.DealDamage(null, new List<Targetable>() { villain }, 10, DamageEffects.DamageType.Fire);
+            Assert.AreEqual(villain.maxHealth, villain.lifeTotal);
+            Assert.AreEqual(lowestHero.maxHealth - 10, lowestHero.lifeTotal);
+
+            //villain should take damage
+            DamageEffects.DealDamage(null, new List<Targetable>() { villain }, 10, DamageEffects.DamageType.Melee);
+            Assert.AreNotEqual(villain.maxHealth, villain.lifeTotal);
+            Assert.AreEqual(lowestHero.maxHealth - 10, lowestHero.lifeTotal);
+        }
+
+        [Test, RequiresSTA]
         public void TestRemoteTurretInitalization()
         {
             Minion minionTest = new PoweredRemoteTurret();

@@ -29,7 +29,6 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestImportNumOfCards()
         {
             int count = files.Length;
-            var pass = true;
             var counter = 0;
             Deck testHaka = new Deck("haka", IPlayer.PlayerType.Hero);
             foreach (Card card in testHaka.cards)
