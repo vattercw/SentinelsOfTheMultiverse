@@ -88,14 +88,16 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             Console.WriteLine("number of discarded cards: " + discardedCards);
         }
 
-
-
-        //Ongoing Cards
-        public void LivingForceField(Card card)
-        {
+        public void LivingForceField(Card card) {
             card.cardType = Card.CardType.Ongoing;
+            card.CardDestroyed += (sender, args) => DamageEffects.damageDealtHandlers.Remove(LivingForceField_Damage_Handler);
+            DamageEffects.damageDealtHandlers.Add(LivingForceField_Damage_Handler);
+        }
 
-            //GameEngine.getVillain().damageAmplificationToPlayer--;
+        int LivingForceField_Damage_Handler(object sender, object receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
+            if (receiver.Equals(this))
+                return -1;
+            return 0;
         }
 
         public void BacklashField(Card card)

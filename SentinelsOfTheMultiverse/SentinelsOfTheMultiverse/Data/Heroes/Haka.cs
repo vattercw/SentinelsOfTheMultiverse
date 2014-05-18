@@ -252,12 +252,8 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public void TaMoko(Card card)
         {
             card.cardType = Card.CardType.Ongoing;
-            card.CardDestroyed += TaMoko_Destroyed_Handler;
+            card.CardDestroyed += (sender, args) => DamageEffects.damageDealtHandlers.Remove(TaMoko_Damage_Handler);
             DamageEffects.damageDealtHandlers.Add(TaMoko_Damage_Handler);
-        }
-        void TaMoko_Destroyed_Handler(Card card, EventArgs e)
-        {
-            DamageEffects.damageDealtHandlers.Remove(TaMoko_Damage_Handler);
         }
 
         int TaMoko_Damage_Handler(object sender, object receiver, ref int damageAmount, DamageEffects.DamageType damageType)
