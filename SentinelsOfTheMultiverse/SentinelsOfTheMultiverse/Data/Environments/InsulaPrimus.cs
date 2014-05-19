@@ -44,13 +44,13 @@ namespace SentinelsOfTheMultiverse.Data.Environments
         public void RiverOfLava(Card card)
         {
             //TODO complete this method
-            List<Hero> targets = getTargets(GameEngine.getHeroes());
+            List<Hero> targets = GameEngine.getHeroes();
         }
 
         public void VolcanicEruption(Card card)
         {
             //TODO complete this method
-            List<Hero> targets = getTargets(GameEngine.getHeroes());
+            List<Hero> targets = GameEngine.getHeroes();
         }
 
        
@@ -59,7 +59,7 @@ namespace SentinelsOfTheMultiverse.Data.Environments
         {
             card.cardType = Card.CardType.OneShot;
 
-            List<Hero> targets = getTargets(GameEngine.getHeroes());
+            List<Hero> targets = GameEngine.getHeroes();
             DiscardedAction act = PrimordialPlantLife_Continuation;
 
             return new object[] { act, GameEngine.ForcedEffect.PrimordialPlant, GameEngine.getHeroes(), card };
@@ -92,27 +92,18 @@ namespace SentinelsOfTheMultiverse.Data.Environments
             Console.WriteLine("Velociraptor Pack: " + velo.lifeTotal);
         }
 
-        public void EnragedTRex(Card card)
-        {
-            EnragedTRex rex = new EnragedTRex();
-            GameEngine.getEnvironment().addMinion(rex);
-            Console.WriteLine("Enraged T-Rex: " + rex.lifeTotal);
+        public void EnragedTRex(Card card) {
+            EnragedTRex trex = new EnragedTRex();
+            card.Minion = trex;
+            card.CardDestroyed += EnragedTRex_Destroyed;
+            EndPhase += trex.executeEffect;
+            trex.MinionDied += () => card.SendToGraveyard(this, cardsOnField);
+            addMinion(trex);
         }
-
-        //used to determin heroes not immune to environment
-        private List<Hero> getTargets(List<Hero> list)
-        {
-            List<Hero> targets = new List<Hero>();
-            foreach (Hero hero in list)
-            {
-                if (hero.immuneToEnvironment == false)
-                {
-                    targets.Add(hero);
-                }
-            }
-            return targets;
+        void EnragedTRex_Destroyed(Card c, EventArgs e) {
+            removeMinion(c.Minion);
+            EndPhase -= c.Minion.executeEffect;
         }
-
 
         public override void DeathPower1()
         {

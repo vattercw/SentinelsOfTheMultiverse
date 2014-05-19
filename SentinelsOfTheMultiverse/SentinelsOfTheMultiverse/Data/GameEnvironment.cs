@@ -44,15 +44,18 @@ namespace SentinelsOfTheMultiverse.Data
 
         public override Boolean playPhase()
         {
-            
+            drawPhase(1);
             return true;
         }
 
         public override void endPhase()
         {
-            //conditionals for end turn effects
-            drawPhase(1);
+            if (EndPhase != null) {
+                EndPhase();
+            }
         }
+        internal event EndPhaseHandler EndPhase;
+        internal delegate void EndPhaseHandler();
 
         public override void drawPhase(int numCards)
         {

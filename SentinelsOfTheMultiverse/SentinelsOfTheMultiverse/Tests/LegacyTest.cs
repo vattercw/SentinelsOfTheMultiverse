@@ -35,7 +35,8 @@ namespace SentinelsOfTheMultiverse.Tests
 
             Card testDanger = new Card("Images\\Hero\\Legacy\\DangerSense.png");
             testLegacy.DangerSense(testDanger);
-            Assert.True(testLegacy.immuneToEnvironment);
+            //TODO fix this test
+            Assert.Fail();
         }
 
         [Test, RequiresSTA]
