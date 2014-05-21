@@ -30,7 +30,7 @@ namespace SentinelsOfTheMultiverse.Data
 
         public override void playerTurn(bool playedCard=false, bool playedPower=false)
         {
-            startPhase();
+            //startPhase();
             //playPhase();
             //endPhase();
             //GameEngine.nextTurn();
@@ -48,14 +48,15 @@ namespace SentinelsOfTheMultiverse.Data
             return true;
         }
 
-        public override void endPhase()
+        public override object endPhase()
         {
             if (EndPhase != null) {
-                EndPhase();
+                return EndPhase();
             }
+            return null;
         }
         internal event EndPhaseHandler EndPhase;
-        internal delegate void EndPhaseHandler();
+        internal delegate object EndPhaseHandler();
 
         public override List<Card> drawPhase(int numCards)
         {

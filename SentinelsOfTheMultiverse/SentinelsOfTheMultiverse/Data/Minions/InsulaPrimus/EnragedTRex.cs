@@ -16,7 +16,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus
         }
 
 
-        public override void executeEffect()
+        public override object executeEffect()
         {
             var orderedTargets = GameEngine.getTargets().OrderBy(x => x.lifeTotal).ToList();
             Targetable target;
@@ -26,6 +26,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus
                 target = orderedTargets[orderedTargets.Count - 2];
             }
             Data.Effects.DamageEffects.DealDamage(this, new List<Targetable>() { target }, 5, Effects.DamageEffects.DamageType.Melee);
+            return null;
         }
     }
 }

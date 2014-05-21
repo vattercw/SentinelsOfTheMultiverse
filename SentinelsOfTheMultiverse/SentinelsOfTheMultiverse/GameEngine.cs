@@ -66,7 +66,7 @@ namespace SentinelsOfTheMultiverse
             villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\2-PoweredRemoteTurret.png");
             
             environment = (GameEnvironment)getClassFromString(envStr);
-            environment.deck.cards[0] = new Card("\\Images\\Environment\\InsulaPrimus\\2-PrimordialPlantLife.png");
+            environment.deck.cards[0] = new Card("\\Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
         }
 
         public static Object getClassFromString(string className)

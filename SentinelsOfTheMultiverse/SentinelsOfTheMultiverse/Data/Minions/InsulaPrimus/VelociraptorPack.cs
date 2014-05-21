@@ -16,7 +16,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus
             //GameEngine.getVillain().addMinion(this, effectPhase);
         }
 
-        public override void executeEffect()
+        public override object executeEffect()
         {
             throw new NotImplementedException();
         }

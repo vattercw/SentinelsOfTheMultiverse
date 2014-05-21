@@ -49,7 +49,6 @@ namespace SentinelsOfTheMultiverse
             {
                 drawPhase(2);
             }
-            endPhase();
         }
         
         
@@ -83,14 +82,14 @@ namespace SentinelsOfTheMultiverse
             return null;//This return only matters for env and villain
         }
 
-        public override void endPhase()
+        public override object endPhase()
         {
-            //conditionals need to be added for end turn effects
             if (EndPhase != null)
-                EndPhase();
+                return EndPhase();
+            return null;
         }
         public event EndPhaseHandler EndPhase;
-        public delegate void EndPhaseHandler();
+        public delegate object EndPhaseHandler();
 
         public List<Card> getPlayerHand()
         {
