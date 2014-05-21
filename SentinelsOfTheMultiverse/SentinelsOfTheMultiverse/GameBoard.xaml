@@ -1,7 +1,7 @@
 ﻿<Window x:Class="SentinelsOfTheMultiverse.GameBoard"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Sentinels of the Multiverse" Height="1000" Width="1000" DataContext="GameEngine">
+        Title="Sentinels of the Multiverse" Icon="Images/Logo.ico" Height="1000" Width="1000" DataContext="GameEngine">
     <Window.Resources>
         <RoutedUICommand x:Key="ViewHand" Text="Text" />
         <RoutedUICommand x:Key="PlayCard" Text="Text" />
