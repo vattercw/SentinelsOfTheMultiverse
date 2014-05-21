@@ -354,7 +354,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             {
                 DamageEffects.DealDamage(this, new List<Targetable>() { GameEngine.getVillain() }, 3, DamageEffects.DamageType.Melee);
             }
-            card.SendToGraveyard(this, cardsOnField);
             CardDrawingEffects.DrawCards(1, this);
         }
  
@@ -407,7 +406,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                 currentPlayer.graveyard.Remove(card);
                 GameEngine.playerPlayedCard = false;
             }
-            else if (target.Count >= 1 && target.Count <= 2)
+            else if (target.Count == 1 && target.Count == 2)
             {
                 var villainMinions = GameEngine.getVillain().getMinions();
                 var environMinions = GameEngine.getEnvironment().getMinions();
@@ -458,7 +457,6 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             else
             {
                 DamageEffects.DealDamage(this, new List<Targetable>() { GameEngine.getVillain() }, 3, DamageEffects.DamageType.Melee);
-                card.SendToGraveyard(this, cardsOnField);
             }
         }
 

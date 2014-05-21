@@ -194,12 +194,17 @@ namespace SentinelsOfTheMultiverse
             cardClickedArray.Clear();
 
             gameBoard.Clear_Selection(sender, e);
-            GameEngine.nextTurn();
+            
             object[] result = GameEngine.getCurrentPlayer().endPhase();
             if (result != null) {
                 switch((GameEngine.ForcedEffect)result[0]){
                     case GameEngine.ForcedEffect.ObsidianField:
                         if ((System.Windows.Forms.DialogResult)result[1] == System.Windows.Forms.DialogResult.Yes) {
+                            Close();
+                            DiscardFromHand discardHand = new DiscardFromHand(((Hero)GameEngine.getCurrentPlayer()).hand, gameBoard);
+                            discardHand.Visibility = System.Windows.Visibility.Visible;
+                            discardHand.ShowDialog();
+
                             GameEnvironment env = GameEngine.getEnvironment();
                             Card card = env.cardsOnField.Find(x => x.getName().Equals("ObsidianField"));
                             card.SendToGraveyard(env, env.cardsOnField);
@@ -209,6 +214,7 @@ namespace SentinelsOfTheMultiverse
                         throw new NotImplementedException();
                 }
             }
+            GameEngine.nextTurn();
             gameBoard.updateBoard();
             this.Close();
         }
