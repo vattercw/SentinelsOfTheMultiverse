@@ -195,12 +195,18 @@ namespace SentinelsOfTheMultiverse
 
             gameBoard.Clear_Selection(sender, e);
             GameEngine.nextTurn();
-            object result = GameEngine.getCurrentPlayer().endPhase();
+            object[] result = GameEngine.getCurrentPlayer().endPhase();
             if (result != null) {
-                if ((System.Windows.Forms.DialogResult)result == System.Windows.Forms.DialogResult.Yes) {
-                    GameEnvironment env = GameEngine.getEnvironment();
-                    Card card = env.cardsOnField.Find(x => x.getName().Equals("ObsidianField"));
-                    card.SendToGraveyard(env, env.cardsOnField);
+                switch((GameEngine.ForcedEffect)result[0]){
+                    case GameEngine.ForcedEffect.ObsidianField:
+                        if ((System.Windows.Forms.DialogResult)result[1] == System.Windows.Forms.DialogResult.Yes) {
+                            GameEnvironment env = GameEngine.getEnvironment();
+                            Card card = env.cardsOnField.Find(x => x.getName().Equals("ObsidianField"));
+                            card.SendToGraveyard(env, env.cardsOnField);
+                        }
+                        break;
+                    default:
+                        throw new NotImplementedException();
                 }
             }
             gameBoard.updateBoard();

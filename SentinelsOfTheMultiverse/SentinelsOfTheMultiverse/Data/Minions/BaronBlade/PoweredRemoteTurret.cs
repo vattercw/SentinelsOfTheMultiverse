@@ -17,7 +17,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
             effectPhase = Minion.MinionType.End;
         }
 
-        public override object executeEffect()
+        public override object[] executeEffect()
         {
             var mobileDefensePlatforms =GameEngine.getVillain().getMinions().FindAll(x => x is PoweredRemoteTurret);
 

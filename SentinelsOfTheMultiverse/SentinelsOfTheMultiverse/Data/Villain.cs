@@ -44,7 +44,7 @@ namespace SentinelsOfTheMultiverse.Data
         }
 
 
-        public override object endPhase()
+        public override object[] endPhase()
         {
             if (EndPhase != null) {
                 return EndPhase();
@@ -53,7 +53,7 @@ namespace SentinelsOfTheMultiverse.Data
         }
         
         internal event EndPhaseHandler EndPhase;
-        internal delegate object EndPhaseHandler();
+        internal delegate object[] EndPhaseHandler();
     
 
         public override List<Card> drawPhase(int numCards)

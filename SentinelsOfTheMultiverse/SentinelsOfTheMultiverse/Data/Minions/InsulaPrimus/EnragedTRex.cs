@@ -16,7 +16,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus
         }
 
 
-        public override object executeEffect()
+        public override object[] executeEffect()
         {
             var orderedTargets = GameEngine.getTargets().OrderBy(x => x.lifeTotal).ToList();
             Targetable target;

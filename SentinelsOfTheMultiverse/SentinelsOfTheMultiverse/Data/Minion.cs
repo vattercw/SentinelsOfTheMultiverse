@@ -40,7 +40,7 @@ namespace SentinelsOfTheMultiverse.Data
         {
             return lifeTotal;
         }
-        public abstract object executeEffect();
+        public abstract object[] executeEffect();
 
         public event MinionDeadHanlder MinionDied;
         public delegate void MinionDeadHanlder();

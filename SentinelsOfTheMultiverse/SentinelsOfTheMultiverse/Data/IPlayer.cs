@@ -54,7 +54,7 @@ namespace SentinelsOfTheMultiverse.Data
         public abstract void playerTurn(bool playedCard, bool playedPower);
         public abstract void startPhase();
         public abstract Boolean playPhase();
-        public abstract object endPhase();
+        public abstract object[] endPhase();
         public abstract List<Card> drawPhase(int numCards);
 
 

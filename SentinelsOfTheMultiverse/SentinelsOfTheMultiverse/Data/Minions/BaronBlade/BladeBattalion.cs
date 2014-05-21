@@ -16,7 +16,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
             effectPhase = Minion.MinionType.End;
         }
 
-        public override object executeEffect()
+        public override object[] executeEffect()
         {
             List<Targetable> targets = new List<Targetable>() { Utility.GetHeroHighestHP() };
             DamageEffects.DealDamage(this, targets, lifeTotal, DamageEffects.DamageType.Melee);

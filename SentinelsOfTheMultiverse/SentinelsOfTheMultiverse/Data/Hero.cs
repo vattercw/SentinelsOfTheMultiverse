@@ -82,14 +82,14 @@ namespace SentinelsOfTheMultiverse
             return null;//This return only matters for env and villain
         }
 
-        public override object endPhase()
+        public override object[] endPhase()
         {
             if (EndPhase != null)
                 return EndPhase();
             return null;
         }
         public event EndPhaseHandler EndPhase;
-        public delegate object EndPhaseHandler();
+        public delegate object[] EndPhaseHandler();
 
         public List<Card> getPlayerHand()
         {
