@@ -84,6 +84,7 @@ namespace SentinelsOfTheMultiverse
             {
                 playerTurn = 0;
             }
+            Console.WriteLine("Player Turn :: " + playerTurn + "   GetCurrentPlayer :: " + GameEngine.getCurrentPlayer());
 
             getCurrentPlayer().playerTurn(playerPlayedCard, playerUsedPower);
             playerPlayedCard = false;

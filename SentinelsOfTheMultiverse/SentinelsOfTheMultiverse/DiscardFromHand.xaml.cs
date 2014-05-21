@@ -41,6 +41,9 @@ namespace SentinelsOfTheMultiverse
             }
         }
 
+        private int minimumToDiscard = -1;
+        private int numDiscarded = 0;
+
         [DllImport("user32.dll")]
         static extern uint GetWindowLong(IntPtr hWnd, int nIndex);
 
@@ -64,11 +67,10 @@ namespace SentinelsOfTheMultiverse
 
         GameBoard gameBoard;
 
-
         public DiscardFromHand(List<Card> hand, GameBoard game)
         {
             InitializeComponent();
-            
+
             gameBoard = game;
 
             updateHandView();
@@ -76,9 +78,22 @@ namespace SentinelsOfTheMultiverse
             Closing += Window_Closed;
         }
 
+        public DiscardFromHand(List<Card> hand, GameBoard game, int min)
+        {
+            InitializeComponent();
+            
+            gameBoard = game;
+
+            updateHandView();
+
+            minimumToDiscard = min;
+
+            Closing += Window_Closed;
+        }
+
         private void Window_Closed(object sender, EventArgs e)
         {
-            cardLayout.Children.RemoveRange(0, cardLayout.Children.Count+1);
+            cardLayout.Children.RemoveRange(0, cardLayout.Children.Count + 1);
             gameBoard.updateBoard();
         }
 
@@ -113,6 +128,7 @@ namespace SentinelsOfTheMultiverse
             if (cardClickedArray.Count != 0)
             {
                 CardDrawingEffects.DiscardCardFromHand(cardClickedArray);
+                numDiscarded += cardClickedArray.Count;
                 updateHandView();
                 gameBoard.updateBoard();
             }
@@ -122,7 +138,11 @@ namespace SentinelsOfTheMultiverse
 
         private void Close_Action(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (minimumToDiscard >= numDiscarded || minimumToDiscard == -1)
+            {
+                this.Close();
+            }
+            else MessageBox.Show("Please discard at least " + (minimumToDiscard - numDiscarded) + " more cards");
         }
 
         private void Cancel_Action(object sender, RoutedEventArgs e)

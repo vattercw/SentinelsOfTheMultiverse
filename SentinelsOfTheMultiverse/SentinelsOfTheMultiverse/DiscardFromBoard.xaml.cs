@@ -33,6 +33,9 @@ namespace SentinelsOfTheMultiverse
 
         GameBoard gameBoard;
 
+        int minimumToDiscard = -1;
+        int numDiscarded = 0;
+
 
         public DiscardFromBoard(GameBoard game)
         {
@@ -43,6 +46,21 @@ namespace SentinelsOfTheMultiverse
             boardShow = GameEngine.getCurrentPlayer().cardsOnField;
 
             updateBoardView();
+
+            Closing += Window_Closed;
+        }
+
+        public DiscardFromBoard(GameBoard game, int min)
+        {
+            InitializeComponent();
+
+            gameBoard = game;
+
+            boardShow = GameEngine.getCurrentPlayer().cardsOnField;
+
+            updateBoardView();
+
+            minimumToDiscard = min;
 
             Closing += Window_Closed;
         }
@@ -88,7 +106,11 @@ namespace SentinelsOfTheMultiverse
             {
                 for (int k = 0; k < count; k++)
                 {
-                    if (currentPlayer.cardsOnField[k].Name.Equals(cardClickedArray[k].Name)) currentPlayer.cardsOnField[k].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
+                    if (currentPlayer.cardsOnField[k].Name.Equals(cardClickedArray[k].Name))
+                    {
+                        currentPlayer.cardsOnField[k].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
+                        numDiscarded += 1;
+                    }
                 }
             }
             updateBoardView();
@@ -98,10 +120,11 @@ namespace SentinelsOfTheMultiverse
 
         private void Close_Action(object sender, RoutedEventArgs e)
         {
-            if (cardClickedArray.Count > 0)
+            if (minimumToDiscard >= numDiscarded || minimumToDiscard == -1)
             {
                 this.Close();
             }
+            else MessageBox.Show("Please discard at least " + (minimumToDiscard - numDiscarded) + " more cards");
         }
 
         public void paintCards()

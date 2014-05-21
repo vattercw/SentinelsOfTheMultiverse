@@ -197,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Hero\Haka\3-Dominion.png" />
+    <Resource Include="Images\SentinelsCover.jpg" />
     <Resource Include="Images\Hero\Legacy\2-BackfistStrike.png" />
     <Resource Include="Images\Hero\Legacy\3-BolsterAllies.png" />
     <Resource Include="Images\Hero\Legacy\3-DangerSense.png" />
