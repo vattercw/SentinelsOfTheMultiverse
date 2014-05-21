@@ -235,6 +235,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public void HakaOfBattle_Continuation(int numDiscardedCards, Card card)
         {
             DamageEffects.damageDealtHandlers.Add(HakaOfBattleDamageHandler);
+            card.SendToGraveyard(this, cardsOnField);
         }
 
         int HakaOfBattleDamageHandler(object sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType)
@@ -287,6 +288,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public void HakaOfShielding_Continuation(int numDiscardedCards, Card card) {
             DamageEffects.damageDealtHandlers.Add(HakaOfShielding_DamageHandler);
+            card.SendToGraveyard(this, cardsOnField);
         }
 
         int HakaOfShielding_DamageHandler(object sender, object receiver, ref int damageAmount, DamageEffects.DamageType damageType) {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,25 +20,14 @@ namespace SentinelsOfTheMultiverse
     /// </summary>
     public partial class Start : Window
     {
-        ComboBox localizationChoicesBox;
         public Start()
         {
             InitializeComponent();
 
-            Button startButton = new Button();
-            startButton.Content = "Start!";
-            startButton.Click += new RoutedEventHandler(Start_Game);
-
             List<String> langChoices = new List<string>(){"en-US", "ja-JP"};
             
-            localizationChoicesBox = new ComboBox();
             localizationChoicesBox.ItemsSource = langChoices;
             localizationChoicesBox.SelectedIndex = 0;
-
-            StackPanel sp= new StackPanel();
-            sp.Children.Add(startButton);
-            sp.Children.Add(localizationChoicesBox);
-            Content = sp;
         }
 
         private void Start_Game(object sender, RoutedEventArgs e)

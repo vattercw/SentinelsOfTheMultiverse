@@ -88,10 +88,13 @@ namespace SentinelsOfTheMultiverse
         private void addHealthLabel(IPlayer playerRujisMom, int row)
         {
             Label playerHealthLabel = new Label();
-            playerHealthLabel.Width = 50;
-            playerHealthLabel.Height = 40;
+            playerHealthLabel.Width = 100;
+            playerHealthLabel.Height = 50;
 
-            playerHealthLabel.Content = playerRujisMom.lifeTotal;
+            playerHealthLabel.Content = playerRujisMom.lifeTotal+"/"+playerRujisMom.maxHealth;
+            playerHealthLabel.FontSize = 24;
+            playerHealthLabel.FontStyle = FontStyles.Normal;
+            playerHealthLabel.FontWeight = FontWeights.Bold;
             Utility.addElementToGrid(playerHealthLabel, row, 0, gridLayout);
         }
 
@@ -208,9 +211,12 @@ namespace SentinelsOfTheMultiverse
         private void View_Hand(object sender, RoutedEventArgs e)
         {
             var currentPlayer = GameEngine.getCurrentPlayer();
-            
-            initHandViewer((Hero)currentPlayer);
-            handViewer.Visibility = Utility.SHOW;
+
+            if(currentPlayer.GetType().Equals(typeof (Data.Villains.BaronBlade)) || currentPlayer.GetType().Equals(typeof (Data.Environments.InsulaPrimus))){}
+            else{
+                initHandViewer((Hero)currentPlayer);
+                handViewer.Visibility = Utility.SHOW;
+            }
             //Button handVisibleButton = (Button)sender;
         }
 
