@@ -6,7 +6,7 @@
         <ImageBrush Stretch="Fill" ImageSource="Images/SentinelsCover.jpg" AlignmentX="Center" AlignmentY="Top" />
     </Window.Background>
     <Grid>
-        <Button Content="Start!" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Margin="826,817,0,0" Click= "Start_Game" Height="75"/>
+        <Button Content="Start!" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Margin="826,817,0,0" Click= "Start_Game" Height="75" FontFamily="Stencil" FontWeight="Bold" FontSize="48"/>
         <ComboBox x:Name="localizationChoicesBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Margin="826,898,0,0"/>
     </Grid>
 </Window>
