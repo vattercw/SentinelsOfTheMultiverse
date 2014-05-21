@@ -121,7 +121,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             }
         }
 
-        public void BackFistStrike(Card card){
+        public void BackfistStrike(Card card){
             card.cardType = Card.CardType.OneShot;
 
             var target = GameBoard.cardClickedArray;

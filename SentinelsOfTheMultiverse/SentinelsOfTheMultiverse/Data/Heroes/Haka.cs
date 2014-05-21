@@ -74,9 +74,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardType = Card.CardType.OneShot;
             var heroes = new List<Targetable>();
             heroes.AddRange(GameEngine.getHeroes());
-            heroes.Remove(GameEngine.getVillain());
-            var nonHeroes = GameEngine.getNonHeroTargets();
-            nonHeroes.Add(GameEngine.getVillain());
+            var nonHeroes = GameEngine.getNonHeroTargets();            
 
             DamageEffects.DealDamage(this, heroes, 2, DamageEffects.DamageType.Melee);
             DamageEffects.DealDamage(this, nonHeroes, 5, DamageEffects.DamageType.Melee);

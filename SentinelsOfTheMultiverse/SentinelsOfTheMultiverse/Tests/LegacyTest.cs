@@ -54,7 +54,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Legacy testLegacy = new Legacy();
 
             Card testStrike = new Card("Images\\Hero\\Legacy\\BackFistStrike.png");
-            testLegacy.BackFistStrike(testStrike);
+            testLegacy.BackfistStrike(testStrike);
             Assert.AreEqual(GameEngine.getVillain().lifeTotal, 35); //change to 36 when done individually, 35 with all are executed, change when static problem fixed...
         }
 

@@ -77,16 +77,19 @@ namespace SentinelsOfTheMultiverse
             return true;
         }
 
-        public override void drawPhase(int numCards)
+        public override List<Card> drawPhase(int numCards)
         {
             hand.AddRange(deck.draw(numCards));
+            return null;//This return only matters for env and villain
         }
 
         public override void endPhase()
         {
             //conditionals need to be added for end turn effects
+            if (EndPhase != null)
+                EndPhase();
         }
-        public event EndPhaseHandler EndPhaseCompleted;
+        public event EndPhaseHandler EndPhase;
         public delegate void EndPhaseHandler();
 
         public List<Card> getPlayerHand()

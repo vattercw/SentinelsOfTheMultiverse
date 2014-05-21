@@ -27,9 +27,9 @@ namespace SentinelsOfTheMultiverse.Data
         public override void playerTurn(bool isCardPlayed=false, bool isPowerUsed=false)
         {
             startPhase();
-            playPhase();
-            endPhase();
-            GameEngine.nextTurn();
+            //playPhase();
+            //endPhase();
+            //GameEngine.nextTurn();
         }
 
         public override void startPhase()
@@ -39,7 +39,7 @@ namespace SentinelsOfTheMultiverse.Data
 
         public override Boolean playPhase()
         {
-            drawPhase(1);//plays card from deck   
+            //drawPhase(1);//plays card from deck   
             return true;
         }
 
@@ -55,14 +55,11 @@ namespace SentinelsOfTheMultiverse.Data
         internal delegate void EndPhaseHandler();
     
 
-        public override void drawPhase(int numCards)
+        public override List<Card> drawPhase(int numCards)
         {
             List<Card> drawnCards = deck.draw(numCards);
             cardsOnField.AddRange(drawnCards);
-            for (int i = 0; i < drawnCards.Count; i++)
-            {
-                this.CardMethod(drawnCards[i]);
-            }
+            return drawnCards;
         }
 
         public List<Minion> getMinions()

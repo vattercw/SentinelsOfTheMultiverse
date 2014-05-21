@@ -55,7 +55,7 @@ namespace SentinelsOfTheMultiverse.Data
         public abstract void startPhase();
         public abstract Boolean playPhase();
         public abstract void endPhase();
-        public abstract void drawPhase(int numCards);
+        public abstract List<Card> drawPhase(int numCards);
 
 
         public enum PlayerType { Hero, Villain, Minion, Environment };

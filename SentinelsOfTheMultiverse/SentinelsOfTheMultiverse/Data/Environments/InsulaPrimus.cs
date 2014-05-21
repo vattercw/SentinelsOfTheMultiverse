@@ -73,7 +73,7 @@ namespace SentinelsOfTheMultiverse.Data.Environments
             {
                 DamageEffects.DealDamage(this,new List<Targetable>(){target}, 4, DamageEffects.DamageType.Toxic);
             }
-            card.SendToGraveyard(this, cardsOnField);
+            //card.SendToGraveyard(this, cardsOnField);
         }
 
         ////Minions

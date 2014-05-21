@@ -97,12 +97,7 @@ namespace SentinelsOfTheMultiverse
 
         private void initButtons()
         {
-            Button showHandButton = new Button();
-            showHandButton.Content = "Show Your Hand!";
-            showHandButton.Width = 150;
-            showHandButton.Height = 50;
-            showHandButton.Click += new RoutedEventHandler(View_Hand);
-            Utility.addElementToGrid(showHandButton, 4, 0, gridLayout);
+
 
             Button cancelSelectionButton = new Button();
             cancelSelectionButton.Content = "Cancel Selection";
@@ -117,6 +112,58 @@ namespace SentinelsOfTheMultiverse
             discardButton.Height = 50;
             discardButton.Click += new RoutedEventHandler(Discard_Action);
             Utility.addElementToGrid(discardButton, 4, 3, gridLayout);
+
+            var currentPlayer = GameEngine.getCurrentPlayer();
+            if(typeof(Hero).IsAssignableFrom(currentPlayer.GetType())){
+                Button showHandButton = new Button();
+                showHandButton.Content = "Show Your Hand!";
+                showHandButton.Width = 150;
+                showHandButton.Height = 50;
+                showHandButton.Click += new RoutedEventHandler(View_Hand);
+                Utility.addElementToGrid(showHandButton, 4, 0, gridLayout);
+            }else{
+            //if (currentPlayer.GetType().Equals(typeof(Data.Villains.BaronBlade)) || currentPlayer.GetType().Equals(typeof(Data.Environments.InsulaPrimus))) {
+                Button playEnvVilButton = new Button();
+                playEnvVilButton.Content = "Play " + GameEngine.getCurrentPlayer().characterName + "Turn";
+                playEnvVilButton.Width = 150;
+                playEnvVilButton.Height = 50;
+                playEnvVilButton.Click += new RoutedEventHandler(PlayEnvVil_Action);
+                Utility.addElementToGrid(playEnvVilButton, 4, 0, gridLayout);
+            }
+            
+        }
+
+        private void PlayEnvVil_Action(object sender, RoutedEventArgs e) {
+            var currentPlayer = GameEngine.getCurrentPlayer();
+            
+            List<Card> drawnCards = currentPlayer.drawPhase(1);
+            for (int i = 0; i < drawnCards.Count; i++) {
+                var res = currentPlayer.CardMethod(drawnCards[i]);
+                if (res != null)
+                {
+                    switch ((GameEngine.ForcedEffect)res[1]) {
+                        case GameEngine.ForcedEffect.RiverOfLava:
+                            break;
+                        case GameEngine.ForcedEffect.PrimordialPlant:
+                            foreach (Hero hero in GameEngine.getHeroes()) {
+                                GameBoard.discardedCardsThisTurn = new List<Card>();
+                                //TODO Discard from board doesn't work
+                                //DiscardFromBoard handView = new DiscardFromBoard(this);
+                                //handView.Visibility = System.Windows.Visibility.Visible;
+                                //handView.ShowDialog();
+                                discardedCardsThisTurn = new List<Card>();
+
+                                Data.Environments.InsulaPrimus.DiscardedAction discardAction = (Data.Environments.InsulaPrimus.DiscardedAction)res[0];
+                                discardAction(GameBoard.discardedCardsThisTurn.Count, hero, (Card)res[3]);
+                            }
+                            drawnCards[0].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
+                            break;
+                    }
+                }
+            }
+            currentPlayer.endPhase();
+            GameEngine.nextTurn();
+            updateBoard();
         }
 
         #endregion
@@ -143,7 +190,7 @@ namespace SentinelsOfTheMultiverse
                 villain.cardsOnField[k].Margin = Utility.cardSpacing;
                 villain.cardsOnField[k].MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
-                Utility.addElementToGrid(villain.cardsOnField[k], VILLAIN_ROW, k + 4, gridLayout);
+                Utility.addElementToGrid(villain.cardsOnField[k], VILLAIN_ROW, k + 5, gridLayout);
             }
 
             for (int k = 0; k < env.cardsOnField.Count; k++)
@@ -159,7 +206,9 @@ namespace SentinelsOfTheMultiverse
         #region HandViewer
         private void View_Hand(object sender, RoutedEventArgs e)
         {
-            initHandViewer((Hero)GameEngine.getCurrentPlayer());
+            var currentPlayer = GameEngine.getCurrentPlayer();
+            
+            initHandViewer((Hero)currentPlayer);
             handViewer.Visibility = Utility.SHOW;
             //Button handVisibleButton = (Button)sender;
         }
@@ -238,9 +287,7 @@ namespace SentinelsOfTheMultiverse
             if (hero.graveyard.Count == 0)
             {
                 graveYardImg.Source = Utility.getImageSource(GRAVEYARD_IMAGE_PATH);
-            }
-            else
-            {
+            }else{
                 graveYardImg.Source = hero.graveyard[hero.graveyard.Count - 1].Source;
             }
             graveYardImg.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
@@ -266,13 +313,24 @@ namespace SentinelsOfTheMultiverse
 
             addHealthLabel(villain, VILLAIN_ROW);
 
-            Card envGraveyard = new Card(GRAVEYARD_IMAGE_PATH);
-            envGraveyard.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
-            Utility.addElementToGrid(envGraveyard, ENVIRONMENT_ROW, GRAVEYARD_COLUMN, gridLayout);
+            Card envGraveImg = new Card(GRAVEYARD_IMAGE_PATH);
+            if (env.graveyard.Count == 0) {
+                envGraveImg.Source = Utility.getImageSource(GRAVEYARD_IMAGE_PATH);
+            } else {
+                envGraveImg.Source = env.graveyard[env.graveyard.Count - 1].Source;
+            }
+            envGraveImg.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
+            Utility.addElementToGrid(envGraveImg, ENVIRONMENT_ROW, GRAVEYARD_COLUMN, gridLayout);
 
-            Card villainGraveYard = new Card(GRAVEYARD_IMAGE_PATH);
-            villainGraveYard.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
-            Utility.addElementToGrid(villainGraveYard, VILLAIN_ROW, GRAVEYARD_COLUMN, gridLayout);
+
+            Card vilGraveImg = new Card(GRAVEYARD_IMAGE_PATH);
+            if (villain.graveyard.Count == 0) {
+                vilGraveImg.Source = Utility.getImageSource(GRAVEYARD_IMAGE_PATH);
+            } else {
+                vilGraveImg.Source = villain.graveyard[villain.graveyard.Count - 1].Source;
+            }
+            vilGraveImg.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
+            Utility.addElementToGrid(vilGraveImg, VILLAIN_ROW, GRAVEYARD_COLUMN, gridLayout);
         }
 
   
@@ -289,7 +347,7 @@ namespace SentinelsOfTheMultiverse
                 Image expandCard = (Image)sender;
 
                 ViewCard showCard = new ViewCard(expandCard.Source, this);
-                showCard.Show();
+                showCard.ShowDialog();
             }
             else if (e.ClickCount == 1)
             {
