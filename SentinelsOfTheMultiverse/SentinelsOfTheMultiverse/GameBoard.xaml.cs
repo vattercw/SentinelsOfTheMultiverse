@@ -115,26 +115,11 @@ namespace SentinelsOfTheMultiverse
             discardButton.Content = "Discard From Field";
             discardButton.Width = 150;
             discardButton.Height = 50;
-            discardButton.Click += new RoutedEventHandler(View_Board);
+            discardButton.Click += new RoutedEventHandler(Discard_Action);
             Utility.addElementToGrid(discardButton, 4, 3, gridLayout);
         }
 
         #endregion
-
-        private void View_Board(object sender, RoutedEventArgs e)
-        {
-            initBoardViewer((Hero)GameEngine.getCurrentPlayer());
-            boardViewer.Visibility = Utility.SHOW;
-            //Button handVisibleButton = (Button)sender;
-        }
-
-        public void initBoardViewer(Hero currentPlayer)
-        {
-            if (currentPlayer != null)
-            {
-                boardViewer = new DiscardFromBoard(this);
-            }
-		}
 
         private void updatePlayersBoard()
 	    {
