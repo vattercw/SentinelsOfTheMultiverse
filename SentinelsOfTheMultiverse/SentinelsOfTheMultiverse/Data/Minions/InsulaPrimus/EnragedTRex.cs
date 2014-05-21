@@ -15,7 +15,6 @@ namespace SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus
             effectPhase = Minion.MinionType.OnAttack;
         }
 
-
         public override object[] executeEffect()
         {
             var orderedTargets = GameEngine.getTargets().OrderBy(x => x.lifeTotal).ToList();
