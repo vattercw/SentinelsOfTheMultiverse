@@ -23,6 +23,7 @@ namespace SentinelsOfTheMultiverse
         //private GameEngine game = new GameEngine();
         private Grid gridLayout = new Grid();
         private ViewHand handViewer;
+        private DiscardFromBoard boardViewer;
 
         private Card drawThisCard;
         public static List<Card> discardedCardsThisTurn = new List<Card>();
@@ -114,11 +115,27 @@ namespace SentinelsOfTheMultiverse
             discardButton.Content = "Discard From Field";
             discardButton.Width = 150;
             discardButton.Height = 50;
-            discardButton.Click += new RoutedEventHandler(Discard_Action);
+            discardButton.Click += new RoutedEventHandler(View_Board);
             Utility.addElementToGrid(discardButton, 4, 3, gridLayout);
         }
 
         #endregion
+
+        private void View_Board(object sender, RoutedEventArgs e)
+        {
+            initBoardViewer((Hero)GameEngine.getCurrentPlayer());
+            boardViewer.Visibility = Utility.SHOW;
+            //Button handVisibleButton = (Button)sender;
+        }
+
+        public void initBoardViewer(Hero currentPlayer)
+        {
+            if (currentPlayer != null)
+            {
+                boardViewer = new DiscardFromBoard(this);
+            }
+		}
+
         private void updatePlayersBoard()
 	    {
 	        Villain villain = GameEngine.getVillain();

@@ -40,9 +40,9 @@ namespace SentinelsOfTheMultiverse
             
             gameBoard = game;
 
-            updateBoardView();
-
             boardShow = GameEngine.getCurrentPlayer().cardsOnField;
+
+            updateBoardView();
 
             Closing += Window_Closed;
         }
@@ -82,12 +82,13 @@ namespace SentinelsOfTheMultiverse
         private void Discard_Action(object sender, RoutedEventArgs e)
         {
             var currentPlayer = GameEngine.getCurrentPlayer();
+            var count = cardClickedArray.Count;
 
             if (cardClickedArray.Count > 0)
             {
-                foreach (Card toDiscard in cardClickedArray)
+                for (int k = 0; k < count; k++)
                 {
-                    if (currentPlayer.cardsOnField.Contains(toDiscard)) toDiscard.SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
+                    if (currentPlayer.cardsOnField[k].Name.Equals(cardClickedArray[k].Name)) currentPlayer.cardsOnField[k].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
                 }
             }
             updateBoardView();
@@ -108,13 +109,15 @@ namespace SentinelsOfTheMultiverse
             var numCards = boardShow.Count;
             for (int k = 0; k < numCards; k++)
             {
-                Grid.SetColumn(boardShow[k], k);
-                boardShow[k].AddHandler(UIElement.MouseDownEvent, new RoutedEventHandler(Card_Selection_Handler), true);
+                Card myImage = new Card(boardShow[k].Source.ToString());
 
-                boardShow[k].Height = 400;
-                boardShow[k].Margin = Utility.cardSpacing;
+                Grid.SetColumn(myImage, k);
+                myImage.AddHandler(UIElement.MouseDownEvent, new RoutedEventHandler(Card_Selection_Handler), true);
 
-                cardLayout.Children.Add(boardShow[k]);
+                myImage.Height = 400;
+                myImage.Margin = Utility.cardSpacing;
+
+                cardLayout.Children.Add(myImage);
             }
         }
 
