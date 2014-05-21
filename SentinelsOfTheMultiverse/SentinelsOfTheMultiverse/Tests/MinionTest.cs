@@ -15,7 +15,7 @@ namespace SentinelsOfTheMultiverse.Tests
     [TestFixture]
     class MinionTest
     {
-        [SetUp, RequiresSTA]
+        [SetUp(), RequiresSTA]
         private void Setup() {
             Start st = new Start();
             st.beginGame();
@@ -152,7 +152,7 @@ namespace SentinelsOfTheMultiverse.Tests
             Assert.AreEqual(0, villain.getMinions().Count);
         }
 
-        [TearDown]
+        [TearDown()]
         public void TearDown() {
             GameEngine.TearDownGameEngine();
         }

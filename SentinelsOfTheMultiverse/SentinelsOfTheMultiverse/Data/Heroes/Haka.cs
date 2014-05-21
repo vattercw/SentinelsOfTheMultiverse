@@ -230,11 +230,11 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardType = Card.CardType.OneShot;
             CardDrawingEffects.DrawCards(2, this);
             
-            DiscardedAction act = HakaOfBattleContinuation;
+            DiscardedAction act = HakaOfBattle_Continuation;
             return new object[] { act,GameEngine.ForcedEffect.DiscardCurrentPlayer, GameEngine.getPlayers(), card };
         }
 
-        private void HakaOfBattleContinuation(int numDiscardedCards, Card card)
+        public void HakaOfBattle_Continuation(int numDiscardedCards, Card card)
         {
             DamageEffects.damageDealtHandlers.Add(HakaOfBattleDamageHandler);
         }
@@ -272,7 +272,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             return new object[] { act, GameEngine.ForcedEffect.DiscardCurrentPlayer, 1, card};
         }
 
-        void HakaOfRestoration_Continuation(int numDiscardedCards, Card card) {
+        public void HakaOfRestoration_Continuation(int numDiscardedCards, Card card) {
             lifeTotal += numDiscardedCards;
             card.SendToGraveyard(this, cardsOnField);
         }
@@ -287,7 +287,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             return new object[] { act, GameEngine.ForcedEffect.DiscardCurrentPlayer, 1, card };
         }
 
-        private void HakaOfShielding_Continuation(int numDiscardedCards, Card card) {
+        public void HakaOfShielding_Continuation(int numDiscardedCards, Card card) {
             DamageEffects.damageDealtHandlers.Add(HakaOfShielding_DamageHandler);
         }
 

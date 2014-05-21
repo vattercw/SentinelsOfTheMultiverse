@@ -32,10 +32,7 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                         }
                     }
                 }
-                if (damageModifiers + damageAmount > receiver.maxHealth)
-                    receiver.lifeTotal = receiver.maxHealth;
-                else
-                    receiver.lifeTotal -= damageModifiers + damageAmount;
+                    receiver.lifeTotal -= (damageModifiers + damageAmount);
             }
         }
     }

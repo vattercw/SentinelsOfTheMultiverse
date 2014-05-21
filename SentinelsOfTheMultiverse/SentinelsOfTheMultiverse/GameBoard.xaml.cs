@@ -407,5 +407,12 @@ namespace SentinelsOfTheMultiverse
             lose.Title = "You lose!";
             lose.Activate();
         }
+        public void GameBoardTeardown()
+        {
+            gridLayout = null;
+            handViewer = null;
+            discardedCardsThisTurn = null;
+            cardClickedArray = null;
+        }
     }
 }

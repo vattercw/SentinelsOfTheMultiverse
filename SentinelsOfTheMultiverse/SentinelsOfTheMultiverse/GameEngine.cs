@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Media;
 using SentinelsOfTheMultiverse.Data.Villains;
 using SentinelsOfTheMultiverse.Data.Heroes;
+using SentinelsOfTheMultiverse.Data.Effects;
 
 namespace SentinelsOfTheMultiverse
 {
@@ -131,6 +132,8 @@ namespace SentinelsOfTheMultiverse
             villain = null;
             heroes = new List<Hero>();
             environment = null;
+            DamageEffects.damageDealtHandlers = new List<DamageEffects.DamageHandler>();
+            GameBoard.discardedCardsThisTurn = new List<Card>();
         }
 
         #region GET SET REGION

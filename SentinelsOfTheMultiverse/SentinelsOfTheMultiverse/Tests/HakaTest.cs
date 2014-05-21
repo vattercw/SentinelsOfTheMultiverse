@@ -16,26 +16,28 @@ namespace SentinelsOfTheMultiverse.Tests
     [TestFixture]
     class HakaTest
     {
+        [SetUp(), RequiresSTA]
+        public void Setup()
+        {
+            Start st = new Start();
+            st.beginGame();
+        }
+
         [Test(), RequiresSTA]
         public void TestRampage()
         {
             //add mocks for GameEngine.getHeroes() and GameEngine.getVillain()
-            Start game = new Start();
-            game.beginGame();
-            Haka haka = (Haka)ObjectMother.TestHero();
-            Minion min1 = ObjectMother.TestMinion();
-            GameEngine.getVillain().addMinion(min1);
+            Haka haka = (Haka)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Haka));
 
-            Card rampageCard = new Card("Images\\Hero\\Haka\\Rampage.png");
+            Card rampageCard = new Card("Images\\Hero\\Haka\\3-Rampage.png");
             haka.Rampage(rampageCard);
-            Assert.AreEqual(GameEngine.getVillain().lifeTotal, 35);
+            Assert.AreEqual(35, GameEngine.getVillain().lifeTotal);
+            Assert.AreEqual(32, haka.lifeTotal);
         }
 
         [Test(), RequiresSTA]
         public void TestElbowSmash()
         {
-            Start game = new Start();
-            game.beginGame();
             Haka haka = (Haka)ObjectMother.TestHero();
             BaronBlade baron = (BaronBlade)ObjectMother.TestVillain();
             GameEnvironment env = (GameEnvironment)ObjectMother.TestEnvironment();
@@ -53,8 +55,6 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestTaMoko()
         {
-            Start game = new Start();
-            game.beginGame();
             Haka haka = (Haka)ObjectMother.TestHero();
             BaronBlade baron = (BaronBlade)ObjectMother.TestVillain();
             int startingLifeTotal = haka.lifeTotal;
@@ -70,8 +70,6 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestHakaOfBattle()
         {
-            Start game = new Start();
-            game.beginGame();
             Haka haka = (Haka)ObjectMother.TestHero();
             Card hakaOfBattleCard = new Card("Images\\Heroes\\Haka\\3-HakaOfBattle.png");
             Card elbowCard = new Card("Images\\Heroes\\Haka\\3-ElbowSmash.png");
@@ -79,32 +77,64 @@ namespace SentinelsOfTheMultiverse.Tests
             int startLifeTotal = GameEngine.getVillain().lifeTotal;
             int startHandCount = haka.hand.Count;
 
-            haka.HakaOfBattle(hakaOfBattleCard);
             haka.DiscardCard(haka.hand[0]);
+            haka.DiscardCard(haka.hand[1]);
+
+            haka.HakaOfBattle(hakaOfBattleCard);
+            //Pretend to have discard 2 cards
+            haka.HakaOfBattle_Continuation(2, hakaOfBattleCard);
 
             haka.ElbowSmash(elbowCard);
 
-            Assert.AreEqual(startHandCount + 1, haka.hand.Count);
-            Assert.AreEqual(36, GameEngine.getVillain().lifeTotal);
-            //int damageAmount= 2 + haka.damageAmplificationFromPlayer;
-            //DamageEffects.DealDamageToVillain(GameEngine.getVillain(), damageAmount, DamageEffects.DamageType.Melee);
-            //Assert.AreEqual(GameEngine.getVillain().lifeTotal, startLifeTotal - 3);
-
-            ////needs to reset haka's damage amp after first damage has been used
-            //int damageAmount2 = 2 + haka.damageAmplificationFromPlayer;
-            //DamageEffects.DealDamageToVillain(GameEngine.getVillain(), damageAmount, DamageEffects.DamageType.Melee);
-            //Assert.AreEqual(GameEngine.getVillain().lifeTotal, startLifeTotal - 5);
-
-            //also need to test that it doesn't use the bonus damage until he is dealing it for the first time
-
+            Assert.AreEqual(startHandCount, haka.hand.Count);
+            Assert.AreEqual(35, GameEngine.getVillain().lifeTotal);
         }
+
+        [Test(), RequiresSTA]
+        public void TestHakaOfRestoration()
+        {
+            Haka haka = (Haka)ObjectMother.TestHero();
+            Card hakaOfRestorationCard = new Card("Images\\Heroes\\Haka\\3-HakaOfRestoration.png");
+
+            haka.lifeTotal -= 14;
+            int startHandCount = haka.hand.Count;
+
+            haka.DiscardCard(haka.hand[0]);
+            haka.DiscardCard(haka.hand[1]);
+
+            haka.HakaOfRestoration(hakaOfRestorationCard);
+            //Pretend to have discard 2 cards
+            haka.HakaOfRestoration_Continuation(2, hakaOfRestorationCard);
+
+            Assert.AreEqual(startHandCount, haka.hand.Count);
+            Assert.AreEqual(22, haka.lifeTotal);
+        }
+
+        [Test(), RequiresSTA]
+        public void TestHakaOfShielding()
+        {
+            Haka haka = (Haka)ObjectMother.TestHero();
+            Card hakaOfShieldingCard = new Card("Images\\Heroes\\Haka\\3-HakaOfShielding.png");
+
+            int startHandCount = haka.hand.Count;
+
+            haka.DiscardCard(haka.hand[0]);
+            haka.DiscardCard(haka.hand[1]);
+
+            haka.HakaOfShielding(hakaOfShieldingCard);
+            //Pretend to have discard 2 cards
+            haka.HakaOfShielding_Continuation(2, hakaOfShieldingCard);
+
+            DamageEffects.DealDamage(haka, new List<Targetable>() { haka }, 5, DamageEffects.DamageType.Melee);
+
+            Assert.AreEqual(startHandCount, haka.hand.Count);
+            Assert.AreEqual(33, haka.lifeTotal);
+        }
+
         [Test(), RequiresSTA]
         public void TestGroundPound() {
-            GameEngine.TearDownGameEngine();
-            Start game = new Start();
-
-            game.beginGame();
-
+            TearDown();
+            Setup();
             Haka haka = (Haka)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Haka));
             Legacy legacy = (Legacy)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Legacy));
             Card groundPoundCard = new Card("Images\\Hero\\Haka\\2-GroundPound.png");
@@ -123,10 +153,6 @@ namespace SentinelsOfTheMultiverse.Tests
 
         [Test(), RequiresSTA]
         public void TestGroundPoundWithExistingDamageHandler() {
-            GameEngine.TearDownGameEngine();
-            Start game = new Start();
-
-            game.beginGame();
 
             Haka haka = (Haka)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Haka));
             Card groundPoundCard = new Card("Images\\Hero\\Haka\\2-GroundPound.png");
@@ -145,11 +171,6 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestDominion()
         {
-            GameEngine.TearDownGameEngine();
-            Start game = new Start();
-            
-            game.beginGame();
-
             Haka haka= (Haka)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Haka));
             Card envCard = new Card("Images\\Environment\\InsulaPrimus\\2-PterodactylThief.png");
             envCard.cardType = Card.CardType.Environment;
@@ -163,9 +184,6 @@ namespace SentinelsOfTheMultiverse.Tests
 
         [Test(), RequiresSTA]
         public void TestEnduringIntercession() {
-            GameEngine.TearDownGameEngine();
-            Start game = new Start();
-            game.beginGame();
 
             Haka haka = (Haka)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Haka));
             Legacy legacy= (Legacy)GameEngine.getHeroes().Find(x => x.GetType() == typeof(Legacy));
@@ -189,7 +207,6 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestMere()
         {
-            GameEngine.TearDownGameEngine();
             Haka testHaka= new Haka();
             BaronBlade testVil = new BaronBlade();
             InsulaPrimus env = new InsulaPrimus();
@@ -211,13 +228,17 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestPower()
         {
-            Start game = new Start();
-            game.beginGame();
             Haka haka = new Haka();
 
             haka.Power();
 
-            Assert.AreEqual(38, GameEngine.getVillain().lifeTotal);
+            Assert.AreEqual(38, GameEngine.getVillain().lifeTotal);   
+        }
+
+        [TearDown()]
+        public void TearDown()
+        {
+            GameEngine.TearDownGameEngine();
             
         }
     }

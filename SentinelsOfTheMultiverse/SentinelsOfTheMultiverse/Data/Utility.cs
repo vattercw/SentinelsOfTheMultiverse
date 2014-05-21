@@ -101,20 +101,28 @@ namespace SentinelsOfTheMultiverse
         public static Hero GetHeroHighestHP()
         {
             var heroes = GameEngine.getHeroes();
-            heroes= heroes.OrderBy(o => o.lifeTotal).ToList();
+            Hero highestHPHero = heroes[0];
 
-            return heroes[heroes.Count -1];
+            for (int i = 0; i < heroes.Count; i++)
+            {
+                if (highestHPHero.lifeTotal < heroes[i].lifeTotal)
+                {
+                    highestHPHero = heroes[i];
+                }
+            }
+            return highestHPHero;
         }
 
         public static Hero GetHeroLowestHP()
         {
-            Hero lowestHPHero = GameEngine.getHeroes()[0];
+            var heroes = GameEngine.getHeroes();
+            Hero lowestHPHero = heroes[0];
 
-            for (int i = 0; i < GameEngine.getHeroes().Count; i++)
+            for (int i = 0; i < heroes.Count; i++)
             {
-                if (lowestHPHero.lifeTotal > GameEngine.getHeroes()[i].lifeTotal)
+                if (lowestHPHero.lifeTotal > heroes[i].lifeTotal)
                 {
-                    lowestHPHero = GameEngine.getHeroes()[i];
+                    lowestHPHero = heroes[i];
                 }
             }
             return lowestHPHero;
