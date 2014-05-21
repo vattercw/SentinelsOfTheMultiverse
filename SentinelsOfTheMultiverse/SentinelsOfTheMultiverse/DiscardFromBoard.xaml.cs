@@ -31,16 +31,17 @@ namespace SentinelsOfTheMultiverse
 
         List<Card> cardClickedArray = new List<Card>();
 
+        IPlayer currentPlayer;
         GameBoard gameBoard;
 
 
-        public DiscardFromBoard(GameBoard game)
+        public DiscardFromBoard(GameBoard game, IPlayer player)
         {
             InitializeComponent();
             
             gameBoard = game;
-
-            boardShow = GameEngine.getCurrentPlayer().cardsOnField;
+            currentPlayer = player;
+            boardShow = player.cardsOnField;
 
             updateBoardView();
 
@@ -61,7 +62,7 @@ namespace SentinelsOfTheMultiverse
             discardButton.Click += new RoutedEventHandler(Discard_Action);
 
             Button closeButton = new Button();
-            closeButton.Content = "No Discard.";
+            closeButton.Content = "Done";
             closeButton.Click += new RoutedEventHandler(Close_Action);
 
             sideBar.Children.Add(closeButton);
@@ -81,9 +82,8 @@ namespace SentinelsOfTheMultiverse
 
         private void Discard_Action(object sender, RoutedEventArgs e)
         {
-            var currentPlayer = GameEngine.getCurrentPlayer();
             var count = cardClickedArray.Count;
-
+            GameBoard.discardedCardsThisTurn.AddRange(cardClickedArray);
             if (cardClickedArray.Count > 0)
             {
                 for (int k = 0; k < count; k++)
@@ -98,10 +98,10 @@ namespace SentinelsOfTheMultiverse
 
         private void Close_Action(object sender, RoutedEventArgs e)
         {
-            if (cardClickedArray.Count > 0)
-            {
-                this.Close();
-            }
+            //if (cardClickedArray.Count > 0)
+            //{
+            this.Close();
+            //}
         }
 
         public void paintCards()
