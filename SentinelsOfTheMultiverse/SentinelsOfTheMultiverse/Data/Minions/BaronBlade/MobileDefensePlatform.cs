@@ -16,8 +16,9 @@ namespace SentinelsOfTheMultiverse.Data.Minions
             effectPhase = Minion.MinionType.Ongoing;
         }
 
-        public override void executeEffect()
+        public override object[] executeEffect()
         {
+            return null;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace SentinelsOfTheMultiverse.Data.Minions
             lifeTotal = 10;
             effectPhase = Minion.MinionType.OnAttack;
         }
-        public override void executeEffect()
+        public override object[] executeEffect()
         {
             throw new NotImplementedException();
         }

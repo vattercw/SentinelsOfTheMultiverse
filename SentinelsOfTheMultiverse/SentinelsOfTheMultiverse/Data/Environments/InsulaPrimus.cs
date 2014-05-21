@@ -16,6 +16,7 @@ namespace SentinelsOfTheMultiverse.Data.Environments
             card.cardType = Card.CardType.Ongoing;
             foreach (Hero hero in GameEngine.getHeroes()) {
                 //TODO add EndPhaseCompletedHandler somehow
+                hero.EndPhase += ObsidianField_EndPhaseCompletedHandler;
             }
             DamageEffects.damageDealtHandlers.Add(ObsidianFieldHandler);
         }
@@ -25,14 +26,9 @@ namespace SentinelsOfTheMultiverse.Data.Environments
             return 1;
         }
 
-        void ObsidianField_EndPhaseCompletedHandler() {
-            DialogResult dialogResult = MessageBox.Show("Do you want to discard 2 cards to remove Obsidian Field?", "Dominion Effect", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes) {
-                //TODO somehow prompt the user for 2 cards to discard
-                
-                Card card = cardsOnField.Find(x => x.getName().Equals("ObsidianField"));
-                card.SendToGraveyard(this, cardsOnField);
-            }
+        object[] ObsidianField_EndPhaseCompletedHandler() {
+            DialogResult dialogResult = MessageBox.Show("Do you want to discard 2 cards to remove Obsidian Field?", "Dominion Effect", MessageBoxButtons.YesNo);            
+            return new object[]{GameEngine.ForcedEffect.ObsidianField, dialogResult};
         }
 
         public override void Power()

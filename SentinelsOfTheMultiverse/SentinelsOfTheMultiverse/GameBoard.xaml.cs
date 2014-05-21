@@ -124,16 +124,14 @@ namespace SentinelsOfTheMultiverse
                 showHandButton.Height = 50;
                 showHandButton.Click += new RoutedEventHandler(View_Hand);
                 Utility.addElementToGrid(showHandButton, 4, 0, gridLayout);
-            }else{
-            //if (currentPlayer.GetType().Equals(typeof(Data.Villains.BaronBlade)) || currentPlayer.GetType().Equals(typeof(Data.Environments.InsulaPrimus))) {
+            }else{           
                 Button playEnvVilButton = new Button();
                 playEnvVilButton.Content = "Play " + GameEngine.getCurrentPlayer().characterName + "Turn";
                 playEnvVilButton.Width = 150;
                 playEnvVilButton.Height = 50;
                 playEnvVilButton.Click += new RoutedEventHandler(PlayEnvVil_Action);
                 Utility.addElementToGrid(playEnvVilButton, 4, 0, gridLayout);
-            }
-            
+            }            
         }
 
         private void PlayEnvVil_Action(object sender, RoutedEventArgs e) {
@@ -146,16 +144,21 @@ namespace SentinelsOfTheMultiverse
                 {
                     switch ((GameEngine.ForcedEffect)res[1]) {
                         case GameEngine.ForcedEffect.RiverOfLava:
+                            foreach (Hero hero in GameEngine.getHeroes()) {
+                                //GameBoard.discardedCardsThisTurn = new List<Card>();
+                                //DiscardFromHand discardWindow = new DiscardFromHand(hero.hand, this);
+                                //discardWindow.Visibility = System.Windows.Visibility.Visible;
+                                //discardWindow.ShowDialog();
+
+
+                            }
                             break;
                         case GameEngine.ForcedEffect.PrimordialPlant:
                             foreach (Hero hero in GameEngine.getHeroes()) {
                                 GameBoard.discardedCardsThisTurn = new List<Card>();
-                                //TODO Discard from board doesn't work
                                 DiscardFromBoard handView = new DiscardFromBoard(this, hero);
                                 handView.Visibility = System.Windows.Visibility.Visible;
                                 handView.ShowDialog();
-
-                                //discardedCardsThisTurn = new List<Card>();
 
                                 Data.Environments.InsulaPrimus.DiscardedAction discardAction = (Data.Environments.InsulaPrimus.DiscardedAction)res[0];
                                 discardAction(GameBoard.discardedCardsThisTurn.Count, hero, (Card)res[3]);
@@ -165,7 +168,10 @@ namespace SentinelsOfTheMultiverse
                     }
                 }
             }
-            currentPlayer.endPhase();
+            object result = currentPlayer.endPhase();
+            if (result != null) {
+                Console.Write("hi");
+            }
             GameEngine.nextTurn();
             updateBoard();
         }
