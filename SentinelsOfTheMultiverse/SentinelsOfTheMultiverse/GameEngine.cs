@@ -47,26 +47,36 @@ namespace SentinelsOfTheMultiverse
             {
                 Hero newHero = (Hero)getClassFromString(heroesStr[i]);
                 //TODO testing code to initialize certain cards in a players hand
-                //newHero.hand.RemoveRange(0, 2);
                 if (newHero.GetType().Equals(typeof(Haka)))
                 {
                     //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-SavageMana.png"));
                     //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-Rampage.png"));
                     //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-GroundPound.png"));
-                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-HakaOfBattle.png"));
-                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-TaMoko.png"));
-
+                    //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-HakaOfBattle.png"));
+                    //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-TaMoko.png"));
                     //newHero.hand.Add(new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\3-EnduringIntercession.png"));
+                }
+                if (newHero.GetType().Equals(typeof(Legacy))) {
+                    newHero.hand.RemoveAll(x => x.Name.Equals("NextEvolution"));
+                    newHero.deck.cards.RemoveAll(x => x.Name.Equals("NextEvolution"));
+
+                    newHero.hand.RemoveAll(x => x.Name.Equals("TakeDown"));
+                    newHero.deck.cards.RemoveAll(x => x.Name.Equals("TakeDown"));
                 }
                 heroes.Add(newHero);
             }
             
 
             villain = (Villain)getClassFromString(villainStr);
-            villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\2-PoweredRemoteTurret.png");
-            
+            //villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\2-PoweredRemoteTurret.png");
+            villain.deck.cards.RemoveAll(x => x.Name.Equals("DeviousDistruption"));
+            villain.deck.cards.RemoveAll(x => x.Name.Equals("ConsiderThePriceOfVictory"));
+            villain.deck.cards.RemoveAll(x => x.Name.Equals("BackSlashField"));
+
             environment = (GameEnvironment)getClassFromString(envStr);
-            environment.deck.cards[0] = new Card("\\Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
+            environment.deck.cards.RemoveAll(x => x.Name.Equals("RiverOfLava"));
+            environment.deck.cards.RemoveAll(x => x.Name.Equals("VolcanicEruption"));
+            //environment.deck.cards[0] = new Card("\\Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
         }
 
         public static Object getClassFromString(string className)

@@ -201,7 +201,7 @@ namespace SentinelsOfTheMultiverse
                     case GameEngine.ForcedEffect.ObsidianField:
                         if ((System.Windows.Forms.DialogResult)result[1] == System.Windows.Forms.DialogResult.Yes) {
                             Close();
-                            DiscardFromHand discardHand = new DiscardFromHand(((Hero)GameEngine.getCurrentPlayer()).hand, gameBoard);
+                            DiscardFromHand discardHand = new DiscardFromHand(((Hero)GameEngine.getCurrentPlayer()).hand, gameBoard, 2);
                             discardHand.Visibility = System.Windows.Visibility.Visible;
                             discardHand.ShowDialog();
 
