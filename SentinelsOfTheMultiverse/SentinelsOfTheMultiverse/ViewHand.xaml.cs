@@ -306,10 +306,10 @@ namespace SentinelsOfTheMultiverse
                             {
                                 //TODO will never get called
                                 GameBoard.discardedCardsThisTurn = new List<Card>();
-                                DiscardFromBoard viewHand = new DiscardFromBoard(gameBoard);
-
+                                DiscardFromBoard viewHand = new DiscardFromBoard(gameBoard, hero);
                                 viewHand.Visibility = System.Windows.Visibility.Visible;
                                 viewHand.ShowDialog();
+
                                 BaronBlade.DisruptDiscardedAction discardAction = (BaronBlade.DisruptDiscardedAction)res[0];
                                 discardAction(GameBoard.discardedCardsThisTurn.Count, hero);
                             }

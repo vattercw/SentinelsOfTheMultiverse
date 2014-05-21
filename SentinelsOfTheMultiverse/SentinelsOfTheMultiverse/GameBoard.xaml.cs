@@ -148,10 +148,11 @@ namespace SentinelsOfTheMultiverse
                             foreach (Hero hero in GameEngine.getHeroes()) {
                                 GameBoard.discardedCardsThisTurn = new List<Card>();
                                 //TODO Discard from board doesn't work
-                                //DiscardFromBoard handView = new DiscardFromBoard(this);
-                                //handView.Visibility = System.Windows.Visibility.Visible;
-                                //handView.ShowDialog();
-                                discardedCardsThisTurn = new List<Card>();
+                                DiscardFromBoard handView = new DiscardFromBoard(this, hero);
+                                handView.Visibility = System.Windows.Visibility.Visible;
+                                handView.ShowDialog();
+
+                                //discardedCardsThisTurn = new List<Card>();
 
                                 Data.Environments.InsulaPrimus.DiscardedAction discardAction = (Data.Environments.InsulaPrimus.DiscardedAction)res[0];
                                 discardAction(GameBoard.discardedCardsThisTurn.Count, hero, (Card)res[3]);

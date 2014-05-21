@@ -189,6 +189,7 @@ namespace SentinelsOfTheMultiverse
             List<Targetable> targets = new List<Targetable>();
             targets.AddRange(villain.getMinions());
             targets.AddRange(environment.getMinions());
+            targets.Add(villain);
             return targets;
         }
     }
