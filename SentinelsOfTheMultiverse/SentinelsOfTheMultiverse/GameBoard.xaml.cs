@@ -138,6 +138,7 @@ namespace SentinelsOfTheMultiverse
             var currentPlayer = GameEngine.getCurrentPlayer();
             
             List<Card> drawnCards = currentPlayer.drawPhase(1);
+
             for (int i = 0; i < drawnCards.Count; i++) {
                 var res = currentPlayer.CardMethod(drawnCards[i]);
                 if (res != null)
@@ -199,6 +200,11 @@ namespace SentinelsOfTheMultiverse
             {
                 villain.cardsOnField[k].Margin = Utility.cardSpacing;
                 villain.cardsOnField[k].MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
+
+                if (villain.cardsOnField[k].Equals(typeof(Minion)))
+                {
+                    
+                }
 
                 Utility.addElementToGrid(villain.cardsOnField[k], VILLAIN_ROW, k + 5, gridLayout);
             }

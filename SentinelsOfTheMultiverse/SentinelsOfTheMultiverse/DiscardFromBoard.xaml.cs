@@ -80,7 +80,8 @@ namespace SentinelsOfTheMultiverse
             discardButton.Click += new RoutedEventHandler(Discard_Action);
 
             Button closeButton = new Button();
-            closeButton.Content = "Done";
+            if (numDiscarded == 0) closeButton.Content = "No Discard.";
+            else closeButton.Content = "Done";
             closeButton.Click += new RoutedEventHandler(Close_Action);
 
             sideBar.Children.Add(closeButton);
