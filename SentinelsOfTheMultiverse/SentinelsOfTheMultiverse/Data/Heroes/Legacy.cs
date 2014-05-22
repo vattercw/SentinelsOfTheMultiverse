@@ -61,7 +61,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             var target = GameBoard.cardClickedArray;
             if (target.Count > 3)
             {
-                MessageBox.Show("Please select 3 or fewer targets. \n No select target default's to the Villain.");
+                MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("SelectThree"));
                 Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
                 currentPlayer.hand.Add(card);
                 currentPlayer.graveyard.Remove(card);
@@ -112,7 +112,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                     }
                     card.SendToGraveyard(this, cardsOnField);
                 }
-                else MessageBox.Show("Please select an appropriate card.");
+                else MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("PleaseSelectAppropriate"));
             }
             else
             {
@@ -167,7 +167,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                     DamageEffects.DealDamage(this, targets , 4, DamageEffects.DamageType.Melee);
                     card.SendToGraveyard(this, cardsOnField);
                 }
-                else MessageBox.Show("Please select an appropriate card.");
+                else MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("PleaseSelectAppropriate"));
             }
             else
             {
@@ -197,7 +197,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             var target = GameBoard.cardClickedArray;
             if (target.Count > 1)
             {
-                MessageBox.Show("Select only one target to deal damage to. \n No select target default's to the Villain.");
+                MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("SelectOne"));
                 Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
                 cardsOnField.Remove(card);
                 currentPlayer.hand.Add(card);
@@ -274,7 +274,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             {
                 if (typeof(Villain).IsAssignableFrom(sender.GetType()) || GameEngine.getVillain().getMinions().Contains(sender))
                 {
-                    DialogResult dialogResult = MessageBox.Show("Do you want to have Legacy take the damage?", "Lead From The Front Effect", MessageBoxButtons.YesNo);
+                    DialogResult dialogResult = MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Legacy Damage"), "Lead From The Front Effect", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
                         DamageEffects.DealDamage(sender, new List<Targetable>() { this }, damageAmount, damageType);
@@ -341,7 +341,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             var target = GameBoard.cardClickedArray;
             if (target.Count > 1)
             {
-                MessageBox.Show("Select only one target to perform Thokk \n No select target default's to the Villain.");
+                MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("ThokkSelect"));
                 Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
                 currentPlayer.hand.Add(card);
                 currentPlayer.graveyard.Remove(card);

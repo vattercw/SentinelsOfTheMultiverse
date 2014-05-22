@@ -79,40 +79,45 @@ namespace SentinelsOfTheMultiverse
                 initGrid(deadHand);
 
                 Button power1Button = new Button();
-                power1Button.Content = "Power 1";
+                power1Button.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Power1");
                 power1Button.Click += new RoutedEventHandler(Power1_Action);
 
                 Button power2Button = new Button();
-                power2Button.Content = "Power 2";
+                power2Button.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Power2");
                 power2Button.Click += new RoutedEventHandler(Power2_Action);
 
                 Button power3Button = new Button();
-                power3Button.Content = "Power 3";
+                power3Button.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Power3");
                 power3Button.Click += new RoutedEventHandler(Power3_Action);
+
+                sideBar.Children.Add(power1Button);
+                sideBar.Children.Add(power2Button);
+                sideBar.Children.Add(power3Button);
+
             }
             else
             {
 
                 Button discardButton = new Button();
-                discardButton.Content = "Discard";
+                discardButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Discard");
                 discardButton.Click += new RoutedEventHandler(Discard_Action);
 
                 Button cancelButton = new Button();
-                cancelButton.Content = "Cancel Action";
+                cancelButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("CancelAction");
                 cancelButton.Click += new RoutedEventHandler(Cancel_Action);
 
                 Button closeButton = new Button();
-                closeButton.Content = "Close";
+                closeButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Close");
                 closeButton.Click += new RoutedEventHandler(Close_Action);
 
                 Button endTurnButton = new Button();
-                endTurnButton.Content = "End Turn!";
+                endTurnButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("EndTurn");
                 endTurnButton.Click += new RoutedEventHandler(End_Turn);
 
                 if (!GameEngine.playerPlayedCard)
                 {
                     Button playButton = new Button();
-                    playButton.Content = "Play Card";
+                    playButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("PlayCard");
                     playButton.Click += new RoutedEventHandler(Play_Card);
                     sideBar.Children.Add(playButton);
                 }
@@ -120,7 +125,7 @@ namespace SentinelsOfTheMultiverse
                 if (!GameEngine.playerUsedPower)
                 {
                     Button powerButton = new Button();
-                    powerButton.Content = "Player Power";
+                    powerButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("PlayerPower");
                     powerButton.Click += new RoutedEventHandler(Power_Action);
                     sideBar.Children.Add(powerButton);
                 }
@@ -176,7 +181,7 @@ namespace SentinelsOfTheMultiverse
                 updateHandView();
                 gameBoard.updateBoard();
             }
-            else MessageBox.Show("Discard something...");
+            else MessageBox.Show( SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("DiscardSomething"));
         }
 
         private void End_Turn(object sender, RoutedEventArgs e)

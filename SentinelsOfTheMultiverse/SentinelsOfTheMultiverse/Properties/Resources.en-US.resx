@@ -117,8 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel Selection</value>
+  </data>
+  <data name="CancelAction" xml:space="preserve">
+    <value>Cancel Action</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Discard" xml:space="preserve">
+    <value>Discard</value>
+  </data>
+  <data name="DiscardFromField" xml:space="preserve">
+    <value>Discard From Field</value>
+  </data>
+  <data name="DiscardSomething" xml:space="preserve">
+    <value>Discard something...</value>
+  </data>
+  <data name="DominionEffect" xml:space="preserve">
+    <value>Do you want to draw a card from Dominions Effect?</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
   <data name="EndTurn" xml:space="preserve">
     <value>End Turn</value>
+  </data>
+  <data name="GroundPoundEffect" xml:space="preserve">
+    <value>Click OK to destroy this card. Click Cancel to discard 2 cards</value>
   </data>
   <data name="Haka" xml:space="preserve">
     <value>Haka</value>
@@ -130,10 +157,70 @@
     <value>Draw 2 Cards, Then Discard 1 or more cards.
 Increase the next damage dealt by Haka by 1 for each card discarded this way.</value>
   </data>
+  <data name="LegacyDamage" xml:space="preserve">
+    <value>Do you want to have Legacy take the damage?</value>
+  </data>
+  <data name="Lose" xml:space="preserve">
+    <value>You lose!</value>
+  </data>
+  <data name="MoreCards" xml:space="preserve">
+    <value> more cards</value>
+  </data>
+  <data name="NoDiscard" xml:space="preserve">
+    <value>No Discard</value>
+  </data>
+  <data name="ObsidianFieldDiscard" xml:space="preserve">
+    <value>Do you want to discard 2 cards to remove Obsidian Field?</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>Play </value>
+  </data>
+  <data name="PlayCard" xml:space="preserve">
+    <value>Play Card</value>
+  </data>
+  <data name="PlayerPower" xml:space="preserve">
+    <value>Player Power</value>
+  </data>
+  <data name="PlayPower" xml:space="preserve">
+    <value>Play Power</value>
+  </data>
+  <data name="PleaseDiscard" xml:space="preserve">
+    <value>Please discard at least </value>
+  </data>
+  <data name="PleaseSelectAppropriate" xml:space="preserve">
+    <value>Please select an appropriate card.</value>
+  </data>
+  <data name="Power1" xml:space="preserve">
+    <value>Power 1</value>
+  </data>
+  <data name="Power2" xml:space="preserve">
+    <value>Power 2</value>
+  </data>
+  <data name="Power3" xml:space="preserve">
+    <value>Power 3</value>
+  </data>
   <data name="Rampage" xml:space="preserve">
     <value>Rampage</value>
   </data>
   <data name="RampageEffect" xml:space="preserve">
     <value>Haka Deals each non-hero target 5 melee damage and each hero target 2 melee damage.</value>
+  </data>
+  <data name="SelectOne" xml:space="preserve">
+    <value>Select only one target. \n No select target default's to the Villain.</value>
+  </data>
+  <data name="SelectThree" xml:space="preserve">
+    <value>Please select 3 or fewer targets. \n No select target defaults to the Villain</value>
+  </data>
+  <data name="ShowHand" xml:space="preserve">
+    <value>Show Your Hand</value>
+  </data>
+  <data name="ThokkSelect" xml:space="preserve">
+    <value>Select only one target to perform Thokk \n No select target defaults to the Villain.</value>
+  </data>
+  <data name="Turn" xml:space="preserve">
+    <value>Turn</value>
+  </data>
+  <data name="Win" xml:space="preserve">
+    <value>You win!</value>
   </data>
 </root>

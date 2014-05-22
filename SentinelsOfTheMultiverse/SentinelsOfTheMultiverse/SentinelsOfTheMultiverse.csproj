@@ -108,6 +108,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Tests\BaronBladeTest.cs" />
+    <Compile Include="Tests\HealTest.cs" />
+    <Compile Include="Tests\MoreHeroTest.cs" />
     <Compile Include="Tests\HakaTest.cs" />
     <Compile Include="Tests\LegacyTest.cs" />
     <Compile Include="Tests\ObjectMother.cs" />

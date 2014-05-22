@@ -36,10 +36,6 @@ namespace SentinelsOfTheMultiverse
         {
             startPhase();
 
-            for (int i = 1; i < numPowers; i++)
-            {
-                //powerPhase();
-            }
 
             if (isCardPlayed || isPowerUsed)
             {
@@ -98,9 +94,14 @@ namespace SentinelsOfTheMultiverse
 
         public void DiscardCard(Card card)
         {
-            GameBoard.discardedCardsThisTurn.Add(card);
-            hand.Remove(card);
-            graveyard.Add(card);
+            if (hand.Contains(card))
+            {
+
+
+                GameBoard.discardedCardsThisTurn.Add(card);
+                hand.Remove(card);
+                graveyard.Add(card);
+            }
         }
 
     }

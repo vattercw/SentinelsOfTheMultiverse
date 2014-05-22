@@ -28,7 +28,7 @@ namespace SentinelsOfTheMultiverse
             magnifiedCard.Source = cardImage;
 
             Button powerButton = new Button();
-            powerButton.Content = "Play Power";
+            powerButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("PlayPower"); ;
             powerButton.Click += new RoutedEventHandler(Power_Action);
 
             StackPanel sp = new StackPanel();

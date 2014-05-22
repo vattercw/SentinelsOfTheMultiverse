@@ -15,12 +15,20 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Resources;
+using System.Reflection;
 
 namespace SentinelsOfTheMultiverse
 {
+
+    
+
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     public partial class DiscardFromBoard : Window
     {
+
+        public static ResourceManager Translator = new ResourceManager("SentinelsOfTheMultiverse.Resources.ja-JP", Assembly.Load("SentinelsOfTheMultiverse"));
+
         Grid cardLayout = new Grid();
 
         StackPanel sideBar = new StackPanel();
@@ -74,13 +82,15 @@ namespace SentinelsOfTheMultiverse
 
         private void addButtons()
         {
+            
+            
             sideBar.Children.RemoveRange(0, sideBar.Children.Count);
             Button discardButton = new Button();
-            discardButton.Content = "Discard";
+            discardButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Discard"); 
             discardButton.Click += new RoutedEventHandler(Discard_Action);
 
             Button closeButton = new Button();
-            closeButton.Content = "Done";
+            closeButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Done"); 
             closeButton.Click += new RoutedEventHandler(Close_Action);
 
             sideBar.Children.Add(closeButton);
@@ -124,7 +134,7 @@ namespace SentinelsOfTheMultiverse
             {
                 this.Close();
             }
-            else MessageBox.Show("Please discard at least " + (minimumToDiscard - numDiscarded) + " more cards");
+            else MessageBox.Show( SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("PleaseDiscard") + (minimumToDiscard - numDiscarded) +  SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("MoreCards"));
         }
 
         public void paintCards()

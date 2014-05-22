@@ -15,11 +15,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Media.Effects;
 using SentinelsOfTheMultiverse.Data.Effects;
+using System.Resources;
+using System.Reflection;
 
 namespace SentinelsOfTheMultiverse
 {
     public partial class GameBoard : Window
     {
+
         //private GameEngine game = new GameEngine();
         private Grid gridLayout = new Grid();
         private ViewHand handViewer;
@@ -103,14 +106,14 @@ namespace SentinelsOfTheMultiverse
 
 
             Button cancelSelectionButton = new Button();
-            cancelSelectionButton.Content = "Cancel Selection";
+            cancelSelectionButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Cancel");
             cancelSelectionButton.Width = 150;
             cancelSelectionButton.Height = 50;
             cancelSelectionButton.Click += new RoutedEventHandler(Clear_Selection);
             Utility.addElementToGrid(cancelSelectionButton, 4, 2, gridLayout);
 
             Button discardButton = new Button();
-            discardButton.Content = "Discard From Field";
+            discardButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("DiscardFromField");
             discardButton.Width = 150;
             discardButton.Height = 50;
             discardButton.Click += new RoutedEventHandler(Discard_Action);
@@ -119,14 +122,14 @@ namespace SentinelsOfTheMultiverse
             var currentPlayer = GameEngine.getCurrentPlayer();
             if(typeof(Hero).IsAssignableFrom(currentPlayer.GetType())){
                 Button showHandButton = new Button();
-                showHandButton.Content = "Show Your Hand!";
+                showHandButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("ShowHand");
                 showHandButton.Width = 150;
                 showHandButton.Height = 50;
                 showHandButton.Click += new RoutedEventHandler(View_Hand);
                 Utility.addElementToGrid(showHandButton, 4, 0, gridLayout);
             }else{           
                 Button playEnvVilButton = new Button();
-                playEnvVilButton.Content = "Play " + GameEngine.getCurrentPlayer().characterName + "Turn";
+                playEnvVilButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Play") +GameEngine.getCurrentPlayer().characterName + SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Turn");
                 playEnvVilButton.Width = 150;
                 playEnvVilButton.Height = 50;
                 playEnvVilButton.Click += new RoutedEventHandler(PlayEnvVil_Action);
@@ -170,7 +173,6 @@ namespace SentinelsOfTheMultiverse
             }
             object result = currentPlayer.endPhase();
             if (result != null) {
-                Console.Write("hi");
             }
             GameEngine.nextTurn();
             updateBoard();
@@ -470,14 +472,14 @@ namespace SentinelsOfTheMultiverse
         public static void WinCondition()
         {
             Window win = new Window();
-            win.Title = "You win!";
+            win.Title = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Win"); 
             win.Activate();
         }
 
         internal static void LoseCondition()
         {
             Window lose = new Window();
-            lose.Title = "You lose!";
+            lose.Title = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Lose"); 
             lose.Activate();
         }
         public void GameBoardTeardown()

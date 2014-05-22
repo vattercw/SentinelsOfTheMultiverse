@@ -24,7 +24,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             var target = GameBoard.cardClickedArray;
             if (target.Count > 1)
             {
-                MessageBox.Show("Select only one target. \n No select target default's to the Villain.");
+                MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("SelectOne"));
             }
             else if (target.Count == 1)
             {
@@ -59,7 +59,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                     targets.AddRange(minionsToAttack);
                     DamageEffects.DealDamage(this, targets , 2, DamageEffects.DamageType.Melee);
                 }
-                else MessageBox.Show("Please select an appropriate card.");
+                else MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("PleaseSelectAppropriate"));
             }
             else
             {
@@ -89,7 +89,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             
             if (target.Count > 1)
             {
-                MessageBox.Show("Select only one target to deal damage to. \n No select target default's to the Villain.");
+                MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("SelectOne"));
                 Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
                 cardsOnField.Remove(card);
                 currentPlayer.hand.Add(card);
@@ -129,7 +129,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                     DamageEffects.DealDamage(this, targets, 3, DamageEffects.DamageType.Melee);
                     card.SendToGraveyard(this, cardsOnField);
                 }
-                else MessageBox.Show("Please select an appropriate card.");
+                else MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("SelectOne"));
             }
             else
             {
@@ -166,7 +166,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         void DominionEffect(Card c, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Do you want to draw a card from Dominions Effect?", "Dominion Effect", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("DominionEffect"), "Dominion Effect", MessageBoxButtons.YesNo);
             if(dialogResult == DialogResult.Yes)
                 CardDrawingEffects.DrawCards(1, this);
         }
@@ -195,7 +195,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
 
         public object[] GroundPound(Card card)
         {
-            DialogResult result = MessageBox.Show("Click OK to destroy this card. Click Cancel to discard 2 cards", "Ground Pound", MessageBoxButtons.OKCancel);
+            DialogResult result = MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("GroundPoundEffect"), "Ground Pound", MessageBoxButtons.OKCancel);
             if (result == DialogResult.OK) {
                 card.SendToGraveyard(this, hand);//might be cards on field instead of hand
                 return null;
@@ -309,7 +309,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             var target = GameBoard.cardClickedArray;
             if (target.Count > 1)
             {
-                MessageBox.Show("Select only one target to deal damage to. \n No select target default's to the Villain.");
+                MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("SelectOne"));
                 Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
                 cardsOnField.Remove(card);
                 currentPlayer.hand.Add(card);
@@ -348,7 +348,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                     targets.AddRange(minionsToAttack);
                     DamageEffects.DealDamage(this, targets, 3, DamageEffects.DamageType.Melee);
                 }
-                else MessageBox.Show("Please select an appropriate card.");
+                else MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("PleaseSelectAppropriate"));
             }
             else
             {
@@ -400,7 +400,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             var target = GameBoard.cardClickedArray;
             if (target.Count > 2)
             {
-                MessageBox.Show("Please select 3 or fewer targets. \n No select target default's to the Villain.");
+                MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("SelectThree"));
                 Hero currentPlayer = (Hero)GameEngine.getCurrentPlayer();
                 currentPlayer.hand.Add(card);
                 currentPlayer.graveyard.Remove(card);
@@ -452,7 +452,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
                     }
                     card.SendToGraveyard(this, cardsOnField);
                 }
-                else MessageBox.Show("Please select an appropriate card.");
+                else MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("PleaseSelectAppropriate"));
             }
             else
             {

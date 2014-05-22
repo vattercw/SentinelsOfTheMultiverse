@@ -16,20 +16,17 @@ namespace SentinelsOfTheMultiverse.Data.Effects
                 foreach (Hero hero in heroes)
                 {
                     healHero(hero, healAmount);
-                    Console.WriteLine(hero.lifeTotal);
                 }
             }
             if (villain != null)
             {
                 healVillain(villain, healAmount);
-                Console.WriteLine(villain.lifeTotal);
             }
             if (minions != null)
             {
                 foreach (Minion minion in minions)
                 {
                     healMinion(minion, healAmount);
-                    Console.WriteLine(minion.lifeTotal);
                 }
             }
         }
@@ -65,7 +62,6 @@ namespace SentinelsOfTheMultiverse.Data.Effects
         public static void healMinion(Minion targetMinion, int healAmount)
         {
             targetMinion.lifeTotal += healAmount;
-            Console.WriteLine(GameEngine.getVillain().getMinions().ToString());
             if (targetMinion.lifeTotal >= targetMinion.maxHealth)
             {
                 //make sure target doesn't go over maxHealth

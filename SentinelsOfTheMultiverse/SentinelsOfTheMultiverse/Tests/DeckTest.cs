@@ -7,6 +7,7 @@ using NUnit.Framework;
 using System.Windows;
 using SentinelsOfTheMultiverse.Data;
 using System.IO;
+using SentinelsOfTheMultiverse.Data.Effects;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -72,5 +73,6 @@ namespace SentinelsOfTheMultiverse.Tests
 
             Assert.False(testHaka.cards.Count == sameCount);
         }
+
     }
 }

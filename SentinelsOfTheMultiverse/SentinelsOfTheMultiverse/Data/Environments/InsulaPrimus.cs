@@ -27,7 +27,7 @@ namespace SentinelsOfTheMultiverse.Data.Environments
         }
 
         object[] ObsidianField_EndPhaseCompletedHandler() {
-            DialogResult dialogResult = MessageBox.Show("Do you want to discard 2 cards to remove Obsidian Field?", "Dominion Effect", MessageBoxButtons.YesNo);            
+            DialogResult dialogResult = MessageBox.Show(SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("ObsidianFieldDiscard"), "Dominion Effect", MessageBoxButtons.YesNo);            
             return new object[]{GameEngine.ForcedEffect.ObsidianField, dialogResult};
         }
 

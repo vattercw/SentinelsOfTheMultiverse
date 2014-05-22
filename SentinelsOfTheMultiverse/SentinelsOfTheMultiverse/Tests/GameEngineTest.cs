@@ -22,5 +22,16 @@ namespace SentinelsOfTheMultiverse.Tests
                         (GameEngine.getEnvironment() != null);
             Assert.True(pass);
         }
+
+        [Test, RequiresSTA]
+        public void TestNextTurn()
+        {
+            Start test = new Start();
+            test.beginGame();
+
+            Assert.AreEqual(GameEngine.getHeroes()[0], GameEngine.getCurrentPlayer());
+            GameEngine.nextTurn();
+            Assert.AreEqual(GameEngine.getHeroes()[1], GameEngine.getCurrentPlayer());
+        }
     }
 }

@@ -101,11 +101,11 @@ namespace SentinelsOfTheMultiverse
         {
             sideBar.Children.RemoveRange(0, sideBar.Children.Count);
             Button discardButton = new Button();
-            discardButton.Content = "Discard";
+            discardButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("Discard");
             discardButton.Click += new RoutedEventHandler(Discard_Action);
 
             Button closeButton = new Button();
-            closeButton.Content = "No Discard.";
+            closeButton.Content = SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("NoDiscard");
             closeButton.Click += new RoutedEventHandler(Close_Action);
 
             sideBar.Children.Add(closeButton);
@@ -132,7 +132,7 @@ namespace SentinelsOfTheMultiverse
                 updateHandView();
                 gameBoard.updateBoard();
             }
-            else MessageBox.Show("Discard something...");
+            else MessageBox.Show( SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("DiscardSomething"));
         }
         
 
@@ -142,7 +142,7 @@ namespace SentinelsOfTheMultiverse
             {
                 this.Close();
             }
-            else MessageBox.Show("Please discard at least " + (minimumToDiscard - numDiscarded) + " more cards");
+            else MessageBox.Show( SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("PleaseDiscard") + (minimumToDiscard - numDiscarded) +  SentinelsOfTheMultiverse.Properties.Resources.ResourceManager.GetString("MoreCards"));
         }
 
         private void Cancel_Action(object sender, RoutedEventArgs e)

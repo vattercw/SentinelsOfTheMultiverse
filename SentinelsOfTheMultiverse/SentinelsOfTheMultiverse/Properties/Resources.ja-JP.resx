@@ -117,8 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Cancel" xml:space="preserve">
+    <value>選択をキャンセル</value>
+  </data>
+  <data name="CancelAction" xml:space="preserve">
+    <value>アクションをキャンセル</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>クローズ</value>
+  </data>
+  <data name="Discard" xml:space="preserve">
+    <value>捨てる</value>
+  </data>
+  <data name="DiscardFromField" xml:space="preserve">
+    <value>フィールドから捨てる</value>
+  </data>
+  <data name="DiscardSomething" xml:space="preserve">
+    <value>何かを捨てる...</value>
+  </data>
+  <data name="DominionEffect" xml:space="preserve">
+    <value>あなたは自治領の影響からカードを描きたいのですか？を</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>終わった</value>
+  </data>
   <data name="EndTurn" xml:space="preserve">
     <value>終えた</value>
+  </data>
+  <data name="GroundPoundEffect" xml:space="preserve">
+    <value>このカードを破壊するには、[OK]をクリックします。 2枚のカードを破棄するように、[キャンセル]をクリックします</value>
   </data>
   <data name="Haka" xml:space="preserve">
     <value>ハカ</value>
@@ -129,10 +156,67 @@
   <data name="HakaOfBattleEffect" xml:space="preserve">
     <value>2枚のカードを引く。捨てる少なくとも1カード。廃棄された各カードに1ずつハカで配ら次のダメージを増加させる。</value>
   </data>
+  <data name="LegacyDamage" xml:space="preserve">
+    <value>あなたはレガシーダメージを受けるようにしたいですか？</value>
+  </data>
+  <data name="Lose" xml:space="preserve">
+    <value>負ける</value>
+  </data>
+  <data name="MoreCards" xml:space="preserve">
+    <value>より多くのカード</value>
+  </data>
+  <data name="NoDiscard" xml:space="preserve">
+    <value>いいえ廃棄ん</value>
+  </data>
+  <data name="ObsidianFieldDiscard" xml:space="preserve">
+    <value>あなたは黒曜石のフィールドを削除するには2枚のカードを破棄するようにしたいですか？</value>
+  </data>
+  <data name="PlayCard" xml:space="preserve">
+    <value>トランプをして遊ぶ</value>
+  </data>
+  <data name="PlayerPower" xml:space="preserve">
+    <value>プレーヤーの電源</value>
+  </data>
+  <data name="PlayPower" xml:space="preserve">
+    <value>電源を演じる</value>
+  </data>
+  <data name="PleaseDiscard" xml:space="preserve">
+    <value>少なくとも、捨ててください</value>
+  </data>
+  <data name="PleaseSelectAppropriate" xml:space="preserve">
+    <value>適切なカードを選択してください。</value>
+  </data>
+  <data name="Power1" xml:space="preserve">
+    <value>パワー1</value>
+  </data>
+  <data name="Power2" xml:space="preserve">
+    <value>パワー2</value>
+  </data>
+  <data name="Power3" xml:space="preserve">
+    <value>パワー3</value>
+  </data>
   <data name="Rampage" xml:space="preserve">
     <value>大暴れ</value>
   </data>
   <data name="RampageEffect" xml:space="preserve">
     <value>ハカは各非ヒーロー5メレーダメージを与える。ハカは、各ヒーロー2メレーダメージを与える。</value>
+  </data>
+  <data name="SelectOne" xml:space="preserve">
+    <value>唯一つのターゲットを選択します。 \nは悪役には、[いいえ]を選択し、ターゲットのデフォルトの。</value>
+  </data>
+  <data name="SelectThree" xml:space="preserve">
+    <value>3つ以下のターゲットを選択してください。悪役に\nいいえ]を選択し、対象のデフォルトはない</value>
+  </data>
+  <data name="ShowHand" xml:space="preserve">
+    <value>手を表示</value>
+  </data>
+  <data name="ThokkSelect" xml:space="preserve">
+    <value>悪役にThokk[いいえ]を選択し、ターゲットのデフォルトを実行するためにのみ1ターゲットを選択します。</value>
+  </data>
+  <data name="Turn" xml:space="preserve">
+    <value>ターン</value>
+  </data>
+  <data name="Win" xml:space="preserve">
+    <value>勝つ</value>
   </data>
 </root>

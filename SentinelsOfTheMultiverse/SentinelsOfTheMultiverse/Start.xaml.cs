@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +22,8 @@ namespace SentinelsOfTheMultiverse
     /// </summary>
     public partial class Start : Window
     {
+
+
         public Start()
         {
             InitializeComponent();
