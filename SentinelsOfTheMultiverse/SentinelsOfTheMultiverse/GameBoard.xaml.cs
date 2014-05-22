@@ -26,7 +26,6 @@ namespace SentinelsOfTheMultiverse
         //private GameEngine game = new GameEngine();
         private Grid gridLayout = new Grid();
         private ViewHand handViewer;
-        private DiscardFromBoard boardViewer;
 
         private Card drawThisCard;
         public static List<Card> discardedCardsThisTurn = new List<Card>();
@@ -46,7 +45,7 @@ namespace SentinelsOfTheMultiverse
 
             private readonly int DECK_COLUMN=3;
             private readonly int CHARACTER_COLUMN= 1;
-            private readonly int INSTRUCTION_COLUMN = 4;
+            //private readonly int INSTRUCTION_COLUMN = 4;
             private readonly int GRAVEYARD_COLUMN= 2;
 
         #endregion
@@ -202,7 +201,7 @@ namespace SentinelsOfTheMultiverse
                 villain.cardsOnField[k].Margin = Utility.cardSpacing;
                 villain.cardsOnField[k].MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
-                Utility.addElementToGrid(villain.cardsOnField[k], VILLAIN_ROW, k + 5, gridLayout);
+                Utility.addElementToGrid(villain.cardsOnField[k], VILLAIN_ROW, k + 4, gridLayout);
             }
 
             for (int k = 0; k < env.cardsOnField.Count; k++)
@@ -316,13 +315,13 @@ namespace SentinelsOfTheMultiverse
             villainCard.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             Card villainDeck = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_back.png");
             villainDeck.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
-            Card villainInst = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
-            villainInst.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
+            //Card villainInst = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_instr_front.png");
+            //villainInst.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
             Card envDeck = new Card("Images/Environment/" + env.characterName + "/NonPlayable/" + "insula_primus_back.png");
             envDeck.MouseDown += new MouseButtonEventHandler(Mouse_Click_Listener);
 
             Utility.addElementToGrid(villainCard, VILLAIN_ROW, CHARACTER_COLUMN, gridLayout);
-            Utility.addElementToGrid(villainInst, VILLAIN_ROW, INSTRUCTION_COLUMN, gridLayout);
+            //Utility.addElementToGrid(villainInst, VILLAIN_ROW, INSTRUCTION_COLUMN, gridLayout);
             Utility.addElementToGrid(villainDeck, VILLAIN_ROW, DECK_COLUMN, gridLayout);
             Utility.addElementToGrid(envDeck, ENVIRONMENT_ROW, DECK_COLUMN, gridLayout);
 
