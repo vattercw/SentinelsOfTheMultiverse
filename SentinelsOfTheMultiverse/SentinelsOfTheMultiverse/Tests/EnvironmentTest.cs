@@ -16,17 +16,6 @@ namespace SentinelsOfTheMultiverse.Tests
     class EnvironmentTest
     {
 
-        
-
-        [Test, RequiresSTA]
-        public void testPlayerTurn()
-        {
-            GameEnvironment env = ObjectMother.TestEnvironment();
-            var numBeforeEnd = env.deck.cards.Count;
-            env.playerTurn();
-            Assert.AreNotEqual(numBeforeEnd, env.deck.cards.Count);
-        }
-
         [Test, RequiresSTA]
         public void testInitialization()
         {

@@ -136,7 +136,8 @@ namespace SentinelsOfTheMultiverse
             }            
         }
 
-        private void PlayEnvVil_Action(object sender, RoutedEventArgs e) {
+
+        public void PlayEnvVil_Action(object sender, RoutedEventArgs e) {
             var currentPlayer = GameEngine.getCurrentPlayer();
             
             List<Card> drawnCards = currentPlayer.drawPhase(1);
@@ -311,7 +312,7 @@ namespace SentinelsOfTheMultiverse
             Utility.addElementToGrid(graveYardImg, currentHeroRow, GRAVEYARD_COLUMN, gridLayout);
         }
 
-        private void drawNPCBoard(Villain villain, GameEnvironment env)
+        public void drawNPCBoard(Villain villain, GameEnvironment env)
         {
             string villainName = villain.getCharacterName();
             Card villainCard = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png");
