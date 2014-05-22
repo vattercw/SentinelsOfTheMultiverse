@@ -18,7 +18,18 @@ namespace SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus
 
         public override object[] executeEffect()
         {
-            throw new NotImplementedException();
+            var orderedTargets = GameEngine.getTargets().OrderBy(x => x.lifeTotal).ToList();
+            int weakest = 0;
+            while (orderedTargets[weakest] == this || typeof(GameEnvironment).IsAssignableFrom(this.GetType()))
+            {
+
+                weakest++;
+            }
+            int damage = 2;
+            List<Card> velociraptorNum = GameEngine.getEnvironment().cardsOnField.FindAll(x=>x.getName().Equals(minionName));
+            damage = damage * velociraptorNum.Count;
+            Data.Effects.DamageEffects.DealDamage(this, new List<Targetable>() { orderedTargets[weakest] }, damage, Effects.DamageEffects.DamageType.Melee);
+            return null;
         }
     }
 }
