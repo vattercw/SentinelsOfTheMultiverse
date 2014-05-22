@@ -56,7 +56,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CardNotFoundException.cs" />
     <Compile Include="Data\Targetable.cs" />
     <Compile Include="DiscardFromBoard.xaml.cs">
       <DependentUpon>DiscardFromBoard.xaml</DependentUpon>

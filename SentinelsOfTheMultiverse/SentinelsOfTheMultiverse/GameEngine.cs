@@ -124,7 +124,7 @@ namespace SentinelsOfTheMultiverse
                     }
                 }
             }
-            throw new CardNotFoundException();
+            throw new Exception("Card not found", null);
         }
 
         public static void TearDownGameEngine()

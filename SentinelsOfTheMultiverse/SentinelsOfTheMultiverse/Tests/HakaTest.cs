@@ -179,7 +179,12 @@ namespace SentinelsOfTheMultiverse.Tests
             Card dominion = new Card("Images\\Hero\\Haka\\3-Dominion.png");
             haka.Dominion(dominion);
 
+            var startHandSize = haka.hand.Count;
+            //destroy an environment card
             GameEngine.getEnvironment().cardsOnField.Find(x=> x.cardType== Card.CardType.Environment).SendToGraveyard(GameEngine.getEnvironment(), GameEngine.getEnvironment().cardsOnField);
+            
+            //assuming yes was pressed
+            Assert.AreEqual(startHandSize + 1, haka.hand.Count);
         }
 
         [Test(), RequiresSTA]

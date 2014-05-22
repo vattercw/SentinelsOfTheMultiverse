@@ -16,7 +16,7 @@ namespace SentinelsOfTheMultiverse.Tests
     class MinionTest
     {
         [SetUp(), RequiresSTA]
-        private void Setup() {
+        public void Setup() {
             Start st = new Start();
             st.beginGame();
         }
@@ -155,6 +155,7 @@ namespace SentinelsOfTheMultiverse.Tests
         [TearDown()]
         public void TearDown() {
             GameEngine.TearDownGameEngine();
+
         }
     }
 }
