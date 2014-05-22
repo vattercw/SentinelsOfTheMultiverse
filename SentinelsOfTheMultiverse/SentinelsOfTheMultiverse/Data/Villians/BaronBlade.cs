@@ -13,10 +13,6 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         {
             lifeTotal = 40;
             maxHealth = 40;
-            Card platform = new Card("Images\\Villain\\BaronBlade\\3-MobileDefensePlatform.png");
-            deck.cards.Remove(platform);
-            cardsOnField.Add(platform);
-            MobileDefensePlatform(platform);
         }
 
         public override void Power()
@@ -95,6 +91,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             var cardsToRemove = deck.cards.GetRange(deck.cards.Count - numheroes -1, discardedCards);
             Card[] dummyCardsToRemove = new Card[cardsToRemove.Count];
             cardsToRemove.CopyTo(dummyCardsToRemove);
+            
             foreach(Card c in dummyCardsToRemove){
                 c.SendToGraveyard(this, deck.cards);
             }
