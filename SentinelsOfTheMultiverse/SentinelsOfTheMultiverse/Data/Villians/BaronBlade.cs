@@ -46,7 +46,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         
 
 
-        void DeviousDisruptionDiscardAction(int discardedCards)
+        public void DeviousDisruptionDiscardAction(int discardedCards)
         {
             int cardDamage = 0;
 
@@ -88,7 +88,7 @@ namespace SentinelsOfTheMultiverse.Data.Villains
         }
         public delegate void DiscardedAction(int discardedCards);
 
-        void ConsiderThePriceOfVictoryDiscardAction(int discardedCards)
+        public void ConsiderThePriceOfVictoryDiscardAction(int discardedCards)
         {
             var cardsToRemove = deck.cards.GetRange(deck.cards.Count - discardedCards -1, discardedCards);
             Card[] dummyCardsToRemove = new Card[cardsToRemove.Count];
