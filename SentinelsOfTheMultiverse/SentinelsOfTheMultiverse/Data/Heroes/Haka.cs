@@ -142,10 +142,8 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         {
             List<Card> allEnvCards = getAllEnvironmentCards();
             
-            foreach (Card c in allEnvCards) {
-                if (c.cardType == Card.CardType.Environment) {
-                    c.CardDestroyed += new Card.CardDestroyedHandler(DominionEffect);
-                }
+            foreach (Card c in allEnvCards) {    
+                c.CardDestroyed += new Card.CardDestroyedHandler(DominionEffect);
             }
             dominionCard.CardDestroyed += Dominion_CardDestroyed;
         }

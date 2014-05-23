@@ -153,18 +153,15 @@ namespace SentinelsOfTheMultiverse
                                 //DiscardFromHand discardWindow = new DiscardFromHand(hero.hand, this);
                                 //discardWindow.Visibility = System.Windows.Visibility.Visible;
                                 //discardWindow.ShowDialog();
-
-
                             }
                             break;
                         case GameEngine.ForcedEffect.PrimordialPlant:
                             foreach (Hero hero in GameEngine.getHeroes()) {
-                                if (hero.cardsOnField.FindAll(x => x.cardType.Equals(Card.CardType.Ongoing)).Count != 0) {
-                                    GameBoard.discardedCardsThisTurn = new List<Card>();
-                                    DiscardFromBoard handView = new DiscardFromBoard(this, hero);
-                                    handView.Visibility = System.Windows.Visibility.Visible;
-                                    handView.ShowDialog();
-                                }
+                                GameBoard.discardedCardsThisTurn = new List<Card>();
+                                DiscardFromBoard handView = new DiscardFromBoard(this, hero);
+                                handView.Visibility = System.Windows.Visibility.Visible;
+                                handView.ShowDialog();
+
                                 Data.Environments.InsulaPrimus.DiscardedAction discardAction = (Data.Environments.InsulaPrimus.DiscardedAction)res[0];
                                 discardAction(GameBoard.discardedCardsThisTurn.Count, hero, (Card)res[3]);
                             }
@@ -179,10 +176,21 @@ namespace SentinelsOfTheMultiverse
 
                                 Data.Villains.BaronBlade.DiscardedAction discardAction = (Data.Villains.BaronBlade.DiscardedAction)res[0];
                                 discardAction(GameBoard.discardedCardsThisTurn.Count);
-                                drawnCards[0].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
                             }
+                            drawnCards[0].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
                             break;
+                        case GameEngine.ForcedEffect.DeviousDisruption:
+                            foreach (Hero hero in GameEngine.getHeroes()) {
+                                GameBoard.discardedCardsThisTurn = new List<Card>();
+                                DiscardFromBoard handView = new DiscardFromBoard(this, hero);
+                                handView.Visibility = System.Windows.Visibility.Visible;
+                                handView.ShowDialog();
 
+                                Data.Villains.BaronBlade.DiscardedAction discardAction = (Data.Villains.BaronBlade.DiscardedAction)res[0];
+                                discardAction(GameBoard.discardedCardsThisTurn.Count);
+                            }
+                            drawnCards[0].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
+                            break;
                     }
                 }
             }
