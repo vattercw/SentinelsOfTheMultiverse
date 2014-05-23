@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using SentinelsOfTheMultiverse.Data;
 using SentinelsOfTheMultiverse.Data.Heroes;
+using SentinelsOfTheMultiverse.Data.Minions;
+using SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -13,11 +15,18 @@ namespace SentinelsOfTheMultiverse.Tests
     [TestFixture]
     class LegacyTest
     {
+
+        [SetUp(), RequiresSTA]
+        public void Setup()
+        {
+            Start st = new Start();
+            st.beginGame();
+        }
+
         [Test, RequiresSTA]
         public void TestFortitude()
         {
-            Start testGame = new Start();
-            testGame.beginGame();
+           
             Legacy testLegacy = new Legacy();
 
             Card testFortitude = new Card("Images\\Hero\\Legacy\\Fortitude.png");
@@ -29,8 +38,6 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestDangerSense()
         {
-            Start testGame = new Start();
-            testGame.beginGame();
             Legacy testLegacy = new Legacy();
 
             Card testDanger = new Card("Images\\Hero\\Legacy\\DangerSense.png");
@@ -43,14 +50,66 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestFlyingSmash()
         {
 
+
+            Legacy testLegacy = new Legacy();
+            Card testFlying = new Card("Images\\Hero\\Legacy\\FlyingSmash.png");
+            testLegacy.FlyingSmash(testFlying);
+            Card redist = new Card("Images\\Villain\\BaronBlade\\2-ElementalRedistributor.png");
+            Card velo = new Card("Images\\Environment\\InsulaPrimus\\3-VelociraptorPack.png");
+            Card battalion = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            Card battalion2 = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            List<Card> cards = new List<Card>();
+            cards.Add(redist);
+            cards.Add(velo);
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameBoard.cardClickedArray = cards;
+            testLegacy.FlyingSmash(testFlying);
+
+            List<Card> cards3 = new List<Card>();
+            cards3.Add(redist);
+            cards3.Add(velo);
+            cards3.Add(battalion);
+            cards3.Add(battalion2);
+
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameEngine.getVillain().addMinion(new BladeBattalion());
+            GameEngine.getVillain().addMinion(new BladeBattalion());
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameEngine.getVillain().cardsOnField.Add(battalion2);
+            GameEngine.getVillain().cardsOnField.Add(battalion);
+            GameBoard.cardClickedArray = cards3;
+            
+            testLegacy.FlyingSmash(testFlying);
+
+            Card redist2 = new Card("Images\\Villain\\BaronBlade\\ElementalRedistributor.png");
+            List<Card> cards2 = new List<Card>();
+            cards2.Add(redist2); 
+            GameEngine.getVillain().cardsOnField.Add(redist2);
+            GameBoard.cardClickedArray = cards2;
+            testLegacy.FlyingSmash(testFlying);
+
+            testLegacy.FlyingSmash(testFlying);
+
+            Card obsidian = new Card("Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
+            GameEngine.getEnvironment().cardsOnField.Add(obsidian);
+            List<Card> cards4 = new List<Card>();
+            cards4.Add(obsidian);
+            GameBoard.cardClickedArray = cards4;
+
+            testLegacy.FlyingSmash(testFlying);
+
         }
 
         //TODO fix test to get prompted selected array AND counteract static gamestate much code still not touched with this test
         [Test, RequiresSTA]
         public void TestBackFistStrike()
         {
-            Start testGame = new Start();
-            testGame.beginGame();
+            
             Legacy testLegacy = new Legacy();
 
             Card testStrike = new Card("Images\\Hero\\Legacy\\BackFistStrike.png");
@@ -79,8 +138,7 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestBolsterAllies()
         {
-            Start game = new Start();
-            game.beginGame();
+           
             Legacy legacy = new Legacy();
 
             List<int> firstList = new List<int>();
@@ -107,8 +165,7 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestSuperhuman()
         {
-            Start game = new Start();
-            game.beginGame();
+            
             Legacy legacy = new Legacy();
 
             
@@ -137,8 +194,7 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestLegacyRing()
         {
-            Start game = new Start();
-            game.beginGame();
+           
             Legacy legacy = new Legacy();
 
             Card ring = new Card("Images\\Hero\\Legacy\\TheLegacyRing.png");
@@ -156,8 +212,7 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestPower()
         {
-            Start game = new Start();
-            game.beginGame();
+            
             Legacy legacy = new Legacy();
 
             legacy.Power();
@@ -169,6 +224,13 @@ namespace SentinelsOfTheMultiverse.Tests
             }
 
             Assert.NotNull(GameEngine.getHeroes());
+        }
+
+        [TearDown()]
+        public void TearDown()
+        {
+            GameEngine.TearDownGameEngine();
+
         }
 
     }
