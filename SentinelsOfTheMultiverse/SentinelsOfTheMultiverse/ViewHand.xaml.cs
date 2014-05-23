@@ -29,8 +29,6 @@ namespace SentinelsOfTheMultiverse
 
         StackPanel sideBar = new StackPanel();
 
-        List<Image> imageSelectedArray = new List<Image>();
-
         List<Card> handShow
         {
             get
@@ -56,7 +54,17 @@ namespace SentinelsOfTheMultiverse
 
             updateHandView();
 
+            addScrollBar();
+
             Closing += Window_Closed;
+        }
+
+        private void addScrollBar()
+        {
+            ScrollViewer viewer = new ScrollViewer();
+            viewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
+            Grid.SetRow(viewer, 2);
+            cardLayout.Children.Add(viewer);
         }
 
         private void Window_Closed(object sender, EventArgs e)

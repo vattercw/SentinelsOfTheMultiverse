@@ -21,7 +21,7 @@ namespace SentinelsOfTheMultiverse
         public Image magnifiedCard = new Image();
         private GameBoard gameBoard;
 
-        public ViewCard(ImageSource cardImage, GameBoard board)
+        public ViewCard(ImageSource cardImage, int current, int max, GameBoard board)
         {
             InitializeComponent();
             
@@ -33,9 +33,19 @@ namespace SentinelsOfTheMultiverse
 
             StackPanel sp = new StackPanel();
             sp.Children.Add(powerButton);
+            if (max != 0)
+            {
+                this.Height = 890;
+                Label minionHealth = new Label();
+                minionHealth.Content = current + "/" + max;
+                minionHealth.FontSize = 36;
+                minionHealth.FontStyle = FontStyles.Normal;
+                minionHealth.FontWeight = FontWeights.Bold;
+                minionHealth.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                sp.Children.Add(minionHealth);
+            }
             sp.Children.Add(magnifiedCard);
             
-
             sp.CanVerticallyScroll = true;
 
             sp.MouseDown += new MouseButtonEventHandler(CloseWindow);

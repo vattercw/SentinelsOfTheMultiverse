@@ -358,10 +358,18 @@ namespace SentinelsOfTheMultiverse
         {
             if (e.ClickCount == 2)
             {
-                Image expandCard = (Image)sender;
-
-                ViewCard showCard = new ViewCard(expandCard.Source, this);
-                showCard.ShowDialog();
+                Card expandCard = (Card)sender;
+                if (expandCard.Minion != null)
+                {
+                    Minion min = expandCard.Minion;
+                    ViewCard showCard = new ViewCard(expandCard.Source, min.lifeTotal, min.maxHealth, this);
+                    showCard.ShowDialog();
+                }
+                else 
+                { 
+                    ViewCard showCard = new ViewCard(expandCard.Source, 0, 0, this);
+                    showCard.ShowDialog();
+                }
             }
             else if (e.ClickCount == 1)
             {
