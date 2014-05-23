@@ -477,11 +477,23 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             {
                 if (hero.lifeTotal > 0)
                 {
-                    //TODO fix this
-                    //hero.damageAmplificationToPlayer -= 2;
+                    DamageEffects.damageDealtHandlers.Add(DeathPower2_DamageHandler);
+                    break;
                 }
             }
         }
+
+        private int DeathPower2_DamageHandler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
+            if (typeof(Hero).IsAssignableFrom(sender.GetType())) {
+                DialogResult result = MessageBox.Show("Do you want to decrease this damage by 2 for Haka's power", "Haka Death Power 2", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes) {
+                    DamageEffects.damageDealtHandlers.Remove(DeathPower2_DamageHandler);
+                    return -2;
+                }
+            }
+            return 0;
+        }
+        
 
         public override void DeathPower3()
         {
