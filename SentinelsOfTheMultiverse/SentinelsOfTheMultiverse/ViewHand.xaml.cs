@@ -54,18 +54,18 @@ namespace SentinelsOfTheMultiverse
 
             updateHandView();
 
-            addScrollBar();
+            //addScrollBar();
 
             Closing += Window_Closed;
         }
 
-        private void addScrollBar()
-        {
-            ScrollViewer viewer = new ScrollViewer();
-            viewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
-            Grid.SetRow(viewer, 2);
-            cardLayout.Children.Add(viewer);
-        }
+        //private void addScrollBar()
+        //{
+        //    ScrollViewer viewer = new ScrollViewer();
+        //    viewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
+        //    Grid.SetRow(viewer, 2);
+        //    cardLayout.Children.Add(viewer);
+        //}
 
         private void Window_Closed(object sender, EventArgs e)
         {

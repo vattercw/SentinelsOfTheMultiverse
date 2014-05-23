@@ -13,17 +13,23 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public Legacy()
         {
             lifeTotal = 32;
-            maxHealth = 32;
+            maxHealth = 32; 
         }
 
 
         public override void Power()
         {
+            DamageEffects.damageDealtHandlers.Add(Legacy_Power_Handler);
+            
             //until next turn heros do one more damage
-            foreach (Hero hero in GameEngine.getHeroes())
-            {
-                //hero.damageAmplificationFromPlayer++;
+            StartPhaseStarted += () => DamageEffects.damageDealtHandlers.Remove(Legacy_Power_Handler);
+        }
+
+        private int Legacy_Power_Handler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
+            if (typeof(Hero).IsAssignableFrom(sender.GetType())) {
+                return 1;
             }
+            return 0;
         }
 
         public void Fortitude(Card card) {
