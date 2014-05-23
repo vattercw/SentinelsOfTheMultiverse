@@ -12,11 +12,17 @@ namespace SentinelsOfTheMultiverse.Tests
 {
     class BaronBladeTest
     {
+
+        [SetUp(), RequiresSTA]
+        public void Setup()
+        {
+            Start st = new Start();
+            st.beginGame();
+        }
+
         [Test(), RequiresSTA]
         public void TestHastenDoom()
         {
-            Start game = new Start();
-            game.beginGame();
             BaronBlade test = new BaronBlade();
             Card hastenCard = new Card("Images\\Villain\\BaronBlade\\4-HastenDoom.png");
             test.HastenDoom(hastenCard);
@@ -35,8 +41,6 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestFleshRepairNanites()
         {
-            Start game = new Start();
-            game.beginGame();
 
             BaronBlade test = new BaronBlade();
             Card nanoCard = new Card("Images\\Villain\\BaronBlade\\1-FleshRepairNanites.png");
@@ -48,17 +52,13 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestSlashAndBurn()
         {
-            Start game = new Start();
-            game.beginGame();
 
             BaronBlade test = new BaronBlade();
             Card slashCard = new Card("Images\\Villain\\BaronBlade\\2-SlashAndBurn.png");
             test.SlashAndBurn(slashCard);
 
-            for (int i = 0; i < GameEngine.getHeroes().Count; i++)
-            {
-                Assert.AreEqual(GameEngine.getHeroes()[i].lifeTotal, 30);
-            }
+            Assert.AreEqual(GameEngine.getHeroes()[0].lifeTotal, GameEngine.getHeroes()[0].maxHealth-4);
+            Assert.AreEqual(GameEngine.getHeroes()[1].lifeTotal, GameEngine.getHeroes()[1].maxHealth - 2);
         }
 
         [Test(), RequiresSTA]
@@ -76,49 +76,48 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestTurret()
         {
-            Start game = new Start();
-            game.beginGame();
-            BaronBlade test = new BaronBlade();
+            BaronBlade baron = (BaronBlade)GameEngine.getVillain();
             Card turretCard = new Card("Images\\Villain\\BaronBlade\\2-PoweredRemoteTurret.png");
-            test.PoweredRemoteTurret(turretCard);
-
-            Assert.AreEqual(GameEngine.getVillain().getMinions()[0].ToString(), (new PoweredRemoteTurret()).ToString());
+            baron.PoweredRemoteTurret(turretCard);
+            List<Minion> minions = GameEngine.getVillain().getMinions();
+            Assert.IsTrue(minions.Contains(turretCard.Minion));
         }
 
         [Test(), RequiresSTA]
         public void TestPlatform()
         {
-            Start game = new Start();
-            game.beginGame();
-            BaronBlade test = new BaronBlade();
+            BaronBlade baron = (BaronBlade)GameEngine.getVillain();
             Card platCard = new Card("Images\\Villain\\BaronBlade\\3-MobileDefencePlatform.png");
-            test.MobileDefensePlatform(platCard);
-
-            Assert.AreEqual(GameEngine.getVillain().getMinions()[0].ToString(), (new MobileDefensePlatform()).ToString());
+            baron.MobileDefensePlatform(platCard);
+            List<Minion> minions = GameEngine.getVillain().getMinions();
+            Assert.IsTrue(minions.Contains(platCard.Minion));
         }
 
         [Test(), RequiresSTA]
         public void TestRedistributor()
         {
-            Start game = new Start();
-            game.beginGame();
-            BaronBlade test = new BaronBlade();
+            BaronBlade baron = (BaronBlade)GameEngine.getVillain();
             Card redistCard = new Card("Images\\Villain\\BaronBlade\\2-ElementalRedistributor.png");
-            test.ElementalRedistributor(redistCard);
-
-            Assert.AreEqual(GameEngine.getVillain().getMinions()[0].ToString(), (new ElementalRedistributor()).ToString());
+            baron.ElementalRedistributor(redistCard);
+            List<Minion> minions = GameEngine.getVillain().getMinions();
+            Assert.IsTrue(minions.Contains(redistCard.Minion));
         }
 
         [Test(), RequiresSTA]
         public void TestBattalion()
         {
-            Start game = new Start();
-            game.beginGame();
-            BaronBlade test = new BaronBlade();
+            BaronBlade baron = (BaronBlade)GameEngine.getVillain();
             Card battleCard = new Card("Images\\Villain\\BaronBlade\\4-BladeBattalion.png");
-            test.BladeBattalion(battleCard);
+            baron.BladeBattalion(battleCard);
+            List<Minion> minions = GameEngine.getVillain().getMinions();
+            Assert.IsTrue(minions.Contains(battleCard.Minion));
+        }
 
-            Assert.AreEqual(GameEngine.getVillain().getMinions()[0].ToString(), (new BladeBattalion()).ToString());
+        [TearDown()]
+        public void TearDown()
+        {
+            GameEngine.TearDownGameEngine();
+
         }
     }
 }
