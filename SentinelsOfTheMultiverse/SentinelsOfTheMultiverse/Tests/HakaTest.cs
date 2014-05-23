@@ -10,6 +10,8 @@ using SentinelsOfTheMultiverse.Data.Villains;
 using SentinelsOfTheMultiverse.Data.Effects;
 using System.Reflection;
 using SentinelsOfTheMultiverse.Data.Environments;
+using SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus;
+using SentinelsOfTheMultiverse.Data.Minions;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -21,6 +23,7 @@ namespace SentinelsOfTheMultiverse.Tests
         {
             Start st = new Start();
             st.beginGame();
+            GameEngine.getVillain().getMinions()[0].lifeTotal = 0;
         }
 
         [Test(), RequiresSTA]
@@ -38,18 +41,48 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestElbowSmash()
         {
-            Haka haka = (Haka)ObjectMother.TestHero();
-            BaronBlade baron = (BaronBlade)ObjectMother.TestVillain();
-            GameEnvironment env = (GameEnvironment)ObjectMother.TestEnvironment();
+            Haka testHaka = new Haka();
+            Card testElbow = new Card("Images\\Hero\\Haka\\3-ElbowSmash.png");
+            testHaka.ElbowSmash(testElbow);
+            Card redist = new Card("Images\\Villain\\BaronBlade\\2-ElementalRedistributor.png");
+            Card velo = new Card("Images\\Environment\\InsulaPrimus\\3-VelociraptorPack.png");
+            Card battalion = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            Card battalion2 = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            List<Card> cards = new List<Card>();
+            cards.Add(velo);
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            GameBoard.cardClickedArray = cards;
+            testHaka.ElbowSmash(testElbow);
 
-            Minion min1 = ObjectMother.TestMinion();
-            GameEngine.getVillain().addMinion(min1);
+            List<Card> cards3 = new List<Card>();
+            cards3.Add(redist);
+            cards3.Add(velo);
+            cards3.Add(battalion);
+            cards3.Add(battalion2);
 
-            Minion min2 = ObjectMother.TestMinion();
-            GameEngine.getEnvironment().addMinion(min2);
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameEngine.getVillain().addMinion(new BladeBattalion());
+            GameEngine.getVillain().addMinion(new BladeBattalion());
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameEngine.getVillain().cardsOnField.Add(battalion2);
+            GameEngine.getVillain().cardsOnField.Add(battalion);
+            GameBoard.cardClickedArray = cards3;
 
-            Card elbowSmash = new Card("Images\\Hero\\Haka\\ElbowSmash.png");
+            testHaka.ElbowSmash(testElbow);
 
+            GameBoard.cardClickedArray.Clear();
+            testHaka.ElbowSmash(testElbow);
+
+            Card obsidian = new Card("Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
+            GameEngine.getEnvironment().cardsOnField.Add(obsidian);
+            List<Card> cards4 = new List<Card>();
+            cards4.Add(obsidian);
+            GameBoard.cardClickedArray = cards4;
+
+            testHaka.ElbowSmash(testElbow);
         }
 
         [Test(), RequiresSTA]
@@ -70,6 +103,7 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestHakaOfBattle()
         {
+            //GameEngine.getVillain().getMinions()[0].lifeTotal = 0;
             Haka haka = (Haka)ObjectMother.TestHero();
             Card hakaOfBattleCard = new Card("Images\\Heroes\\Haka\\3-HakaOfBattle.png");
             Card elbowCard = new Card("Images\\Heroes\\Haka\\3-ElbowSmash.png");
@@ -212,32 +246,104 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestMere()
         {
-            Haka testHaka= new Haka();
-            BaronBlade testVil = new BaronBlade();
-            InsulaPrimus env = new InsulaPrimus();
-            List<Hero> myHeroes = new List<Hero>() { testHaka };
-            typeof(GameEngine).GetField("heroes", BindingFlags.Static| BindingFlags.NonPublic).SetValue(null, myHeroes);
-            typeof(GameEngine).GetField("villain", BindingFlags.Static | BindingFlags.NonPublic).SetValue(null, testVil);
-            typeof(GameEngine).GetField("environment", BindingFlags.Static | BindingFlags.NonPublic).SetValue(null, env);
-            Card mere= new Card("Images\\Hero\\Haka\\3-Mere.png");
+            Haka testHaka = new Haka();
+            Card testMere = new Card("Images\\Hero\\Haka\\3-Mere.png");
+            testHaka.Mere(testMere);
+            testHaka.MerePower(testMere, null);
+            Card redist = new Card("Images\\Villain\\BaronBlade\\2-ElementalRedistributor.png");
+            Card velo = new Card("Images\\Environment\\InsulaPrimus\\3-VelociraptorPack.png");
+            Card battalion = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            Card battalion2 = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            List<Card> cards = new List<Card>();
+            cards.Add(velo);
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            GameBoard.cardClickedArray = cards;
+            testHaka.MerePower(testMere, null);
 
-            //deals damage to villain because cardClickedArray is empty
-            GameBoard.cardClickedArray = new List<Card>();
-            testHaka.MerePower(mere, null);
+            List<Card> cards2 = new List<Card>();
+            cards2.Add(redist);
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameBoard.cardClickedArray = cards2;
+            testHaka.MerePower(testMere, null);
 
-            Assert.AreEqual(5, testHaka.hand.Count);
-            Assert.AreNotEqual(GameEngine.getVillain().maxHealth, GameEngine.getVillain().lifeTotal);
+            List<Card> cards3 = new List<Card>();
+            cards3.Add(redist);
+            cards3.Add(velo);
+            cards3.Add(battalion);
+            cards3.Add(battalion2);
+
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameEngine.getVillain().addMinion(new BladeBattalion());
+            GameEngine.getVillain().addMinion(new BladeBattalion());
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameEngine.getVillain().cardsOnField.Add(battalion2);
+            GameEngine.getVillain().cardsOnField.Add(battalion);
+            GameBoard.cardClickedArray = cards3;
+
+            testHaka.MerePower(testMere, null);
+
+            Card obsidian = new Card("Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
+            GameEngine.getEnvironment().cardsOnField.Add(obsidian);
+            List<Card> cards4 = new List<Card>();
+            cards4.Add(obsidian);
+            GameBoard.cardClickedArray = cards4;
+
+            testHaka.MerePower(testMere, null);
         }
 
 
         [Test, RequiresSTA]
         public void TestPower()
         {
-            Haka haka = new Haka();
+            Haka testHaka = new Haka();
+            testHaka.Power();
+            Card redist = new Card("Images\\Villain\\BaronBlade\\2-ElementalRedistributor.png");
+            Card velo = new Card("Images\\Environment\\InsulaPrimus\\3-VelociraptorPack.png");
+            Card battalion = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            Card battalion2 = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            List<Card> cards = new List<Card>();
+            cards.Add(velo);
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            GameBoard.cardClickedArray = cards;
+            testHaka.Power();
 
-            haka.Power();
+            List<Card> cards2 = new List<Card>();
+            cards2.Add(redist);
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameBoard.cardClickedArray = cards2;
+            testHaka.Power();
 
-            Assert.AreEqual(38, GameEngine.getVillain().lifeTotal);   
+            List<Card> cards3 = new List<Card>();
+            cards3.Add(redist);
+            cards3.Add(velo);
+            cards3.Add(battalion);
+            cards3.Add(battalion2);
+
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameEngine.getVillain().addMinion(new BladeBattalion());
+            GameEngine.getVillain().addMinion(new BladeBattalion());
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameEngine.getVillain().cardsOnField.Add(battalion2);
+            GameEngine.getVillain().cardsOnField.Add(battalion);
+            GameBoard.cardClickedArray = cards3;
+
+            testHaka.Power();
+
+            Card obsidian = new Card("Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
+            GameEngine.getEnvironment().cardsOnField.Add(obsidian);
+            List<Card> cards4 = new List<Card>();
+            cards4.Add(obsidian);
+            GameBoard.cardClickedArray = cards4;
+
+            testHaka.Power();  
         }
 
         [TearDown()]

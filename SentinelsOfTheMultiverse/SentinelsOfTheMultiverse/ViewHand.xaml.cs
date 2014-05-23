@@ -54,7 +54,7 @@ namespace SentinelsOfTheMultiverse
 
             updateHandView();
 
-            addScrollBar();
+            //addScrollBar();
 
             Closing += Window_Closed;
         }
@@ -63,8 +63,8 @@ namespace SentinelsOfTheMultiverse
         {
             ScrollViewer viewer = new ScrollViewer();
             viewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
-            Grid.SetRow(viewer, 2);
             cardLayout.Children.Add(viewer);
+            Grid.SetRow(viewer, 2);
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -286,6 +286,9 @@ namespace SentinelsOfTheMultiverse
             RowDefinition row = new RowDefinition();
             row.Height = GridLength.Auto;
             myGrid.RowDefinitions.Add(row);
+            RowDefinition row2 = new RowDefinition();
+            row2.Height = GridLength.Auto;
+            myGrid.RowDefinitions.Add(row2);
 
             for (int kk = 0; kk < handToShow.Count + 1; kk++)
             {
