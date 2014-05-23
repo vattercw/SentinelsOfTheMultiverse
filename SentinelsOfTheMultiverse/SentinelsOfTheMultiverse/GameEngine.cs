@@ -34,7 +34,7 @@ namespace SentinelsOfTheMultiverse
         public static bool primordial = false;
         public static bool playerUsedSecondPower = false;
 
-        public enum ForcedEffect { ConsiderThePrice, PrimordialPlant, DeviousDisruption, RiverOfLava, DiscardCurrentPlayer, ObsidianField };
+        public enum ForcedEffect { PrimordialPlant, DeviousDisruption, RiverOfLava, DiscardCurrentPlayer, ObsidianField, ConsiderThePriceOfVictory };
 
         //private static bool getWinCon()
         //{
@@ -53,8 +53,8 @@ namespace SentinelsOfTheMultiverse
                     //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-SavageMana.png"));
                     //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-Rampage.png"));
                     //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\2-GroundPound.png"));
-                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-HakaOfBattle.png"));
-                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-TaMoko.png"));
+                    newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-Dominion.png"));
+                    //newHero.hand.Add(new Card("\\Images\\Hero\\Haka\\3-TaMoko.png"));
 
                     //newHero.hand.Add(new Card("C:\\Users\\rujirasl.000\\Documents\\GitHub\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\SentinelsOfTheMultiverse\\Images\\Hero\\Haka\\3-EnduringIntercession.png"));
                 }
@@ -63,8 +63,13 @@ namespace SentinelsOfTheMultiverse
             
 
             villain = (Villain)getClassFromString(villainStr);
-            villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\2-PoweredRemoteTurret.png");
-            
+            //villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\2-PoweredRemoteTurret.png");
+            villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\1-ConsiderThePriceOfVictory.png");
+            Card platform = new Card("Images\\Villain\\BaronBlade\\3-MobileDefensePlatform.png");
+            villain.deck.cards.Remove(platform);
+            villain.cardsOnField.Add(platform);
+            ((BaronBlade)villain).MobileDefensePlatform(platform);
+
             environment = (GameEnvironment)getClassFromString(envStr);
             environment.deck.cards[0] = new Card("\\Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
         }

@@ -59,13 +59,14 @@ namespace SentinelsOfTheMultiverse
             Closing += Window_Closed;
         }
 
-        public DiscardFromBoard(GameBoard game, int min)
+        public DiscardFromBoard(GameBoard game, IPlayer player, int min)
         {
             InitializeComponent();
 
             gameBoard = game;
 
-            boardShow = GameEngine.getCurrentPlayer().cardsOnField;
+            currentPlayer = player;
+            boardShow = player.cardsOnField;
 
             updateBoardView();
 

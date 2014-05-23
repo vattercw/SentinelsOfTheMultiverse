@@ -136,10 +136,12 @@ namespace SentinelsOfTheMultiverse
             }            
         }
 
-        private void PlayEnvVil_Action(object sender, RoutedEventArgs e) {
+
+        public void PlayEnvVil_Action(object sender, RoutedEventArgs e) {
             var currentPlayer = GameEngine.getCurrentPlayer();
             
             List<Card> drawnCards = currentPlayer.drawPhase(1);
+            
             for (int i = 0; i < drawnCards.Count; i++) {
                 var res = currentPlayer.CardMethod(drawnCards[i]);
                 if (res != null)
@@ -157,16 +159,30 @@ namespace SentinelsOfTheMultiverse
                             break;
                         case GameEngine.ForcedEffect.PrimordialPlant:
                             foreach (Hero hero in GameEngine.getHeroes()) {
-                                GameBoard.discardedCardsThisTurn = new List<Card>();
-                                DiscardFromBoard handView = new DiscardFromBoard(this, hero);
-                                handView.Visibility = System.Windows.Visibility.Visible;
-                                handView.ShowDialog();
-
+                                if (hero.cardsOnField.FindAll(x => x.cardType.Equals(Card.CardType.Ongoing)).Count != 0) {
+                                    GameBoard.discardedCardsThisTurn = new List<Card>();
+                                    DiscardFromBoard handView = new DiscardFromBoard(this, hero);
+                                    handView.Visibility = System.Windows.Visibility.Visible;
+                                    handView.ShowDialog();
+                                }
                                 Data.Environments.InsulaPrimus.DiscardedAction discardAction = (Data.Environments.InsulaPrimus.DiscardedAction)res[0];
                                 discardAction(GameBoard.discardedCardsThisTurn.Count, hero, (Card)res[3]);
                             }
                             drawnCards[0].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
                             break;
+                        case GameEngine.ForcedEffect.ConsiderThePriceOfVictory:
+                            foreach (Hero hero in GameEngine.getHeroes()) {
+                                GameBoard.discardedCardsThisTurn = new List<Card>();
+                                DiscardFromHand handView = new DiscardFromHand(hero.hand, this, 1, hero);
+                                handView.Visibility = System.Windows.Visibility.Visible;
+                                handView.ShowDialog();
+
+                                Data.Villains.BaronBlade.DiscardedAction discardAction = (Data.Villains.BaronBlade.DiscardedAction)res[0];
+                                discardAction(GameBoard.discardedCardsThisTurn.Count);
+                                drawnCards[0].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
+                            }
+                            break;
+
                     }
                 }
             }
@@ -308,7 +324,7 @@ namespace SentinelsOfTheMultiverse
             Utility.addElementToGrid(graveYardImg, currentHeroRow, GRAVEYARD_COLUMN, gridLayout);
         }
 
-        private void drawNPCBoard(Villain villain, GameEnvironment env)
+        public void drawNPCBoard(Villain villain, GameEnvironment env)
         {
             string villainName = villain.getCharacterName();
             Card villainCard = new Card(VILLAIN_IMAGE_PATH + villainName + "/NonPlayable/" + villainName + "_initial.png");
