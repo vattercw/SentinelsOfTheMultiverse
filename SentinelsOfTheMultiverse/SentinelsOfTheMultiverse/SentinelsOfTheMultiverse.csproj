@@ -65,7 +65,7 @@
     <Compile Include="Data\Effects\DamageEffects.cs" />
     <Compile Include="Data\Handlers\DiscardListener.cs" />
     <Compile Include="Data\Heroes\Legacy.cs" />
-    <Compile Include="Data\Minions\BaronBlade\BladeBattalion.cs" />
+    <Compile Include="Data\Minions\InsulaPrimus\BladeBattalion.cs" />
     <Compile Include="Data\Minions\BaronBlade\ElementalRedistributor.cs" />
     <Compile Include="Data\Minions\BaronBlade\MobileDefensePlatform.cs" />
     <Compile Include="Data\Minions\BaronBlade\PoweredRemoteTurret.cs" />

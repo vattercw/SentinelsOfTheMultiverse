@@ -192,7 +192,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardPower = new Card.Power(MotivationalChargePower);
         }
 
-        void MotivationalChargePower(Card card, object[] args)
+        public void MotivationalChargePower(Card card, object[] args)
         {
             var target = GameBoard.cardClickedArray;
             if (target.Count > 1)
@@ -398,14 +398,9 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.CardDestroyed += TheLegacyRing_Destroyed_Handler;
         }
 
-        private void TheLegacyRing_Destroyed_Handler(Card m, EventArgs e)
+        public void TheLegacyRing_Destroyed_Handler(Card m, EventArgs e)
         {
             this.numPowers = 1;
-        }
-
-        public void TakeDown(Card card)
-        {
-            //TODO implement this method
         }
 
         public override void DeathPower1()
