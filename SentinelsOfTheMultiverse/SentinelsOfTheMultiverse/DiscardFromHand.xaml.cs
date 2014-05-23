@@ -26,20 +26,10 @@ namespace SentinelsOfTheMultiverse
         Grid cardLayout = new Grid();
 
         StackPanel sideBar = new StackPanel();
-
+        IPlayer Player;
         List<Image> imageSelectedArray = new List<Image>();
 
-        List<Card> handShow
-        {
-            get
-            {
-                return ((Hero)GameEngine.getCurrentPlayer()).getPlayerHand();
-            }
-            set
-            {
-                handShow= value;
-            }
-        }
+        List<Card> handShow = new List<Card>();
 
         private int minimumToDiscard = -1;
         private int numDiscarded = 0;
@@ -67,23 +57,25 @@ namespace SentinelsOfTheMultiverse
 
         GameBoard gameBoard;
 
-        public DiscardFromHand(List<Card> hand, GameBoard game)
+        public DiscardFromHand(List<Card> hand, GameBoard game, IPlayer player)
         {
             InitializeComponent();
 
             gameBoard = game;
+            Player = player;
+            handShow = hand;
 
             updateHandView();
 
             Closing += Window_Closed;
         }
 
-        public DiscardFromHand(List<Card> hand, GameBoard game, int min)
+        public DiscardFromHand(List<Card> hand, GameBoard game, int min, IPlayer player)
         {
             InitializeComponent();
-            
+            Player = player;
             gameBoard = game;
-
+            handShow = hand;
             updateHandView();
 
             minimumToDiscard = min;
@@ -127,7 +119,7 @@ namespace SentinelsOfTheMultiverse
         {
             if (cardClickedArray.Count != 0)
             {
-                CardDrawingEffects.DiscardCardFromHand(cardClickedArray);
+                CardDrawingEffects.DiscardCardFromHand(cardClickedArray, (Hero)Player);
                 numDiscarded += cardClickedArray.Count;
                 updateHandView();
                 gameBoard.updateBoard();
@@ -138,7 +130,7 @@ namespace SentinelsOfTheMultiverse
 
         private void Close_Action(object sender, RoutedEventArgs e)
         {
-            if (minimumToDiscard >= numDiscarded || minimumToDiscard == -1)
+            if (numDiscarded >= minimumToDiscard || minimumToDiscard == -1)
             {
                 this.Close();
             }

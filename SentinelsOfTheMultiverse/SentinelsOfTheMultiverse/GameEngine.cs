@@ -34,7 +34,7 @@ namespace SentinelsOfTheMultiverse
         public static bool primordial = false;
         public static bool playerUsedSecondPower = false;
 
-        public enum ForcedEffect { ConsiderThePrice, PrimordialPlant, DeviousDisruption, RiverOfLava, DiscardCurrentPlayer, ObsidianField };
+        public enum ForcedEffect { PrimordialPlant, DeviousDisruption, RiverOfLava, DiscardCurrentPlayer, ObsidianField, ConsiderThePriceOfVictory };
 
         //private static bool getWinCon()
         //{
@@ -64,6 +64,7 @@ namespace SentinelsOfTheMultiverse
 
             villain = (Villain)getClassFromString(villainStr);
             //villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\2-PoweredRemoteTurret.png");
+            villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\1-ConsiderThePriceOfVictory.png");
             Card platform = new Card("Images\\Villain\\BaronBlade\\3-MobileDefensePlatform.png");
             villain.deck.cards.Remove(platform);
             villain.cardsOnField.Add(platform);

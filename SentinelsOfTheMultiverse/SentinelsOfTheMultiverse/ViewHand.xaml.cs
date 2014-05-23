@@ -177,7 +177,7 @@ namespace SentinelsOfTheMultiverse
         {
             if (cardClickedArray.Count != 0)
             {
-                CardDrawingEffects.DiscardCardFromHand(cardClickedArray);
+                CardDrawingEffects.DiscardCardFromHand(cardClickedArray, (Hero)GameEngine.getCurrentPlayer());
                 updateHandView();
                 gameBoard.updateBoard();
             }
@@ -206,7 +206,8 @@ namespace SentinelsOfTheMultiverse
                     case GameEngine.ForcedEffect.ObsidianField:
                         if ((System.Windows.Forms.DialogResult)result[1] == System.Windows.Forms.DialogResult.Yes) {
                             Close();
-                            DiscardFromHand discardHand = new DiscardFromHand(((Hero)GameEngine.getCurrentPlayer()).hand, gameBoard);
+                            Hero currentPlayer = ((Hero)GameEngine.getCurrentPlayer());
+                            DiscardFromHand discardHand = new DiscardFromHand(currentPlayer.hand, gameBoard, currentPlayer);
                             discardHand.Visibility = System.Windows.Visibility.Visible;
                             discardHand.ShowDialog();
 
@@ -305,27 +306,6 @@ namespace SentinelsOfTheMultiverse
                 {
                     switch ((GameEngine.ForcedEffect)res[1])
                     {
-                        case GameEngine.ForcedEffect.ConsiderThePrice:
-                            foreach (Hero hero in GameEngine.getHeroes())
-                            {
-                                if (hero.GetType().Equals(typeof(Legacy)))
-                                {
-                                    //here is where it will prompt the user with the discard window
-                                    GameBoard.discardedCardsThisTurn = new List<Card>();
-                                    DiscardFromHand viewHand = new DiscardFromHand(hero.getPlayerHand(), gameBoard);
-
-                                    viewHand.Visibility = System.Windows.Visibility.Visible;
-                                    viewHand.ShowDialog();//use this to make it wait for the window to close before resuming
-
-                                    //have it check that they actually discarded cards if they need to
-                                    BaronBlade.DiscardedAction discardAction = (BaronBlade.DiscardedAction)res[0];
-                                    discardAction(GameBoard.discardedCardsThisTurn.Count); //returns to the method that was passed as the first parameter of the result
-
-                                }
-                            }
-
-                            break;
-
                         case GameEngine.ForcedEffect.DeviousDisruption:
                             foreach (Hero hero in GameEngine.getHeroes())
                             {
@@ -343,7 +323,8 @@ namespace SentinelsOfTheMultiverse
 
                         case GameEngine.ForcedEffect.DiscardCurrentPlayer:
                             GameBoard.discardedCardsThisTurn = new List<Card>();
-                            DiscardFromHand discardedHand = new DiscardFromHand(((Hero)GameEngine.getCurrentPlayer()).getPlayerHand(), gameBoard);
+                            Hero currHero = ((Hero)GameEngine.getCurrentPlayer());
+                            DiscardFromHand discardedHand = new DiscardFromHand(currHero.getPlayerHand(), gameBoard, currHero);
                             discardedHand.Visibility = System.Windows.Visibility.Visible;
                             discardedHand.ShowDialog();
 

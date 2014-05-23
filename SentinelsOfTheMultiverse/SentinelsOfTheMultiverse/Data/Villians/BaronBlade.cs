@@ -78,17 +78,17 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
         public object[] ConsiderThePriceOfVictory(Card card)
         {
+            foreach (Hero h in GameEngine.getHeroes()) {
+                DamageEffects.DealDamage(this, h, 2, DamageEffects.DamageType.Sonic); 
+            }
             DiscardedAction act = ConsiderThePriceOfVictoryDiscardAction;
-            return new object[]{act, GameEngine.getPlayers()};
+            return new object[]{act, GameEngine.ForcedEffect.ConsiderThePriceOfVictory, GameEngine.getPlayers()};
         }
         public delegate void DiscardedAction(int discardedCards);
 
         void ConsiderThePriceOfVictoryDiscardAction(int discardedCards)
         {
-            Card ctpovCard = cardsOnField.Find(x => x.getName().Equals("ConsiderThePriceOfVictory"));
-            ctpovCard.SendToGraveyard(this, cardsOnField);
-            var numheroes = GameEngine.getHeroes().Count;
-            var cardsToRemove = deck.cards.GetRange(deck.cards.Count - numheroes -1, discardedCards);
+            var cardsToRemove = deck.cards.GetRange(deck.cards.Count - discardedCards -1, discardedCards);
             Card[] dummyCardsToRemove = new Card[cardsToRemove.Count];
             cardsToRemove.CopyTo(dummyCardsToRemove);
             

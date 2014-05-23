@@ -140,6 +140,7 @@ namespace SentinelsOfTheMultiverse
             var currentPlayer = GameEngine.getCurrentPlayer();
             
             List<Card> drawnCards = currentPlayer.drawPhase(1);
+            
             for (int i = 0; i < drawnCards.Count; i++) {
                 var res = currentPlayer.CardMethod(drawnCards[i]);
                 if (res != null)
@@ -168,7 +169,16 @@ namespace SentinelsOfTheMultiverse
                             drawnCards[0].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
                             break;
                         case GameEngine.ForcedEffect.ConsiderThePriceOfVictory:
-                            
+                            foreach (Hero hero in GameEngine.getHeroes()) {
+                                GameBoard.discardedCardsThisTurn = new List<Card>();
+                                DiscardFromHand handView = new DiscardFromHand(hero.hand, this, 1, hero);
+                                handView.Visibility = System.Windows.Visibility.Visible;
+                                handView.ShowDialog();
+
+                                Data.Villains.BaronBlade.DiscardedAction discardAction = (Data.Villains.BaronBlade.DiscardedAction)res[0];
+                                discardAction(GameBoard.discardedCardsThisTurn.Count);
+                                drawnCards[0].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
+                            }
                             break;
                     }
                 }

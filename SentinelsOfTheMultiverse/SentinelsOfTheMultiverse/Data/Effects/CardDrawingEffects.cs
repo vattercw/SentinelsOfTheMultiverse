@@ -13,11 +13,11 @@ namespace SentinelsOfTheMultiverse.Data.Effects
             player.drawPhase(numCards);
         }
 
-        public static void DiscardCardFromHand(List<Card> cardsToDiscard)
+        public static void DiscardCardFromHand(List<Card> cardsToDiscard, Hero hero)
         {
             foreach (Card card in cardsToDiscard)
             {
-                ((Hero)GameEngine.getCurrentPlayer()).DiscardCard(card);
+                hero.DiscardCard(card);
             }
         }
 
