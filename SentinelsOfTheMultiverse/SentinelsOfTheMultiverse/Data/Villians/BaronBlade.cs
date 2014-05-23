@@ -40,12 +40,13 @@ namespace SentinelsOfTheMultiverse.Data.Villains
 
         public object[] DeviousDisruption(Card card)
         {
-            DisruptDiscardedAction act = DeviousDisruptionDiscardAction;
+            DiscardedAction act = DeviousDisruptionDiscardAction;
             return new object[] { act, GameEngine.ForcedEffect.DeviousDisruption, GameEngine.getPlayers() };
         }
-        public delegate void DisruptDiscardedAction(int discardedCards, Hero target);
+        
 
-        void DeviousDisruptionDiscardAction(int discardedCards, Hero target)
+
+        void DeviousDisruptionDiscardAction(int discardedCards)
         {
             int cardDamage = 0;
 
@@ -55,8 +56,9 @@ namespace SentinelsOfTheMultiverse.Data.Villains
             }
 
             cardDamage = cardDamage + 3;
-
-            DamageEffects.DealDamage(this, new List<Targetable>(){target}, cardDamage, DamageEffects.DamageType.Lightning);
+            List<Targetable> targets= new List<Targetable>();
+            targets.AddRange(GameEngine.getHeroes());
+            DamageEffects.DealDamage(this, targets, cardDamage, DamageEffects.DamageType.Lightning);
 
         }
 

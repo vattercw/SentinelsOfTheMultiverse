@@ -65,7 +65,7 @@
     <Compile Include="Data\Effects\DamageEffects.cs" />
     <Compile Include="Data\Handlers\DiscardListener.cs" />
     <Compile Include="Data\Heroes\Legacy.cs" />
-    <Compile Include="Data\Minions\BaronBlade\BladeBattalion.cs" />
+    <Compile Include="Data\Minions\InsulaPrimus\BladeBattalion.cs" />
     <Compile Include="Data\Minions\BaronBlade\ElementalRedistributor.cs" />
     <Compile Include="Data\Minions\BaronBlade\MobileDefensePlatform.cs" />
     <Compile Include="Data\Minions\BaronBlade\PoweredRemoteTurret.cs" />
@@ -209,14 +209,12 @@
     <Resource Include="Images\Hero\Legacy\3-InspiringPresence.png" />
     <Resource Include="Images\Hero\Legacy\3-LeadFromTheFront.png" />
     <Resource Include="Images\Hero\Legacy\3-MotivationalCharge.png" />
-    <Resource Include="Images\Hero\Legacy\3-NextEvolution.png" />
     <Resource Include="Images\Hero\Legacy\NonPlayable\legacy_back.png" />
     <Resource Include="Images\Hero\Legacy\NonPlayable\legacy_cover.png" />
     <Resource Include="Images\Hero\Legacy\NonPlayable\legacy_death.png" />
     <Resource Include="Images\Hero\Legacy\NonPlayable\legacy_hero.png" />
     <Resource Include="Images\Hero\Legacy\2-SuperhumanDurability.png" />
     <Resource Include="Images\Hero\Legacy\3-SurgeOfStrength.png" />
-    <Resource Include="Images\Hero\Legacy\2-TakeDown.png" />
     <Resource Include="Images\Hero\Legacy\2-TheLegacyRing.png" />
     <Resource Include="Images\Hero\Legacy\3-Thokk.png" />
     <Resource Include="Images\Hero\Haka\NonPlayable\haka_back.png" />
@@ -235,16 +233,13 @@
     <Resource Include="Images\Environment\InsulaPrimus\2-EnragedTRex.png" />
     <Resource Include="Images\Environment\InsulaPrimus\3-ObsidianField.png" />
     <Resource Include="Images\Environment\InsulaPrimus\2-PrimordialPlantLife.png" />
-    <Resource Include="Images\Environment\InsulaPrimus\2-RiverOfLava.png" />
     <Resource Include="Images\Environment\InsulaPrimus\3-VelociraptorPack.png" />
-    <Resource Include="Images\Environment\InsulaPrimus\1-VolcanicEruption.png" />
     <Resource Include="Images\Environment\InsulaPrimus\NonPlayable\insula_primus_back.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\NumOfCards.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Villain\BaronBlade\2-BacklashField.png" />
     <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_back.png" />
     <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_death.png" />
     <Resource Include="Images\Villain\BaronBlade\NonPlayable\BaronBlade_initial.png" />

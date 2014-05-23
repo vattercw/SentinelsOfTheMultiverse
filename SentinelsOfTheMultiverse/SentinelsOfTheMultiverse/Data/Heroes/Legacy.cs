@@ -13,17 +13,23 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
         public Legacy()
         {
             lifeTotal = 32;
-            maxHealth = 32;
+            maxHealth = 32; 
         }
 
 
         public override void Power()
         {
+            DamageEffects.damageDealtHandlers.Add(Legacy_Power_Handler);
+            
             //until next turn heros do one more damage
-            foreach (Hero hero in GameEngine.getHeroes())
-            {
-                //hero.damageAmplificationFromPlayer++;
+            StartPhaseStarted += () => DamageEffects.damageDealtHandlers.Remove(Legacy_Power_Handler);
+        }
+
+        private int Legacy_Power_Handler(Targetable sender, Targetable receiver, ref int damageAmount, DamageEffects.DamageType damageType) {
+            if (typeof(Hero).IsAssignableFrom(sender.GetType())) {
+                return 1;
             }
+            return 0;
         }
 
         public void Fortitude(Card card) {
@@ -192,7 +198,7 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.cardPower = new Card.Power(MotivationalChargePower);
         }
 
-        void MotivationalChargePower(Card card, object[] args)
+        public void MotivationalChargePower(Card card, object[] args)
         {
             var target = GameBoard.cardClickedArray;
             if (target.Count > 1)
@@ -398,14 +404,9 @@ namespace SentinelsOfTheMultiverse.Data.Heroes
             card.CardDestroyed += TheLegacyRing_Destroyed_Handler;
         }
 
-        private void TheLegacyRing_Destroyed_Handler(Card m, EventArgs e)
+        public void TheLegacyRing_Destroyed_Handler(Card m, EventArgs e)
         {
             this.numPowers = 1;
-        }
-
-        public void TakeDown(Card card)
-        {
-            //TODO implement this method
         }
 
         public override void DeathPower1()

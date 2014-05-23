@@ -9,6 +9,7 @@ using SentinelsOfTheMultiverse.Data;
 using SentinelsOfTheMultiverse.Data.Effects;
 using SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus;
 using SentinelsOfTheMultiverse.Data.Heroes;
+using SentinelsOfTheMultiverse.Data.Minions;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -41,9 +42,15 @@ namespace SentinelsOfTheMultiverse.Tests
 
             testEnvo.ObsidianField(testObsidian);
 
+            Card platform = new Card("Images\\Villain\\BaronBlade\\3-MobileDefensePlatform.png");
+            List<Card> cards = new List<Card>();
+            cards.Add(platform);
+            GameEngine.getVillain().addMinion(new MobileDefensePlatform());
+            GameBoard.cardClickedArray = cards;
+
             testHaka.ElbowSmash(elbowCard);
 
-            Assert.AreEqual(36, GameEngine.getVillain().lifeTotal);            
+            Assert.AreEqual(6, GameEngine.getVillain().getMinions()[1].lifeTotal);            
 
         }
 

@@ -64,14 +64,20 @@ namespace SentinelsOfTheMultiverse
 
             villain = (Villain)getClassFromString(villainStr);
             //villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\2-PoweredRemoteTurret.png");
-            villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\1-ConsiderThePriceOfVictory.png");
+            //villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\1-ConsiderThePriceOfVictory.png");
+            villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\2-DeviousDisruption.png");
+
+            BaronStartup();
+
+            environment = (GameEnvironment)getClassFromString(envStr);
+            //environment.deck.cards[0] = new Card("\\Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
+        }
+
+        private static void BaronStartup() {
             Card platform = new Card("Images\\Villain\\BaronBlade\\3-MobileDefensePlatform.png");
             villain.deck.cards.Remove(platform);
             villain.cardsOnField.Add(platform);
             ((BaronBlade)villain).MobileDefensePlatform(platform);
-
-            environment = (GameEnvironment)getClassFromString(envStr);
-            environment.deck.cards[0] = new Card("\\Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
         }
 
         public static Object getClassFromString(string className)

@@ -8,6 +8,7 @@ using SentinelsOfTheMultiverse.Data;
 using SentinelsOfTheMultiverse.Data.Heroes;
 using SentinelsOfTheMultiverse.Data.Minions;
 using SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus;
+using SentinelsOfTheMultiverse.Data.Effects;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -109,18 +110,105 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestBackFistStrike()
         {
-            
-            Legacy testLegacy = new Legacy();
 
             Card testStrike = new Card("Images\\Hero\\Legacy\\BackFistStrike.png");
+
+            Legacy testLegacy = new Legacy();
+
             testLegacy.BackfistStrike(testStrike);
-            Assert.AreEqual(GameEngine.getVillain().lifeTotal, 35); //change to 36 when done individually, 35 with all are executed, change when static problem fixed...
+
+            Card redist = new Card("Images\\Villain\\BaronBlade\\2-ElementalRedistributor.png");
+            Card velo = new Card("Images\\Environment\\InsulaPrimus\\3-VelociraptorPack.png");
+            Card battalion = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            Card battalion2 = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            List<Card> cards = new List<Card>();
+            cards.Add(redist);
+            cards.Add(velo);
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameBoard.cardClickedArray = cards;
+
+            testLegacy.BackfistStrike(testStrike);
+
+
+            List<Card> cards3 = new List<Card>();
+            cards3.Add(redist);
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameBoard.cardClickedArray = cards3;
+
+            testLegacy.BackfistStrike(testStrike);
+
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            List<Card> cards2 = new List<Card>();
+            cards2.Add(velo);
+            GameBoard.cardClickedArray = cards2;
+
+            testLegacy.BackfistStrike(testStrike);
+
+            Card obsidian = new Card("Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
+            GameEngine.getEnvironment().cardsOnField.Add(obsidian);
+            List<Card> cards4 = new List<Card>();
+            cards4.Add(obsidian);
+            GameBoard.cardClickedArray = cards4;
+
+            testLegacy.BackfistStrike(testStrike);
+
+            
+            
         }
 
         [Test, RequiresSTA]
         public void TestMotivationalCharge()
         {
+            Card testMot = new Card("Images\\Hero\\Legacy\\3-MotivationalCharge.png");
 
+            Legacy testLegacy = new Legacy();
+
+            testLegacy.MotivationalChargePower(testMot, null);
+
+            Card redist = new Card("Images\\Villain\\BaronBlade\\2-ElementalRedistributor.png");
+            Card velo = new Card("Images\\Environment\\InsulaPrimus\\3-VelociraptorPack.png");
+            Card battalion = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            Card battalion2 = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            List<Card> cards = new List<Card>();
+            cards.Add(redist);
+            cards.Add(velo);
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameBoard.cardClickedArray = cards;
+
+            testLegacy.MotivationalChargePower(testMot, null);
+
+
+            List<Card> cards3 = new List<Card>();
+            cards3.Add(redist);
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameBoard.cardClickedArray = cards3;
+
+            testLegacy.MotivationalChargePower(testMot, null);
+
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            List<Card> cards2 = new List<Card>();
+            cards2.Add(velo);
+            GameBoard.cardClickedArray = cards2;
+
+            testLegacy.MotivationalChargePower(testMot, null);
+
+            Card obsidian = new Card("Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
+            GameEngine.getEnvironment().cardsOnField.Add(obsidian);
+            List<Card> cards4 = new List<Card>();
+            cards4.Add(obsidian);
+            GameBoard.cardClickedArray = cards4;
+
+            testLegacy.MotivationalChargePower(testMot, null);
         }
 
         [Test, RequiresSTA]
@@ -189,7 +277,51 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test, RequiresSTA]
         public void TestThokk()
         {
+            Card testThokk = new Card("Images\\Hero\\Legacy\\3-Thokk.png");
 
+            Legacy testLegacy = new Legacy();
+
+            testLegacy.Thokk(testThokk);
+
+            Card redist = new Card("Images\\Villain\\BaronBlade\\2-ElementalRedistributor.png");
+            Card velo = new Card("Images\\Environment\\InsulaPrimus\\3-VelociraptorPack.png");
+            Card battalion = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            Card battalion2 = new Card("Images\\Environment\\InsulaPrimus\\4-BattleBattalion.png");
+            List<Card> cards = new List<Card>();
+            cards.Add(redist);
+            cards.Add(velo);
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameBoard.cardClickedArray = cards;
+
+            testLegacy.Thokk(testThokk);
+
+
+            List<Card> cards3 = new List<Card>();
+            cards3.Add(redist);
+            GameEngine.getVillain().addMinion(new ElementalRedistributor());
+            GameEngine.getVillain().cardsOnField.Add(redist);
+            GameBoard.cardClickedArray = cards3;
+
+            testLegacy.Thokk(testThokk);
+
+            GameEngine.getEnvironment().cardsOnField.Add(velo);
+            GameEngine.getEnvironment().addMinion(new VelociraptorPack());
+            List<Card> cards2 = new List<Card>();
+            cards2.Add(velo);
+            GameBoard.cardClickedArray = cards2;
+
+            testLegacy.Thokk(testThokk);
+
+            Card obsidian = new Card("Images\\Environment\\InsulaPrimus\\3-ObsidianField.png");
+            GameEngine.getEnvironment().cardsOnField.Add(obsidian);
+            List<Card> cards4 = new List<Card>();
+            cards4.Add(obsidian);
+            GameBoard.cardClickedArray = cards4;
+
+            testLegacy.Thokk(testThokk);
         }
         [Test, RequiresSTA]
         public void TestLegacyRing()
@@ -200,6 +332,11 @@ namespace SentinelsOfTheMultiverse.Tests
             Card ring = new Card("Images\\Hero\\Legacy\\TheLegacyRing.png");
             legacy.TheLegacyRing(ring);
             Assert.AreEqual(legacy.numPowers, 2);
+
+            legacy.TheLegacyRing_Destroyed_Handler(ring, null);
+
+            Assert.AreEqual(legacy.numPowers, 1);
+            
 
         }
 
@@ -213,17 +350,13 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestPower()
         {
             
-            Legacy legacy = new Legacy();
+            Legacy legacy = (Legacy)GameEngine.getHeroes().Find(h => typeof(Legacy).IsAssignableFrom(h.GetType()));
 
             legacy.Power();
 
-            foreach (Hero hero in GameEngine.getHeroes())
-            {
-                //Assert.AreEqual(1, hero.damageAmplificationFromPlayer);
-                Assert.True(false);
-            }
+            DamageEffects.DealDamage(legacy, GameEngine.getVillain().getMinions()[0], 2, DamageEffects.DamageType.Lightning);
 
-            Assert.NotNull(GameEngine.getHeroes());
+            Assert.AreEqual(GameEngine.getVillain().getMinions()[0].maxHealth - 3, GameEngine.getVillain().getMinions()[0].lifeTotal);
         }
 
         [TearDown()]
