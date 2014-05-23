@@ -152,6 +152,16 @@ namespace SentinelsOfTheMultiverse.Tests
             Assert.AreEqual(0, villain.getMinions().Count);
         }
 
+        [Test, RequiresSTA]
+        public void VelociraptorEffect()
+        {
+            VelociraptorPack velo = new VelociraptorPack();
+            Card c = new Card("Images\\Environment\\InsulaPrimus\\3-VelociraptorPack.png");
+            GameEngine.getEnvironment().cardsOnField.Add(c);
+            velo.executeEffect();
+            Assert.AreEqual(GameEngine.getHeroes()[1].lifeTotal, 30);
+        }
+
         [TearDown()]
         public void TearDown() {
             GameEngine.TearDownGameEngine();
