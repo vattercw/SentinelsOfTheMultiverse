@@ -65,6 +65,7 @@ namespace SentinelsOfTheMultiverse
             villain = (Villain)getClassFromString(villainStr);
             //villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\2-PoweredRemoteTurret.png");
             //villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\1-ConsiderThePriceOfVictory.png");
+            villain.deck.cards[0] = new Card("\\Images\\Villain\\BaronBlade\\2-DeviousDisruption.png");
 
             BaronStartup();
 

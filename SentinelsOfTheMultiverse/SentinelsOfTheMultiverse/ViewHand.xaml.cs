@@ -315,21 +315,6 @@ namespace SentinelsOfTheMultiverse
                 {
                     switch ((GameEngine.ForcedEffect)res[1])
                     {
-                        case GameEngine.ForcedEffect.DeviousDisruption:
-                            foreach (Hero hero in GameEngine.getHeroes())
-                            {
-                                //TODO will never get called
-                                GameBoard.discardedCardsThisTurn = new List<Card>();
-                                DiscardFromBoard viewHand = new DiscardFromBoard(gameBoard, hero);
-                                viewHand.Visibility = System.Windows.Visibility.Visible;
-                                viewHand.ShowDialog();
-
-                                BaronBlade.DisruptDiscardedAction discardAction = (BaronBlade.DisruptDiscardedAction)res[0];
-                                discardAction(GameBoard.discardedCardsThisTurn.Count, hero);
-                            }
-
-                            break;
-
                         case GameEngine.ForcedEffect.DiscardCurrentPlayer:
                             GameBoard.discardedCardsThisTurn = new List<Card>();
                             Hero currHero = ((Hero)GameEngine.getCurrentPlayer());
@@ -341,7 +326,6 @@ namespace SentinelsOfTheMultiverse
                             discardedAction(GameBoard.discardedCardsThisTurn.Count, (Card)res[3]);
                             break;
                     }
-
                 }
                 else
                 {

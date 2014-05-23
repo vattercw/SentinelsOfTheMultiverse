@@ -180,15 +180,14 @@ namespace SentinelsOfTheMultiverse
                             drawnCards[0].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
                             break;
                         case GameEngine.ForcedEffect.DeviousDisruption:
+                            GameBoard.discardedCardsThisTurn = new List<Card>();
                             foreach (Hero hero in GameEngine.getHeroes()) {
-                                GameBoard.discardedCardsThisTurn = new List<Card>();
                                 DiscardFromBoard handView = new DiscardFromBoard(this, hero);
                                 handView.Visibility = System.Windows.Visibility.Visible;
                                 handView.ShowDialog();
-
-                                Data.Villains.BaronBlade.DiscardedAction discardAction = (Data.Villains.BaronBlade.DiscardedAction)res[0];
-                                discardAction(GameBoard.discardedCardsThisTurn.Count);
                             }
+                            Data.Villains.BaronBlade.DiscardedAction deviousAction= (Data.Villains.BaronBlade.DiscardedAction)res[0];
+                            deviousAction(GameBoard.discardedCardsThisTurn.Count);
                             drawnCards[0].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
                             break;
                     }
