@@ -124,20 +124,6 @@ namespace SentinelsOfTheMultiverse
             }
         }
 
-        public static Card getCardFromID(int cardID){
-
-            for (int i = 0; i < getPlayers().Count; i++)
-            {
-                for(int j = 0; j < getPlayers()[i].cardsOnField.Count; j++){
-                    if (getPlayers()[i].cardsOnField[j].getCardID() == cardID)
-                    {
-                        return getPlayers()[i].cardsOnField[j];
-                    }
-                }
-            }
-            throw new Exception("Card not found", null);
-        }
-
         public static void TearDownGameEngine()
         {
             playerTurn = 0;

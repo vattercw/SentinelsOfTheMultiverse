@@ -35,7 +35,18 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestDeviousDisruption()
         {
-            //test
+            BaronBlade baron = (BaronBlade)GameEngine.getVillain();
+            Card devious = new Card("Images\\Villain\\BaronBlade\\2-DeviousDisruption.png");
+            baron.DeviousDisruption(devious);
+            Card superhuman = new Card("Images\\Hero\\Legacy\\SuperhumanDurability.png");
+            List<Card> cards = new List<Card>();
+            cards.Add(superhuman);
+            GameEngine.getHeroes()[0].cardsOnField = cards;
+            Assert.AreEqual(GameEngine.getHeroes()[0].cardsOnField.Count, 1);
+            baron.DeviousDisruptionDiscardAction(0);
+
+            Assert.AreEqual(GameEngine.getHeroes()[0].lifeTotal, GameEngine.getHeroes()[0].maxHealth - 4);
+            Assert.AreEqual(GameEngine.getHeroes()[1].lifeTotal, GameEngine.getHeroes()[1].maxHealth - 4);
         }
 
         [Test(), RequiresSTA]
@@ -64,7 +75,17 @@ namespace SentinelsOfTheMultiverse.Tests
         [Test(), RequiresSTA]
         public void TestConsiderThePrice()
         {
+            BaronBlade baron = (BaronBlade)GameEngine.getVillain();
+            Card consider = new Card("Images\\Villain\\BaronBlade\\1-ConsiderThePriceOfVictory.png");
+            baron.ConsiderThePriceOfVictory(consider);
+            Card superhuman = new Card("Images\\Hero\\Legacy\\SuperhumanDurability.png");
+            List<Card> cards = new List<Card>();
+            cards.Add(superhuman);
+            GameEngine.getHeroes()[0].cardsOnField = cards;
+            baron.ConsiderThePriceOfVictoryDiscardAction(1);
 
+            Assert.AreEqual(GameEngine.getHeroes()[0].lifeTotal, GameEngine.getHeroes()[0].maxHealth -2 );
+            Assert.AreEqual(GameEngine.getHeroes()[1].lifeTotal, GameEngine.getHeroes()[1].maxHealth - 2);
         }
 
         [Test(), RequiresSTA]
