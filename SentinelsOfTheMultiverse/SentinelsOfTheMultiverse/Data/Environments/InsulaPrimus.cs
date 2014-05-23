@@ -67,25 +67,29 @@ namespace SentinelsOfTheMultiverse.Data.Environments
         {
             if (discardedCards == 0)
             {
-                DamageEffects.DealDamage(this,new List<Targetable>(){target}, 4, DamageEffects.DamageType.Toxic);
+                DamageEffects.DealDamage(this, new List<Targetable>() { target }, 4, DamageEffects.DamageType.Toxic);
             }
-            //card.SendToGraveyard(this, cardsOnField);
+            else
+            {
+                DamageEffects.DealDamage(this, new List<Targetable>() { target }, 2, DamageEffects.DamageType.Toxic);
+            }
         }
 
         ////Minions
-        public void PterodactylThief(Card card)
-        {
-            card.cardType = Card.CardType.Environment;
-            PterodactylThief ptero = new PterodactylThief();
-            GameEngine.getEnvironment().addMinion(ptero);
-            Console.WriteLine("Pterodactyl Thief: " + ptero.lifeTotal);
-        }
 
         public void VelociraptorPack(Card card)
         {
             VelociraptorPack velo = new VelociraptorPack();
-            GameEngine.getEnvironment().addMinion(velo);
-            Console.WriteLine("Velociraptor Pack: " + velo.lifeTotal);
+            card.Minion = velo;
+            card.CardDestroyed += VelociraptorPack_Destroyed;
+            EndPhase += velo.executeEffect;
+            velo.MinionDied += () => card.SendToGraveyard(this, cardsOnField);
+        }
+
+        void VelociraptorPack_Destroyed(Card c, EventArgs e)
+        {
+            removeMinion(c.Minion);
+            EndPhase -= c.Minion.executeEffect;
         }
 
         public void EnragedTRex(Card card) {

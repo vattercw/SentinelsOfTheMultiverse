@@ -168,9 +168,9 @@ namespace SentinelsOfTheMultiverse
                             }
                             drawnCards[0].SendToGraveyard(currentPlayer, currentPlayer.cardsOnField);
                             break;
-                        case GameEngine.ForcedEffect.ConsiderThePriceOfVictory:
+                        //case GameEngine.ForcedEffect.ConsiderThePriceOfVictory:
                             
-                            break;
+                            //break;
                     }
                 }
             }
