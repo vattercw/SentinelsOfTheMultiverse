@@ -8,6 +8,7 @@ using SentinelsOfTheMultiverse.Data;
 using SentinelsOfTheMultiverse.Data.Heroes;
 using SentinelsOfTheMultiverse.Data.Minions;
 using SentinelsOfTheMultiverse.Data.Minions.InsulaPrimus;
+using SentinelsOfTheMultiverse.Data.Effects;
 
 namespace SentinelsOfTheMultiverse.Tests
 {
@@ -349,17 +350,13 @@ namespace SentinelsOfTheMultiverse.Tests
         public void TestPower()
         {
             
-            Legacy legacy = new Legacy();
+            Legacy legacy = (Legacy)GameEngine.getHeroes().Find(h => typeof(Legacy).IsAssignableFrom(h.GetType()));
 
             legacy.Power();
 
-            foreach (Hero hero in GameEngine.getHeroes())
-            {
-                //Assert.AreEqual(1, hero.damageAmplificationFromPlayer);
-                Assert.True(false);
-            }
+            DamageEffects.DealDamage(legacy, GameEngine.getVillain().getMinions()[0], 2, DamageEffects.DamageType.Lightning);
 
-            Assert.NotNull(GameEngine.getHeroes());
+            Assert.AreEqual(GameEngine.getVillain().getMinions()[0].maxHealth - 3, GameEngine.getVillain().getMinions()[0].lifeTotal);
         }
 
         [TearDown()]
